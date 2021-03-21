@@ -14,20 +14,18 @@ namespace XRT_Project.Controller
     [Route("[controller]")]
     public class ShipwreckController : ControllerBase
     {
-        private readonly ILogger<ShipwreckController> _logger;
+        private IMongoCollection<Shipwreck> ShipWreckCollection;
 
-        public ShipwreckController(ILogger<ShipwreckController> logger)
+        public ShipwreckController(IMongoClient client)
         {
-            _logger = logger;
+            var database = client.GetDatabase("sample_geospatial");
+            ShipWreckCollection = database.GetCollection<Shipwreck>("shipwrecks");
         }
 
         [HttpGet]
         public IEnumerable<Shipwreck> Get()
         {
-            var client = new MongoClient("mongodb+srv://admin:admin@trainingxr.h7o4w.mongodb.net/sample_geospatial?retryWrites=true&w=majority");
-            var database  = client.GetDatabase("sample_geospatial");
-            var collection = database.GetCollection<Shipwreck>("shipwrecks");
-            return collection.Find(s => s.FeatureType == "Wrecks - Visible").ToList();
+            return ShipWreckCollection.Find(s => s.FeatureType == "Wrecks - Visible").ToList();
         }
     }
 }
