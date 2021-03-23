@@ -27,5 +27,26 @@ namespace XRT_Project.Controller
         {
             return ShipWreckCollection.Find(s => s.FeatureType == "Wrecks - Visible").ToList();
         }
+
+        [HttpPost]
+        public void Post(Shipwreck shipwreck)
+        {
+            ShipWreckCollection.InsertOne(shipwreck);
+        }
+
+        [HttpPut]
+        [Route("{Id}")]
+        public void Put(string Id, [FromBody]Shipwreck shipwreck)
+        {
+            shipwreck.Id = ObjectId.Parse(Id);
+            ShipWreckCollection.ReplaceOne(Builders<Shipwreck>.Filter.Eq(s => s.Id, ObjectId.Parse(Id)), shipwreck);
+        }
+
+        [HttpDelete]
+        [Route("{Id}")]
+        public void Delete(string Id)
+        {
+            ShipWreckCollection.DeleteOne(Builders<Shipwreck>.Filter.Eq(s => s.Id, ObjectId.Parse(Id)));
+        }
     }
 }
