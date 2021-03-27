@@ -25,7 +25,7 @@ namespace XRT_Project.Controller
         [HttpGet]
         public IEnumerable<Shipwreck> Get()
         {
-            return ShipWreckCollection.Find(s => s.FeatureType == "Wrecks - Visible").ToList();
+            return ShipWreckCollection.Find(s => s.FeatureType == "dog").ToList();
         }
 
         [HttpPost]
