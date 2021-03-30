@@ -2,14 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import SignIn from './signin'
 import LogIn from './login'
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
     {/* <App /> */}
-    <SignIn/>
+    <LogIn/>
 
   </React.StrictMode>,
   document.getElementById('root')
