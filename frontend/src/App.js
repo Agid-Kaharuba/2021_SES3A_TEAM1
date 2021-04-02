@@ -41,7 +41,7 @@ function AppRouter(props) {
         <Signout />
       </Route> */}
 
-      <Route path="/training" 
+      <Route path="/create-new-training" 
         exact={true}
         component={CreateNewTraining}>
       </Route>
