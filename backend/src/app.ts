@@ -5,6 +5,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 // import morgan from "morgan";
 import courseRouter from "./routes/course-router"
+import newUserRouter from "./routes/newUser-router"
 
 
 dotenv.config();
@@ -23,6 +24,7 @@ const app: Application = express();
 
 // Routes
 app.use("/course", courseRouter);
+app.use("/newUser", newUserRouter);
 
 const server = app.listen(process.env.API_PORT, () => {
     console.log(`Server is now running at:  http://localhost:${process.env.API_PORT}`);
