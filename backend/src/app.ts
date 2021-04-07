@@ -1,31 +1,70 @@
 import express, { Application, Request, Response, NextFunction } from 'express';
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import { Routes } from "./routes";
 import bodyParser from "body-parser";
 import cors from "cors";
-// import morgan from "morgan";
-import courseRouter from "./routes/course-router"
-import newUserRouter from "./routes/newUser-router"
-
+import ApiInitializer from "./initializer";
+import morgan from "morgan";
+import swaggerJsDoc from 'swagger-jsdoc';
+import swaggerUI from 'swagger-ui-express';
+import fs  from 'fs';
 
 dotenv.config();
 
 const mongo_uri = process.env.DATABASE_URL as string;
-mongoose.connect(mongo_uri, { useNewUrlParser: true }, function(err) {
+mongoose.connect(mongo_uri, { useNewUrlParser: true, useUnifiedTopology: true }, function(err) {
 	if (err) {
 		throw err;
 	} else {
-		console.log(`Successfully connected to ${mongo_uri}`);
+		console.log(`Successfully connected to MongoDB`);
 	}
 });
 
-const app: Application = express();
+const app = express();
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+
+// Swagger Docs
+const swaggerOptions = {
+	definition: {
+		info: {
+			title: 'XRT Training',
+			version: '1.0.0'
+		}
+	},
+	apis: ['src/app.ts', 'src/routes/*']
+};
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+fs.writeFileSync('../docs/swagger/swagger.json', JSON.stringify(swaggerDocs));
+app.use('/swagger', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
 
 // Routes
-app.use("/course", courseRouter);
-app.use("/newUser", newUserRouter);
+const apiInit = new ApiInitializer(app);
+Routes(apiInit);
 
+// Default route
+/**
+ * @swagger
+ * /:
+ *  get:
+ *   description: Default route
+ *   responses:
+ *    200:
+ *     description: Success
+ */
+app.get("/", (req, res) => {
+	res.json({
+		stage: process.env.stage,
+		msg: "Hello world from XRT Training API 🚀🚀🚀🚀!"
+	});
+});
+  
+// Startup complete
 const server = app.listen(process.env.API_PORT, () => {
     console.log(`Server is now running at:  http://localhost:${process.env.API_PORT}`);
+    console.log(`Swagger Docs            :  http://localhost:${process.env.API_PORT}/swagger`);
 });

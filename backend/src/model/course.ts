@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const subscriberSchema = new mongoose.Schema({
+const courseSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -8,7 +8,11 @@ const subscriberSchema = new mongoose.Schema({
     description: {
         type: String,
         required: false
+    },
+    archive: {
+        type: Boolean,
+        required: false
     }
 });
 
-export default mongoose.model('Course', subscriberSchema);
+export default mongoose.model('Course', courseSchema);
