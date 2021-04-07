@@ -3,7 +3,7 @@ import Course from "../model/course";
 
 export default class CourseController {
     public async getAll(req: Request, res: Response) {
-        const courses = await Course.find();
+        const courses = await Course.find({ archive: { $ne: true } });
         res.json(courses)
     }
 
@@ -22,5 +22,18 @@ export default class CourseController {
 		} as any);
 		newCourseRequest.save();
         res.json(newCourseRequest);
+    }
+
+    public async update(req: Request, res: Response) {
+        const id = req.params.courseId;
+		const body = req.body;
+        const response = await Course.update({ _id: id }, body);
+        res.json(response);
+    }
+
+    public async delete(req: Request, res: Response) {
+        const id = req.params.courseId;
+        const response = await Course.update({ _id: id }, { archive: true });
+        res.json(response);
     }
 }
