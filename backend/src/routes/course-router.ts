@@ -1,19 +1,6 @@
-import { Router } from "express";
-import Course from "../model/course";
+import { Express } from "express";
+import CourseController from "../controllers/course";
 
-const courseRouter = Router();
-
-courseRouter.get("/", async (req, res) => {
-    try {
-        const courses = await Course.find();
-        res.json(courses)
-    } catch (err) {
-        res.status(500).json({ message: err.message });
-    }
-});
-
-courseRouter.get("/", (req, res) => {
-    res.send("test");
-});
-
-export default courseRouter;
+export const CourseRoute = (app: Express, controller: CourseController) => {
+    app.get("/course", controller.getAll)
+}

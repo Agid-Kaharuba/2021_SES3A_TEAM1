@@ -1,11 +1,11 @@
 import express, { Application, Request, Response, NextFunction } from 'express';
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import { Routes } from "./routes";
 import bodyParser from "body-parser";
 import cors from "cors";
-// import morgan from "morgan";
-import courseRouter from "./routes/course-router"
-
+import ApiInitializer from "./initializer";
+import morgan from "morgan";
 
 dotenv.config();
 
@@ -18,12 +18,25 @@ mongoose.connect(mongo_uri, { useNewUrlParser: true }, function(err) {
 	}
 });
 
-const app: Application = express();
+const app = express();
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 
 // Routes
-app.use("/course", courseRouter);
+const apiInit = new ApiInitializer(app);
+Routes(apiInit);
 
+// Default route
+app.get("/", (req, res) => {
+	res.json({
+		stage: process.env.stage,
+		msg: "Hello world from XRT Training API 🚀🚀🚀🚀!"
+	});
+});
+  
+// Startup complete
 const server = app.listen(process.env.API_PORT, () => {
     console.log(`Server is now running at:  http://localhost:${process.env.API_PORT}`);
 });
