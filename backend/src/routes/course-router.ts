@@ -73,4 +73,20 @@ export const CourseRoute = (app: Express, controller: CourseController) => {
      *     description: Success
      */
     app.put("/course/:courseId", controller.update);
+    /**
+     * @swagger
+     * /course/{courseId}:
+     *  delete:
+     *   description: Get a course by id
+     *   tags: [Course]
+     *   parameters:
+     *    - in: path
+     *      name: courseId
+     *      required: true
+     *      type: string
+     *   responses:
+     *    200:
+     *     description: Success
+     */
+    app.delete("/course/:courseId", controller.delete);
 }

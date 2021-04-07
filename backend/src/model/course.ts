@@ -8,6 +8,10 @@ const courseSchema = new mongoose.Schema({
     description: {
         type: String,
         required: false
+    },
+    archive: {
+        type: Boolean,
+        required: false
     }
 });
 
