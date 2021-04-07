@@ -1,1 +1,16 @@
-GET http://localhost:4004/course
+GET http://localhost:4000/course
+
+
+###
+
+POST http://localhost:4000/course
+Content-Type: application/json
+
+{
+    "name": "test",
+    "description": "this is the description"
+}
+
+###
+
+GET http://localhost:4000/course/606d6620384bcd23d00c3a6f
