@@ -23,4 +23,11 @@ export default class CourseController {
 		newCourseRequest.save();
         res.json(newCourseRequest);
     }
+
+    public async update(req: Request, res: Response) {
+        const id = req.params.courseId;
+		const body = req.body;
+        const response = await Course.update({ _id: id }, body);
+        res.json(response);
+    }
 }

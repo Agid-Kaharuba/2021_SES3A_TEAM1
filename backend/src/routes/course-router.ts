@@ -7,6 +7,7 @@ export const CourseRoute = (app: Express, controller: CourseController) => {
      * /course:
      *  get:
      *   description: Get all the courses
+     *   tags: [Course]
      *   responses:
      *    200:
      *     description: Success
@@ -17,6 +18,7 @@ export const CourseRoute = (app: Express, controller: CourseController) => {
      * /course/{courseId}:
      *  get:
      *   description: Get a course by id
+     *   tags: [Course]
      *   parameters:
      *    - in: path
      *      name: courseId
@@ -27,5 +29,48 @@ export const CourseRoute = (app: Express, controller: CourseController) => {
      *     description: Success
      */
     app.get("/course/:courseId", controller.get);
+    /**
+     * @swagger
+     * /course:
+     *  post:
+     *   description: Get a course by id
+     *   tags: [Course]
+     *   parameters:
+     *    - in: formData
+     *      name: name
+     *      required: true
+     *      type: string
+     *    - in: formData
+     *      name: description
+     *      required: false
+     *      type: string
+     *   responses:
+     *    200:
+     *     description: Success
+     */
     app.post("/course", controller.create);
+    /**
+     * @swagger
+     * /course/{courseId}:
+     *  put:
+     *   description: Update a course by id
+     *   tags: [Course]
+     *   parameters:
+     *    - in: path
+     *      name: courseId
+     *      required: true
+     *      type: string
+     *    - in: formData
+     *      name: name
+     *      required: true
+     *      type: string
+     *    - in: formData
+     *      name: description
+     *      required: false
+     *      type: string
+     *   responses:
+     *    200:
+     *     description: Success
+     */
+    app.put("/course/:courseId", controller.update);
 }
