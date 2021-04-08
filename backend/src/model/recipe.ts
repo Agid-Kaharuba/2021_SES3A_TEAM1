@@ -12,7 +12,11 @@ const recipeSchema = new mongoose.Schema({
     ingredients: {
         type: [String],
         required: false
+    },
+    courseId: {
+        type: String,
+        required: true
     }
 });
 
-export default mongoose.model('Course', recipeSchema);
+export default mongoose.model('Recipe', recipeSchema);

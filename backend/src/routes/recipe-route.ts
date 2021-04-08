@@ -3,7 +3,7 @@ import RecipeController from "../controllers/recipe";
 
 export const RecipeRoute = (app: Express, controller: RecipeController) => {
     //Get all recipes in a course (E.g. All milk tea recipes)
-    app.get("/course/:courseId", controller.getAll);
+    app.get("/recipe", controller.getAll);
 
     //Get a recipe by id
     //app.get("/course/:courseId/:recipeId", controller.get);
