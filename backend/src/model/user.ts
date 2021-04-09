@@ -21,6 +21,13 @@ const UserSchema = new mongoose.Schema({
 },
 {collection: 'users'})
 
+UserSchema.methods.checkPassword = function (plainPass) {
+  // @ts-ignore
+  const user: IUser = this;
+  
+  return (bcrypt.compare(plainPass, user.password));
+};
+
 UserSchema.pre("save", function(next) {
   // @ts-ignore
   const user: IUser = this;
@@ -29,13 +36,6 @@ UserSchema.pre("save", function(next) {
     next();
   });
 });
-
-UserSchema.methods.checkPassword = function (plainPass) {
-  // @ts-ignore
-  const user: IUser = this;
-  
-  return (bcrypt.compare(plainPass, user.password));
-};
 
 UserSchema.plugin(uniqueValidator);
 export default mongoose.model('User', UserSchema);

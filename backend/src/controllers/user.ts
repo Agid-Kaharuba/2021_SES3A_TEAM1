@@ -14,8 +14,9 @@ export default class UserController {
       } = req.body;
 
       User.findOne({ username: usernameIn }, function(err: Error, user: typeof User){
+        console.log(err);
         // @ts-ignore
-        if (User.checkPassword(passwordIn)){
+        if (user.checkPassword(passwordIn)){
           res.json("woohoo");
         }
         else{
