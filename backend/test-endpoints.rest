@@ -19,3 +19,12 @@ GET http://localhost:4000/course/606d661b384bcd23d00c3a6d
 
 ###
 DELETE http://localhost:4000/course/606d661b384bcd23d00c3a6d
+
+###
+POST http://localhost:4000/user/register
+Content-Type: application/json
+
+{
+    "name": "testTwo",
+    "password": "verynice"
+}

@@ -30,5 +30,12 @@ UserSchema.pre("save", function(next) {
   });
 });
 
+UserSchema.methods.checkPassword = function (plainPass) {
+  // @ts-ignore
+  const user: IUser = this;
+  
+  return (bcrypt.compare(plainPass, user.password));
+};
+
 UserSchema.plugin(uniqueValidator);
 export default mongoose.model('User', UserSchema);
