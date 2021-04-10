@@ -2,11 +2,10 @@ import { Express } from "express";
 import RecipeController from "../controllers/recipe";
 
 export const RecipeRoute = (app: Express, controller: RecipeController) => {
-    //Get all recipes in a course (E.g. All milk tea recipes)
 
     /**
      * @swagger
-     * /recipes:
+     * /recipe:
      *  get:
      *   description: Get all the recipes
      *   tags: [Recipe]
@@ -65,11 +64,11 @@ export const RecipeRoute = (app: Express, controller: RecipeController) => {
      *      name: steps
      *      required: false
      *      type: Object
-     *   - in: formData
+     *    - in: formData
      *      name: category
      *      required: false
      *      type: string
-     *   - in: formData
+     *    - in: formData
      *      name: archive
      *      required: false
      *      type: boolean
@@ -95,15 +94,14 @@ export const RecipeRoute = (app: Express, controller: RecipeController) => {
      *      name: steps
      *      required: false
      *      type: Object
-     *   - in: formData
+     *    - in: formData
      *      name: category
      *      required: false
      *      type: string
-     *   - in: formData
+     *    - in: formData
      *      name: archive
      *      required: false
      *      type: boolean
-     * 
      *   responses:
      *    200:
      *     description: Success
@@ -115,7 +113,7 @@ export const RecipeRoute = (app: Express, controller: RecipeController) => {
      * /recipe/{recipeId}:
      *  delete:
      *   description: Delete a recipe
-     *   tags: [REcipe]
+     *   tags: [Recipe]
      *   parameters:
      *    - in: path
      *      name: recipeId

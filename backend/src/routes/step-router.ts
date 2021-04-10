@@ -2,45 +2,25 @@ import { Express } from "express";
 import StepController from "../controllers/step";
 
 export const StepRoute = (app: Express, controller: StepController) => {
-    app.get("/step", controller.getAll);
-    app.post("/step/create", controller.create);
-    app.post("/recipe/category", controller.getAllByName);
-    app.put("/step/:stepId", controller.update);
-    app.delete("/step/:stepId", controller.delete);
 
     /**
      * @swagger
-     * /course:
+     * /step:
      *  get:
-     *   description: Get all the courses
-     *   tags: [Course]
+     *   description: Get all steps
+     *   tags: [Step]
      *   responses:
      *    200:
      *     description: Success
      */
-    //app.get("/course", controller.getAll);
+    app.get("/step", controller.getAll);
+
     /**
      * @swagger
-     * /course/{courseId}:
-     *  get:
-     *   description: Get a course by id
-     *   tags: [Course]
-     *   parameters:
-     *    - in: path
-     *      name: courseId
-     *      required: true
-     *      type: string
-     *   responses:
-     *    200:
-     *     description: Success
-     */
-    //app.get("/course/:courseId", controller.get);
-    /**
-     * @swagger
-     * /course:
+     * /step/create:
      *  post:
-     *   description: Get a course by id
-     *   tags: [Course]
+     *   description: Create a step
+     *   tags: [Step]
      *   parameters:
      *    - in: formData
      *      name: name
@@ -54,16 +34,34 @@ export const StepRoute = (app: Express, controller: StepController) => {
      *    200:
      *     description: Success
      */
-    //app.post("/course", controller.create);
+    app.post("/step/create", controller.create);
+
     /**
      * @swagger
-     * /course/{courseId}:
+     * /step/name:
+     *  post:
+     *   description: Get all steps by name
+     *   tags: [Step]
+     *   parameters:
+     *    - in: formData
+     *      name: name
+     *      required: true
+     *      type: string
+     *   responses:
+     *    200:
+     *     description: Success
+     */
+    app.post("/step/name", controller.getAllByName);
+
+    /**
+     * @swagger
+     * /step/{stepId}:
      *  put:
-     *   description: Update a course by id
-     *   tags: [Course]
+     *   description: Update a step by id
+     *   tags: [Step]
      *   parameters:
      *    - in: path
-     *      name: courseId
+     *      name: stepId
      *      required: true
      *      type: string
      *    - in: formData
@@ -78,21 +76,22 @@ export const StepRoute = (app: Express, controller: StepController) => {
      *    200:
      *     description: Success
      */
-    //app.put("/course/:courseId", controller.update);
+    app.put("/step/:stepId", controller.update);
+
     /**
      * @swagger
-     * /course/{courseId}:
+     * /step/{stepId}:
      *  delete:
-     *   description: Get a course by id
-     *   tags: [Course]
+     *   description: Delete a step
+     *   tags: [Step]
      *   parameters:
      *    - in: path
-     *      name: courseId
+     *      name: stepId
      *      required: true
      *      type: string
      *   responses:
      *    200:
      *     description: Success
      */
-    //app.delete("/course/:courseId", controller.delete);
+    app.delete("/step/:stepId", controller.delete);
 }
