@@ -9,16 +9,15 @@ export default class UserController {
 	
     public async login(req: Request, res: Response){
       const {
-        usernameIn,
-        passwordIn
+        username,
+        password
       } = req.body;
 
-      console.log(usernameIn);
+      console.log(username);
 
-      User.findOne({ username: usernameIn }, function(err: Error, userIn: typeof User){
-        console.log(err);
+      User.findOne({ username: username }, function(err: Error, userIn: typeof User){
         // @ts-ignore
-        if (userIn.checkPassword(passwordIn)){
+        if (userIn.checkPassword(password)){
           res.json("woohoo");
         }
         else{

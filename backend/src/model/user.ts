@@ -4,7 +4,7 @@ const uniqueValidator = require("mongoose-unique-validator");
 
 export interface IUser {
 	_id: string;
-  email: string;
+  username: string;
   password: string;
 }
 
@@ -12,7 +12,7 @@ const UserSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true, 
-    index: {unique: true, dropDups: true}
+    index: {unique: false, dropDups: true}
   },
   password: {
     type: String,
