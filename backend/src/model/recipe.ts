@@ -6,14 +6,14 @@ const recipeSchema = new mongoose.Schema({
         required: true
     },
     steps: {
-        type: [String],
+        type: [Object],
         required: false
     },
     ingredients: {
         type: [String],
         required: false
     },
-    courseId: {
+    category: {
         type: String,
         required: true
     }

@@ -19,3 +19,29 @@ GET http://localhost:4000/course/606d661b384bcd23d00c3a6d
 
 ###
 DELETE http://localhost:4000/course/606d661b384bcd23d00c3a6d
+
+
+###
+POST  http://localhost:4000/recipe/create
+Content-Type: application/json
+
+{
+    "name": "Royal Milk Tea",
+    "steps": [{"actionId": "234", "depends": [1,2,3]}],
+    "ingredients": ["B1213"],
+    "category": "Milk Tea"
+}
+
+###
+GET http://localhost:4000/recipe
+
+###
+PUT http://localhost:4000/recipe/607182cb7cac42f7d50da7ee
+Content-Type: application/json
+
+{
+    "name": "Royal Milk ",
+    "steps": [{"actionId": "234", "depends": [1,2,3]}],
+    "ingredients": ["B1213"],
+    "category": "Milk Tea"
+}

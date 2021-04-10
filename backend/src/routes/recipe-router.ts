@@ -6,10 +6,31 @@ export const RecipeRoute = (app: Express, controller: RecipeController) => {
     app.get("/recipe", controller.getAll);
 
     //Get a recipe by id
-    //app.get("/course/:courseId/:recipeId", controller.get);
-    
-    
-    
+    app.get("/recipe/:recipeId", controller.getById);
+
+    /**
+     * @swagger
+     * /recipe/category:
+     *  post:
+     *   description: Get recipes by category
+     *   tags: [Recipe]
+     *   parameters:
+     *    - in: formData
+     *      name: category
+     *      required: true
+     *      type: string
+     *   responses:
+     *    200:
+     *     description: Success
+     */
+    //Get a recipe by category
+    app.post("/recipe/category", controller.getAllByCategory);
+
+    //Create a recipe
+    app.post("/recipe/create", controller.create);
+
+    //Update Recipe
+    app.put("/recipe/:recipeId", controller.update);
     
     
     
