@@ -23,103 +23,15 @@ export const RecipeRoute = (app: Express, controller: RecipeController) => {
      *    200:
      *     description: Success
      */
-    //Get a recipe by category
     app.post("/recipe/category", controller.getAllByCategory);
 
-    //Create a recipe
+    
+    //Create Recipe
     app.post("/recipe/create", controller.create);
 
     //Update Recipe
     app.put("/recipe/:recipeId", controller.update);
-    
-    
-    
-    
-    /**
-     * @swagger
-     * /course:
-     *  get:
-     *   description: Get all the courses
-     *   tags: [Course]
-     *   responses:
-     *    200:
-     *     description: Success
-     */
-    //app.get("/course", controller.getAll);
-    /**
-     * @swagger
-     * /course/{courseId}:
-     *  get:
-     *   description: Get a course by id
-     *   tags: [Course]
-     *   parameters:
-     *    - in: path
-     *      name: courseId
-     *      required: true
-     *      type: string
-     *   responses:
-     *    200:
-     *     description: Success
-     */
-    //app.get("/course/:courseId", controller.get);
-    /**
-     * @swagger
-     * /course:
-     *  post:
-     *   description: Get a course by id
-     *   tags: [Course]
-     *   parameters:
-     *    - in: formData
-     *      name: name
-     *      required: true
-     *      type: string
-     *    - in: formData
-     *      name: description
-     *      required: false
-     *      type: string
-     *   responses:
-     *    200:
-     *     description: Success
-     */
-    //app.post("/course", controller.create);
-    /**
-     * @swagger
-     * /course/{courseId}:
-     *  put:
-     *   description: Update a course by id
-     *   tags: [Course]
-     *   parameters:
-     *    - in: path
-     *      name: courseId
-     *      required: true
-     *      type: string
-     *    - in: formData
-     *      name: name
-     *      required: true
-     *      type: string
-     *    - in: formData
-     *      name: description
-     *      required: false
-     *      type: string
-     *   responses:
-     *    200:
-     *     description: Success
-     */
-    //app.put("/course/:courseId", controller.update);
-    /**
-     * @swagger
-     * /course/{courseId}:
-     *  delete:
-     *   description: Get a course by id
-     *   tags: [Course]
-     *   parameters:
-     *    - in: path
-     *      name: courseId
-     *      required: true
-     *      type: string
-     *   responses:
-     *    200:
-     *     description: Success
-     */
-    //app.delete("/course/:courseId", controller.delete);
+
+    //Delete Recipe
+    app.delete("/recipe/:recipeId", controller.delete);
 }

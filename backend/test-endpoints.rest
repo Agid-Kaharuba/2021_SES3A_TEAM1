@@ -26,10 +26,11 @@ POST  http://localhost:4000/recipe/create
 Content-Type: application/json
 
 {
-    "name": "Royal Milk Tea",
+    "name": "Calvin Special",
     "steps": [{"actionId": "234", "depends": [1,2,3]}],
     "ingredients": ["B1213"],
-    "category": "Milk Tea"
+    "category": "Milk Tea",
+    "archive": false
 }
 
 ###
@@ -40,8 +41,12 @@ PUT http://localhost:4000/recipe/607182cb7cac42f7d50da7ee
 Content-Type: application/json
 
 {
-    "name": "Royal Milk ",
+    "name": "MotherFUcker ",
     "steps": [{"actionId": "234", "depends": [1,2,3]}],
     "ingredients": ["B1213"],
-    "category": "Milk Tea"
+    "category": "Milk Tea",
+    "archive": false
 }
+
+###
+DELETE http://localhost:4000/recipe/607196ca23d5300976c82c52

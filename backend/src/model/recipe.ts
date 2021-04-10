@@ -16,6 +16,10 @@ const recipeSchema = new mongoose.Schema({
     category: {
         type: String,
         required: true
+    },
+    archive: {
+        type: Boolean,
+        required: false
     }
 });
 
