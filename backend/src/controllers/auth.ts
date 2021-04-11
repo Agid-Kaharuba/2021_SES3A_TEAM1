@@ -1,11 +1,8 @@
 import { Request, Response } from "express";
 import User from "../model/user";
 import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
 import ResponseService from "../helpers/response"
 import { MongoError } from "mongodb";
-
-dotenv.config();
 
 export default class AuthController {
     public async login(req: Request, res: Response) {
