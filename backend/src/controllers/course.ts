@@ -45,7 +45,6 @@ export default class CourseController {
     public async update(req: Request, res: Response) {
         try {
             const id = req.params.courseId;
-            console.log(id);
             const body = req.body;
             const response = await Course.updateOne({ _id: id }, {$set: {...body}});
             ResponseService.successResponse(res, response);
