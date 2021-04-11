@@ -1,22 +1,38 @@
 import { Express } from "express";
 import AuthController from "../controllers/auth";
+import { checkToken } from "../middleware/auth";
 
 export const AuthRoute = (app: Express, controller: AuthController) => {
+    /**
+     * @swagger
+     * /auth:
+     *  get:
+     *   description: Register a new user
+     *   tags: [Auth]
+     *   responses:
+     *    200:
+     *     description: Success
+     */
+    app.get('/auth', checkToken, (req, res) => res.status(200).send("you have auth"));
     /**
      * @swagger
      * /auth/register:
      *  post:
      *   description: Register a new user
      *   tags: [Auth]
-     *   parameters:
-     *    - in: formData
-     *      name: username
-     *      required: true
-     *      type: string
-     *    - in: formData
-     *      name: password
-     *      required: false
-     *      type: string
+     *   requestBody:
+     *    required: true,
+     *    content:
+     *     application/json:
+     *      schema:
+     *       type: object
+     *       properties:
+     *        username:
+     *         type: string
+     *         example: test123
+     *        password:
+     *         type: string
+     *         example: password123
      *   responses:
      *    200:
      *     description: Success
@@ -28,15 +44,19 @@ export const AuthRoute = (app: Express, controller: AuthController) => {
      *  post:
      *   description: Login
      *   tags: [Auth]
-     *   parameters:
-     *    - in: formData
-     *      name: username
-     *      required: true
-     *      type: string
-     *    - in: formData
-     *      name: password
-     *      required: false
-     *      type: string
+     *   requestBody:
+     *    required: true,
+     *    content:
+     *     application/json:
+     *      schema:
+     *       type: object
+     *       properties:
+     *        username:
+     *         type: string
+     *         example: test123
+     *        password:
+     *         type: string
+     *         example: password123
      *   responses:
      *    200:
      *     description: Success
