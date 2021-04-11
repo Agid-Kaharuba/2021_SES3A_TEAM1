@@ -50,3 +50,18 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:4000/recipe/607196ca23d5300976c82c52
+
+###
+GET http://localhost:4000/step
+
+###
+POST  http://localhost:4000/step/create
+Content-Type: application/json
+
+{
+    "name": "Water",
+    "description": "Boil Water",
+    "archive": "false"
+}
+
+###
