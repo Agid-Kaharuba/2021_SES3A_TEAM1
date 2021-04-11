@@ -10,7 +10,7 @@ export default class CourseController {
             ResponseService.successResponse(res, courses);
         }
         catch (err) {
-            ResponseService.mongoNotFoundResponse(res, err);
+            ResponseService.mongoErrorResponse(res, err);
         }
     }
 
