@@ -17,23 +17,6 @@ export const RecipeRoute = (app: Express, controller: RecipeController) => {
 
     /**
      * @swagger
-     * /recipe/{recipeId}:
-     *  get:
-     *   description: Get a recipe by id
-     *   tags: [Recipe]
-     *   parameters:
-     *    - in: path
-     *      name: recipeId
-     *      required: true
-     *      type: string
-     *   responses:
-     *    200:
-     *     description: Success
-     */
-    app.get("/recipe/:recipeId", controller.getById);
-
-    /**
-     * @swagger
      * /recipe/search:
      *  get:
      *   description: Get recipes by category
@@ -48,6 +31,23 @@ export const RecipeRoute = (app: Express, controller: RecipeController) => {
      *     description: Success
      */
     app.get("/recipe/search", controller.getAllByCategory);
+
+    /**
+     * @swagger
+     * /recipe/{recipeId}:
+     *  get:
+     *   description: Get a recipe by id
+     *   tags: [Recipe]
+     *   parameters:
+     *    - in: path
+     *      name: recipeId
+     *      required: true
+     *      type: string
+     *   responses:
+     *    200:
+     *     description: Success
+     */
+    app.get("/recipe/:recipeId", controller.getById);
 
     /**
      * @swagger
