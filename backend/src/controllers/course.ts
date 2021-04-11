@@ -1,17 +1,29 @@
 import { Request, Response } from "express";
 import Course from "../model/course";
+import ResponseService from "../helpers/response"
+import { MongoError } from "mongodb";
 
 export default class CourseController {
     public async getAll(req: Request, res: Response) {
-        const courses = await Course.find({ archive: { $ne: true } });
-        res.json(courses)
+        try {
+            const courses = await Course.find({ archive: { $ne: true } });
+            ResponseService.successResponse(res, courses);
+        }
+        catch (err) {
+            ResponseService.mongoErrorResponse(res, err);
+        }
     }
 
     public async get(req: Request, res: Response) {
-        const course = await Course.findOne({
-			_id: req.params.courseId
-		});
-        res.json(course)
+        try {
+            const course = await Course.findOne({
+                _id: req.params.courseId
+            });
+            ResponseService.successResponse(res, course);
+        }
+        catch (err) {
+            ResponseService.mongoNotFoundResponse(res, err);
+        }
     }
 
     public async create(req: Request, res: Response) {
@@ -20,20 +32,37 @@ export default class CourseController {
 			name: body.name,
 			description: body.description
 		} as any);
-		newCourseRequest.save();
-        res.json(newCourseRequest);
+		newCourseRequest.save((err: MongoError) => {
+			if (err) {
+				ResponseService.mongoErrorResponse(res, err);
+			} else {
+				ResponseService.successResponse(res, newCourseRequest);
+			}
+		});
+        
     }
 
     public async update(req: Request, res: Response) {
-        const id = req.params.courseId;
-		const body = req.body;
-        const response = await Course.update({ _id: id }, body);
-        res.json(response);
+        try {
+            const id = req.params.courseId;
+            console.log(id);
+            const body = req.body;
+            const response = await Course.updateOne({ _id: id }, {$set: {...body}});
+            ResponseService.successResponse(res, response);
+        }
+        catch (err) {
+            ResponseService.mongoNotFoundResponse(res, err);
+        }
     }
 
     public async delete(req: Request, res: Response) {
-        const id = req.params.courseId;
-        const response = await Course.update({ _id: id }, { archive: true });
-        res.json(response);
+        try {
+            const id = req.params.courseId;
+            const response = await Course.updateOne({ _id: id }, { archive: true });
+            ResponseService.successResponse(res, response);
+        }
+        catch (err) {
+            ResponseService.mongoNotFoundResponse(res, err);
+        }
     }
 }

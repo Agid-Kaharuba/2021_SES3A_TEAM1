@@ -38,20 +38,20 @@ export const StepRoute = (app: Express, controller: StepController) => {
 
     /**
      * @swagger
-     * /step/name:
-     *  post:
+     * /step/{stepId}:
+     *  get:
      *   description: Get all steps by name
      *   tags: [Step]
      *   parameters:
-     *    - in: formData
-     *      name: name
+     *    - in: path
+     *      name: stepId
      *      required: true
      *      type: string
      *   responses:
      *    200:
      *     description: Success
      */
-    app.post("/step/name", controller.getAllByName);
+    app.get("/step/:stepId", controller.get);
 
     /**
      * @swagger

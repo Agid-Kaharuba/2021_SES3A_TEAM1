@@ -17,6 +17,23 @@ export const RecipeRoute = (app: Express, controller: RecipeController) => {
 
     /**
      * @swagger
+     * /recipe/search:
+     *  get:
+     *   description: Get recipes by category
+     *   tags: [Recipe]
+     *   parameters:
+     *    - in: query
+     *      name: category
+     *      required: true
+     *      type: string
+     *   responses:
+     *    200:
+     *     description: Success
+     */
+    app.get("/recipe/search", controller.getAllByCategory);
+
+    /**
+     * @swagger
      * /recipe/{recipeId}:
      *  get:
      *   description: Get a recipe by id
@@ -31,23 +48,6 @@ export const RecipeRoute = (app: Express, controller: RecipeController) => {
      *     description: Success
      */
     app.get("/recipe/:recipeId", controller.getById);
-
-    /**
-     * @swagger
-     * /recipe/category:
-     *  post:
-     *   description: Get recipes by category
-     *   tags: [Recipe]
-     *   parameters:
-     *    - in: formData
-     *      name: category
-     *      required: true
-     *      type: string
-     *   responses:
-     *    200:
-     *     description: Success
-     */
-    app.post("/recipe/category", controller.getAllByCategory);
 
     /**
      * @swagger
@@ -68,11 +68,6 @@ export const RecipeRoute = (app: Express, controller: RecipeController) => {
      *      name: category
      *      required: false
      *      type: string
-     *    - in: formData
-     *      name: archive
-     *      required: false
-     *      type: boolean
-     * 
      *   responses:
      *    200:
      *     description: Success
@@ -81,11 +76,15 @@ export const RecipeRoute = (app: Express, controller: RecipeController) => {
 
     /**
      * @swagger
-     * /recipe/recipeId:
+     * /recipe/{recipeId}:
      *  put:
      *   description: Update a recipe by id
      *   tags: [Recipe]
      *   parameters:
+     *    - in: path
+     *      name: recipeId
+     *      required: true
+     *      type: string
      *    - in: formData
      *      name: name
      *      required: true
@@ -98,10 +97,6 @@ export const RecipeRoute = (app: Express, controller: RecipeController) => {
      *      name: category
      *      required: false
      *      type: string
-     *    - in: formData
-     *      name: archive
-     *      required: false
-     *      type: boolean
      *   responses:
      *    200:
      *     description: Success
