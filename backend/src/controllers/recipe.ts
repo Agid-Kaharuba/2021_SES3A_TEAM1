@@ -33,9 +33,9 @@ export default class RecipeController {
     public async getAllByCategory(req: Request, res: Response) {
         try {
             const recipe = await Recipe.find({
-                category: req.body.category
+                category: req.query.category
             });
-            res.json(recipe);
+            ResponseService.successResponse(res, recipe);
         }
         catch (err) {
             ResponseService.mongoErrorResponse(res, err);

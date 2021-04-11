@@ -34,12 +34,12 @@ export const RecipeRoute = (app: Express, controller: RecipeController) => {
 
     /**
      * @swagger
-     * /recipe/category:
-     *  post:
+     * /recipe/search:
+     *  get:
      *   description: Get recipes by category
      *   tags: [Recipe]
      *   parameters:
-     *    - in: formData
+     *    - in: query
      *      name: category
      *      required: true
      *      type: string
@@ -47,7 +47,7 @@ export const RecipeRoute = (app: Express, controller: RecipeController) => {
      *    200:
      *     description: Success
      */
-    app.post("/recipe/category", controller.getAllByCategory);
+    app.get("/recipe/search", controller.getAllByCategory);
 
     /**
      * @swagger
