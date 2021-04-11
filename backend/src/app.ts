@@ -68,3 +68,5 @@ const server = app.listen(process.env.API_PORT, () => {
     console.log(`Server is now running at:  http://localhost:${process.env.API_PORT}`);
     console.log(`Swagger Docs            :  http://localhost:${process.env.API_PORT}/swagger`);
 });
+
+module.exports = server;
