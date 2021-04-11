@@ -7,6 +7,8 @@ import { StepRoute } from "./step-router";
 import StepController from "../controllers/step";
 import { UserRoute } from "./user-router";
 import UserController from "../controllers/user";
+import { AuthRoute } from "./auth-router";
+import AuthController from "../controllers/auth";
 
 
 export const Routes = (init: ApiInitializer) => {
@@ -14,4 +16,5 @@ export const Routes = (init: ApiInitializer) => {
     RecipeRoute(init.getApp(), new RecipeController());
     StepRoute(init.getApp(), new StepController());
     UserRoute(init.getApp(), new UserController());
+    AuthRoute(init.getApp(), new AuthController());
 }

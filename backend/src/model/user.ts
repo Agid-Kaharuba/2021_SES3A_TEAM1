@@ -11,8 +11,8 @@ export interface IUser {
 const UserSchema = new mongoose.Schema({
   username: {
     type: String,
-    required: true, 
-    index: {unique: false, dropDups: true}
+    required: true,
+    unique: true
   },
   password: {
     type: String,
