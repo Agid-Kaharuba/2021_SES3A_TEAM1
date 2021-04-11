@@ -20,6 +20,7 @@ GET http://localhost:4000/course/606d661b384bcd23d00c3a6d
 ###
 DELETE http://localhost:4000/course/606d661b384bcd23d00c3a6d
 
+
 //Create Recipe
 ###
 POST  http://localhost:4000/recipe/create
@@ -94,3 +95,11 @@ Content-Type: application/json
 ###
 DELETE http://localhost:4000/step/607266721cf07b2801787104
 
+###
+POST http://localhost:4000/user/register
+Content-Type: application/json
+
+{
+    "name": "testTwo",
+    "password": "verynice"
+}
