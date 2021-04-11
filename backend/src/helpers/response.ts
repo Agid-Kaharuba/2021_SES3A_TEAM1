@@ -2,7 +2,10 @@ import { Response } from "express";
 import { MongoError } from "mongodb";
 
 export default {
-    successResponse: (res: Response, data?: any) => {
+	// TODO set data to data?: any
+	// have removed for now as too many frustrating errors not being caught 
+	// (data is being used as the response in some locations)
+    successResponse: (res: Response, data: any) => {
         res
 			.status(200)
 			.json(data);
