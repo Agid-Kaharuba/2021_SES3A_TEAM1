@@ -1,18 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class TogglableObject : MonoBehaviour
+public class TogglableObjectController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject targetObject;
+
+    private Toggle toggle;
+
+    private void Awake()
     {
-        
+        toggle = GetComponent<Toggle>();
+
+        if (targetObject != null && toggle)
+        {
+            toggle.onValueChanged.AddListener(OnToggleClicked);
+            // Make sure to run the first time for first time setup
+            OnToggleClicked(toggle.isOn);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnToggleClicked(bool isOn)
     {
-        
+        targetObject.SetActive(isOn);
     }
 }
