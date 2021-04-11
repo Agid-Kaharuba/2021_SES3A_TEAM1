@@ -3,9 +3,34 @@ import RecipeController from "../controllers/recipe";
 
 export const RecipeRoute = (app: Express, controller: RecipeController) => {
     //Get all recipes in a course (E.g. All milk tea recipes)
+
+    /**
+     * @swagger
+     * /recipes:
+     *  get:
+     *   description: Get all the recipes
+     *   tags: [Recipe]
+     *   responses:
+     *    200:
+     *     description: Success
+     */
     app.get("/recipe", controller.getAll);
 
-    //Get a recipe by id
+    /**
+     * @swagger
+     * /recipe/{recipeId}:
+     *  get:
+     *   description: Get a recipe by id
+     *   tags: [Recipe]
+     *   parameters:
+     *    - in: path
+     *      name: recipeId
+     *      required: true
+     *      type: string
+     *   responses:
+     *    200:
+     *     description: Success
+     */
     app.get("/recipe/:recipeId", controller.getById);
 
     /**
@@ -25,13 +50,80 @@ export const RecipeRoute = (app: Express, controller: RecipeController) => {
      */
     app.post("/recipe/category", controller.getAllByCategory);
 
-    
-    //Create Recipe
+    /**
+     * @swagger
+     * /recipe/create:
+     *  post:
+     *   description: Create a recipe
+     *   tags: [Recipe]
+     *   parameters:
+     *    - in: formData
+     *      name: name
+     *      required: true
+     *      type: string
+     *    - in: formData
+     *      name: steps
+     *      required: false
+     *      type: Object
+     *   - in: formData
+     *      name: category
+     *      required: false
+     *      type: string
+     *   - in: formData
+     *      name: archive
+     *      required: false
+     *      type: boolean
+     * 
+     *   responses:
+     *    200:
+     *     description: Success
+     */
     app.post("/recipe/create", controller.create);
 
-    //Update Recipe
+    /**
+     * @swagger
+     * /recipe/recipeId:
+     *  put:
+     *   description: Update a recipe by id
+     *   tags: [Recipe]
+     *   parameters:
+     *    - in: formData
+     *      name: name
+     *      required: true
+     *      type: string
+     *    - in: formData
+     *      name: steps
+     *      required: false
+     *      type: Object
+     *   - in: formData
+     *      name: category
+     *      required: false
+     *      type: string
+     *   - in: formData
+     *      name: archive
+     *      required: false
+     *      type: boolean
+     * 
+     *   responses:
+     *    200:
+     *     description: Success
+     */
     app.put("/recipe/:recipeId", controller.update);
 
-    //Delete Recipe
+    /**
+     * @swagger
+     * /recipe/{recipeId}:
+     *  delete:
+     *   description: Delete a recipe
+     *   tags: [REcipe]
+     *   parameters:
+     *    - in: path
+     *      name: recipeId
+     *      required: true
+     *      type: string
+     *   responses:
+     *    200:
+     *     description: Success
+     */
     app.delete("/recipe/:recipeId", controller.delete);
 }
