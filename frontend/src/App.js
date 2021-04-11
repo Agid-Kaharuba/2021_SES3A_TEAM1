@@ -7,6 +7,7 @@ import { ThemeProvider } from "@material-ui/core/styles";
 
 // IMPORT PAGES
 import HomePage from "./pages/home/home.js";
+import Dashboard from "./pages/dashboard/dashboard.js";
 import CreateNewTraining from './pages/supervisorCreateNewTraining/supervisorCreateNewTraining.js';
 import LogIn from "./pages/login/login.js";
 import SignUp from "./pages/signup/signup.js";
@@ -43,7 +44,12 @@ function AppRouter(props) {
         <Signout />
       </Route> */}
 
-      <Route path="/create-new-training" 
+      <Route path="/dashboard" 
+        exact={true}
+        component={Dashboard}>
+      </Route>
+
+      <Route path="/dashboard/create-new-training" 
         exact={true}
         component={CreateNewTraining}>
       </Route>
