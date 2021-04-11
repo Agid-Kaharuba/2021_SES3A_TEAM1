@@ -21,11 +21,10 @@ const UserSchema = new mongoose.Schema({
 },
 {collection: 'users'})
 
-UserSchema.methods.checkPassword = function (plainPass) {
+UserSchema.methods.checkPassword = async function (plainPass) {
   // @ts-ignore
   const user: IUser = this;
-  
-  return (bcrypt.compare(plainPass, user.password));
+  return await bcrypt.compare(plainPass, user.password);
 };
 
 UserSchema.pre("save", function(next) {

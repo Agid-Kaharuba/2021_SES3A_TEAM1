@@ -1,5 +1,9 @@
 import { Request, Response } from "express";
 import User from "../model/user";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export default class UserController {
     public async getAll(req: Request, res: Response) {
@@ -13,18 +17,25 @@ export default class UserController {
         password
       } = req.body;
 
-      console.log(username);
-
-      User.findOne({ username: username }, function(err: Error, userIn: typeof User){
+      User.findOne({ username: username }, async function(err: Error, userIn: typeof User){
         // @ts-ignore
-        if (userIn.checkPassword(password)){
-          res.json("woohoo");
+        if (await userIn.checkPassword(password)){
+          const jwtPayload = {​​​​                          
+            userId: username,                          
+            password: password                       
+          }​​​​; 
+          const token = jwt.sign(jwtPayload, `${process.env.TOKEN_SECRET}`, {​​​​                            
+            expiresIn: "1h"                        
+          }​​​​);
+          
+          console.log(`Welcome ${username}`);
+          res.json(token);
         }
         else{
+          console.log(`You're not ${username}`)
           res.json("womp womp");
         }
       })
-
     }
 
     public async create(req: Request, res: Response) {
