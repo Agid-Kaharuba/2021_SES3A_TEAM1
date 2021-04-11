@@ -12,8 +12,7 @@ export default class RecipeController {
     //Get recipe by id
     public async getById(req: Request, res: Response) {
         const recipe = await Recipe.findOne({
-            _id: req.params.recipeId,
-            archive: { $ne: true }
+            _id: req.params.recipeId
         });
         res.json(recipe);
     }
