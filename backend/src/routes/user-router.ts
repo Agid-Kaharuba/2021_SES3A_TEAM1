@@ -12,7 +12,7 @@ export const UserRoute = (app: Express, controller: UserController) => {
      *    200:
      *     description: Success
      */
-     app.get("/user", controller.getAll);
+    app.get("/user", controller.getAll);
     /**
      * @swagger
      * /user/register:
@@ -33,7 +33,6 @@ export const UserRoute = (app: Express, controller: UserController) => {
      *     description: Success
      */
     app.post('/user/register', controller.create);
-
     /**
      * @swagger
      * /user/login:
@@ -53,5 +52,5 @@ export const UserRoute = (app: Express, controller: UserController) => {
      *    200:
      *     description: Success
      */
-     app.post('/user/login', controller.login);
+    app.post('/user/login', controller.login);
 }
