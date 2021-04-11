@@ -68,11 +68,6 @@ export const RecipeRoute = (app: Express, controller: RecipeController) => {
      *      name: category
      *      required: false
      *      type: string
-     *    - in: formData
-     *      name: archive
-     *      required: false
-     *      type: boolean
-     * 
      *   responses:
      *    200:
      *     description: Success
@@ -81,11 +76,15 @@ export const RecipeRoute = (app: Express, controller: RecipeController) => {
 
     /**
      * @swagger
-     * /recipe/recipeId:
+     * /recipe/{recipeId}:
      *  put:
      *   description: Update a recipe by id
      *   tags: [Recipe]
      *   parameters:
+     *    - in: path
+     *      name: recipeId
+     *      required: true
+     *      type: string
      *    - in: formData
      *      name: name
      *      required: true
@@ -98,10 +97,6 @@ export const RecipeRoute = (app: Express, controller: RecipeController) => {
      *      name: category
      *      required: false
      *      type: string
-     *    - in: formData
-     *      name: archive
-     *      required: false
-     *      type: boolean
      *   responses:
      *    200:
      *     description: Success
