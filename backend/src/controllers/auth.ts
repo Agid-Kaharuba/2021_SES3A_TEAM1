@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 import User from "../model/user";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import ResponseService from "../helpers/response"
+import { MongoError } from "mongodb";
 
 dotenv.config();
 
@@ -20,15 +22,12 @@ export default class AuthController {
                     password: password
                 };
                 const token = jwt.sign(jwtPayload, `${process.env.TOKEN_SECRET}`, {
-                    expiresIn: "1h"
+                    expiresIn: "24h"
                 });
-
-                console.log(`Welcome ${username}`);
-                res.json(token);
+                ResponseService.successResponse(res, {user: userIn, token: token});
             }
             else {
-                console.log(`You're not ${username}`)
-                res.json("womp womp");
+                ResponseService.mongoNotFoundResponse(res, "Username or password is incorrect");
             }
         })
     }
@@ -43,7 +42,13 @@ export default class AuthController {
             username,
             password
         } as any);
-        newUserRequest.save();
-        res.json(newUserRequest);
+        newUserRequest.save((err: MongoError) => {
+			if (err) {
+                err.code = 11000;
+				ResponseService.mongoErrorResponse(res, err, "Username already exists in the database");
+			} else {
+				ResponseService.successResponse(res, newUserRequest);
+			}
+		});
     }
 }

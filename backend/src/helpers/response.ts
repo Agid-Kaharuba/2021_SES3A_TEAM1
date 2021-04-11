@@ -30,7 +30,7 @@ export default {
 				break;
 		}
 	},
-	mongoNotFoundResponse: (res: Response, err: MongoError,  data?: any) => {
+	mongoNotFoundResponse: (res: Response, err: MongoError|string,  data?: any) => {
 		res
             .status(404)
             .send({ msg: "Not Found", err: err, data });
