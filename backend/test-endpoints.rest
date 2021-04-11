@@ -20,6 +20,81 @@ GET http://localhost:4000/course/606d661b384bcd23d00c3a6d
 ###
 DELETE http://localhost:4000/course/606d661b384bcd23d00c3a6d
 
+
+//Create Recipe
+###
+POST  http://localhost:4000/recipe/create
+Content-Type: application/json
+
+{
+    "name": "Calvin Special",
+    "steps": [{"actionId": "234", "depends": [1,2,3]}],
+    "ingredients": ["B1213"],
+    "category": "Milk Tea",
+    "archive": false
+}
+
+//Get all recipes
+###
+GET http://localhost:4000/recipe
+
+//Update Recipe
+###
+PUT http://localhost:4000/recipe/607182cb7cac42f7d50da7ee
+Content-Type: application/json
+
+{
+    "name": "MotherFUcker ",
+    "steps": [{"actionId": "234", "depends": [1,2,3]}],
+    "ingredients": ["B1213"],
+    "category": "Milk Tea",
+    "archive": false
+}
+
+//Delete Recipe
+###
+DELETE http://localhost:4000/recipe/607196ca23d5300976c82c52
+
+
+//Get all steps
+###
+GET http://localhost:4000/step
+
+//Create a step
+###
+POST  http://localhost:4000/step/create
+Content-Type: application/json
+
+{
+    "name": "Milk",
+    "description": "Boil Milk",
+    "archive": "false"
+}
+
+//Get all steps by name
+###
+POST http://localhost:4000/step/name
+Content-Type: application/json
+
+{
+    "name": "Water"
+}
+
+//Update Step
+###
+PUT http://localhost:4000/step/607266721cf07b2801787104
+Content-Type: application/json
+
+{
+    "name": "Ice",
+    "description": "Shake Ice",
+    "archive": "false"
+}
+
+//Delete Step
+###
+DELETE http://localhost:4000/step/607266721cf07b2801787104
+
 ###
 POST http://localhost:4000/user/register
 Content-Type: application/json
