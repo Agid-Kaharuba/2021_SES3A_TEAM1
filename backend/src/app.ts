@@ -29,11 +29,25 @@ app.use(bodyParser.json());
 
 // Swagger Docs
 const swaggerOptions = {
-	definition: {
+	swaggerDefinition: {
+		openapi: '3.0.1',
 		info: {
 			title: 'XRT Training',
 			version: '1.0.0'
-		}
+		},
+		basePath: '/',
+		components: {
+		  securitySchemes: {
+			bearerAuth: {
+			  type: 'http',
+			  scheme: 'bearer',
+			  bearerFormat: 'JWT',
+			}
+		  }
+		},
+		security: [{
+		  bearerAuth: []
+		}]
 	},
 	apis: ['src/app.ts', 'src/routes/*']
 };
