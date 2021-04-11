@@ -1,11 +1,11 @@
 import { Response } from "express";
+import { MongoError } from "mongodb";
 
 export default {
     successResponse: (res: Response, data?: any) => {
         res
 			.status(200)
-			.json(data)
-			.send();
+			.json(data);
     },
 	errorResponse: (res: Response, err: Error, msg?: string) => {
 		res
@@ -17,9 +17,19 @@ export default {
             .status(401)
             .send({ msg: msg });
 	},
-	mongoErrorResponse: (res: Response, code: string,  data?: any) => {
+	mongoErrorResponse: (res: Response, err: MongoError,  data?: any) => {
+		switch (err.code) {
+			case 11000: //Duplicate key
+				res.status(400) .send({ msg: "Duplicate key", err: err, data });
+				break;
+			default:
+				res.status(500) .send({ err: err, data });
+				break;
+		}
+	},
+	mongoNotFoundResponse: (res: Response, err: MongoError,  data?: any) => {
 		res
-            .status(500)
-            .send({ code: code, data });
+            .status(404)
+            .send({ msg: "Not Found", err: err, data });
 	}
 }
