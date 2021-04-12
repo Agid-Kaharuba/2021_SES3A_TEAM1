@@ -14,7 +14,7 @@ import Mitchell from '../../images/profile-photos/mitchell-murphy.png';
 import Herrick from '../../images/profile-photos/herrick-feng.jpg';
 import Bryan from '../../images/profile-photos/bryan-dinh.png';
 import Kelvin from '../../images/profile-photos/kelvin-luong.jpg';
-import Calvin from '../../images/profile-photos/calvin-dong.png';
+import Calvin from '../../images/profile-photos/calvin-dong.jpg';
 import Brendon from '../../images/profile-photos/brendon-tong.png';
 import Lakshva from '../../images/profile-photos/lakshva-sharma.jpg';
 
