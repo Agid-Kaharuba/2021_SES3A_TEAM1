@@ -11,7 +11,7 @@ import Dashboard from "./pages/dashboard/dashboard.js";
 import CreateNewTraining from './pages/supervisorCreateNewTraining/supervisorCreateNewTraining.js';
 import LogIn from "./pages/login/login.js";
 import SignUp from "./pages/signup/signup.js";
-
+import taskList from "./pages/taskList/taskList.js";
 // import appTheme from "./helpers/appTheme";
 
 // IMPORT CONTEXT
@@ -52,6 +52,11 @@ function AppRouter(props) {
       <Route path="/dashboard/create-new-training" 
         exact={true}
         component={CreateNewTraining}>
+      </Route>
+
+      <Route path="/dashboard/taskList" 
+        exact={true}
+        component={taskList}>
       </Route>
 
       <Route path="/login"
