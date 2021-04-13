@@ -35,15 +35,19 @@ export const CourseRoute = (app: Express, controller: CourseController) => {
      *  post:
      *   description: Get a course by id
      *   tags: [Course]
-     *   parameters:
-     *    - in: formData
-     *      name: name
-     *      required: true
-     *      type: string
-     *    - in: formData
-     *      name: description
-     *      required: false
-     *      type: string
+     *   requestBody:
+     *    required: true,
+     *    content:
+     *     application/json:
+     *      schema:
+     *       type: object
+     *       properties:
+     *        name:
+     *         type: string
+     *         example: First Course
+     *        description:
+     *         type: string
+     *         example: This is the first of many courses
      *   responses:
      *    200:
      *     description: Success
@@ -60,14 +64,19 @@ export const CourseRoute = (app: Express, controller: CourseController) => {
      *      name: courseId
      *      required: true
      *      type: string
-     *    - in: formData
-     *      name: name
-     *      required: true
-     *      type: string
-     *    - in: formData
-     *      name: description
-     *      required: false
-     *      type: string
+     *   requestBody:
+     *    required: true,
+     *    content:
+     *     application/json:
+     *      schema:
+     *       type: object
+     *       properties:
+     *        name:
+     *         type: string
+     *         example: First Course
+     *        description:
+     *         type: string
+     *         example: This is the first of many courses
      *   responses:
      *    200:
      *     description: Success

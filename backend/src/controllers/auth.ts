@@ -3,6 +3,9 @@ import User from "../model/user";
 import jwt from "jsonwebtoken";
 import ResponseService from "../helpers/response"
 import { MongoError } from "mongodb";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export default class AuthController {
     public async login(req: Request, res: Response) {

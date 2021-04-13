@@ -55,19 +55,21 @@ export const RecipeRoute = (app: Express, controller: RecipeController) => {
      *  post:
      *   description: Create a recipe
      *   tags: [Recipe]
-     *   parameters:
-     *    - in: formData
-     *      name: name
-     *      required: true
-     *      type: string
-     *    - in: formData
-     *      name: steps
-     *      required: false
-     *      type: Object
-     *    - in: formData
-     *      name: category
-     *      required: false
-     *      type: string
+     *   requestBody:
+     *    required: true,
+     *    content:
+     *     application/json:
+     *      schema:
+     *       type: object
+     *       properties:
+     *        name:
+     *         type: string
+     *         example: First Course
+     *        steps:
+     *         type: object
+     *        category:
+     *         type: string
+     *         example: Milk Tea
      *   responses:
      *    200:
      *     description: Success
@@ -85,18 +87,21 @@ export const RecipeRoute = (app: Express, controller: RecipeController) => {
      *      name: recipeId
      *      required: true
      *      type: string
-     *    - in: formData
-     *      name: name
-     *      required: true
-     *      type: string
-     *    - in: formData
-     *      name: steps
-     *      required: false
-     *      type: Object
-     *    - in: formData
-     *      name: category
-     *      required: false
-     *      type: string
+     *   requestBody:
+     *    required: true,
+     *    content:
+     *     application/json:
+     *      schema:
+     *       type: object
+     *       properties:
+     *        name:
+     *         type: string
+     *         example: First Course
+     *        steps:
+     *         type: object
+     *        category:
+     *         type: string
+     *         example: Milk Tea
      *   responses:
      *    200:
      *     description: Success
