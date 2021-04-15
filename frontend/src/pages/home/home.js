@@ -6,7 +6,9 @@ import { withStyles, makeStyles } from "@material-ui/core/styles";
 
 // IMPORT IMAGES
 import VRLogo from '../../images/vr-glasses-white.png';
-import placeholder from '../../images/placeholder.png';
+import bbt from '../../images/bbt.jpg';
+import burger from '../../images/burger.jpg';
+import pizza from '../../images/pizza.jpg';
 import Andrew from '../../images/profile-photos/andrew-do.jpg';
 import Vanisha from '../../images/profile-photos/vanisha-singh.png';
 import Andy from '../../images/profile-photos/andy-le.jpg';
@@ -75,9 +77,9 @@ export default function HomePage() {
             </Grid>
             <br></br>
             <Grid container spacing={3} direction="row" justify="space-around" alignItems="center" >
-              <img src={placeholder} width='25%' height='20%'/>
-              <img src={placeholder} width='25%' height='20%'/>
-              <img src={placeholder} width='25%' height='20%'/>
+              <img src={bbt} width='25%' height='20%'/>
+              <img src={burger} width='25%' height='20%'/>
+              <img src={pizza} width='25%' height='20%'/>
             </Grid>
             <br></br>
             <Grid container spacing={1} direction="column" color='white' alignItems='flex-start'>
