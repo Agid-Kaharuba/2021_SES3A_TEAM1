@@ -16,14 +16,24 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(0.5),
 		marginBottom: theme.spacing(0.5),
   },
+  heading: {
+    marginTop:theme.spacing(3),
+    marginBottom: theme.spacing(0.5)
+  },
   image: {
     height: 120,
     width: 120,
     borderRadius: 100,
-    margin: theme.spacing(1)
+    margin: theme.spacing(1),
   },
   imageUpload: {
-    display: "none"
+    display: "none",
+    // marginBottom: theme.spacing(0.1)
+  },
+  container: {
+    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'column',
   }
 }));
 
@@ -117,8 +127,8 @@ export default function EmployeeProfile(props) {
 
     return (
       <Container maxWidth="sm">
-        
-       <Typography variant="h4" className={classes.typography}>PROFILE</Typography>
+        <div className={classes.container}>
+       <Typography variant="h4" className={classes.heading}>PROFILE</Typography>
         
         {/*Accepting only files with image type*/}
         <input type = "file" id="input" accept="image/*" onChange={handleImageUpload} ref={imageUploader} className={classes.imageUpload}/>  
@@ -126,6 +136,7 @@ export default function EmployeeProfile(props) {
           <img className={classes.image} ref={uploadedImage} />
           <br/>
           <Button size="small" onClick={() => imageUploader.current.click()}variant="outlined" color="secondary">Upload Image</Button>
+        </div>
         </div>
 
         <br/>
@@ -138,6 +149,7 @@ export default function EmployeeProfile(props) {
           variant="outlined"
           fullWidth
           className={classes.textField}
+          // label="First Name"
         />
         <br/>
         <Typography variant="subtitle1" className={classes.typography}>Last Name</Typography>
@@ -186,9 +198,11 @@ export default function EmployeeProfile(props) {
           className={classes.textField}
         />
         <br/>
+        <div className={classes.container}>
         <Button onClick= {saveChanges} variant="contained" color="secondary" className={classes.button}>
           Save
         </Button>
+        </div>
       </Container>
     );
 }
