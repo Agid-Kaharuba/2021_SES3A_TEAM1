@@ -2,19 +2,34 @@ import React, {useState} from "react";
 import {Button, TextField, Container, Typography, Avatar} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
+import UploadImageForm from "../../components/upload"; 
+
 const useStyles = makeStyles(theme => ({
   button: {
     margin: theme.spacing(1)
   },
-
   textField: {
-    marginTop: theme.spacing(1),
-		marginBottom: theme.spacing(1),
+    marginTop: theme.spacing(0.5),
+		marginBottom: theme.spacing(0.5),
+  },
+  typography: {
+    marginTop: theme.spacing(0.5),
+		marginBottom: theme.spacing(0.5),
+  },
+  image: {
+    height: 120,
+    width: 120,
+    borderRadius: 100,
+    margin: theme.spacing(1)
+  },
+  imageUpload: {
+    display: "none"
   }
 }));
 
-export default function EmployeeProfile() {
+export default function EmployeeProfile(props) {
 
+    let userData=[props.ProfileState]
     const classes = useStyles(); 
 
     const [employee, setEmployeeDetails] = useState({
@@ -83,34 +98,38 @@ export default function EmployeeProfile() {
     function saveChanges() {
 
     }
+    
+    const uploadedImage = React.useRef(null);
+    const imageUploader = React.useRef(null);
 
-    // const imageHandler = (e) => {
-    //   const reader = new FileReader();
-    //   reader.onload = () => {
-    //     if(reader.readyState ===2) {
-    //       this.setState({profileImg: reader.result})
-    //     }
-    //   }
-    //   reader.readAsDataURL(e.target.files[0])
-    // }
+    const handleImageUpload = e => {
+      const [file] = e.target.files;
+      if(file){
+        const reader = new FileReader();
+        const {current} = uploadedImage;
+        current.file = file;
+        reader.onload = (e) => {
+          current.src = e.target.result;
+        }
+        reader.readAsDataURL(file);
+      }
+    };
 
     return (
       <Container maxWidth="sm">
         
-       <Typography variant="h4">Profile</Typography>
-        {/* <Avatar alt="dora" src="./profile/pics/omg.jpg" />
-        <img src={Pic1}/> */}
-        {/* <div className="img-holder">
-          <img src={profileImg} alt="user-icon" id="img" className="img"/>
-        </div> */}
+       <Typography variant="h4" className={classes.typography}>PROFILE</Typography>
+        
         {/*Accepting only files with image type*/}
-        <input type = "file" name="image-upload" id="input" accept="image/*"/>  
-        {/* <div className = "label">
-           <label htmlFor="input" className="image-upload">
-            
-            </label> {/*a label for the input element above
-        </div> */}
-        <Typography variant="subtitle1">First Name</Typography>
+        <input type = "file" id="input" accept="image/*" onChange={handleImageUpload} ref={imageUploader} className={classes.imageUpload}/>  
+        <div>
+          <img className={classes.image} ref={uploadedImage} />
+          <br/>
+          <Button size="small" onClick={() => imageUploader.current.click()}variant="outlined" color="secondary">Upload Image</Button>
+        </div>
+
+        <br/>
+        <Typography variant="subtitle1" className={classes.typography}>First Name</Typography>
         <TextField
           id="outlined-required"
           name = "fName"
@@ -121,7 +140,7 @@ export default function EmployeeProfile() {
           className={classes.textField}
         />
         <br/>
-        <Typography variant="subtitle1">Last Name</Typography>
+        <Typography variant="subtitle1" className={classes.typography}>Last Name</Typography>
         <TextField
           id="outlined-required"
           name = "lName"
@@ -132,7 +151,7 @@ export default function EmployeeProfile() {
           className={classes.textField}
         />
         <br/>
-        <Typography variant="subtitle1">Email</Typography>
+        <Typography variant="subtitle1" className={classes.typography}>Email</Typography>
         <TextField
           id="outlined-required"
           name = "email"
@@ -143,7 +162,7 @@ export default function EmployeeProfile() {
           className={classes.textField}
         />
         <br/>
-        <Typography variant="subtitle1">Password</Typography>
+        <Typography variant="subtitle1" className={classes.typography}>Password</Typography>
         <TextField
           id="outlined-password-input"
           type="password"
@@ -156,7 +175,7 @@ export default function EmployeeProfile() {
           className={classes.password}
         />
         <br/>
-        <Typography variant="subtitle1">Staff ID</Typography>
+        <Typography variant="subtitle1" className={classes.typography}>Staff ID</Typography>
         <TextField
           id="outlined-required"
           name = "staffID"
