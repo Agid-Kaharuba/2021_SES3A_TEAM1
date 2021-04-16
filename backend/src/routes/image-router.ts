@@ -10,5 +10,5 @@ export const ImageRoute = (app: Express, controller: ImageController) => {
     },
   });
 
-  app.post("/upload", )
+  app.post("/upload", uploader.single('image'), controller.uploadProfileImage)
 }
