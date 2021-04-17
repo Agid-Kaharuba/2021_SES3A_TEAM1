@@ -21,11 +21,11 @@ export const ImageRoute = (app: Express, controller: ImageController) => {
      *    content:
      *     multipart/form-data:
      *      schema:
-     *      type: object
-     *      properties:
-     *        file:
-     *          type: string
-     *          format: binary
+     *        type: object
+     *        properties:
+     *          file:
+     *            type: string
+     *            format: binary
      *   responses:
      *    200:
      *     description: Success
