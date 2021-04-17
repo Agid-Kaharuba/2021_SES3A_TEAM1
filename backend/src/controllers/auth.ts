@@ -38,22 +38,22 @@ export default class AuthController {
     }
 
     public async create(req: Request, res: Response) {
-        const {
-            username,
-            password
-        } = req.body;
+      const {
+          username,
+          password
+      } = req.body;
 
-        const newUserRequest = new User({
-            username,
-            password
-        } as any);
-        newUserRequest.save((err: MongoError) => {
-			if (err) {
-                err.code = 11000;
-				ResponseService.mongoErrorResponse(res, err, "Username already exists in the database");
-			} else {
-				ResponseService.successResponse(res, newUserRequest);
-			}
-		});
+      const newUserRequest = new User({
+          username,
+          password
+      } as any);
+      newUserRequest.save((err: MongoError) => {
+        if (err) {
+          err.code = 11000;
+          ResponseService.mongoErrorResponse(res, err, "Username already exists in the database");
+        } else {
+          ResponseService.successResponse(res, newUserRequest);
+        }
+      });
     }
 }

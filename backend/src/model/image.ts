@@ -9,5 +9,6 @@ const ProfileImageSchema = new mongoose.Schema({
     type: Buffer,
     required: true
   }
-})
+},
+{collection: 'ProfilePics'})
 export default mongoose.model('ProfileImage', ProfileImageSchema);

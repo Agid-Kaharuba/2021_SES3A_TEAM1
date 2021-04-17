@@ -10,5 +10,25 @@ export const ImageRoute = (app: Express, controller: ImageController) => {
     },
   });
 
+  /**
+     * @swagger
+     * /upload:
+     *  post:
+     *   description: Upload an Image
+     *   tags: [User]
+     *   requestBody:
+     *    required: true,
+     *    content:
+     *     multipart/form-data:
+     *      schema:
+     *       type: object
+     *       properties:
+     *        file:
+     *         type: string
+     *         format: binary
+     *   responses:
+     *    200:
+     *     description: Success
+     */
   app.post("/upload", uploader.single('image'), controller.uploadProfileImage)
 }
