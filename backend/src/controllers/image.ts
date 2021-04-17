@@ -26,7 +26,7 @@ export default class ImageController{
       if (err) {
 				ResponseService.mongoErrorResponse(res, err);
 			} else {
-				ResponseService.successResponse(res, "congratz");
+				ResponseService.successResponse(res, newImageRequest);
 			}
     });
   }
