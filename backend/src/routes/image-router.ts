@@ -9,7 +9,7 @@ export const ImageRoute = (app: Express, controller: ImageController) => {
       fileSize: 16 * 1024 * 1024, // keep images size < 16 MB
     },
   });
-
+  
   /**
      * @swagger
      * /upload:
@@ -30,5 +30,5 @@ export const ImageRoute = (app: Express, controller: ImageController) => {
      *    200:
      *     description: Success
      */
-  app.post("/upload", uploader.single('image'), controller.uploadProfileImage)
+  app.post("/upload", uploader.single('file'), controller.uploadProfileImage)
 }

@@ -1,15 +1,15 @@
 import { Request, Response } from "express";
-import { MongoError } from "mongodb";
 import ProfileImage from "../model/image";
 import ResponseService from "../helpers/response";
-
+import { MongoError } from "mongodb";
 
 export default class ImageController{
-  public async uploadProfileImage(req: Request, res: Response){
-    const name = req.file.filename;
-    const file = req.file;
-    
-    if (!this.checkMime(file.mimetype)){
+  public uploadProfileImage(req: Request, res: Response){
+    const name = req.file.originalname;
+    const mimetype = req.file.mimetype;
+    const img = req.file.buffer;
+
+    if (!checkMime(mimetype)){
       // Add response
       res
       .status(500)
@@ -19,28 +19,28 @@ export default class ImageController{
 
     const newImageRequest = new ProfileImage({
       name,
-      file
+      img
     } as any);
     
     newImageRequest.save((err: MongoError) => {
       if (err) {
 				ResponseService.mongoErrorResponse(res, err);
 			} else {
-				ResponseService.successResponse(res, newImageRequest);
+				ResponseService.successResponse(res, "congratz");
 			}
     });
   }
+}
 
-  private checkMime(mime: String) {
-    if (mime === "image/jpeg" ||
-        mime === "image/bmp" ||
-        mime === "image/png" ||
-        mime === "image/tiff" ||
-        mime === "image/webp") {
-      return true;
-    }
-    else{
-      return false;
-    }
+function checkMime(mime: String) {
+  if (mime === "image/jpeg" ||
+      mime === "image/bmp" ||
+      mime === "image/png" ||
+      mime === "image/tiff" ||
+      mime === "image/webp") {
+    return true;
+  }
+  else{
+    return false;
   }
 }
