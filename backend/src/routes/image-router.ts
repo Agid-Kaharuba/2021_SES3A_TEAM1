@@ -10,6 +10,8 @@ export const ImageRoute = (app: Express, controller: ImageController) => {
     },
   });
 
+  //app.use(uploader.fields([{name: "file"}]));
+  
   /**
      * @swagger
      * /upload:
@@ -21,14 +23,14 @@ export const ImageRoute = (app: Express, controller: ImageController) => {
      *    content:
      *     multipart/form-data:
      *      schema:
-     *       type: object
-     *       properties:
+     *      type: object
+     *      properties:
      *        file:
-     *         type: string
-     *         format: binary
+     *          type: string
+     *          format: binary
      *   responses:
      *    200:
      *     description: Success
      */
-  app.post("/upload", uploader.single('image'), controller.uploadProfileImage)
+  app.post("/upload", uploader.single('file'), controller.uploadProfileImage)
 }
