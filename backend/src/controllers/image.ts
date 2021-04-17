@@ -26,7 +26,7 @@ export default class ImageController{
       if (err) {
 				ResponseService.mongoErrorResponse(res, err);
 			} else {
-				ResponseService.successResponse(res, newImageRequest);
+				ResponseService.successResponse(res, `${name} uploaded!`); // Don't put the model as the message or swagger will crash
 			}
     });
   }
