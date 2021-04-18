@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 // IMPORT COMPONENTS
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -8,7 +8,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
+import { Alert } from "@material-ui/lab";
 import { useHistory } from 'react-router-dom';
+
+import api from "../../helpers/api";
 
 //creating the react hook
 const useStyles = makeStyles((theme) => ({
@@ -33,10 +36,45 @@ const useStyles = makeStyles((theme) => ({
 export default function LogIn() {
   const classes = useStyles(); //using hook to create classes object
   let history = useHistory();
+  const [loginState, setLoginState] = useState({ username: "", password: "" });
+  const [loginError, setLoginError] = React.useState(undefined);
+
+  const handleChange = async (event) => {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    setLoginState({
+      ...loginState, [name]: value,
+    });
+  }
+
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    var res;
+    try {
+      console.log(loginState)
+      res = (await api.auth.login(loginState));
+      console.log(res);
+    }
+    catch (err) {
+      setLoginError(err.response.data.err);
+    }
+
+
+  }
 
   const signupClick = () => {
     history.push('/signup')
   }
+
+  const buildLoginError = () => {
+    return (
+      <>
+        <Alert severity="error">{loginError}</Alert>
+      </>
+    );
+  };
 
   return (
     <Container component="main" maxWidth="xs"> {/*set container size*/}
@@ -44,7 +82,7 @@ export default function LogIn() {
       <div className={classes.paper}>
         <Typography variant="h3">LOGIN</Typography>
 
-        <form className={classes.form} noValidate>
+        <form onSubmit={handleLogin}>
           <TextField
             label="Username"
             variant="outlined"
@@ -53,6 +91,7 @@ export default function LogIn() {
             id="username"
             required //must have input to submit the form
             fullWidth
+            onChange={handleChange}
           />
           {/* TODO: implement forgot username */}
           {/* <Link href="#" variant="body2">Forgot username?</Link> */}
@@ -66,9 +105,12 @@ export default function LogIn() {
             type="password" //hide password entered
             required
             fullWidth
+            onChange={handleChange}
           />
           {/* TODO: implement forgot password */}
           {/* <Link href="#" variant="body2">Forgot password?</Link> */}
+
+          {loginError !== undefined && buildLoginError()}
 
           <Button
             type="submit"
