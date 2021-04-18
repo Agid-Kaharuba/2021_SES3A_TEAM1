@@ -4,10 +4,10 @@ import CourseController from "../controllers/course";
 export const CourseRoute = (app: Express, controller: CourseController) => {
     /**
      * @swagger
-     * /user:
+     * /course:
      *  get:
      *   description: Get all the courses
-     *   tags: [User]
+     *   tags: [Course]
      *   responses:
      *    200:
      *     description: Success
