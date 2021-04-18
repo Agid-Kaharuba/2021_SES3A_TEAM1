@@ -25,6 +25,8 @@ export default class AuthController {
               const token = jwt.sign(jwtPayload, `${process.env.TOKEN_SECRET}`, {
                   expiresIn: "24h"
               });
+              // @ts-ignore
+              userIn.password = undefined;
               ResponseService.successResponse(res, {user: userIn, token: token});
             }
             else {
