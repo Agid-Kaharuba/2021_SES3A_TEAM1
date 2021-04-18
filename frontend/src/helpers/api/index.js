@@ -6,7 +6,8 @@ import {
 import {
   getAllUser,
   getCurrentUser,
-  getUser
+  getUser,
+  updateUser
 } from "./user";
 
 export const API_HOST = "http://localhost:4000";
@@ -20,6 +21,7 @@ export default {
     user: {
       current: getCurrentUser,
       all: getAllUser,
-      get: getUser
+      get: getUser,
+      update: updateUser
     }
 }

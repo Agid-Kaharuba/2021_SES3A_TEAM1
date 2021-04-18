@@ -41,4 +41,51 @@ export const UserRoute = (app: Express, controller: UserController) => {
      *     description: Success
      */
     app.get("/user/:userId", controller.get);
+    /**
+     * @swagger
+     * /user/{userId}:
+     *  put:
+     *   description: Get a user by id
+     *   tags: [User]
+     *   parameters:
+     *    - in: path
+     *      name: userId
+     *      required: true
+     *      type: string
+     *   requestBody:
+     *    required: true,
+     *    content:
+     *     application/json:
+     *      schema:
+     *       type: object
+     *       properties:
+     *        username:
+     *         type: string
+     *         example: test123
+     *        password:
+     *         type: string
+     *         example: password123
+     *        newPassword:
+     *         type: string
+     *         example: password123
+     *        firstname:
+     *         type: string
+     *         example: john
+     *        lastname:
+     *         type: string
+     *         example: smith
+     *        email:
+     *         type: string
+     *         example: test@test.com
+     *        staffid:
+     *         type: string
+     *         example: abc123
+     *        isSupervisor:
+     *         type: boolean
+     *         example: true
+     *   responses:
+     *    200:
+     *     description: Success
+     */
+    app.put("/user/:userId", controller.update);
 }

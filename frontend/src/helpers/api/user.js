@@ -27,3 +27,13 @@ export const getUser = async (token, userId) => {
 	);
 	return res;
 }
+
+export const updateUser = async (token, userId, body) => {
+	const res = await axios.put(`${API_HOST}/user/${userId}`,
+		body,
+		{
+			headers: { Authorization: `Bearer ${token}` },
+		}
+	);
+	return res;
+}
