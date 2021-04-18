@@ -60,7 +60,7 @@ export default function LogIn() {
         authenticated: true,
         ...res.data,
       })
-      console.log(authState);
+      history.push('/dashboard')
     }
     catch (err) {
       setLoginError(err.response.data.err);
