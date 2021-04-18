@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory, Redirect } from 'react-router-dom';
 
 // IMPORT COMPONENTS
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -9,10 +10,10 @@ import TextField from '@material-ui/core/TextField';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import { Alert } from "@material-ui/lab";
-import { useHistory } from 'react-router-dom';
 
 import api from "../../helpers/api";
 import { AuthContext } from "../../context/auth";
+import isAuthenticated from "../../helpers/auth/isAuthenticated"
 
 //creating the react hook
 const useStyles = makeStyles((theme) => ({
@@ -86,6 +87,10 @@ export default function LogIn() {
       </>
     );
   };
+
+  if (isAuthenticated(authState)) {
+		return <Redirect to="/dashboard" />;
+	}
 
   return (
     <Container component="main" maxWidth="xs"> {/*set container size*/}
