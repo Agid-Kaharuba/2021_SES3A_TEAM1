@@ -1,9 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
+import { ThemeProvider } from "@material-ui/core/styles";
+
 // IMPORT COMPONENTS
 import ManageNavigation from "./components/manageNavigation";
-import { ThemeProvider } from "@material-ui/core/styles";
+import PrivateRoute from "./components/PrivateRoute";
 
 // IMPORT PAGES
 import HomePage from "./pages/home/home.js";
@@ -22,9 +24,9 @@ import { AuthProvider } from "./context/auth";
 function AppProvider(props) {
   return (
     // <ThemeProvider theme={appTheme}>
-      <AuthProvider>
-        {props.children}
-      </AuthProvider>
+    <AuthProvider>
+      {props.children}
+    </AuthProvider>
     // </ThemeProvider>
   );
 }
@@ -32,32 +34,17 @@ function AppProvider(props) {
 function AppRouter(props) {
   return (
     <Switch>
-      <Route path="/" 
+      <PrivateRoute path="/dashboard"
         exact={true}
-        component={HomePage}>
-      </Route>
+        component={Dashboard} />
 
-      {/* <Route path="/signup" exact={true}>
-        <SignupPage />
-      </Route> */}
-
-      {/* <Route path="/signout" exact={true}>
-        <Signout />
-      </Route> */}
-
-      <Route path="/dashboard" 
+      <PrivateRoute path="/dashboard/create-new-training"
         exact={true}
-        component={Dashboard}>
-      </Route>
+        component={CreateNewTraining} />
 
-      <Route path="/dashboard/create-new-training" 
+      <PrivateRoute path="/employee-profile"
         exact={true}
-        component={CreateNewTraining}>
-      </Route>
-      <Route path="/employee-profile" 
-        exact={true}
-        component={EmployeeProfile}>
-      </Route>
+        component={EmployeeProfile} />
 
       <Route path="/login"
         exact={true}
@@ -69,6 +56,10 @@ function AppRouter(props) {
         component={SignUp}>
       </Route>
 
+      <Route path="/"
+        exact={true}
+        component={HomePage}>
+      </Route>
     </Switch>
   );
 }
