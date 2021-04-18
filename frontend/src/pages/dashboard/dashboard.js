@@ -44,12 +44,7 @@ const cardStyles = makeStyles({
 export default function CreateNewTrainingPage() {
   const classes = useStyles();
   const cardStyle = cardStyles();
-
-  //   const { authState, setAuthState } = React.useContext(AuthContext);
-
-  //   if (authState.authenticated) {
-  //     return authState.user.claims.teacher ? <Redirect to="/teacher/subjectList" />: <Redirect to="/student/dashboard" />; 
-  //   } else {
+  
   return (
     <div>
       <Box m={5}>
