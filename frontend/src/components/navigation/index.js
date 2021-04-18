@@ -119,7 +119,7 @@ const MyDrawer = withStyles(styles)(
           <ListItem 
           button 
           component={Link}
-          to="/employee-profile"
+          to="/profile"
           onClick={onItemClick("Profile")}>
             <ListItemText>Profile</ListItemText>
           </ListItem>

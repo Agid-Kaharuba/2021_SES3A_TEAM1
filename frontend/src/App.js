@@ -42,7 +42,7 @@ function AppRouter(props) {
         exact={true}
         component={CreateNewTraining} />
 
-      <PrivateRoute path="/employee-profile"
+      <PrivateRoute path="/profile"
         exact={true}
         component={EmployeeProfile} />
 
