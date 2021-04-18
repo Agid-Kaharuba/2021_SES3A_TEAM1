@@ -42,12 +42,22 @@ export default class AuthController {
     public async create(req: Request, res: Response) {
         const {
             username,
-            password
+            password,
+            firstname,
+            lastname,
+            email,
+            stafid,
+            isSupervisor
         } = req.body;
 
         const newUserRequest = new User({
             username,
-            password
+            password,
+            firstname,
+            lastname,
+            email,
+            stafid,
+            isSupervisor
         } as any);
         newUserRequest.save((err: MongoError) => {
 			if (err) {
