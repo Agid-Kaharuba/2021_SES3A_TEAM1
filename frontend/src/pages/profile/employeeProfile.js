@@ -8,6 +8,7 @@ import { AuthContext } from "../../context/auth";
 export default function EmployeeProfile(props) {
   const { authState } = useContext(AuthContext);
   const [employee, setEmployeeDetails] = useState(undefined);
+  const [resultState, setResultState] = React.useState(undefined);
   const pImage = useState({
     profileImg: 'https://cdn3.iconfinder.com/data/icons/gradient-general-pack/512/user-01-512.png'
   });
@@ -32,11 +33,28 @@ export default function EmployeeProfile(props) {
     setEmployeeDetails({
       ...employee, [name]: value,
     });
+    console.log(name, value, employee);
   }
 
-  function saveChanges() {
-
+  async function saveChanges(event) {
+    event.preventDefault();
+    setResultState("Submitting");
+    try {
+      await api.user.update(authState.token, authState.user._id, employee);
+      setResultState("Success");
+    }
+    catch (err) {
+      setResultState(err.response.data.err);
+    }
   }
+
+  const buildResult = () => {
+    return (
+      <>
+        <p>{resultState}</p>
+      </>
+    );
+  };
 
   // TODO: I dont know what these are for
   // But they are 
@@ -58,10 +76,13 @@ export default function EmployeeProfile(props) {
 
   return (
     employee ?
-      <Profile employee={employee} handleChange={handleChange} handleImageUpload={handleImageUpload} saveChanges={saveChanges}
-        // TODO: figure out props below
-        uploadedImage={uploadedImage} imageUploader={imageUploader}
-      />
+      <>
+        <Profile employee={employee} handleChange={handleChange} handleImageUpload={handleImageUpload} saveChanges={saveChanges}
+          // TODO: figure out props below
+          uploadedImage={uploadedImage} imageUploader={imageUploader}
+        />
+        {resultState !== undefined && buildResult()}
+      </>
       :
       // TODO: someone put in a loader or sort this out
       <>
