@@ -12,6 +12,7 @@ import { Alert } from "@material-ui/lab";
 import { useHistory } from 'react-router-dom';
 
 import api from "../../helpers/api";
+import { AuthContext } from "../../context/auth";
 
 //creating the react hook
 const useStyles = makeStyles((theme) => ({
@@ -38,6 +39,7 @@ export default function LogIn() {
   let history = useHistory();
   const [loginState, setLoginState] = useState({ username: "", password: "" });
   const [loginError, setLoginError] = React.useState(undefined);
+  const { authState, setAuthState } = React.useContext(AuthContext);
 
   const handleChange = async (event) => {
     const target = event.target;
@@ -53,15 +55,16 @@ export default function LogIn() {
     event.preventDefault();
     var res;
     try {
-      console.log(loginState)
       res = (await api.auth.login(loginState));
-      console.log(res);
+      setAuthState({
+        authenticated: true,
+        ...res.data,
+      })
+      console.log(authState);
     }
     catch (err) {
       setLoginError(err.response.data.err);
     }
-
-
   }
 
   const signupClick = () => {
