@@ -46,7 +46,7 @@ export default class AuthController {
             firstname,
             lastname,
             email,
-            stafid,
+            staffid,
             isSupervisor
         } = req.body;
 
@@ -56,7 +56,7 @@ export default class AuthController {
             firstname,
             lastname,
             email,
-            stafid,
+            staffid,
             isSupervisor
         } as any);
         newUserRequest.save((err: MongoError) => {
