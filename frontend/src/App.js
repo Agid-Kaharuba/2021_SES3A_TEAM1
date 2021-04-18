@@ -16,18 +16,18 @@ import SignUp from "./pages/signup/signup.js";
 // import appTheme from "./helpers/appTheme";
 
 // IMPORT CONTEXT
-// import { AuthProvider } from "./context/auth";
+import { AuthProvider } from "./context/auth";
 // import Signout from "./helpers/auth/signout.js";
 
-// function AppProvider(props) {
-//   return (
-//     <ThemeProvider theme={appTheme}>
-//       <AuthProvider>
-//         {props.children}
-//       </AuthProvider>
-//     </ThemeProvider>
-//   );
-// }
+function AppProvider(props) {
+  return (
+    // <ThemeProvider theme={appTheme}>
+      <AuthProvider>
+        {props.children}
+      </AuthProvider>
+    // </ThemeProvider>
+  );
+}
 
 function AppRouter(props) {
   return (
@@ -76,14 +76,14 @@ function AppRouter(props) {
 function App() {
   return (
     <div className="App">
-      {/* <AppProvider> */}
+      <AppProvider>
         <BrowserRouter>
           <ManageNavigation />
           <div>
             <AppRouter />
           </div>
         </BrowserRouter>
-      {/* </AppProvider> */}
+      </AppProvider>
     </div>
   );
 }
