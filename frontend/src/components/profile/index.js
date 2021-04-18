@@ -35,27 +35,38 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function Profile(props) {
+function ProfilePicture(props) {
   const classes = useStyles();
-  const { employee, handleChange, handleImageUpload, saveChanges } = props;
-
   // TODO: I dont know what these are for
   // There were declared before this component was pulled from being hardcoded in a page
   // Just propping them in for now.
-  const { uploadedImage, imageUploader } = props;
+  const { uploadedImage, imageUploader, handleImageUpload } = props;
+
+  return (
+    <>
+      {/*Accepting only files with image type*/}
+      <input type="file" id="input" accept="image/*" onChange={handleImageUpload} ref={imageUploader} className={classes.imageUpload} />
+      <div>
+        <img className={classes.image} ref={uploadedImage} />
+        <br />
+        <Button size="small" onClick={() => imageUploader.current.click()} variant="outlined" color="secondary">Upload Image</Button>
+      </div>
+    </>
+  )
+}
+
+export default function Profile(props) {
+  const classes = useStyles();
+  const { employee, handleChange, saveChanges } = props;
 
   return (
     <Container maxWidth="sm">
       <div className={classes.container}>
         <Typography variant="h4" className={classes.heading}>PROFILE</Typography>
 
-        {/*Accepting only files with image type*/}
-        <input type="file" id="input" accept="image/*" onChange={handleImageUpload} ref={imageUploader} className={classes.imageUpload} />
-        <div>
-          <img className={classes.image} ref={uploadedImage} />
-          <br />
-          <Button size="small" onClick={() => imageUploader.current.click()} variant="outlined" color="secondary">Upload Image</Button>
-        </div>
+        {/* TODO: implement profile picture */}
+        {/* <ProfilePicture {...props}/> */}
+
       </div>
 
       <br />
