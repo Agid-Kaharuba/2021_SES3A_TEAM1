@@ -16,8 +16,10 @@ export default class UserController {
 
     public async get(req: Request, res: Response) {
         try {
+            //@ts-ignore
+            const id = req.params.userId || req.user._id;
             const user = await User.findOne({
-                _id: req.params.userId
+                _id: id
             });
             ResponseService.successResponse(res, user);
         }

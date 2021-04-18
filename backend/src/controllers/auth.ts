@@ -19,7 +19,7 @@ export default class AuthController {
             // @ts-ignore
             if (await userIn.checkPassword(password)) {
               const jwtPayload = {
-                  userId: username,
+                  username: username,
                   password: password
               };
               const token = jwt.sign(jwtPayload, `${process.env.TOKEN_SECRET}`, {
