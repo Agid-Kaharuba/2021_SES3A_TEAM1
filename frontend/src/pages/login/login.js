@@ -75,6 +75,14 @@ export default function LogIn() {
       </>
     );
   };
+  // TODO: someone on frontend please move or re-space this
+  const errorSpace = () => {
+    return (
+      <>
+        <Alert severity="error" style={{opacity: 0}}/>
+      </>
+    );
+  };
 
   return (
     <Container component="main" maxWidth="xs"> {/*set container size*/}
@@ -110,7 +118,7 @@ export default function LogIn() {
           {/* TODO: implement forgot password */}
           {/* <Link href="#" variant="body2">Forgot password?</Link> */}
 
-          {loginError !== undefined && buildLoginError()}
+          {loginError !== undefined ? buildLoginError() : errorSpace()}
 
           <Button
             type="submit"
