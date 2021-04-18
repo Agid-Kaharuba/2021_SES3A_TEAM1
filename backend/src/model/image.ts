@@ -5,6 +5,10 @@ const ProfileImageSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  mimetype:{
+    type: String,
+    required: true
+  },
   img: {
     type: Buffer,
     required: true
