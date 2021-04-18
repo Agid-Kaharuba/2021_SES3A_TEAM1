@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useEffect, useState, useContext } from "react";
 
 // IMPORT COMPONENTS
 import { Box, Button, Typography, Divider, TextField, Card, CardContent, CardActions, Paper, Fab } from "@material-ui/core";
 import AddIcon from '@material-ui/icons/Add';
 import { makeStyles } from "@material-ui/core/styles";
 
-// import { Link } from "react-router-dom";
-// import { AuthContext } from "../../context/auth";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/auth";
+import api from "../../helpers/api";
 
 
 const useStyles = makeStyles({
@@ -44,7 +45,45 @@ const cardStyles = makeStyles({
 export default function CreateNewTrainingPage() {
   const classes = useStyles();
   const cardStyle = cardStyles();
-  
+  const { authState } = useContext(AuthContext);
+  const [coursesState, setCoursesState] = useState(undefined);
+  // const [coursesState, setCoursesState] = useState([{"name":"test","description":"asdsdf"},{"name":"test","description":"asdsdf"}]);
+
+
+  const fetchData = async () => {
+    const res = await api.course.getAll(authState.token);
+    setCoursesState(res.data);
+    console.log("courses", res.data);
+  };
+
+  useEffect(() => {
+    if (coursesState === undefined) {
+      fetchData();
+    }
+  });
+
+
+
+  const buildCourse = (course) => {
+    return (
+      <Box mx={5} my={2}>
+        <Paper>
+          <Card className={classes.root} variant="outlined">
+            <CardContent>
+              <Typography className={classes.title} color="textSecondary" gutterBottom>
+                {course.name} - {course.description}
+              </Typography>
+
+            </CardContent>
+            <CardActions>
+              <Button size="small">View Training</Button>
+            </CardActions>
+          </Card>
+        </Paper>
+      </Box>
+    )
+  }
+
   return (
     <div>
       <Box m={5}>
@@ -55,36 +94,13 @@ export default function CreateNewTrainingPage() {
       </Box>
 
       <Box m={5}>
-        <Box mx={5} my={2}>
-          <Paper>
-            <Card className={classes.root} variant="outlined">
-              <CardContent>
-                <Typography className={classes.title} color="textSecondary" gutterBottom>
-                  Word of the Day
-                </Typography>
-
-              </CardContent>
-              <CardActions>
-                <Button size="small">View Training</Button>
-              </CardActions>
-            </Card>
-          </Paper>
-        </Box>
-        <Box mx={5} my={2}>
-          <Paper>
-            <Card className={classes.root} variant="outlined">
-              <CardContent>
-                <Typography className={classes.title} color="textSecondary" gutterBottom>
-                  Word of the Day
-                </Typography>
-
-              </CardContent>
-              <CardActions>
-                <Button size="small">View Training</Button>
-              </CardActions>
-            </Card>
-          </Paper>
-        </Box>
+        {coursesState ?
+          coursesState.map((course) => {
+            return buildCourse(course);
+          })
+          :
+          <h1>LOADING</h1>
+        }
         <Box mx={5} my={2} justifyContent='center' display="flex">
           <Fab color="primary" aria-label="add">
             <AddIcon />
