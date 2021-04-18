@@ -78,13 +78,13 @@ export default function HomePage() {
               </Button>
             </Grid>
             <br></br>
-            <Grid container spacing={3} direction="row" justify="space-around" alignItems="center" >
+            <Grid container direction="row" justify="space-around" alignItems="center" >
               <img src={bbt} width='25%' height='20%'/>
               <img src={burger} width='25%' height='20%'/>
               <img src={pizza} width='25%' height='20%'/>
             </Grid>
             <br></br>
-            <Grid container spacing={1} direction="column" color='white' alignItems='flex-start'>
+            <Grid container direction="column" color='white' alignItems='flex-start'>
             <Container>
               <Box color="white">
             <h2>Project Outline</h2>
