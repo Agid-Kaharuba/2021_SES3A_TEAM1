@@ -11,7 +11,7 @@ import SignOut from "./components/signout";
 // IMPORT PAGES
 import HomePage from "./pages/home/home.js";
 import Dashboard from "./pages/dashboard/dashboard.js";
-import CreateNewTraining from './pages/supervisorCreateNewTraining/supervisorCreateNewTraining.js';
+import CreateNewCourse from './pages/supervisor/CreateCourse';
 import EmployeeProfile from "./pages/profile/employeeProfile";
 import LogIn from "./pages/login/login.js";
 import SignUp from "./pages/signup/signup.js";
@@ -39,9 +39,9 @@ function AppRouter(props) {
         exact={true}
         component={Dashboard} />
 
-      <PrivateRoute path="/dashboard/create-new-training"
+      <PrivateRoute path="/dashboard/create"
         exact={true}
-        component={CreateNewTraining} />
+        component={CreateNewCourse} />
 
       <PrivateRoute path="/profile"
         exact={true}

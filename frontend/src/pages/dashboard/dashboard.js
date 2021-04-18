@@ -49,7 +49,6 @@ export default function CreateNewTrainingPage() {
   const [coursesState, setCoursesState] = useState(undefined);
   // const [coursesState, setCoursesState] = useState([{"name":"test","description":"asdsdf"},{"name":"test","description":"asdsdf"}]);
 
-
   const fetchData = async () => {
     const res = await api.course.getAll(authState.token);
     setCoursesState(res.data);
@@ -60,8 +59,6 @@ export default function CreateNewTrainingPage() {
       fetchData();
     }
   });
-
-
 
   const buildCourse = (course) => {
     return (
@@ -101,9 +98,11 @@ export default function CreateNewTrainingPage() {
           <h1>LOADING</h1>
         }
         <Box mx={5} my={2} justifyContent='center' display="flex">
-          <Fab color="primary" aria-label="add">
-            <AddIcon />
-          </Fab>
+          <Link to="/dashboard/create">
+            <Fab color="primary" aria-label="add">
+              <AddIcon />
+            </Fab>
+          </Link>
         </Box>
       </Box>
     </div>

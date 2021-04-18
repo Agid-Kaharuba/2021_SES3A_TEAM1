@@ -1,7 +1,7 @@
 import React from "react";
 
 // IMPORT COMPONENTS
-import { Box, Button, Typography, Divider, TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper} from "@material-ui/core";
+import { Box, Button, Typography, Divider, TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@material-ui/core";
 import { DropzoneArea } from 'material-ui-dropzone'
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -36,11 +36,11 @@ const rows = [
 
 export default function CreateNewTrainingPage() {
   const classes = useStyles();
-//   const { authState, setAuthState } = React.useContext(AuthContext);
+  //   const { authState, setAuthState } = React.useContext(AuthContext);
 
-//   if (authState.authenticated) {
-//     return authState.user.claims.teacher ? <Redirect to="/teacher/subjectList" />: <Redirect to="/student/dashboard" />; 
-//   } else {
+  //   if (authState.authenticated) {
+  //     return authState.user.claims.teacher ? <Redirect to="/teacher/subjectList" />: <Redirect to="/student/dashboard" />; 
+  //   } else {
   return (
     <div>
       <Box m={5}>
@@ -58,11 +58,11 @@ export default function CreateNewTrainingPage() {
           </Typography>
         </Box>
 
-        <DropzoneArea/>
+        <DropzoneArea />
         <Box m={2}>
           <Button variant="contained" component="label">
             Upload Photo
-            <input type="file" hidden/>
+            <input type="file" hidden />
           </Button>
         </Box>
       </Box>
@@ -76,21 +76,21 @@ export default function CreateNewTrainingPage() {
 
         <Box m={2}>
           <TextField
-              id="filled-multiline-static"
-              label="Enter the Training's Name"
-              fullWidth='true'
-              variant="filled"
-            />
+            id="filled-multiline-static"
+            label="Enter the Training's Name"
+            fullWidth='true'
+            variant="filled"
+          />
         </Box>
         <Box m={2}>
           <TextField
-              id="filled-multiline-static"
-              label="Enter the Training's Description"
-              multiline
-              rows={4}
-              fullWidth='true'
-              variant="filled"
-            />
+            id="filled-multiline-static"
+            label="Enter the Training's Description"
+            multiline
+            rows={4}
+            fullWidth='true'
+            variant="filled"
+          />
         </Box>
       </Box>
 
@@ -125,19 +125,19 @@ export default function CreateNewTrainingPage() {
           </Table>
         </TableContainer>
       </Box>
-      
+
       <Box justifyContent='center' display="flex" m={6}>
         <Box mr={6}>
-          <Button variant="contained"color="secondary">
-          Back
+          <Button variant="contained" color="secondary">
+            Back
           </Button>
         </Box>
         <Box>
           <Button variant="contained" color="primary">
-          Save
+            Save
           </Button>
         </Box>
       </Box>
     </div>
-    )
+  )
 }
