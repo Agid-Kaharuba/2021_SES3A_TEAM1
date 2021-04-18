@@ -79,7 +79,7 @@ export default function LogIn() {
   const errorSpace = () => {
     return (
       <>
-        <Alert severity="error" style={{opacity: 0}}/>
+        <Alert severity="error" style={{ opacity: 0 }} />
       </>
     );
   };
@@ -90,7 +90,7 @@ export default function LogIn() {
       <div className={classes.paper}>
         <Typography variant="h3">LOGIN</Typography>
 
-        <form onSubmit={handleLogin}>
+        <form className={classes.form} onSubmit={handleLogin}>
           <TextField
             label="Username"
             variant="outlined"
