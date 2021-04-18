@@ -10,7 +10,8 @@ import {
   updateUser
 } from "./user";
 import {
-  getAllCourses
+  getAllCourses,
+  createCourse
 } from "./course";
 
 export const API_HOST = "http://localhost:4000";
@@ -28,6 +29,7 @@ export default {
     update: updateUser
   },
   course: {
-    getAll: getAllCourses
+    getAll: getAllCourses,
+    create: createCourse
   }
 }
