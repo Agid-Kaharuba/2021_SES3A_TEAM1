@@ -54,7 +54,8 @@ export default function LogIn() {
             required //must have input to submit the form
             fullWidth
           />
-          <Link href="#" variant="body2">Forgot username?</Link>
+          {/* TODO: implement forgot username */}
+          {/* <Link href="#" variant="body2">Forgot username?</Link> */}
 
           <TextField
             label="Password"
@@ -66,7 +67,8 @@ export default function LogIn() {
             required
             fullWidth
           />
-          <Link href="#" variant="body2">Forgot password?</Link>
+          {/* TODO: implement forgot password */}
+          {/* <Link href="#" variant="body2">Forgot password?</Link> */}
 
           <Button
             type="submit"
