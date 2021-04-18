@@ -1,7 +1,7 @@
 import React from "react";
 
 // IMPORT COMPONENTS
-import { Box, Button, Typography, Divider, TextField, Card, CardContent, CardActions, Paper, Fab} from "@material-ui/core";
+import { Box, Button, Typography, Divider, TextField, Card, CardContent, CardActions, Paper, Fab } from "@material-ui/core";
 import AddIcon from '@material-ui/icons/Add';
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -25,77 +25,77 @@ const useStyles = makeStyles({
 })
 
 const cardStyles = makeStyles({
-    root: {
-      minWidth: 275,
-    },
-    bullet: {
-      display: 'inline-block',
-      margin: '0 2px',
-      transform: 'scale(0.8)',
-    },
-    title: {
-      fontSize: 14,
-    },
-    pos: {
-      marginBottom: 12,
-    },
-  });
+  root: {
+    minWidth: 275,
+  },
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
+  },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
+});
 
 export default function CreateNewTrainingPage() {
   const classes = useStyles();
   const cardStyle = cardStyles();
 
-//   const { authState, setAuthState } = React.useContext(AuthContext);
+  //   const { authState, setAuthState } = React.useContext(AuthContext);
 
-//   if (authState.authenticated) {
-//     return authState.user.claims.teacher ? <Redirect to="/teacher/subjectList" />: <Redirect to="/student/dashboard" />; 
-//   } else {
+  //   if (authState.authenticated) {
+  //     return authState.user.claims.teacher ? <Redirect to="/teacher/subjectList" />: <Redirect to="/student/dashboard" />; 
+  //   } else {
   return (
     <div>
-        <Box m={5}>
-            <Typography className={classes.bold} variant='h4'>
-            Dashboard
+      <Box m={5}>
+        <Typography className={classes.bold} variant='h4'>
+          Dashboard
             </Typography>
-            <Divider variant="middle" />
+        <Divider variant="middle" />
+      </Box>
+
+      <Box m={5}>
+        <Box mx={5} my={2}>
+          <Paper>
+            <Card className={classes.root} variant="outlined">
+              <CardContent>
+                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                  Word of the Day
+                </Typography>
+
+              </CardContent>
+              <CardActions>
+                <Button size="small">View Training</Button>
+              </CardActions>
+            </Card>
+          </Paper>
         </Box>
+        <Box mx={5} my={2}>
+          <Paper>
+            <Card className={classes.root} variant="outlined">
+              <CardContent>
+                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                  Word of the Day
+                </Typography>
 
-        <Box m={5}>
-            <Box mx={5} my={2}>
-                <Paper>
-                    <Card className={classes.root} variant="outlined">
-                        <CardContent>
-                            <Typography className={classes.title} color="textSecondary" gutterBottom>
-                            Word of the Day
-                            </Typography>
-
-                        </CardContent>
-                        <CardActions>
-                            <Button size="small">View Training</Button>
-                        </CardActions>
-                    </Card>
-                </Paper>
-            </Box>
-            <Box mx={5} my={2}>
-                <Paper>
-                    <Card className={classes.root} variant="outlined">
-                        <CardContent>
-                            <Typography className={classes.title} color="textSecondary" gutterBottom>
-                            Word of the Day
-                            </Typography>
-
-                        </CardContent>
-                        <CardActions>
-                            <Button size="small">View Training</Button>
-                        </CardActions>
-                    </Card>
-                </Paper>
-            </Box>
-            <Box mx={5} my={2} justifyContent='center' display="flex">
-                <Fab color="primary" aria-label="add">
-                    <AddIcon />
-                </Fab>
-            </Box>
-        </Box>  
+              </CardContent>
+              <CardActions>
+                <Button size="small">View Training</Button>
+              </CardActions>
+            </Card>
+          </Paper>
+        </Box>
+        <Box mx={5} my={2} justifyContent='center' display="flex">
+          <Fab color="primary" aria-label="add">
+            <AddIcon />
+          </Fab>
+        </Box>
+      </Box>
     </div>
-    )
+  )
 }
