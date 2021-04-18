@@ -53,7 +53,6 @@ export default function CreateNewTrainingPage() {
   const fetchData = async () => {
     const res = await api.course.getAll(authState.token);
     setCoursesState(res.data);
-    console.log("courses", res.data);
   };
 
   useEffect(() => {

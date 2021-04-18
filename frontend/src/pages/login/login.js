@@ -88,7 +88,7 @@ export default function LogIn() {
     );
   };
 
-  if (isAuthenticated(authState)) {
+  if (authState.authenticated) {
 		return <Redirect to="/dashboard" />;
 	}
 

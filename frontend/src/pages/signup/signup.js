@@ -86,7 +86,7 @@ export default function SignUp() {
         }
     }
 
-    if (isAuthenticated(authState)) {
+    if (authState.authenticated) {
 		return <Redirect to="/dashboard" />;
 	}
 

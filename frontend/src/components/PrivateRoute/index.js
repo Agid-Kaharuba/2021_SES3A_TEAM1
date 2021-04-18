@@ -13,7 +13,7 @@ export default class PrivateRoute extends React.Component {
     }
 
     async componentWillMount() {
-        const isAuth = await isAuthenticated(this.context.authState);
+        const isAuth = await isAuthenticated(this.context.authState, this.context.setAuthState);
         this.setState({ authenticated: isAuth })
     }
 

@@ -6,6 +6,7 @@ import { ThemeProvider } from "@material-ui/core/styles";
 // IMPORT COMPONENTS
 import ManageNavigation from "./components/manageNavigation";
 import PrivateRoute from "./components/PrivateRoute";
+import SignOut from "./components/signout";
 
 // IMPORT PAGES
 import HomePage from "./pages/home/home.js";
@@ -54,6 +55,11 @@ function AppRouter(props) {
       <Route path="/signup"
         exact={true}
         component={SignUp}>
+      </Route>
+
+      <Route path="/signout"
+        exact={true}
+        component={SignOut}>
       </Route>
 
       <Route path="/"
