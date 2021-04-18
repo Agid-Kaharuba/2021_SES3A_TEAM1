@@ -25,6 +25,8 @@ export default class AuthController {
               const token = jwt.sign(jwtPayload, `${process.env.TOKEN_SECRET}`, {
                   expiresIn: "24h"
               });
+              // @ts-ignore
+              userIn.password = undefined;
               ResponseService.successResponse(res, {user: userIn, token: token});
             }
             else {
@@ -38,22 +40,32 @@ export default class AuthController {
     }
 
     public async create(req: Request, res: Response) {
-      const {
-          username,
-          password
-      } = req.body;
+        const {
+            username,
+            password,
+            firstname,
+            lastname,
+            email,
+            stafid,
+            isSupervisor
+        } = req.body;
 
-      const newUserRequest = new User({
-          username,
-          password
-      } as any);
-      newUserRequest.save((err: MongoError) => {
-        if (err) {
-          err.code = 11000;
-          ResponseService.mongoErrorResponse(res, err, "Username already exists in the database");
-        } else {
-          ResponseService.successResponse(res, newUserRequest);
-        }
-      });
+        const newUserRequest = new User({
+            username,
+            password,
+            firstname,
+            lastname,
+            email,
+            stafid,
+            isSupervisor
+        } as any);
+        newUserRequest.save((err: MongoError) => {
+			if (err) {
+                err.code = 11000;
+				ResponseService.mongoErrorResponse(res, err, "Username already exists in the database");
+			} else {
+				ResponseService.successResponse(res, newUserRequest);
+			}
+		});
     }
 }
