@@ -32,6 +32,15 @@ public class BurgerItemEditor : Editor
             {
                 GUILayout.Label($"No Below Item Found");
             }
+
+            if (burgerItem.IsGlued)
+            {
+                GUILayout.Label($"Glued to {burgerItem.GluedItem.name}");
+            }
+            else
+            {
+                GUILayout.Label($"Not glued to anything");
+            }
         }
     }
 }

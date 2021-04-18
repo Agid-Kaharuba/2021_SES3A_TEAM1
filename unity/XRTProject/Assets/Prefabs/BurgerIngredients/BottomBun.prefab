@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7130338043061618231}
   m_Layer: 0
-  m_Name: StickPoint
+  m_Name: AboveStickPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6574626329415508472}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.0341}
+  m_LocalPosition: {x: 0, y: -0, z: 0.0354}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5768627673590581570}
@@ -213,7 +213,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stackDetector: {fileID: 2181050974130909}
-  stickPoint: {fileID: 7130338043061618231}
+  aboveStickPoint: {fileID: 7130338043061618231}
+  belowStickPoint: {fileID: 0}
   attachmentFlags: 86
   canStackBelow: 0
 --- !u!1 &7758484321920182328

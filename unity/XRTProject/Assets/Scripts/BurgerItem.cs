@@ -4,11 +4,48 @@ using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
 
-[RequireComponent(typeof(Interactable)), RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Interactable))]
 public class BurgerItem : MonoBehaviour
 {
+    private struct RigidbodyConfig
+    {
+        public float mass;
+        public float drag;
+        public float angularDrag;
+        public bool isKinematic;
+        public RigidbodyInterpolation interpolation;
+        public RigidbodyConstraints constraints;
+        public bool useGravity;
+        public CollisionDetectionMode collisionDetectionMode;
+
+        public RigidbodyConfig(Rigidbody rigidbody)
+        {
+            mass = rigidbody.mass;
+            drag = rigidbody.drag;
+            angularDrag = rigidbody.angularDrag;
+            isKinematic = rigidbody.isKinematic;
+            interpolation = rigidbody.interpolation;
+            useGravity = rigidbody.useGravity;
+            constraints = rigidbody.constraints;
+            collisionDetectionMode = rigidbody.collisionDetectionMode;
+        }
+
+        public void ApplyTo(Rigidbody rigidbody)
+        {
+            rigidbody.mass = mass;
+            rigidbody.drag = drag;
+            rigidbody.angularDrag = angularDrag;
+            rigidbody.isKinematic = isKinematic;
+            rigidbody.interpolation = interpolation;
+            rigidbody.useGravity = useGravity;
+            rigidbody.constraints = constraints;
+            rigidbody.collisionDetectionMode = collisionDetectionMode;
+        }
+    }
+    
     [SerializeField] private BurgerStackDetector stackDetector;
-    [SerializeField] private Transform stickPoint;
+    [SerializeField] private Transform aboveStickPoint;
+    [SerializeField] private Transform belowStickPoint;
     [SerializeField] private Hand.AttachmentFlags attachmentFlags = Hand.AttachmentFlags.DetachOthers |
                                                                     Hand.AttachmentFlags.DetachFromOtherHand |
                                                                     Hand.AttachmentFlags.TurnOffGravity |
@@ -16,18 +53,28 @@ public class BurgerItem : MonoBehaviour
     [SerializeField] private bool canStackBelow = true;
 
     private Interactable interactable;
-    private FixedJoint fixedJoint;
     private Rigidbody rb;
-    private BurgerItem trackingBelowItem;
+    private RigidbodyConfig rigidbodyConfig;
+    private Transform unGluedParent;
+    private bool isGlued;
+    private BurgerItem gluedItem;
 
     public BurgerItem AboveItem => stackDetector ? stackDetector.AboveItem : null;
     public BurgerItem BelowItem => stackDetector ? stackDetector.BelowItem : null;
-    private bool isGlued;
+    public bool IsGlued => isGlued;
+    public BurgerItem GluedItem => gluedItem;
+    
 
     private void Awake()
     {
         interactable = GetComponent<Interactable>();
         rb = GetComponent<Rigidbody>();
+        unGluedParent = transform.parent;
+
+        if (rb)
+        {
+            rigidbodyConfig = new RigidbodyConfig(rb);
+        }
 
         if (stackDetector != null)
         {
@@ -39,21 +86,13 @@ public class BurgerItem : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
-    {
-        // if (isGlued)
-        // {
-        //     rb.MovePosition(trackingBelowItem.stickPoint.position);
-        // }
-    }
-
     private void OnCollisionEnter(Collision other)
     {
-        if (canStackBelow)
+        if (canStackBelow && !isGlued)
         {
             BurgerItem otherBurgerItem = other.gameObject.GetComponent<BurgerItem>();
         
-            if (!isGlued && BelowItem && BelowItem == otherBurgerItem && BelowItem.stickPoint)
+            if (BelowItem && BelowItem == otherBurgerItem && BelowItem.aboveStickPoint)
             {
                 GlueBurger(BelowItem);
             }
@@ -82,36 +121,29 @@ public class BurgerItem : MonoBehaviour
     private void GlueBurger(BurgerItem otherBurgerItem)
     {
         isGlued = true;
+        gluedItem = otherBurgerItem;
+        
+        Destroy(rb);
+        transform.SetParent(otherBurgerItem.transform, true);
 
-        if (otherBurgerItem.stickPoint != null)
+        if (belowStickPoint != null)
         {
-            transform.position = otherBurgerItem.stickPoint.position;
+            Vector3 vectorFromBelow = transform.position - belowStickPoint.position;
+            transform.position = otherBurgerItem.aboveStickPoint.position + vectorFromBelow;
         }
         else
         {
-            Debug.LogWarning($"{gameObject} is missing a StickPoint");
+            Debug.LogWarning($"{gameObject.name} is missing a BelowStickPoint");
         }
-        
-        fixedJoint = gameObject.AddComponent<FixedJoint>();
-        fixedJoint.enableCollision = true;
-        // fixedJoint.breakForce = 5;
-        // fixedJoint.breakTorque = 5;
-        fixedJoint.connectedBody = otherBurgerItem.GetComponent<Rigidbody>();
-
-        // rb.isKinematic = true;
-        // trackingBelowItem = otherBurgerItem;
-        // rb.MovePosition(trackingBelowItem.stickPoint.position);
     }
 
     private void UnGlueBurger()
     {
-        if (isGlued)
-        {
-            Destroy(fixedJoint);
-        }
-        
+        rb = gameObject.AddComponent<Rigidbody>();
+        rigidbodyConfig.ApplyTo(rb);
+        transform.SetParent(unGluedParent, true);
+
+        gluedItem = null;
         isGlued = false;
-        // rb.isKinematic = false;
-        // trackingBelowItem = null;
     }
 }

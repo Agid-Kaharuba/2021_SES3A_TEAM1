@@ -67,7 +67,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5357215789531851383}
   m_Layer: 0
-  m_Name: StickPoint
+  m_Name: AboveStickPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,11 +81,41 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3255032177274501923}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: 0.0106}
+  m_LocalPosition: {x: 0, y: -0, z: 0.0153}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2856210300394479793}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3597487953775672554
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5247914461596239037}
+  m_Layer: 0
+  m_Name: BelowStickPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5247914461596239037
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3597487953775672554}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0, z: -0.0164}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2856210300394479793}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4144525105402181183
 GameObject:
@@ -122,6 +152,7 @@ Transform:
   m_Children:
   - {fileID: 3886242470877675854}
   - {fileID: 5357215789531851383}
+  - {fileID: 5247914461596239037}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -255,7 +286,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stackDetector: {fileID: 6632726521357053535}
-  stickPoint: {fileID: 5357215789531851383}
+  aboveStickPoint: {fileID: 5357215789531851383}
+  belowStickPoint: {fileID: 5247914461596239037}
   attachmentFlags: 86
   canStackBelow: 1
 --- !u!65 &5127100825261900519
@@ -269,5 +301,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.18, y: 0.18, z: 0.025}
+  m_Size: {x: 0.18, y: 0.18, z: 0.02}
   m_Center: {x: 0, y: 0, z: 0.0010255649}
