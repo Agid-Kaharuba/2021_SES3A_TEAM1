@@ -6,7 +6,7 @@ export const ImageRoute = (app: Express, controller: ImageController) => {
   const uploader = multer({
     storage: multer.memoryStorage(),
     limits: {
-      fileSize: 10 * 1024 * 1024, // keep images size < 3 MB
+      fileSize: 10 * 1024 * 1024, // keep images size < 10 MB
     },
   });
   
