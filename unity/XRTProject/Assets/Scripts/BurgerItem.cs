@@ -51,8 +51,9 @@ public class BurgerItem : MonoBehaviour
                                                                     Hand.AttachmentFlags.TurnOffGravity |
                                                                     Hand.AttachmentFlags.VelocityMovement;
     [SerializeField] private bool canStackBelow = true;
+    [SerializeField] private bool isBoard;
     
-    private const float SnapDistance = 0.04f;
+    private const float SnapDistance = 0.06f;
     private Interactable interactable;
     private Rigidbody rb;
     private RigidbodyConfig rigidbodyConfig;
@@ -166,18 +167,21 @@ public class BurgerItem : MonoBehaviour
 
     private void TryGlue(GameObject otherObject)
     {
-        if (!isHandHolding && canStackBelow && !isGlued)
+        if (!isHandHolding && !isGlued)
         {
             BurgerItem otherBurgerItem = otherObject.GetComponent<BurgerItem>();
 
             if (otherBurgerItem)
             {
-                BurgerItem topItem = otherBurgerItem.GetTopItem();
-                Debug.Log($"{name} Collide with {otherBurgerItem}");
-                
-                if (BelowItem == topItem && topItem.gluedFrom == null && topItem.aboveStickPoint && Vector3.Distance(belowStickPoint.position, topItem.aboveStickPoint.position) < SnapDistance)
+                if (canStackBelow || otherBurgerItem.isBoard)
                 {
-                    GlueBurger(topItem);
+                    BurgerItem topItem = otherBurgerItem.GetTopItem();
+                    Debug.Log($"{name} Collide with {otherBurgerItem}");
+                
+                    if (BelowItem == topItem && topItem.gluedFrom == null && topItem.aboveStickPoint && Vector3.Distance(belowStickPoint.position, topItem.aboveStickPoint.position) < SnapDistance)
+                    {
+                        GlueBurger(topItem);
+                    }
                 }
             }
         }
