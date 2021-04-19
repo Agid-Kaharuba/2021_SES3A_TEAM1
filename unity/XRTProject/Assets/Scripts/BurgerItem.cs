@@ -51,13 +51,18 @@ public class BurgerItem : MonoBehaviour
                                                                     Hand.AttachmentFlags.TurnOffGravity |
                                                                     Hand.AttachmentFlags.VelocityMovement;
     [SerializeField] private bool canStackBelow = true;
-
+    
+    private const float SnapDistance = 0.04f;
     private Interactable interactable;
     private Rigidbody rb;
     private RigidbodyConfig rigidbodyConfig;
     private Transform unGluedParent;
     private bool isGlued;
+    private Hand handToAttachNextFrame;
+    private GrabTypes grabTypeNextFrame;
     private BurgerItem gluedItem;
+    private BurgerItem gluedFrom;
+    private bool isHandHolding;
 
     public BurgerItem AboveItem => stackDetector ? stackDetector.AboveItem : null;
     public BurgerItem BelowItem => stackDetector ? stackDetector.BelowItem : null;
@@ -86,17 +91,29 @@ public class BurgerItem : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        if (handToAttachNextFrame != null)
+        {
+            handToAttachNextFrame.HoverLock(interactable);
+            handToAttachNextFrame.AttachObject(gameObject, grabTypeNextFrame, attachmentFlags);
+            handToAttachNextFrame = null;
+        }
+    }
+
     private void OnCollisionEnter(Collision other)
     {
-        if (canStackBelow && !isGlued)
-        {
-            BurgerItem otherBurgerItem = other.gameObject.GetComponent<BurgerItem>();
-        
-            if (BelowItem && BelowItem == otherBurgerItem && BelowItem.aboveStickPoint)
-            {
-                GlueBurger(BelowItem);
-            }
-        }
+        TryGlue(other.gameObject);
+    }
+
+    private void OnCollisionStay(Collision other)
+    {
+        TryGlue(other.gameObject);
+    }
+
+    private void OnHandHoverBegin(Hand hand)
+    {
+        Debug.Log($"Hovering with ${hand.handType} over {hand.hoveringInteractable.name}");
     }
 
     private void HandHoverUpdate(Hand hand)
@@ -104,17 +121,65 @@ public class BurgerItem : MonoBehaviour
         GrabTypes startingGrabType = hand.GetGrabStarting();
         bool isGrabEnding = hand.IsGrabEnding(gameObject);
 
-        if (interactable.attachedToHand == null && startingGrabType != GrabTypes.None)
+        if (handToAttachNextFrame == null && interactable.attachedToHand == null && startingGrabType != GrabTypes.None)
         {
+            isHandHolding = true;
+            Debug.Log($"Hand attaching {name}");
             UnGlueBurger();
             
-            hand.HoverLock(interactable);
-            hand.AttachObject(gameObject, startingGrabType, attachmentFlags);
+            handToAttachNextFrame = hand;
+            grabTypeNextFrame = startingGrabType;
         }
         else if (isGrabEnding)
         {
+            Debug.Log($"Hand detaching {name}");
+            
             hand.DetachObject(gameObject);
             hand.HoverUnlock(interactable);
+            isHandHolding = false;
+        }
+    }
+
+    private BurgerItem GetTopItem()
+    {
+        BurgerItem currentItem = this;
+
+        while (currentItem.gluedFrom != null)
+        {
+            currentItem = currentItem.gluedFrom;
+        }
+
+        return currentItem;
+    }
+    
+    private BurgerItem GetBottomItem()
+    {
+        BurgerItem currentItem = this;
+
+        while (currentItem.gluedItem != null)
+        {
+            currentItem = currentItem.gluedItem;
+        }
+
+        return currentItem;
+    }
+
+    private void TryGlue(GameObject otherObject)
+    {
+        if (!isHandHolding && canStackBelow && !isGlued)
+        {
+            BurgerItem otherBurgerItem = otherObject.GetComponent<BurgerItem>();
+
+            if (otherBurgerItem)
+            {
+                BurgerItem topItem = otherBurgerItem.GetTopItem();
+                Debug.Log($"{name} Collide with {otherBurgerItem}");
+                
+                if (BelowItem == topItem && topItem.gluedFrom == null && topItem.aboveStickPoint && Vector3.Distance(belowStickPoint.position, topItem.aboveStickPoint.position) < SnapDistance)
+                {
+                    GlueBurger(topItem);
+                }
+            }
         }
     }
 
@@ -122,6 +187,7 @@ public class BurgerItem : MonoBehaviour
     {
         isGlued = true;
         gluedItem = otherBurgerItem;
+        otherBurgerItem.gluedFrom = this;
         
         Destroy(rb);
         transform.SetParent(otherBurgerItem.transform, true);
@@ -130,6 +196,7 @@ public class BurgerItem : MonoBehaviour
         {
             Vector3 vectorFromBelow = transform.position - belowStickPoint.position;
             transform.position = otherBurgerItem.aboveStickPoint.position + vectorFromBelow;
+            transform.rotation = otherBurgerItem.GetBottomItem().transform.rotation;
         }
         else
         {
@@ -139,11 +206,17 @@ public class BurgerItem : MonoBehaviour
 
     private void UnGlueBurger()
     {
-        rb = gameObject.AddComponent<Rigidbody>();
-        rigidbodyConfig.ApplyTo(rb);
-        transform.SetParent(unGluedParent, true);
+        if (isGlued)
+        {
+            rb = gameObject.AddComponent<Rigidbody>();
+            // TODO fix below
+            // rigidbodyConfig.ApplyTo(rb);
+            transform.SetParent(unGluedParent, true);
 
-        gluedItem = null;
+            gluedItem.gluedFrom = null;
+            gluedItem = null;
+        }
+        
         isGlued = false;
     }
 }
