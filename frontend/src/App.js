@@ -1,58 +1,51 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
+import { ThemeProvider } from "@material-ui/core/styles";
+
 // IMPORT COMPONENTS
 import ManageNavigation from "./components/manageNavigation";
-import { ThemeProvider } from "@material-ui/core/styles";
+import PrivateRoute from "./components/PrivateRoute";
+import SignOut from "./components/signout";
 
 // IMPORT PAGES
 import HomePage from "./pages/home/home.js";
 import Dashboard from "./pages/dashboard/dashboard.js";
-import CreateNewTraining from './pages/supervisorCreateNewTraining/supervisorCreateNewTraining.js';
+import CreateNewCourse from './pages/supervisor/CreateCourse';
+import EmployeeProfile from "./pages/profile/employeeProfile";
 import LogIn from "./pages/login/login.js";
 import SignUp from "./pages/signup/signup.js";
 
 // import appTheme from "./helpers/appTheme";
 
 // IMPORT CONTEXT
-// import { AuthProvider } from "./context/auth";
+import { AuthProvider } from "./context/auth";
 // import Signout from "./helpers/auth/signout.js";
 
-// function AppProvider(props) {
-//   return (
-//     <ThemeProvider theme={appTheme}>
-//       <AuthProvider>
-//         {props.children}
-//       </AuthProvider>
-//     </ThemeProvider>
-//   );
-// }
+function AppProvider(props) {
+  return (
+    // <ThemeProvider theme={appTheme}>
+    <AuthProvider>
+      {props.children}
+    </AuthProvider>
+    // </ThemeProvider>
+  );
+}
 
 function AppRouter(props) {
   return (
     <Switch>
-      <Route path="/" 
+      <PrivateRoute path="/dashboard"
         exact={true}
-        component={HomePage}>
-      </Route>
+        component={Dashboard} />
 
-      {/* <Route path="/signup" exact={true}>
-        <SignupPage />
-      </Route> */}
-
-      {/* <Route path="/signout" exact={true}>
-        <Signout />
-      </Route> */}
-
-      <Route path="/dashboard" 
+      <PrivateRoute path="/dashboard/create"
         exact={true}
-        component={Dashboard}>
-      </Route>
+        component={CreateNewCourse} />
 
-      <Route path="/dashboard/create-new-training" 
+      <PrivateRoute path="/profile"
         exact={true}
-        component={CreateNewTraining}>
-      </Route>
+        component={EmployeeProfile} />
 
       <Route path="/login"
         exact={true}
@@ -64,6 +57,15 @@ function AppRouter(props) {
         component={SignUp}>
       </Route>
 
+      <Route path="/signout"
+        exact={true}
+        component={SignOut}>
+      </Route>
+
+      <Route path="/"
+        exact={true}
+        component={HomePage}>
+      </Route>
     </Switch>
   );
 }
@@ -71,14 +73,14 @@ function AppRouter(props) {
 function App() {
   return (
     <div className="App">
-      {/* <AppProvider> */}
+      <AppProvider>
         <BrowserRouter>
           <ManageNavigation />
           <div>
             <AppRouter />
           </div>
         </BrowserRouter>
-      {/* </AppProvider> */}
+      </AppProvider>
     </div>
   );
 }

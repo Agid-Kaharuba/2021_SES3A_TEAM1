@@ -33,11 +33,14 @@ const getUser = async (token: any) => {
 
 const verifyUser = async (req: Request,	res: Response,	next: any) => {
     const token = getAuthToken(req);
-    console.log(token);
 	if (!token) {
         ResponseService.unauthorizedResponse(res, "Unauthorized - no token found");
 	} else {
 		const user = await getUser(token);
+		// @ts-ignore
+		req.token = token;
+		// @ts-ignore
+		req.user = user;
 		if (user !== undefined) {
 			next();
 		} else {

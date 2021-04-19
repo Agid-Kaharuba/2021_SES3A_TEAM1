@@ -15,32 +15,49 @@ export default class AuthController {
         } = req.body;
 
         User.findOne({ username: username }, async function (err: Error, userIn: typeof User) {
+          if (userIn){
             // @ts-ignore
             if (await userIn.checkPassword(password)) {
-                const jwtPayload = {
-                    userId: username,
-                    password: password
-                };
-                const token = jwt.sign(jwtPayload, `${process.env.TOKEN_SECRET}`, {
-                    expiresIn: "24h"
-                });
-                ResponseService.successResponse(res, {user: userIn, token: token});
+              const jwtPayload = {
+                  username: username,
+                  password: password
+              };
+              const token = jwt.sign(jwtPayload, `${process.env.TOKEN_SECRET}`, {
+                  expiresIn: "24h"
+              });
+              // @ts-ignore
+              userIn.password = undefined;
+              ResponseService.successResponse(res, {user: userIn, token: token});
             }
             else {
                 ResponseService.mongoNotFoundResponse(res, "Username or password is incorrect");
             }
-        })
+          }
+          else{
+            ResponseService.mongoNotFoundResponse(res, "Username or password is incorrect");
+          }
+      })
     }
 
     public async create(req: Request, res: Response) {
         const {
             username,
-            password
+            password,
+            firstname,
+            lastname,
+            email,
+            staffid,
+            isSupervisor
         } = req.body;
 
         const newUserRequest = new User({
             username,
-            password
+            password,
+            firstname,
+            lastname,
+            email,
+            staffid,
+            isSupervisor
         } as any);
         newUserRequest.save((err: MongoError) => {
 			if (err) {
