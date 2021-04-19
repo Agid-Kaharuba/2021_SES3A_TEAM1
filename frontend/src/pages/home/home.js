@@ -3,6 +3,7 @@ import React from "react";
 // IMPORT COMPONENTS
 import { Box, Grid, Button, Typography, Paper, Avatar } from "@material-ui/core";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
+import { Link, Redirect } from "react-router-dom";
 
 // IMPORT IMAGES
 import VRLogo from '../../images/vr-glasses-white.png';
@@ -68,12 +69,10 @@ export default function HomePage() {
             </Grid>
 
             <Grid item>
-              <Button variant='contained' color='primary'>
+              <Button variant='contained' color='primary' to="/login" component={Link}>
                 Get Started!
               </Button>
             </Grid>
-
-
 
             <Box mt={6}>
               <Grid
