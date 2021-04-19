@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-
+import { useHistory, Redirect } from 'react-router-dom';
 // IMPORT COMPONENTS
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Button from '@material-ui/core/Button';
@@ -15,6 +14,7 @@ import { Radio } from '@material-ui/core';
 
 import api from "../../helpers/api";
 import { AuthContext } from "../../context/auth";
+import isAuthenticated from "../../helpers/auth/isAuthenticated"
 
 //creating the react hook
 const useStyles = makeStyles((theme) => ({
@@ -85,6 +85,10 @@ export default function SignUp() {
             }
         }
     }
+
+    if (authState.authenticated) {
+		return <Redirect to="/dashboard" />;
+	}
 
     return (
         <Container component="main" maxWidth="xs"> {/*set container size*/}
