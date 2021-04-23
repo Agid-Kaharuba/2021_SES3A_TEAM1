@@ -15,6 +15,7 @@ import CreateNewCourse from './pages/supervisor/CreateCourse';
 import EmployeeProfile from "./pages/profile/employeeProfile";
 import LogIn from "./pages/login/login.js";
 import SignUp from "./pages/signup/signup.js";
+import AboutUs from "./pages/aboutus/aboutus.js";
 
 // import appTheme from "./helpers/appTheme";
 
@@ -60,6 +61,11 @@ function AppRouter(props) {
       <Route path="/signout"
         exact={true}
         component={SignOut}>
+      </Route>
+
+      <Route path="/aboutus"
+        exact={true}
+        component={AboutUs}>
       </Route>
 
       <Route path="/"

@@ -116,12 +116,20 @@ const MyDrawer = withStyles(styles)(
           onClick={onItemClick("Signup")}>
             <ListItemText>Signup</ListItemText>
           </ListItem>
+          <ListItem 
+          button 
+          component={Link}
+          to="/aboutus"
+          onClick={onItemClick("Aboutus")}>
+            <ListItemText>About Us</ListItemText>
+          </ListItem>
         </List>
       </Drawer>
       <main className={classes.content}>
         <Link exact to="/" />
         <Link to="/login" />
         <Link to="/signup" />
+        <Link to="/aboutus"/>
         <Link to="/employee-profile" />
       </main>
     </Box>
