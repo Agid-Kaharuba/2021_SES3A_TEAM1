@@ -41,13 +41,14 @@ function ProfilePicture(props) {
   // There were declared before this component was pulled from being hardcoded in a page
   // Just propping them in for now.
   const { uploadedImage, imageUploader, handleImageUpload } = props;
+  
 
   return (
     <>
       {/*Accepting only files with image type*/}
       <input type="file" id="input" accept="image/*" onChange={handleImageUpload} ref={imageUploader} className={classes.imageUpload} />
       <div>
-        <img className={classes.image} ref={uploadedImage} />
+        <img className={classes.image} src={props.image.data} />
         <br />
         <Button size="small" onClick={() => imageUploader.current.click()} variant="outlined" color="secondary">Upload Image</Button>
       </div>
@@ -58,7 +59,6 @@ function ProfilePicture(props) {
 export default function Profile(props) {
   const classes = useStyles();
   const { employee, handleChange, saveChanges } = props;
-  console.log(props.image)
 
   return (
     <Container maxWidth="sm">
@@ -66,7 +66,7 @@ export default function Profile(props) {
         <Typography variant="h4" className={classes.heading}>PROFILE</Typography>
         <img src={props.image.data} height="200vh" objectFit="contain" />
         {/* TODO: implement profile picture */}
-        {/* <ProfilePicture {...props}/> */}
+        {<ProfilePicture {...props}/>}
 
       </div>
 
