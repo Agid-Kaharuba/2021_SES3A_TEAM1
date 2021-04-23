@@ -65,7 +65,8 @@ export default class ImageController{
         return res.status(200).send("data:" + fileType + ';base64,' + conversion);
       }
       else{
-        ResponseService.mongoNotFoundResponse(res, "File not found");
+        //ResponseService.mongoNotFoundResponse(res, "File not found");
+        return res.status(200).send(null);
       }
     })
   }
