@@ -39,8 +39,9 @@ export default class ImageController{
     ProfileImage.findOne({ name: name }, function (err: Error, image: typeof ProfileImage){
       if (image){
         const fileType = (image as any).mimetype;
+        const conversion = ((image as any).img).toString('base64');
         res.set('Content-Type', fileType);
-        return res.status(200).send((image as any).img);
+        return res.status(200).send("data:" + fileType + ';base64,' + conversion);
       }
       else{
         ResponseService.mongoNotFoundResponse(res, "File not found");

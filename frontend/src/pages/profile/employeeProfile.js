@@ -8,7 +8,8 @@ import { AuthContext } from "../../context/auth";
 export default function EmployeeProfile(props) {
   const { authState } = useContext(AuthContext);
   const [employee, setEmployeeDetails] = useState(undefined);
-  const [resultState, setResultState] = React.useState(undefined);
+  const [resultState, setResultState] = useState(undefined);
+  const [img, setImg] = useState(undefined);
   const pImage = useState({
     profileImg: 'https://cdn3.iconfinder.com/data/icons/gradient-general-pack/512/user-01-512.png'
   });
@@ -16,6 +17,7 @@ export default function EmployeeProfile(props) {
 
   const fetchData = async () => {
     const res = await api.user.current(authState.token);
+    setImg(await api.user.download(authState.user.username))
     res.data.password = "";
     setEmployeeDetails(res.data);
   };
@@ -77,7 +79,7 @@ export default function EmployeeProfile(props) {
   return (
     employee ?
       <>
-        <Profile employee={employee} handleChange={handleChange} handleImageUpload={handleImageUpload} saveChanges={saveChanges}
+        <Profile employee={employee} image={img} handleChange={handleChange} handleImageUpload={handleImageUpload} saveChanges={saveChanges}
           // TODO: figure out props below
           uploadedImage={uploadedImage} imageUploader={imageUploader}
         />

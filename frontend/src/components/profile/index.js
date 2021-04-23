@@ -58,12 +58,13 @@ function ProfilePicture(props) {
 export default function Profile(props) {
   const classes = useStyles();
   const { employee, handleChange, saveChanges } = props;
+  console.log(props.image)
 
   return (
     <Container maxWidth="sm">
       <div className={classes.container}>
         <Typography variant="h4" className={classes.heading}>PROFILE</Typography>
-
+        <img src={props.image.data} height="200vh" objectFit="contain" />
         {/* TODO: implement profile picture */}
         {/* <ProfilePicture {...props}/> */}
 
