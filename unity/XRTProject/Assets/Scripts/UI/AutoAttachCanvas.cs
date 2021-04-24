@@ -1,11 +1,14 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 using Valve.VR.InteractionSystem;
 
 
 public class AutoAttachCanvas : MonoBehaviour
 {
     [SerializeField] private Canvas canvas;
+    [SerializeField] public UnityEvent OnAttachCanvas;
+    [SerializeField] public UnityEvent OnDetachCanvas;
 
     private float distanceToCenter;
     private float targetY;
@@ -60,10 +63,12 @@ public class AutoAttachCanvas : MonoBehaviour
         originalParent = canvas.transform.parent;
         canvas.transform.SetParent(null, true);
         canvas.gameObject.SetActive(true);
+        OnAttachCanvas?.Invoke();
     }
 
     private void DisableCanvas()
     {
+        OnDetachCanvas?.Invoke();
         canvas.gameObject.SetActive(false);
         canvas.transform.SetParent(originalParent, true);
     }

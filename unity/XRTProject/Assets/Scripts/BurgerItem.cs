@@ -117,7 +117,7 @@ public class BurgerItem : MonoBehaviour
 
     private void OnHandHoverBegin(Hand hand)
     {
-        Debug.Log($"Hovering with ${hand.handType} over {hand.hoveringInteractable.name}");
+        //Debug.Log($"Hovering with ${hand.handType} over {hand.hoveringInteractable.name}");
     }
 
     private void HandHoverUpdate(Hand hand)

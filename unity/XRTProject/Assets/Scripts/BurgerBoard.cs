@@ -62,4 +62,10 @@ public class BurgerBoard : MonoBehaviour
 
         return burgerItems;
     }
+
+    public void SetCurrentBurgerForTask(Task task)
+    {
+        Debug.Log($"Set current burger for task {task.Name}");
+        //TODO
+    }
 }

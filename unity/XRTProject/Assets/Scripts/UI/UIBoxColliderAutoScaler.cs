@@ -11,6 +11,11 @@ public class UIBoxColliderAutoScaler : MonoBehaviour
 
     private void Update()
     {
+        AutoScale();
+    }
+
+    public void AutoScale()
+    {
         if (rectTransform == null)
             rectTransform = GetComponent<RectTransform>();
             

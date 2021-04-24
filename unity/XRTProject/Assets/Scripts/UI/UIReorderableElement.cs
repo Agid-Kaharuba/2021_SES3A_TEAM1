@@ -14,10 +14,11 @@ public class UIReorderableElement : MonoBehaviour
     [SerializeField] private TMP_Text text;
     [SerializeField] private Color hoverTextColor = Color.black;
     [SerializeField] private Color swapToTextColor = Color.black;
+    [SerializeField] public bool canDrag = true;
     [SerializeField] public UnityEvent OnClick;
     [SerializeField] public UnityEvent OnStartDragging;
     [SerializeField] public UnityEvent OnStopDragging;
-    
+
     private Interactable interactable;
     private bool isDragging;
     private bool isHoldingGrab;
@@ -26,6 +27,8 @@ public class UIReorderableElement : MonoBehaviour
     private Color originalTextColor;
     private UIReorderableElement lastOtherElement;
     private Coroutine dragCoroutine;
+
+    public TMP_Text Text => text;
 
     private void Awake()
     {
@@ -51,7 +54,9 @@ public class UIReorderableElement : MonoBehaviour
         if (!isHoldingGrab && interactable.attachedToHand == null && startingGrabType != GrabTypes.None)
         {
             draggingGrabType = startingGrabType;
-            dragCoroutine = StartCoroutine(DoDraggingAfterDelay(hand));
+            
+            if (canDrag)
+                dragCoroutine = StartCoroutine(DoDraggingAfterDelay(hand));
             isHoldingGrab = true;
         }
         else if (isHoldingGrab && endingGrabType == draggingGrabType)
@@ -62,7 +67,8 @@ public class UIReorderableElement : MonoBehaviour
             }
             else
             {
-                StopCoroutine(dragCoroutine);
+                if (dragCoroutine != null)
+                    StopCoroutine(dragCoroutine);
                 OnClick?.Invoke();
                 //Debug.Log("On click!");
             }
