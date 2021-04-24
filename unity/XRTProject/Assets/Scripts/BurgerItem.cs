@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Valve.VR.InteractionSystem;
 
 [RequireComponent(typeof(Interactable))]
@@ -52,6 +53,7 @@ public class BurgerItem : MonoBehaviour
                                                                     Hand.AttachmentFlags.VelocityMovement;
     [SerializeField] private bool canStackBelow = true;
     [SerializeField] private bool isBoard;
+    [SerializeField] public UnityEvent OnAboveStackChanged;
     
     private const float SnapDistance = 0.07f;
     private Interactable interactable;
@@ -68,7 +70,8 @@ public class BurgerItem : MonoBehaviour
     public BurgerItem AboveItem => stackDetector ? stackDetector.AboveItem : null;
     public BurgerItem BelowItem => stackDetector ? stackDetector.BelowItem : null;
     public bool IsGlued => isGlued;
-    public BurgerItem GluedItem => gluedItem;
+    public BurgerItem GluedBelowItem => gluedItem;
+    public BurgerItem GluedAboveItem => gluedFrom;
     
 
     private void Awake()
@@ -176,7 +179,7 @@ public class BurgerItem : MonoBehaviour
                 if (canStackBelow || otherBurgerItem.isBoard)
                 {
                     BurgerItem topItem = otherBurgerItem.GetTopItem();
-                    Debug.Log($"{name} Collide with {otherBurgerItem}");
+                    Debug.Log($"{name} Glue with {otherBurgerItem}");
                 
                     if (BelowItem == topItem && topItem.gluedFrom == null && topItem.aboveStickPoint && Vector3.Distance(belowStickPoint.position, topItem.aboveStickPoint.position) < SnapDistance)
                     {
@@ -192,6 +195,7 @@ public class BurgerItem : MonoBehaviour
         isGlued = true;
         gluedItem = otherBurgerItem;
         otherBurgerItem.gluedFrom = this;
+        InvokeStackChangedBelow(gluedItem);
         
         Destroy(rb);
         transform.SetParent(otherBurgerItem.transform, true);
@@ -217,10 +221,23 @@ public class BurgerItem : MonoBehaviour
             // rigidbodyConfig.ApplyTo(rb);
             transform.SetParent(unGluedParent, true);
 
+            BurgerItem belowItem = gluedItem;
             gluedItem.gluedFrom = null;
             gluedItem = null;
+            InvokeStackChangedBelow(belowItem);
         }
         
         isGlued = false;
+    }
+
+    private void InvokeStackChangedBelow(BurgerItem fromItem)
+    {
+        BurgerItem currentItem = fromItem;
+
+        while (currentItem != null)
+        {
+            currentItem.OnAboveStackChanged?.Invoke();
+            currentItem = currentItem.gluedItem;
+        }
     }
 }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1149314528}
   - component: {fileID: 1149314527}
   m_Layer: 5
-  m_Name: ContentsText (1)
+  m_Name: ContentsTitleText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -465,6 +465,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83ea697eb3f072b45903cbe8297b0460, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnAboveItemChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBelowItemChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1982428243810371490
 GameObject:
   m_ObjectHideFlags: 0
@@ -645,6 +651,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stackDetector: {fileID: 6144951978474752129}
+  contentsText: {fileID: 1803074177}
 --- !u!65 &5104712318472194071
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -676,6 +683,9 @@ MonoBehaviour:
   attachmentFlags: 86
   canStackBelow: 0
   isBoard: 1
+  OnAboveStackChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &999430878840215921
 Rigidbody:
   m_ObjectHideFlags: 0
