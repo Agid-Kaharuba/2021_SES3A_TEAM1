@@ -184,6 +184,7 @@ GameObject:
   - component: {fileID: 7768965350888779914}
   - component: {fileID: 7768965350888779915}
   - component: {fileID: 7768965350888779908}
+  - component: {fileID: 8120945504869496843}
   m_Layer: 0
   m_Name: ListItem
   m_TagString: Untagged
@@ -298,6 +299,20 @@ MonoBehaviour:
   OnStopDragging:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8120945504869496843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7768965350888779910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14d46b62e2e54d06b5069f56e80b6387, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collider: {fileID: 7768965351419594231}
+  depth: 0.06
 --- !u!1 &7768965351419594225
 GameObject:
   m_ObjectHideFlags: 0
@@ -340,7 +355,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.68, y: 0.07, z: 0.02}
+  m_Size: {x: 0.67906, y: 0.08, z: 0.06}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7768965352212026711
 GameObject:
