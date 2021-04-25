@@ -236,6 +236,9 @@ MonoBehaviour:
   attachmentFlags: 86
   canStackBelow: 0
   isBoard: 0
+  OnAboveStackChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &8827343571719973521
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -275,7 +278,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7758484321920182328}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.0193}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5768627673590581570}
@@ -306,6 +309,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83ea697eb3f072b45903cbe8297b0460, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnAboveItemChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBelowItemChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8964670224357383690
 GameObject:
   m_ObjectHideFlags: 0
