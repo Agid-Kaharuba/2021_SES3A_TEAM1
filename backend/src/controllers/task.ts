@@ -1,12 +1,18 @@
 import { Request, Response } from "express";
 import Task from "../model/task";
 import ResponseService from "../helpers/response"
+import { findRecipe } from "./recipe"
 import { MongoError } from "mongodb";
 
-export async function findTask(Id: string){
+export async function findTask(Id: string) {
     const task = await Task.findOne({
         _id: Id
     });
+    if (task.recipe) {
+        const recipe = await findRecipe(task.recipe);
+        task.recipe = undefined;
+        return { ...task._doc, recipe }
+    }
     return task
 }
 
@@ -38,23 +44,25 @@ export default class TaskController {
         const body = req.body;
         const newTaskRequest = new Task({
             name: body.name,
-            description: body.description
+            description: body.description,
+            recipe: body.recipe
         } as any);
         newTaskRequest.save((err: MongoError) => {
-			if (err) {
-				ResponseService.mongoErrorResponse(res, err);
-			} else {
-				ResponseService.successResponse(res, newTaskRequest);
-			}
-		});
+            if (err) {
+                ResponseService.mongoErrorResponse(res, err);
+            } else {
+                ResponseService.successResponse(res, newTaskRequest);
+            }
+        });
     }
 
     //Update a task
     public async update(req: Request, res: Response) {
         try {
             const id = req.params.taskId;
+            req.body.recipe = undefined;
             const body = req.body;
-            const response = await Task.updateOne({ _id: id }, body);
+            const response = await Task.updateOne({ _id: id }, body, { omitUndefined: true });
             ResponseService.successResponse(res, response);
         }
         catch (err) {
@@ -63,10 +71,10 @@ export default class TaskController {
     }
 
     //Delete a task
-    public async delete(req: Request, res: Response){
+    public async delete(req: Request, res: Response) {
         try {
             const id = req.params.taskId;
-            const response = await Task.updateOne({_id: id}, {archive: true});
+            const response = await Task.updateOne({ _id: id }, { archive: true });
             res.json(response);
         }
         catch (err) {

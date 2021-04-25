@@ -9,6 +9,10 @@ const taskSchema = new mongoose.Schema({
         type: String,
         required: false
     },
+    recipe: {
+        type: String,
+        required: false
+    },
     archive: {
         type: Boolean,
         required: false

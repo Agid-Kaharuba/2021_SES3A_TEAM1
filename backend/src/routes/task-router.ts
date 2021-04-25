@@ -17,7 +17,7 @@ export const TaskRoute = (app: Express, controller: TaskController) => {
 
     /**
      * @swagger
-     * /task/create:
+     * /task:
      *  post:
      *   description: Create a task
      *   tags: [Task]
@@ -34,11 +34,14 @@ export const TaskRoute = (app: Express, controller: TaskController) => {
      *        description:
      *         type: string
      *         example: Boil water
+     *        recipe:
+     *         type: string
+     *         example: recipe01
      *   responses:
      *    200:
      *     description: Success
      */
-    app.post("/task/create", controller.create);
+    app.post("/task", controller.create);
 
     /**
      * @swagger
@@ -81,6 +84,9 @@ export const TaskRoute = (app: Express, controller: TaskController) => {
      *        description:
      *         type: string
      *         example: Boil water
+     *        recipe:
+     *         type: string
+     *         example: recipe01
      *   responses:
      *    200:
      *     description: Success
