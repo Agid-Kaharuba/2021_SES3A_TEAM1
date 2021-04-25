@@ -6,8 +6,16 @@ import { MongoError } from "mongodb";
 
 export default class CourseController {
     public async getAll(req: Request, res: Response) {
+        //@ts-ignore
+        const user = req.user;
         try {
-            const courses = await Course.find({ archive: { $ne: true } });
+            var courses;
+            if (user.isSupervisor){
+                courses = await Course.find({ archive: { $ne: true }});
+            }
+            else {
+                courses = await Course.find({ archive: { $ne: true }, assignedEmployees: user._id });
+            }
             ResponseService.successResponse(res, courses);
         }
         catch (err) {

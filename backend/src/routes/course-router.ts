@@ -1,5 +1,6 @@
 import { Express } from "express";
 import CourseController from "../controllers/course";
+import { checkToken } from "../middleware/auth";
 
 export const CourseRoute = (app: Express, controller: CourseController) => {
     /**
@@ -44,7 +45,7 @@ export const CourseRoute = (app: Express, controller: CourseController) => {
      *    200:
      *     description: Success
      */
-    app.get("/course", controller.getAll);
+    app.get("/course", checkToken, controller.getAll);
     /**
      * @swagger
      * /course/{courseId}:
