@@ -3,6 +3,13 @@ import Task from "../model/task";
 import ResponseService from "../helpers/response"
 import { MongoError } from "mongodb";
 
+export async function findTask(Id: string){
+    const task = await Task.findOne({
+        _id: Id
+    });
+    return task
+}
+
 export default class TaskController {
     //Get all tasks
     public async getAll(req: Request, res: Response) {
@@ -18,9 +25,7 @@ export default class TaskController {
     //Get a task by id
     public async get(req: Request, res: Response) {
         try {
-            const task = await Task.findOne({
-                _id: req.params.taskId
-            });
+            const task = await findTask(req.params.taskId);
             ResponseService.successResponse(res, task);
         }
         catch (err) {
