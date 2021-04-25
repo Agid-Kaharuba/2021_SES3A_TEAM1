@@ -31,7 +31,9 @@ export default class CourseController {
 		const body = req.body;
 		const newCourseRequest = new Course({
 			name: body.name,
-			description: body.description
+			description: body.description,
+            tasks: body.tasks,
+            assignedEmployees: body.assignedEmployees
 		} as any);
 		newCourseRequest.save((err: MongoError) => {
 			if (err) {
