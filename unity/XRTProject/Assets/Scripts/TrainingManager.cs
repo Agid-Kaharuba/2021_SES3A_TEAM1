@@ -18,9 +18,11 @@ public class TrainingManager : MonoBehaviour
             return;
         }
         
-        // TODO remove Sample tasks
+        // TODO remove Sample tasks and query backend
         tasks.Add(new Task("Learn to make a Whooper", TaskType.Recipe));
+        tasks.Add(new Task("Learn to make a Cheeseburger", TaskType.Recipe));
         tasks.Add(new Task("Remembering to make a Whooper", TaskType.Testing));
+        tasks.Add(new Task("Serve 5 customers", TaskType.Performance));
 
         Instance = this;
     }
@@ -28,5 +30,12 @@ public class TrainingManager : MonoBehaviour
     private void Update()
     {
         
+    }
+
+    public void ReorderTask(int fromIndex, int toIndex)
+    {
+        Task tempTask = tasks[fromIndex];
+        tasks[fromIndex] = tasks[toIndex];
+        tasks[toIndex] = tempTask;
     }
 }

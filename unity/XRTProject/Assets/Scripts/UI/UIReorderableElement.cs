@@ -7,6 +7,8 @@ using UnityEngine;
 using UnityEngine.Events;
 using Valve.VR.InteractionSystem;
 
+[Serializable]
+public class OnReorderEvent : UnityEvent<int, int, UIReorderableElement> {}
 
 public class UIReorderableElement : MonoBehaviour
 {
@@ -18,6 +20,7 @@ public class UIReorderableElement : MonoBehaviour
     [SerializeField] public UnityEvent OnClick;
     [SerializeField] public UnityEvent OnStartDragging;
     [SerializeField] public UnityEvent OnStopDragging;
+    [SerializeField] public OnReorderEvent OnReorderEvent;
 
     private Interactable interactable;
     private bool isDragging;
@@ -111,6 +114,7 @@ public class UIReorderableElement : MonoBehaviour
                 
             transform.SetSiblingIndex(otherIndex);
             other.transform.SetSiblingIndex(index);
+            OnReorderEvent?.Invoke(index, otherIndex, other);
         }
         
         if (lastOtherElement != null)
