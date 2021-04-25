@@ -1,55 +1,55 @@
 import { Request, Response } from "express";
-import Step from "../model/step";
+import Task from "../model/task";
 import ResponseService from "../helpers/response"
 import { MongoError } from "mongodb";
 
-export default class StepController {
-    //Get all steps
+export default class TaskController {
+    //Get all tasks
     public async getAll(req: Request, res: Response) {
         try {
-            const steps = await Step.find({ archive: { $ne: true } });
-            ResponseService.successResponse(res, steps);
+            const tasks = await Task.find({ archive: { $ne: true } });
+            ResponseService.successResponse(res, tasks);
         }
         catch (err) {
             ResponseService.mongoErrorResponse(res, err);
         }
     }
 
-    //Get a Step by name
+    //Get a task by id
     public async get(req: Request, res: Response) {
         try {
-            const step = await Step.findOne({
-                _id: req.params.stepId
+            const task = await Task.findOne({
+                _id: req.params.taskId
             });
-            ResponseService.successResponse(res, step);
+            ResponseService.successResponse(res, task);
         }
         catch (err) {
             ResponseService.mongoNotFoundResponse(res, err);
         }
     }
 
-    //Create a Step
+    //Create a task
     public async create(req: Request, res: Response) {
         const body = req.body;
-        const newStepRequest = new Step({
+        const newTaskRequest = new Task({
             name: body.name,
             description: body.description
         } as any);
-        newStepRequest.save((err: MongoError) => {
+        newTaskRequest.save((err: MongoError) => {
 			if (err) {
 				ResponseService.mongoErrorResponse(res, err);
 			} else {
-				ResponseService.successResponse(res, newStepRequest);
+				ResponseService.successResponse(res, newTaskRequest);
 			}
 		});
     }
 
-    //Update a step
+    //Update a task
     public async update(req: Request, res: Response) {
         try {
-            const id = req.params.stepId;
+            const id = req.params.taskId;
             const body = req.body;
-            const response = await Step.updateOne({ _id: id }, body);
+            const response = await Task.updateOne({ _id: id }, body);
             ResponseService.successResponse(res, response);
         }
         catch (err) {
@@ -57,11 +57,11 @@ export default class StepController {
         }
     }
 
-    //Delete a step
+    //Delete a task
     public async delete(req: Request, res: Response){
         try {
-            const id = req.params.stepId;
-            const response = await Step.updateOne({_id: id}, {archive: true});
+            const id = req.params.taskId;
+            const response = await Task.updateOne({_id: id}, {archive: true});
             res.json(response);
         }
         catch (err) {

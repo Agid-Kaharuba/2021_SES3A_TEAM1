@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const stepSchema = new mongoose.Schema({
+const taskSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -15,4 +15,4 @@ const stepSchema = new mongoose.Schema({
     }
 });
 
-export default mongoose.model('Step', stepSchema);
+export default mongoose.model('Task', taskSchema);

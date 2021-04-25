@@ -1,26 +1,26 @@
 import { Express } from "express";
-import StepController from "../controllers/step";
+import TaskController from "../controllers/task";
 
-export const StepRoute = (app: Express, controller: StepController) => {
+export const TaskRoute = (app: Express, controller: TaskController) => {
 
     /**
      * @swagger
-     * /step:
+     * /task:
      *  get:
-     *   description: Get all steps
-     *   tags: [Step]
+     *   description: Get all tasks
+     *   tags: [Task]
      *   responses:
      *    200:
      *     description: Success
      */
-    app.get("/step", controller.getAll);
+    app.get("/task", controller.getAll);
 
     /**
      * @swagger
-     * /step/create:
+     * /task/create:
      *  post:
-     *   description: Create a step
-     *   tags: [Step]
+     *   description: Create a task
+     *   tags: [Task]
      *   requestBody:
      *    required: true,
      *    content:
@@ -30,7 +30,7 @@ export const StepRoute = (app: Express, controller: StepController) => {
      *       properties:
      *        name:
      *         type: string
-     *         example: First Step
+     *         example: First Task
      *        description:
      *         type: string
      *         example: Boil water
@@ -38,34 +38,34 @@ export const StepRoute = (app: Express, controller: StepController) => {
      *    200:
      *     description: Success
      */
-    app.post("/step/create", controller.create);
+    app.post("/task/create", controller.create);
 
     /**
      * @swagger
-     * /step/{stepId}:
+     * /task/{taskId}:
      *  get:
-     *   description: Get all steps by name
-     *   tags: [Step]
+     *   description: Get all tasks by name
+     *   tags: [Task]
      *   parameters:
      *    - in: path
-     *      name: stepId
+     *      name: taskId
      *      required: true
      *      type: string
      *   responses:
      *    200:
      *     description: Success
      */
-    app.get("/step/:stepId", controller.get);
+    app.get("/task/:taskId", controller.get);
 
     /**
      * @swagger
-     * /step/{stepId}:
+     * /task/{taskId}:
      *  put:
-     *   description: Update a step by id
-     *   tags: [Step]
+     *   description: Update a task by id
+     *   tags: [Task]
      *   parameters:
      *    - in: path
-     *      name: stepId
+     *      name: taskId
      *      required: true
      *      type: string
      *   requestBody:
@@ -77,7 +77,7 @@ export const StepRoute = (app: Express, controller: StepController) => {
      *       properties:
      *        name:
      *         type: string
-     *         example: First Step
+     *         example: First Task
      *        description:
      *         type: string
      *         example: Boil water
@@ -85,22 +85,22 @@ export const StepRoute = (app: Express, controller: StepController) => {
      *    200:
      *     description: Success
      */
-    app.put("/step/:stepId", controller.update);
+    app.put("/task/:taskId", controller.update);
 
     /**
      * @swagger
-     * /step/{stepId}:
+     * /task/{taskId}:
      *  delete:
-     *   description: Delete a step
-     *   tags: [Step]
+     *   description: Delete a task
+     *   tags: [Task]
      *   parameters:
      *    - in: path
-     *      name: stepId
+     *      name: taskId
      *      required: true
      *      type: string
      *   responses:
      *    200:
      *     description: Success
      */
-    app.delete("/step/:stepId", controller.delete);
+    app.delete("/task/:taskId", controller.delete);
 }
