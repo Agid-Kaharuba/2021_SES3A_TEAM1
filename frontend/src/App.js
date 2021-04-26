@@ -1,7 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import { ThemeProvider } from "@material-ui/core/styles";
+//STYLES
+import {ThemeProvider} from "@material-ui/core/styles";
+import Theme from './theme'
 
 // IMPORT COMPONENTS
 import ManageNavigation from "./components/manageNavigation";
@@ -18,7 +20,7 @@ import SignUp from "./pages/signup/signup.js";
 
 // import appTheme from "./helpers/appTheme";
 
-// IMPORT CONTEXT
+// IMPORT CONTEXTS
 import { AuthProvider } from "./context/auth";
 // import Signout from "./helpers/auth/signout.js";
 
@@ -71,16 +73,19 @@ function AppRouter(props) {
 }
 
 function App() {
+
   return (
     <div className="App">
-      <AppProvider>
-        <BrowserRouter>
-          <ManageNavigation />
-          <div>
-            <AppRouter />
-          </div>
-        </BrowserRouter>
-      </AppProvider>
+      <ThemeProvider theme={Theme}>
+        <AppProvider>
+          <BrowserRouter>
+            <ManageNavigation />
+            <div>
+              <AppRouter />
+            </div>
+          </BrowserRouter>
+        </AppProvider>
+      </ThemeProvider>
     </div>
   );
 }
