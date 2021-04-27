@@ -50,6 +50,20 @@ function AppRouter(props) {
         exact={true}
         component={EmployeeProfile} />
 
+
+      {/* <Route path="/dashboard"
+        exact={true}
+        component={Dashboard} />
+
+      <Route path="/dashboard/create"
+        exact={true}
+        component={CreateNewCourse} />
+
+      <Route path="/profile"
+        exact={true}
+        component={EmployeeProfile} /> */}
+
+
       <Route path="/login"
         exact={true}
         component={LogIn}>

@@ -99,7 +99,10 @@ export default function CreateNewTrainingPage() {
         </Grid>
       </Grid>
 
-      <Divider variant="middle" />
+      <Box my={2}>
+        <Divider variant="middle" />
+      </Box>  
+      
       <Box m={5}>
         {coursesState ?
           coursesState.map((course) => {
