@@ -25,6 +25,24 @@ export const UserRoute = (app: Express, controller: UserController) => {
      *     description: Success
      */
     app.get("/user", checkToken, controller.get);
+
+    /**
+     * @swagger
+     * /user/search:
+     *  get:
+     *   description: Get all supervisors or Get all trainees
+     *   tags: [User]
+     *   parameters:
+     *    - in: query
+     *      name: isSupervisor
+     *      required: true
+     *      type: boolean
+     *   responses:
+     *    200:
+     *     description: Success
+     */
+     app.get("/user/search", controller.getAllSupervisor);
+     
     /**
      * @swagger
      * /user/{userId}:
@@ -41,6 +59,7 @@ export const UserRoute = (app: Express, controller: UserController) => {
      *     description: Success
      */
     app.get("/user/:userId", controller.get);
+
     /**
      * @swagger
      * /user/{userId}:
