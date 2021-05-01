@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using TMPro;
 using UnityEngine;
@@ -40,7 +41,7 @@ public class BurgerBoard : MonoBehaviour
         {
             StringBuilder stringBuilder = new StringBuilder();
 
-            foreach (BurgerItem item in burgerItems)
+            foreach (BurgerItem item in burgerItems.AsEnumerable().Reverse())
             {
                 stringBuilder.Append($"- {item.name}\n");
             }

@@ -9,6 +9,8 @@ public class Task
 
     public bool HasRecipe => Recipe != null;
 
+    public bool ShouldShowRecipe => HasRecipe && TaskType == TaskType.Recipe;
+
     public Task(string name, TaskType taskType)
     {
         Name = name;

@@ -1,9 +1,6 @@
 using System;
+using System.Globalization;
 using UnityEngine;
-#if UNITY_EDITOR
-using System.IO;
-using UnityEditor;
-#endif
 
 
 [CreateAssetMenu(menuName = "ScriptableObjects/PropData", fileName = "NewProp")]
@@ -12,7 +9,9 @@ public class PropData : ScriptableObject
     [SerializeField] private string propId;
     [SerializeField] private GameObject associatedPrefab;
 
-    public string PropId => PropId;
+    public string PropId => propId;
+
+    public string DisplayName => new CultureInfo("en-US").TextInfo.ToTitleCase(propId.Replace("_", " "));
 
     /// Change the prefab object in which this prop is instantiated from
     public void AssignPrefab(GameObject targetObject)
