@@ -58,6 +58,11 @@ function AppRouter(props) {
         component={taskList}>
       </Route>
 
+      <Route path="/statistics" 
+        exact={true}
+        component={Statistics}>
+      </Route>
+
       <Route path="/login"
         exact={true}
         component={LogIn}>

@@ -107,7 +107,11 @@ export default function CreateNewTrainingPage() {
         <TableCell align="left">{task.name}</TableCell>
         <TableCell align="left">{task.description}</TableCell>
         <TableCell align="left">{task.recipe}</TableCell>
-        <TableCell align="left"></TableCell>
+        <TableCell align="right">
+        <Button component={Link} color="secondary" variant="outlined" to={"/dashboard/create"}>
+            View
+          </Button>
+        </TableCell>
       </TableRow>
     )
   }
@@ -139,6 +143,7 @@ export default function CreateNewTrainingPage() {
 
   const [checked, setChecked] = React.useState([1]);
 
+
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
@@ -161,8 +166,8 @@ export default function CreateNewTrainingPage() {
           <ListItem key={user} button>
             <ListItemAvatar>
               <Avatar
-                alt={`Avatar n°${user + 1}`}
-                src={`/static/images/avatar/${user + 1}.jpg`}
+                // alt={`Avatar n°${user + 1}`}
+                // src={`/static/images/avatar/${user + 1}.jpg`}
               />
             </ListItemAvatar>
             <ListItemText id={labelId} primary={user.firstname + " " + user.lastname} alignItems="flex-start"
@@ -182,6 +187,33 @@ export default function CreateNewTrainingPage() {
       </div>
     )
   }
+
+  //Build User Table
+  const fetchDataUserTable = async () => {
+    const res = await api.user.get(authState.token);
+    setUsersState(res.data);
+  };
+
+  useEffect(() => {
+    if (usersState === undefined) {
+      fetchDataUserTable();
+    }
+  });
+
+  const buildUserTable = (user) => {
+    return (
+      <TableRow key={user}>
+        <TableCell align="left">{user.firstname + " " + user.lastname}</TableCell>
+        <TableCell align="left">{user.staffid}</TableCell>
+        <TableCell align="right">
+          <Button component={Link} color="secondary" variant="outlined" to={"/statistics"}>
+            View
+          </Button>
+        </TableCell>
+      </TableRow>
+    )
+  }
+
 
   return (
     <div>
@@ -260,7 +292,7 @@ export default function CreateNewTrainingPage() {
                 <TableCell align="left">Name</TableCell>
                 <TableCell align="left">Description</TableCell>
                 <TableCell align="left">Recipe</TableCell>
-                <TableCell align="left">View Task</TableCell>
+                <TableCell align="right">View Task</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -271,7 +303,6 @@ export default function CreateNewTrainingPage() {
                   :
                   <h1>LOADING</h1>
                 }
- 
             </TableBody>
           </Table>
         </TableContainer>
@@ -335,21 +366,18 @@ export default function CreateNewTrainingPage() {
             <TableHead>
               <TableRow>
                 <TableCell align="left">Name</TableCell>
-                <TableCell align="left">Description</TableCell>
-                <TableCell align="left">Duration</TableCell>
-                <TableCell align="left">View Task</TableCell>
+                <TableCell align="left">Staff ID</TableCell>
+                <TableCell align="right">View Profile</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
-                <TableRow key={row.name}>
-                  <TableCell align="left">{row.name}</TableCell>
-                  <TableCell align="left">{row.description}</TableCell>
-                  <TableCell align="left">{row.duration}</TableCell>
-                  <TableCell align="left"></TableCell>
-                </TableRow>
-              ))}
-
+              {usersState ?
+                  usersState.map((user) => {
+                    return buildUserTable(user);
+                  })
+                  :
+                  <h1>LOADING</h1>
+                }
             </TableBody>
           </Table>
         </TableContainer>
