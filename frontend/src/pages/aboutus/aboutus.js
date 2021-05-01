@@ -18,6 +18,7 @@ import Kelvin from '../../images/profile-photos/kelvin-luong.jpg';
 import Calvin from '../../images/profile-photos/calvin-dong.jpg';
 import Brendon from '../../images/profile-photos/brendon-tong.png';
 import Lakshva from '../../images/profile-photos/lakshva-sharma.jpg';
+import MitchGif from '../../images/mitchellvr.gif';
 
 // import { Link } from "react-router-dom";
 // import { AuthContext } from "../../context/auth";
@@ -51,20 +52,20 @@ export default function AboutUsPage() {
         alignItems='center'
         justify='center'
         style={{ minHeight: '100vh', backgroundImage: "linear-gradient(45deg, #662D8C  10%, #ED1E79)"}}>
-
         <Grid item>
+          <br></br>
               <WhiteTextTypography variant='h3'>
                 <Box style={{fontWeight: '600', letterSpacing:6}} display='inline'> About Us</Box>
               </WhiteTextTypography>
         </Grid>
         <Grid container direction="column" color='white' alignItems='flex-start'>
         <Container>
-          <Box color="white">
+          <Box color="white" fontSize="24px">
         <h2>Project Outline</h2>
 
         <p>The Virtual Organizational Training Experience is focusing on large corporate organizations that are looking to improve their training experience. 
           The training experience is envisioned to eventually become a platform where companies can create their own XR training modules however, due to the time constraints
-           of Software Studio 3A/3B, we will focus on creating the webapp component of the product, and one specific training scenario (as an example) for now. </p>
+           of Software Studio 3A/3B, we will focus on creating the webapp component of the product, and one specific training scenario which is burger training for now. </p>
         
         <p>Our team's objective is:
           <ul>
@@ -112,8 +113,19 @@ export default function AboutUsPage() {
         </p>
           </Box>
           </Container>
+          <Container>
+            <Grid container alignItems="center" justify="center" direction='column'>\
+              <Box>
+                <img src={MitchGif}></img>
+              </Box>
+              <Box color='white' fontStyle="italic">
+              <text>- "Mitchell trying VR"</text>
+              </Box>
+  
+            </Grid>
+          </Container>
         </Grid>
-        <Box color='white'> 
+        <Box color='white' fontSize="24px"> 
         <h2>
           Team Structure
         </h2>
