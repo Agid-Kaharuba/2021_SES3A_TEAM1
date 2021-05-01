@@ -15,7 +15,8 @@ import CreateNewCourse from './pages/supervisor/CreateCourse';
 import EmployeeProfile from "./pages/profile/employeeProfile";
 import LogIn from "./pages/login/login.js";
 import SignUp from "./pages/signup/signup.js";
-
+import taskList from "./pages/taskslist/taskslist.js";
+import Statistics from "./pages/statistics/Statistics.js";
 // import appTheme from "./helpers/appTheme";
 
 // IMPORT CONTEXT
@@ -48,6 +49,11 @@ function AppRouter(props) {
         exact={true}
         component={EmployeeProfile} />
 
+      <Route path="/dashboard/taskList" 
+        exact={true}
+        component={taskList}>
+      </Route>
+
       <Route path="/login"
         exact={true}
         component={LogIn}>
@@ -66,6 +72,11 @@ function AppRouter(props) {
       <Route path="/taskslist"
         exact={true}
         component={TasksList}>
+      </Route>
+
+      <Route path="/statistics"
+        exact={true}
+        component={Statistics}>
       </Route>
 
       <Route path="/"

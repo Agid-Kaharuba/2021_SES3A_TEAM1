@@ -9,7 +9,9 @@ import {
   getAllUser,
   getCurrentUser,
   getUser,
-  updateUser
+  updateUser,
+  uploadImage,
+  downloadImage
 } from "./user";
 import {
   getAllCourses,
@@ -28,7 +30,9 @@ export default {
     current: getCurrentUser,
     all: getAllUser,
     get: getUser,
-    update: updateUser
+    update: updateUser,
+    upload: uploadImage,
+    download: downloadImage
   },
   course: {
     getAll: getAllCourses,
