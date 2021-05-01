@@ -31,6 +31,18 @@ export default class UserController {
         }
     }
 
+    public async getAllSupervisor(req: Request, res: Response) {
+        try {
+            const user = await User.find({
+                isSupervisor: req.query.isSupervisor
+            });
+            ResponseService.successResponse(res, user);
+        }
+        catch (err) {
+            ResponseService.mongoErrorResponse(res, err);
+        }
+    }
+
     public async update(req: Request, res: Response) {
         try {
             //@ts-ignore
