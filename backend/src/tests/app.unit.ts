@@ -7,7 +7,7 @@ import { expect } from "chai";
 import mongoose from "mongoose";
 import Course from "../model/course";
 import Recipe from "../model/recipe";
-import Step from "../model/step";
+import Task from "../model/task";
 import User from "../model/user";
 
 describe("Prepare Unit Test", () => {
@@ -29,8 +29,8 @@ describe("Prepare Unit Test", () => {
   it("should empty Recipe", async function () {
     await Recipe.deleteMany({});
   });
-  it("should empty Step", async function () {
-    await Step.deleteMany({});
+  it("should empty Task", async function () {
+    await Task.deleteMany({});
   });
   it("should empty User", async function () {
     await User.deleteMany({});

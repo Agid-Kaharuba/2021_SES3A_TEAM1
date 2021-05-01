@@ -4,6 +4,10 @@ import ResponseService from "../helpers/response"
 import { MongoError } from "mongodb";
 import bcrypt from "bcrypt";
 
+export async function findUser(Id: string){
+    return await User.findOne({ _id: Id });
+}
+
 export default class UserController {
     public async getAll(req: Request, res: Response) {
         try {
@@ -19,9 +23,7 @@ export default class UserController {
         try {
             //@ts-ignore
             const id = req.params.userId || req.user._id;
-            const user = await User.findOne({
-                _id: id
-            });
+            const user = await findUser(id);
             ResponseService.successResponse(res, user);
         }
         catch (err) {
