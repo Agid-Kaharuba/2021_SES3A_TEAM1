@@ -117,7 +117,7 @@ export default function CreateNewTrainingPage() {
             </Button>
           </Grid>
           <Grid item >
-            <Button component={Link} color="primary" variant="contained" to={"/dashboard/create"}>
+            <Button component={Link} color="primary" variant="contained" to={"/createtask"}>
               Create Task
             </Button>
           </Grid>

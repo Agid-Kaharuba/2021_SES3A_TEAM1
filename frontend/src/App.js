@@ -17,6 +17,7 @@ import CreateNewCourse from './pages/supervisor/CreateCourse';
 import EmployeeProfile from "./pages/profile/employeeProfile";
 import LogIn from "./pages/login/login.js";
 import SignUp from "./pages/signup/signup.js";
+import CreateNewTask from "./pages/createtask/createtask.js";
 
 // import appTheme from "./helpers/appTheme";
 
@@ -50,20 +51,6 @@ function AppRouter(props) {
         exact={true}
         component={EmployeeProfile} />
 
-
-      {/* <Route path="/dashboard"
-        exact={true}
-        component={Dashboard} />
-
-      <Route path="/dashboard/create"
-        exact={true}
-        component={CreateNewCourse} />
-
-      <Route path="/profile"
-        exact={true}
-        component={EmployeeProfile} /> */}
-
-
       <Route path="/login"
         exact={true}
         component={LogIn}>
@@ -82,6 +69,11 @@ function AppRouter(props) {
       <Route path="/taskslist"
         exact={true}
         component={TasksList}>
+      </Route>
+
+      <Route path="/createtask"
+        exact={true}
+        component={CreateNewTask}>
       </Route>
 
       <Route path="/"

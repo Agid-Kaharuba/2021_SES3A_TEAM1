@@ -82,27 +82,29 @@ export default function CreateNewTrainingPage() {
 
   return (
     <Box>
-      <Grid
-      container
-      direction='row'
-      justify='space-between'
-      alignItems='baseline'>
-        <Grid item>
-          <Typography className={classes.bold} variant='h4'>
-            Dashboard
-          </Typography>
-        </Grid>
-        <Grid item>
-          <Button component={Link} color="primary" variant="contained" to={"/dashboard/create"}>
-            Add Course
-          </Button>
-        </Grid>
-      </Grid>
 
-      <Box my={2}>
-        <Divider variant="middle" />
-      </Box>  
-      
+      <Box m={5}>
+        <Grid
+        container
+        direction='row'
+        justify='space-between'
+        alignItems='baseline'>
+          <Grid item>
+            <Typography className={classes.bold} variant='h4'>
+              Dashboard
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Button component={Link} color="primary" variant="contained" to={"/dashboard/create"}>
+              Create Course
+            </Button>
+          </Grid>
+        </Grid>
+        <Box my={1}>
+          <Divider variant="middle" />
+        </Box>        
+      </Box>
+
       <Box m={5}>
         {coursesState ?
           coursesState.map((course) => {
