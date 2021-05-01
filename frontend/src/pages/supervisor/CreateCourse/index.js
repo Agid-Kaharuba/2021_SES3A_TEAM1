@@ -26,8 +26,8 @@ const useStyles = makeStyles({
   },
 })
 
-function createData(name, description, duration, task) {
-  return { name, description, duration, task };
+function createData(name, description, recipe, task) {
+  return { name, description, recipe, task };
 }
 
 const rows = [
@@ -79,7 +79,7 @@ export default function CreateNewTrainingPage() {
       <TableRow key={task.name}>
         <TableCell align="left">{task.name}</TableCell>
         <TableCell align="left">{task.description}</TableCell>
-        <TableCell align="left">{task.duration}</TableCell>
+        <TableCell align="left">{task.recipe}</TableCell>
         <TableCell align="left"></TableCell>
       </TableRow>
     )
@@ -161,7 +161,7 @@ export default function CreateNewTrainingPage() {
               <TableRow>
                 <TableCell align="left">Name</TableCell>
                 <TableCell align="left">Description</TableCell>
-                <TableCell align="left">Duration</TableCell>
+                <TableCell align="left">Recipe</TableCell>
                 <TableCell align="left">View Task</TableCell>
               </TableRow>
             </TableHead>

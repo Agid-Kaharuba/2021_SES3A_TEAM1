@@ -98,12 +98,12 @@ export default function CreateNewTaskPage() {
         <Box my={2}>
           <TextField
             id="filled-multiline-static"
-            label="Enter the Task's Duration"
+            label="Enter the Task's Recipe"
             multiline
             rows={4}
             fullWidth='true'
             variant="filled"
-            name="description"
+            name="recipe"
             onChange={handleChange}
           />
         </Box>
