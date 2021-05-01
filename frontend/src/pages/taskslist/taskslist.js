@@ -2,6 +2,10 @@ import React, { useState, useEffect, useContext } from "react";
 import { Button, Container, Typography, Box, Divider,Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Grid} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
+import { Link, Redirect } from "react-router-dom";
+import { AuthContext } from "../../context/auth";
+import api from "../../helpers/api";
+
 const useStyles = makeStyles({
     bold: {
       fontWeight: 600
@@ -28,8 +32,38 @@ const useStyles = makeStyles({
       createData('Task 3', 'Learn the safety terminology', 5,0)
   ];
 
+  
+
 export default function TasksList() {
     const classes = useStyles();
+    const { authState } = useContext(AuthContext);
+    const [tasksState, setTasksState] = useState(undefined);
+
+    const fetchData = async () => {
+      const res = await api.task.getAll(authState.token);
+      setTasksState(res.data);
+    };
+  
+    useEffect(() => {
+      if (tasksState === undefined) {
+        fetchData();
+      }
+    });
+
+    function buildTask(task) {
+      return (
+        <TableRow key={task.name}>
+            <TableCell align="left">{task.name}</TableCell>
+            <TableCell align="left">{task.description}</TableCell>
+            <TableCell align="left">{task.duration}</TableCell>
+            <TableCell align="left">
+            <Link to={`/task/${task._id}`}>
+                <Button size="small" variant="outlined" color="secondary">View Task</Button>
+            </Link>
+            </TableCell>
+        </TableRow>
+      )
+      }
 
     return(
     <>
@@ -64,16 +98,9 @@ export default function TasksList() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map((row) => (
-                        <TableRow key={row.name}>
-                            <TableCell align="left">{row.name}</TableCell>
-                            <TableCell align="left">{row.description}</TableCell>
-                            <TableCell align="left">{row.duration}</TableCell>
-                            <TableCell align="left">
-                                <Button size="small" variant="outlined" color="secondary">View Task</Button>
-                            </TableCell>
-                        </TableRow>
-                    ))}
+                    {tasksState && tasksState.map((task) => {
+                        return buildTask(task);
+                    })}
                 </TableBody>
             </Table>
           </TableContainer>

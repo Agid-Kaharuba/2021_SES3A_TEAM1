@@ -1,3 +1,5 @@
+import {getAllTasks} from "./task";
+
 import {
   verify,
   registerUser,
@@ -31,5 +33,8 @@ export default {
   course: {
     getAll: getAllCourses,
     create: createCourse
+  },
+  task: {
+    getAll: getAllTasks,
   }
 }
