@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 5262236507642529791}
   - component: {fileID: 621306535722228470}
   - component: {fileID: 8827343571719973521}
+  - component: {fileID: -9039962283043871723}
   m_Layer: 0
   m_Name: BottomBun
   m_TagString: Untagged
@@ -252,6 +253,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.16, y: 0.03, z: 0.16}
   m_Center: {x: 0, y: -0.008, z: 0}
+--- !u!114 &-9039962283043871723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7228266056993919887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb6ca27abdb74b9c97f7d81f9fd36634, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  propData: {fileID: 11400000, guid: e722070ee1c9e9f4a9fe0b29ea71cf2d, type: 2}
 --- !u!1 &7758484321920182328
 GameObject:
   m_ObjectHideFlags: 0

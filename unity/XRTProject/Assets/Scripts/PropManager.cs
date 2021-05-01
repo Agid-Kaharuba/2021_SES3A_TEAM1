@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.Newtonsoft.Json.Linq;
 
 
 public class PropManager : MonoBehaviour
@@ -9,7 +10,7 @@ public class PropManager : MonoBehaviour
 
     private readonly Dictionary<string, PropData> propDictionary = new Dictionary<string, PropData>();
 
-    public static PropManager Instance { get; set; }
+    public static PropManager Instance { get; private set; }
 
     private void Awake()
     {

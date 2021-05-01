@@ -1,10 +1,16 @@
+using Valve.Newtonsoft.Json;
+
+[JsonObject(MemberSerialization.OptIn)]
 public class Task
 {
+    [JsonProperty("name")]
     public string Name { get; private set; }
     
+    [JsonProperty("type")]
     public TaskType TaskType { get; private set; }
 
     /// This may be null if it does not have a recipe
+    [JsonProperty("recipe")]
     public Recipe Recipe { get; set; }
 
     public bool HasRecipe => Recipe != null;

@@ -139,6 +139,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83ea697eb3f072b45903cbe8297b0460, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnAboveItemChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBelowItemChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2068575993686707403
 GameObject:
   m_ObjectHideFlags: 0
@@ -182,6 +188,7 @@ GameObject:
   - component: {fileID: 1486210578070212268}
   - component: {fileID: 4946946777143384319}
   - component: {fileID: 1545179631429995029}
+  - component: {fileID: 5458023246636147388}
   m_Layer: 0
   m_Name: TopBun
   m_TagString: Untagged
@@ -291,6 +298,10 @@ MonoBehaviour:
   belowStickPoint: {fileID: 9075363473604495608}
   attachmentFlags: 86
   canStackBelow: 1
+  isBoard: 0
+  OnAboveStackChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1545179631429995029
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -304,3 +315,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.18, y: 0.05, z: 0.18}
   m_Center: {x: 0, y: 0.004, z: 0}
+--- !u!114 &5458023246636147388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7001082528869832772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb6ca27abdb74b9c97f7d81f9fd36634, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  propData: {fileID: 11400000, guid: 1902cc97f976662489c73abc5b6e55b3, type: 2}

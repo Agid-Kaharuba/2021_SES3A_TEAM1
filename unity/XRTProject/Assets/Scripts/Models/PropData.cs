@@ -1,9 +1,10 @@
 using System;
 using System.Globalization;
 using UnityEngine;
+using Valve.Newtonsoft.Json;
 
 
-[CreateAssetMenu(menuName = "ScriptableObjects/PropData", fileName = "NewProp")]
+[CreateAssetMenu(menuName = "ScriptableObjects/PropData", fileName = "NewProp"), JsonConverter(typeof(PropConverter))]
 public class PropData : ScriptableObject
 {
     [SerializeField] private string propId;

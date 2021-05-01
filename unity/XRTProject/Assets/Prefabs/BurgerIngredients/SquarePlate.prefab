@@ -561,8 +561,9 @@ GameObject:
   - component: {fileID: 1042851077579109616}
   - component: {fileID: 999430878840215921}
   - component: {fileID: 1180864941}
+  - component: {fileID: 4167295344600645690}
   m_Layer: 0
-  m_Name: BurgerBoard
+  m_Name: SquarePlate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -733,6 +734,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &4167295344600645690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3966476886739191017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb6ca27abdb74b9c97f7d81f9fd36634, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  propData: {fileID: 11400000, guid: 758174e44fc337e46b817c5ec9d39b90, type: 2}
 --- !u!1 &4677867848936440909
 GameObject:
   m_ObjectHideFlags: 0

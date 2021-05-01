@@ -31,7 +31,7 @@ public class BurgerBoard : MonoBehaviour
 
     private void UpdateContentsText()
     {
-        List<BurgerItem> burgerItems = GetCurrentBurger();
+        List<BurgerItem> burgerItems = GetCurrentBurgerItems();
 
         if (burgerItems.Count == 0)
         {
@@ -50,7 +50,7 @@ public class BurgerBoard : MonoBehaviour
         }
     }
 
-    public List<BurgerItem> GetCurrentBurger()
+    public List<BurgerItem> GetCurrentBurgerItems()
     {
         var burgerItems = new List<BurgerItem>();
         BurgerItem aboveItem = burgerItem.GluedAboveItem;
@@ -62,6 +62,14 @@ public class BurgerBoard : MonoBehaviour
         }
 
         return burgerItems;
+    }
+
+    public Recipe GetCurrentBurger()
+    {
+        IEnumerable<PropData> props = GetCurrentBurgerItems()
+            .Select(i => i.GetComponent<PropBehaviour>().PropData);
+
+        return new Recipe("burger", props);
     }
 
     public void SetCurrentBurgerForTask(Task task)

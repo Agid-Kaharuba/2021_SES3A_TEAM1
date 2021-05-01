@@ -1,17 +1,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Valve.Newtonsoft.Json;
 
 
+[JsonObject(MemberSerialization.OptIn)]
 public class Recipe
 {
-    private readonly string name;
-    private readonly List<PropData> ingredients = new List<PropData>();
+    [JsonProperty("name")]
+    private string name;
+    [JsonProperty("ingredients")]
+    private List<PropData> ingredients = new List<PropData>();
 
     public IReadOnlyList<PropData> Ingredients => ingredients.AsReadOnly();
-
+    
     public string Name => name;
 
+    public Recipe(string name, IEnumerable<PropData> ingredients)
+    {
+        this.name = name;
+        this.ingredients = ingredients.ToList();
+    }
+    
     public Recipe(string name, params PropData[] ingredients)
     {
         this.name = name;
@@ -35,5 +45,15 @@ public class Recipe
                 ingredients.Add(propData);
             }
         }
+    }
+
+    public bool IsSameRecipe(Recipe other)
+    {
+        return this.name == other.name && HasSameIngredients(other);
+    }
+
+    public bool HasSameIngredients(Recipe other)
+    {
+        return !Ingredients.Except(other.Ingredients).Any();
     }
 }
