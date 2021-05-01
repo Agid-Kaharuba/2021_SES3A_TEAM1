@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Bar, Line, Pie} from 'react-chartjs-2';
 
 class Chart extends Component{
-    constructor(){
+    constructor(props){
         super(props);
         this.state = {
             chartData:{
@@ -16,10 +16,11 @@ class Chart extends Component{
                             70
                         ],
                     }
-                ],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.6)',
                 ]
+            },
+            chartConfig:{
+                fillShadowGradient:'skyblue',
+                fillShadowGradientOpacity:1,
             }
         }
     }
