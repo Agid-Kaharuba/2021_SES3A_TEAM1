@@ -43,7 +43,7 @@ function AppRouter(props) {
         exact={true}
         component={Dashboard} />
 
-      <PrivateRoute path="/dashboard/create"
+      <PrivateRoute path="/dashboard/create-course"
         exact={true}
         component={CreateNewCourse} />
 
@@ -71,7 +71,7 @@ function AppRouter(props) {
         component={TasksList}>
       </Route>
 
-      <Route path="/createtask"
+      <Route path="/create-task"
         exact={true}
         component={CreateNewTask}>
       </Route>

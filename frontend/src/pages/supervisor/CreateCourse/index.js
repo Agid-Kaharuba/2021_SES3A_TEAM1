@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useEffect, useState} from "react";
 import { Link, useHistory } from "react-router-dom";
 
 // IMPORT COMPONENTS
@@ -59,6 +59,32 @@ export default function CreateNewTrainingPage() {
     history.push('/dashboard');
   }
 
+
+  const [tasksState, setTasksState] = useState(undefined);
+  // const [tasksState, setTasksState] = useState([{"name":"test","description":"asdsdf"},{"name":"test","description":"asdsdf"}]);
+
+  const fetchData = async () => {
+    const res = await api.task.getAllTasks(authState.token);
+    setTasksState(res.data);
+  };
+
+  useEffect(() => {
+    if (tasksState === undefined) {
+      fetchData();
+    }
+  });
+
+  const buildTask = (task) => {
+    return (
+      <TableRow key={task.name}>
+        <TableCell align="left">{task.name}</TableCell>
+        <TableCell align="left">{task.description}</TableCell>
+        <TableCell align="left">{task.duration}</TableCell>
+        <TableCell align="left"></TableCell>
+      </TableRow>
+    )
+  }
+
   return (
     <div>
       <Box m={5}>
@@ -117,7 +143,7 @@ export default function CreateNewTrainingPage() {
             </Button>
           </Grid>
           <Grid item >
-            <Button component={Link} color="primary" variant="contained" to={"/createtask"}>
+            <Button component={Link} color="primary" variant="contained" to={"/create-task"}>
               Create Task
             </Button>
           </Grid>
@@ -140,14 +166,14 @@ export default function CreateNewTrainingPage() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
-                <TableRow key={row.name}>
-                  <TableCell align="left">{row.name}</TableCell>
-                  <TableCell align="left">{row.description}</TableCell>
-                  <TableCell align="left">{row.duration}</TableCell>
-                  <TableCell align="left"></TableCell>
-                </TableRow>
-              ))}
+                {tasksState ?
+                  tasksState.map((task) => {
+                    return buildTask(task);
+                  })
+                  :
+                  <h1>LOADING</h1>
+                }
+ 
             </TableBody>
           </Table>
         </TableContainer>
@@ -196,6 +222,7 @@ export default function CreateNewTrainingPage() {
                   <TableCell align="left"></TableCell>
                 </TableRow>
               ))}
+
             </TableBody>
           </Table>
         </TableContainer>
