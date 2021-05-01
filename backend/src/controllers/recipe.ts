@@ -3,6 +3,12 @@ import Recipe from "../model/recipe";
 import ResponseService from "../helpers/response"
 import { MongoError } from "mongodb";
 
+export async function findRecipe(Id: string){
+    return await Recipe.findOne({
+        _id: Id
+    });
+}
+
 export default class RecipeController {
 
     //Get all existing recipes
@@ -19,9 +25,7 @@ export default class RecipeController {
     //Get recipe by id
     public async getById(req: Request, res: Response) {
         try {
-            const recipe = await Recipe.findOne({
-                _id: req.params.recipeId
-            });
+            const recipe = await findRecipe(req.params.recipeId);
             ResponseService.successResponse(res, recipe);
         }
         catch (err) {

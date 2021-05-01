@@ -32,7 +32,7 @@ export default class ImageController{
 
     if (delet){
       console.log("deleting")
-      ProfileImage.deleteOne({name: name}, function(err){
+      ProfileImage.deleteOne({name: name}, undefined, (err) => {
         if (err){
           console.log(err)
         }

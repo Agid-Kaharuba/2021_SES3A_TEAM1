@@ -51,7 +51,7 @@ export const RecipeRoute = (app: Express, controller: RecipeController) => {
 
     /**
      * @swagger
-     * /recipe/create:
+     * /recipe:
      *  post:
      *   description: Create a recipe
      *   tags: [Recipe]
@@ -74,7 +74,7 @@ export const RecipeRoute = (app: Express, controller: RecipeController) => {
      *    200:
      *     description: Success
      */
-    app.post("/recipe/create", controller.create);
+    app.post("/recipe", controller.create);
 
     /**
      * @swagger
