@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Button, Container, Typography, Box, Divider,Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Grid} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import Chart from './components/Chart/index.js';
+import Chart from './components/Chart';
 
 const useStyles = makeStyles({
     bold: {
