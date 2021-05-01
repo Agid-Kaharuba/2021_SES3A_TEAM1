@@ -12,12 +12,12 @@ import fs  from 'fs';
 
 dotenv.config();
 
-const mongo_uri = process.env.DATABASE_URL as string;
+const mongo_uri = `${process.env.DATABASE_URL}/${process.env.DATABASE_NAME}`  as string;
 mongoose.connect(mongo_uri, { useNewUrlParser: true, useUnifiedTopology: true }, function(err) {
 	if (err) {
 		throw err;
 	} else {
-		console.log(`Successfully connected to MongoDB`);
+		console.log(`Successfully connected to ${process.env.DATABASE_NAME}`);
 	}
 });
 
@@ -29,11 +29,25 @@ app.use(bodyParser.json());
 
 // Swagger Docs
 const swaggerOptions = {
-	definition: {
+	swaggerDefinition: {
+		openapi: '3.0.1',
 		info: {
 			title: 'XRT Training',
 			version: '1.0.0'
-		}
+		},
+		basePath: '/',
+		components: {
+		  securitySchemes: {
+			bearerAuth: {
+			  type: 'http',
+			  scheme: 'bearer',
+			  bearerFormat: 'JWT',
+			}
+		  }
+		},
+		security: [{
+		  bearerAuth: []
+		}]
 	},
 	apis: ['src/app.ts', 'src/routes/*']
 };
@@ -68,3 +82,5 @@ const server = app.listen(process.env.API_PORT, () => {
     console.log(`Server is now running at:  http://localhost:${process.env.API_PORT}`);
     console.log(`Swagger Docs            :  http://localhost:${process.env.API_PORT}/swagger`);
 });
+
+module.exports = server;

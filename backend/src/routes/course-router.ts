@@ -4,6 +4,38 @@ import CourseController from "../controllers/course";
 export const CourseRoute = (app: Express, controller: CourseController) => {
     /**
      * @swagger
+     * /course/progress:
+     *  post:
+     *   description: Post a progress update
+     *   tags: [Course, Progress]
+     *   requestBody:
+     *    required: true,
+     *    content:
+     *     application/json:
+     *      schema:
+     *       type: object
+     *       properties:
+     *        data:
+     *         type: object
+     *         example: {"any":"thing"}
+     *   responses:
+     *    200:
+     *     description: Success
+     */
+    app.post("/course/progress", controller.submitProgress);
+    /**
+     * @swagger
+     * /course/progress:
+     *  get:
+     *   description: Get all progress updates
+     *   tags: [Course, Progress]
+     *   responses:
+     *    200:
+     *     description: Success
+     */
+    app.get("/course/progress", controller.getAllProgress);
+    /**
+     * @swagger
      * /course:
      *  get:
      *   description: Get all the courses
@@ -35,15 +67,19 @@ export const CourseRoute = (app: Express, controller: CourseController) => {
      *  post:
      *   description: Get a course by id
      *   tags: [Course]
-     *   parameters:
-     *    - in: formData
-     *      name: name
-     *      required: true
-     *      type: string
-     *    - in: formData
-     *      name: description
-     *      required: false
-     *      type: string
+     *   requestBody:
+     *    required: true,
+     *    content:
+     *     application/json:
+     *      schema:
+     *       type: object
+     *       properties:
+     *        name:
+     *         type: string
+     *         example: First Course
+     *        description:
+     *         type: string
+     *         example: This is the first of many courses
      *   responses:
      *    200:
      *     description: Success
@@ -60,14 +96,19 @@ export const CourseRoute = (app: Express, controller: CourseController) => {
      *      name: courseId
      *      required: true
      *      type: string
-     *    - in: formData
-     *      name: name
-     *      required: true
-     *      type: string
-     *    - in: formData
-     *      name: description
-     *      required: false
-     *      type: string
+     *   requestBody:
+     *    required: true,
+     *    content:
+     *     application/json:
+     *      schema:
+     *       type: object
+     *       properties:
+     *        name:
+     *         type: string
+     *         example: First Course
+     *        description:
+     *         type: string
+     *         example: This is the first of many courses
      *   responses:
      *    200:
      *     description: Success

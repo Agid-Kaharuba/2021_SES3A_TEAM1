@@ -122,6 +122,7 @@ const MyDrawer = withStyles(styles)(
         <Link exact to="/" />
         <Link to="/login" />
         <Link to="/signup" />
+        <Link to="/employee-profile" />
       </main>
     </Box>
   )
