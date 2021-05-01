@@ -5,10 +5,12 @@ using UnityEngine;
 public class TrainingManager : MonoBehaviour
 {
     private List<Task> tasks = new List<Task>();
+    private TrainingModule trainingModule;
     
     public static TrainingManager Instance { get; private set; }
 
-    public IList<Task> Tasks => tasks.AsReadOnly();
+    public IList<Task> Tasks => trainingModule.tasks;
+    public TrainingModule TrainingModule => trainingModule;
 
     private void Awake()
     {
@@ -19,17 +21,20 @@ public class TrainingManager : MonoBehaviour
         }
         
         // TODO remove Sample tasks and query backend
-        tasks.Add(new Task("Learn to make a Whooper", TaskType.Recipe));
-        tasks.Add(new Task("Learn to make a Cheeseburger", TaskType.Recipe));
-        tasks.Add(new Task("Remembering to make a Whooper", TaskType.Testing));
-        tasks.Add(new Task("Serve 5 customers", TaskType.Performance));
+        trainingModule = new TrainingModule("Make a Simple burger");
+        
+        Task whooperTask = new Task("Learn to make a Whooper", TaskType.Recipe);
+        whooperTask.Recipe = new Recipe("top_bun", "lettuce", "cheese", "patty", "bottom_bun");
+        trainingModule.tasks.Add(whooperTask);
+        
+        Task cheeseBurgerTask = new Task("Learn to make a Cheeseburger", TaskType.Recipe);
+        cheeseBurgerTask.Recipe = new Recipe("top_bun", "cheese", "patty", "bottom_bun");
+        trainingModule.tasks.Add(cheeseBurgerTask);
+        
+        trainingModule.tasks.Add(new Task("Remembering to make a Whooper", TaskType.Testing));
+        trainingModule.tasks.Add(new Task("Serve 5 customers", TaskType.Performance));
 
         Instance = this;
-    }
-    
-    private void Update()
-    {
-        
     }
 
     public void ReorderTask(int fromIndex, int toIndex)

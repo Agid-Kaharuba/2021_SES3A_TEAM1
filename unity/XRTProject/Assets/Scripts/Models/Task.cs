@@ -1,8 +1,13 @@
-
 public class Task
 {
     public string Name { get; private set; }
+    
     public TaskType TaskType { get; private set; }
+
+    /// This may be null if it does not have a recipe
+    public Recipe Recipe { get; set; }
+
+    public bool HasRecipe => Recipe != null;
 
     public Task(string name, TaskType taskType)
     {
