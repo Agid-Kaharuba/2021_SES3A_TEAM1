@@ -2,7 +2,7 @@ import React, { useState} from "react";
 import { Link, useHistory } from "react-router-dom";
 
 // IMPORT COMPONENTS
-import { Box, Button, Typography, Divider, TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@material-ui/core";
+import { Box, Button, Typography, Divider, TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Grid } from "@material-ui/core";
 import { DropzoneArea } from 'material-ui-dropzone'
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -68,31 +68,14 @@ export default function CreateNewTrainingPage() {
         <Divider variant="middle" />
       </Box>
 
-      {/* https://www.npmjs.com/package/material-ui-dropzone */}
       <Box m={5}>
-        <Box m={2}>
-          <Typography variant='h5'>
-            Upload Training Photo
-          </Typography>
-        </Box>
-
-        <DropzoneArea />
-        <Box m={2}>
-          <Button variant="contained" component="label">
-            Upload Photo
-            <input type="file" hidden />
-          </Button>
-        </Box>
-      </Box>
-
-      <Box m={5}>
-        <Box m={2}>
+        <Box my={2}>
           <Typography variant='h5'>
             Training Details
           </Typography>
         </Box>
 
-        <Box m={2}>
+        <Box my={2}>
           <TextField
             id="filled-multiline-static"
             label="Enter the Training's Name"
@@ -102,7 +85,7 @@ export default function CreateNewTrainingPage() {
             onChange={handleChange}
           />
         </Box>
-        <Box m={2}>
+        <Box my={2}>
           <TextField
             id="filled-multiline-static"
             label="Enter the Training's Description"
@@ -117,10 +100,32 @@ export default function CreateNewTrainingPage() {
       </Box>
 
       <Box m={5}>
-        <Typography className={classes.bold} variant='h5'>
-          Tasks
-        </Typography>
-        <Divider variant="middle" />
+        <Grid
+        container
+        direction='row'
+        justify='space-between'
+        alignItems='baseline'>
+          <Grid item xs={9}>
+            <Typography variant='h5'>
+              Tasks
+            </Typography>
+          </Grid>
+
+          <Grid item>
+            <Button component={Link} color="secondary" variant="contained" to={"/dashboard/create"}>
+              Add Task
+            </Button>
+          </Grid>
+          <Grid item >
+            <Button component={Link} color="primary" variant="contained" to={"/createtask"}>
+              Create Task
+            </Button>
+          </Grid>
+ 
+        </Grid>
+        <Box my={1}>
+          <Divider variant="middle" />
+        </Box>        
       </Box>
 
       <Box m={5}>
@@ -147,6 +152,54 @@ export default function CreateNewTrainingPage() {
           </Table>
         </TableContainer>
       </Box>
+
+      <Box m={5}>
+        <Grid
+        container
+        direction='row'
+        justify='space-between'
+        alignItems='baseline'>
+          <Grid item>
+            <Typography variant='h5'>
+              Assigned Employees
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Button component={Link} color="primary" variant="contained" to={"/dashboard/create"}>
+              Assign
+            </Button>
+          </Grid>
+        </Grid>
+        <Box my={1}>
+          <Divider variant="middle" />
+        </Box>        
+      </Box>
+      
+
+      <Box m={5}>
+        <TableContainer component={Paper}>
+          <Table className={classes.table} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell align="left">Name</TableCell>
+                <TableCell align="left">Description</TableCell>
+                <TableCell align="left">Duration</TableCell>
+                <TableCell align="left">View Task</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <TableRow key={row.name}>
+                  <TableCell align="left">{row.name}</TableCell>
+                  <TableCell align="left">{row.description}</TableCell>
+                  <TableCell align="left">{row.duration}</TableCell>
+                  <TableCell align="left"></TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Box> 
 
       <Box justifyContent='center' display="flex" m={6}>
         <Box mr={6}>
