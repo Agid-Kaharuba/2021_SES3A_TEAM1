@@ -32,7 +32,7 @@ export default class UserController {
     public async getAllSupervisor(req: Request, res: Response) {
         try {
             const user = await User.find({
-                isSupervisor: req.params.isSupervisor
+                isSupervisor: req.query.isSupervisor
             });
             ResponseService.successResponse(res, user);
         }
