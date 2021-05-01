@@ -16,10 +16,11 @@ class Chart extends Component{
                             70
                         ],
                     }
-                ],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.6)',
                 ]
+            },
+            chartConfig:{
+                fillShadowGradient:'skyblue',
+                fillShadowGradientOpacity:1,
             }
         }
     }
