@@ -16,6 +16,7 @@ public class Recipe
     
     public string Name => name;
 
+    [JsonConstructor]
     public Recipe(string name, IEnumerable<PropData> ingredients)
     {
         this.name = name;

@@ -85,7 +85,10 @@ public class ApiService
         }
         else
         {
-            callback?.Invoke(JsonConvert.DeserializeObject<TrainingModule>(www.downloadHandler.text));
+            Debug.Log(www.downloadHandler.text);
+            TrainingModule module = JsonConvert.DeserializeObject<TrainingModule>(www.downloadHandler.text);
+            Debug.Log(module);
+            callback?.Invoke(module);
         }
     }
 }

@@ -8,7 +8,7 @@ public class ApiHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        apiService = new ApiService();
+        apiService = new ApiService("");
     }
 
     // Update is called once per frame
@@ -19,12 +19,15 @@ public class ApiHandler : MonoBehaviour
 
     public void OnClick()
     {
-        StartCoroutine(apiService.Login(new User("test", "test"), (theObject) => {
-            if (theObject is BackendErrorResponse errorReponse)
+
+
+        StartCoroutine(apiService.GetTrainingModule("608eae5ab7dd3233a46916f7", (response) =>
+        {
+            if (response is BackendErrorResponse errorReponse)
             {
 
             }
-            else if (theObject is User user)
+            else if (response is TrainingModule module)
             {
 
             }
