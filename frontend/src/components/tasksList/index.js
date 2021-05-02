@@ -41,11 +41,6 @@ export default function Tasks({tasksState}){
     return(
         <>
          <Box m={5}>
-             {/* <TableContainer>
-                 <Table>
-                    
-                 </Table>
-             </TableContainer> */}
              <Grid container spacing={2} justify="space-between">
                 <Grid item>
                     <Typography className={classes.bold} variant='h4'>
