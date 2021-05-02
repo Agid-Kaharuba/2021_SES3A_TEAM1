@@ -21,7 +21,6 @@ public class DetectBurger : MonoBehaviour
         if (collider.gameObject.CompareTag("Plates"))
         {
             Debug.Log("Collision Detected");
-            // For some reason this is crashing the app but it works
             Destroy(collider.gameObject);
         }
     }

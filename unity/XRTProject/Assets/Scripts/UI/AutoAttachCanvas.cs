@@ -72,4 +72,9 @@ public class AutoAttachCanvas : MonoBehaviour
         canvas.gameObject.SetActive(false);
         canvas.transform.SetParent(originalParent, true);
     }
+
+    private void OnDestroy()
+    {
+        Destroy(canvas);
+    }
 }
