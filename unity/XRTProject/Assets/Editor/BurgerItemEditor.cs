@@ -35,11 +35,20 @@ public class BurgerItemEditor : Editor
 
             if (burgerItem.IsGlued)
             {
-                GUILayout.Label($"Glued to {burgerItem.GluedItem.name}");
+                GUILayout.Label($"Glued to {burgerItem.GluedBelowItem.name}");
             }
             else
             {
                 GUILayout.Label($"Not glued to anything");
+            }
+            
+            if (burgerItem.GluedAboveItem != null)
+            {
+                GUILayout.Label($"Glued from {burgerItem.GluedAboveItem.name}");
+            }
+            else
+            {
+                GUILayout.Label($"Not glued from anything");
             }
         }
     }

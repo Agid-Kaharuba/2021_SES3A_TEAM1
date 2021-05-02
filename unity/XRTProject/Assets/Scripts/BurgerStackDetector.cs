@@ -1,11 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BurgerStackDetector : MonoBehaviour
 {
+    [SerializeField] public UnityEvent OnAboveItemChanged;
+    [SerializeField] public UnityEvent OnBelowItemChanged;
+    
     private List<BurgerItem> surroundingItems = new List<BurgerItem>();
     private BurgerItem currentItem;
+    private BurgerItem lastAboveItem;
+    private BurgerItem lastBelowItem;
     
     public BurgerItem AboveItem { get; private set; }
     public BurgerItem BelowItem { get; private set; }
@@ -61,5 +67,17 @@ public class BurgerStackDetector : MonoBehaviour
 
         AboveItem = bestAboveItem;
         BelowItem = bestBelowItem;
+
+        if (lastAboveItem != AboveItem)
+        {
+            lastAboveItem = AboveItem;
+            OnAboveItemChanged?.Invoke();
+        }
+
+        if (lastBelowItem != BelowItem)
+        {
+            lastBelowItem = BelowItem;
+            OnBelowItemChanged?.Invoke();
+        }
     }
 }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6040153241002945671}
   - component: {fileID: 6153961649163736586}
   - component: {fileID: 8597393842459032646}
+  - component: {fileID: -7049172286501642558}
   m_Layer: 0
   m_Name: Beetroot
   m_TagString: Untagged
@@ -123,6 +124,10 @@ MonoBehaviour:
   belowStickPoint: {fileID: 3891802898993918823}
   attachmentFlags: 86
   canStackBelow: 1
+  isBoard: 0
+  OnAboveStackChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &8597393842459032646
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -136,6 +141,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.17, y: 0.06, z: 0.17}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-7049172286501642558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5147522449972315519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb6ca27abdb74b9c97f7d81f9fd36634, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  propData: {fileID: 11400000, guid: 323cb7b663901c549812201bca7b4d10, type: 2}
 --- !u!1 &5183484853622746649
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,6 +241,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83ea697eb3f072b45903cbe8297b0460, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnAboveItemChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBelowItemChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6238270539291934447
 GameObject:
   m_ObjectHideFlags: 0
