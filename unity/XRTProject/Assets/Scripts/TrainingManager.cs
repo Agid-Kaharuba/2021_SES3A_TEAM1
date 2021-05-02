@@ -54,6 +54,22 @@ public class TrainingManager : MonoBehaviour
         Instance = this;
     }
 
+    private void Start()
+    {
+        StartCoroutine(apiService.GetTrainingModule("608eae5ab7dd3233a46916f7", (response) =>
+        {
+            if (response is BackendErrorResponse errorReponse)
+            {
+                Debug.LogError($"Could not get training module got {errorReponse.Message}");
+            }
+            else if (response is TrainingModule module)
+            {
+                trainingModule = module;
+                CurrentTask = module.Tasks[0];
+            }
+        }));
+    }
+
     public void ReorderTask(int fromIndex, int toIndex)
     {
         Task tempTask = trainingModule.Tasks[fromIndex];
