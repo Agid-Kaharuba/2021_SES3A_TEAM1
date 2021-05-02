@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
 
 // IMPORT COMPONENTS
-import { Box, Button, Typography, Divider, TextField, Card, CardContent, CardActions, Paper, Fab } from "@material-ui/core";
+import { Box, Button, Typography, Divider, TextField, Card, CardContent, CardActions, Paper, Grid } from "@material-ui/core";
 import AddIcon from '@material-ui/icons/Add';
 import { makeStyles } from "@material-ui/core/styles";
 
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { AuthContext } from "../../context/auth";
 import api from "../../helpers/api";
 
@@ -81,12 +81,28 @@ export default function CreateNewTrainingPage() {
   }
 
   return (
-    <div>
+    <Box>
+
       <Box m={5}>
-        <Typography className={classes.bold} variant='h4'>
-          Dashboard
+        <Grid
+        container
+        direction='row'
+        justify='space-between'
+        alignItems='baseline'>
+          <Grid item>
+            <Typography className={classes.bold} variant='h4'>
+              Dashboard
             </Typography>
-        <Divider variant="middle" />
+          </Grid>
+          <Grid item>
+            <Button component={Link} color="primary" variant="contained" to={"/dashboard/create"}>
+              Create Course
+            </Button>
+          </Grid>
+        </Grid>
+        <Box my={1}>
+          <Divider variant="middle" />
+        </Box>        
       </Box>
 
       <Box m={5}>
@@ -97,14 +113,7 @@ export default function CreateNewTrainingPage() {
           :
           <h1>LOADING</h1>
         }
-        <Box mx={5} my={2} justifyContent='center' display="flex">
-          <Link to="/dashboard/create">
-            <Fab color="primary" aria-label="add">
-              <AddIcon />
-            </Fab>
-          </Link>
-        </Box>
       </Box>
-    </div>
+    </Box>
   )
 }

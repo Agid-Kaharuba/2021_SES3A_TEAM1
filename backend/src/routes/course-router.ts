@@ -1,5 +1,6 @@
 import { Express } from "express";
 import CourseController from "../controllers/course";
+import { checkToken } from "../middleware/auth";
 
 export const CourseRoute = (app: Express, controller: CourseController) => {
     /**
@@ -7,7 +8,7 @@ export const CourseRoute = (app: Express, controller: CourseController) => {
      * /course/progress:
      *  post:
      *   description: Post a progress update
-     *   tags: [Course, Progress]
+     *   tags: [Progress]
      *   requestBody:
      *    required: true,
      *    content:
@@ -28,7 +29,7 @@ export const CourseRoute = (app: Express, controller: CourseController) => {
      * /course/progress:
      *  get:
      *   description: Get all progress updates
-     *   tags: [Course, Progress]
+     *   tags: [Progress]
      *   responses:
      *    200:
      *     description: Success
@@ -44,7 +45,7 @@ export const CourseRoute = (app: Express, controller: CourseController) => {
      *    200:
      *     description: Success
      */
-    app.get("/course", controller.getAll);
+    app.get("/course", checkToken, controller.getAll);
     /**
      * @swagger
      * /course/{courseId}:
@@ -80,6 +81,18 @@ export const CourseRoute = (app: Express, controller: CourseController) => {
      *        description:
      *         type: string
      *         example: This is the first of many courses
+     *        tasks:
+     *         type: array
+     *         items:
+     *          type: string
+     *          example: "task01"
+     *         example: ["task01", "task02"]
+     *        assignedEmployees:
+     *         type: array
+     *         items:
+     *          type: string
+     *          example: "user01"
+     *         example: ["user01", "user02"]
      *   responses:
      *    200:
      *     description: Success
@@ -109,6 +122,18 @@ export const CourseRoute = (app: Express, controller: CourseController) => {
      *        description:
      *         type: string
      *         example: This is the first of many courses
+     *        tasks:
+     *         type: array
+     *         items:
+     *          type: string
+     *          example: "task01"
+     *         example: ["task01", "task02"]
+     *        assignedEmployees:
+     *         type: array
+     *         items:
+     *          type: string
+     *          example: "user01"
+     *         example: ["user01", "user02"]
      *   responses:
      *    200:
      *     description: Success

@@ -9,6 +9,14 @@ const courseSchema = new mongoose.Schema({
         type: String,
         required: false
     },
+    tasks: {
+        type: [String],
+        required: false
+    },
+    assignedEmployees: {
+        type: [String],
+        required: false
+    },
     archive: {
         type: Boolean,
         required: false

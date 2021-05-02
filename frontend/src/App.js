@@ -1,7 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import { ThemeProvider } from "@material-ui/core/styles";
+//STYLES
+import {ThemeProvider} from "@material-ui/core/styles";
+import Theme from './theme'
 
 // IMPORT COMPONENTS
 import ManageNavigation from "./components/manageNavigation";
@@ -17,9 +19,11 @@ import LogIn from "./pages/login/login.js";
 import SignUp from "./pages/signup/signup.js";
 import taskList from "./pages/taskslist/taskslist.js";
 import Statistics from "./pages/statistics/Statistics.js";
+import CreateNewTask from "./pages/createtask/createtask.js";
+
 // import appTheme from "./helpers/appTheme";
 
-// IMPORT CONTEXT
+// IMPORT CONTEXTS
 import { AuthProvider } from "./context/auth";
 import TasksList from './pages/taskslist/taskslist';
 // import Signout from "./helpers/auth/signout.js";
@@ -78,6 +82,11 @@ function AppRouter(props) {
         exact={true}
         component={Statistics}>
       </Route>
+      
+      <Route path="/createtask"
+        exact={true}
+        component={CreateNewTask}>
+      </Route>
 
       <Route path="/"
         exact={true}
@@ -88,16 +97,19 @@ function AppRouter(props) {
 }
 
 function App() {
+
   return (
     <div className="App">
-      <AppProvider>
-        <BrowserRouter>
-          <ManageNavigation />
-          <div>
-            <AppRouter />
-          </div>
-        </BrowserRouter>
-      </AppProvider>
+      <ThemeProvider theme={Theme}>
+        <AppProvider>
+          <BrowserRouter>
+            <ManageNavigation />
+            <div>
+              <AppRouter />
+            </div>
+          </BrowserRouter>
+        </AppProvider>
+      </ThemeProvider>
     </div>
   );
 }
