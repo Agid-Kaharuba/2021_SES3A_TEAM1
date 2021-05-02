@@ -18,7 +18,7 @@ import EmployeeProfile from "./pages/profile/employeeProfile";
 import LogIn from "./pages/login/login.js";
 import SignUp from "./pages/signup/signup.js";
 import taskList from "./pages/taskslist/taskslist.js";
-import Statistics from "./pages/statistics/statistics.js";
+import Statistics from "./pages/statistics/Statistics.js";
 import CreateNewTask from "./pages/createtask/createtask.js";
 
 // import appTheme from "./helpers/appTheme";
