@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
+using System.Text;
+using TMPro;
 public class DetectBurger : MonoBehaviour
 {
+    [SerializeField] private TMP_Text titleText;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        titleText.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -21,7 +25,14 @@ public class DetectBurger : MonoBehaviour
         if (collider.gameObject.CompareTag("Plates"))
         {
             Debug.Log("Collision Detected");
-            Destroy(collider.gameObject);
+            StartCoroutine(FinalText(collider.gameObject));
         }
+    }
+
+    private IEnumerator FinalText(GameObject colliderobject)
+    {
+        yield return new WaitForSeconds(3);
+        Destroy(colliderobject);
+        titleText.gameObject.SetActive(true);
     }
 }
