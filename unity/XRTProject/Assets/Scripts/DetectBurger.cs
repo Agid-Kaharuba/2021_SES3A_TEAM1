@@ -6,12 +6,12 @@ using System.Text;
 using TMPro;
 public class DetectBurger : MonoBehaviour
 {
-    [SerializeField] private TMP_Text titleText;
+    [SerializeField] private Canvas canvas;
 
     // Start is called before the first frame update
     void Start()
     {
-        titleText.gameObject.SetActive(false);
+        canvas.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -33,6 +33,6 @@ public class DetectBurger : MonoBehaviour
     {
         yield return new WaitForSeconds(3);
         Destroy(colliderobject);
-        titleText.gameObject.SetActive(true);
+        canvas.gameObject.SetActive(true);
     }
 }
