@@ -60,9 +60,10 @@ export default function CreateNewTrainingPage() {
     }
   });
 
-  const handleLaunchXR = () => {
+  const handleLaunchXR = (param) => {
+  //handleLaunchXR(value) {
     //history.push('/xrt-training://?token=${authState.token}')
-    window.open('xrt-training://')
+    window.open('xrt-training://?moduleId=${course._id}')
   }
 
   const buildCourse = (course) => {
@@ -74,11 +75,11 @@ export default function CreateNewTrainingPage() {
               <Typography className={classes.title} color="textSecondary" gutterBottom>
                 [{course._id}] {course.name} - {course.description}
               </Typography>
-
+            
             </CardContent>
             <CardActions>
               <Button size="small">View Training</Button>
-              <Button size="small" onClick={handleLaunchXR}>Launch XR</Button>
+              <Button size="small" onClick={() => handleLaunchXR(course._id)}>Launch XR</Button>
             </CardActions>
           </Card>
         </Paper>
