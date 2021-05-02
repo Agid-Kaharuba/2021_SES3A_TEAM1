@@ -82,7 +82,7 @@ function AppRouter(props) {
         exact={true}
         component={Statistics}>
       </Route>
-      
+    
       <Route path="/createtask"
         exact={true}
         component={CreateNewTask}>
