@@ -7,8 +7,8 @@ public class BackendErrorResponse
     [JsonProperty("msg")]
     public string Message { get; private set; }
 
-    [JsonProperty("err")]
-    public string Error { get; private set; }
+    //[JsonProperty("err")]
+    //public string Error { get; private set; }
 
     [JsonProperty("data")]
     public string Data { get; private set; }

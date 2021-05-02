@@ -25,7 +25,7 @@ public class ApiHandler : MonoBehaviour
         {
             if (response is BackendErrorResponse errorReponse)
             {
-
+                Debug.LogError($"Could not get training module got {errorReponse.Message}");
             }
             else if (response is TrainingModule module)
             {
