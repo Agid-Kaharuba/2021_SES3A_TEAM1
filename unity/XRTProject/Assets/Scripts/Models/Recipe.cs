@@ -7,31 +7,33 @@ using Valve.Newtonsoft.Json;
 [JsonObject(MemberSerialization.OptIn)]
 public class Recipe
 {
-    [JsonProperty("name")]
-    private string name;
     [JsonProperty("ingredients")]
     private List<PropData> ingredients = new List<PropData>();
 
     public IReadOnlyList<PropData> Ingredients => ingredients.AsReadOnly();
     
-    public string Name => name;
+    [JsonProperty("_id")]
+    public string Id { get; private set; }
+    
+    [JsonProperty("name")]
+    public string Name { get; private set; }
 
     [JsonConstructor]
     public Recipe(string name, IEnumerable<PropData> ingredients)
     {
-        this.name = name;
+        Name = name;
         this.ingredients = ingredients.ToList();
     }
     
     public Recipe(string name, params PropData[] ingredients)
     {
-        this.name = name;
+        Name = name;
         this.ingredients = ingredients.ToList();
     }
 
     public Recipe(string name, params string[] propIds)
     {
-        this.name = name;
+        Name = name;
         
         foreach (string propId in propIds)
         {
@@ -50,7 +52,7 @@ public class Recipe
 
     public bool IsSameRecipe(Recipe other)
     {
-        return this.name == other.name && HasSameIngredients(other);
+        return this.Name == other.Name && HasSameIngredients(other);
     }
 
     public bool HasSameIngredients(Recipe other)
