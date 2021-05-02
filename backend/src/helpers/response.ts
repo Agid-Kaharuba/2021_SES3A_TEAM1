@@ -26,7 +26,7 @@ export default {
 				res.status(400) .send({ msg: "Duplicate key", err: err, data });
 				break;
 			default:
-				res.status(500) .send({ err: err, data });
+				res.status(500) .send({ msg: "MongoDB Error", err: err, data });
 				break;
 		}
 	},
