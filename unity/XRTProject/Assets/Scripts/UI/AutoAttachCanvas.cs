@@ -75,6 +75,6 @@ public class AutoAttachCanvas : MonoBehaviour
 
     private void OnDestroy()
     {
-        Destroy(canvas);
+        Destroy(canvas.gameObject);
     }
 }
