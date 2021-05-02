@@ -7,6 +7,7 @@ using Valve.Newtonsoft.Json;
 public class TrainingManager : MonoBehaviour
 {
     [SerializeField] public UnityEvent OnCurrentTaskChanged;
+    [SerializeField] public UnityEvent OnTrainingModuleChanged;
     
     private TrainingModule trainingModule;
     
@@ -19,8 +20,21 @@ public class TrainingManager : MonoBehaviour
     public int CurrentTaskIndex => HasCurrentTask ? trainingModule.Tasks.BinarySearch(CurrentTask) : -1;
 
     public IList<Task> Tasks => trainingModule.Tasks;
-    
-    public TrainingModule TrainingModule => trainingModule;
+
+    public TrainingModule TrainingModule
+    {
+        get
+        {
+            return trainingModule;
+        }
+        private set
+        {
+            trainingModule = value;
+            OnTrainingModuleChanged?.Invoke();
+        }
+    }
+
+    public bool IsTrainingModuleReady => TrainingModule != null;
 
     public ApiService apiService;
 
@@ -64,8 +78,8 @@ public class TrainingManager : MonoBehaviour
             }
             else if (response is TrainingModule module)
             {
-                trainingModule = module;
-                CurrentTask = module.Tasks[0];
+                TrainingModule = module;
+                SwitchTask(0);
             }
         }));
     }
