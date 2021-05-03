@@ -64,12 +64,16 @@ export const RecipeRoute = (app: Express, controller: RecipeController) => {
      *       properties:
      *        name:
      *         type: string
-     *         example: First Course
-     *        steps:
-     *         type: object
+     *         example: Whooper
+     *        ingredients:
+     *         type: array
+     *         items:
+     *          type: string
+     *          example: "top_bun"
+     *         example: ["top_bun", "cheese", "patty", "bottom_bun"]
      *        category:
      *         type: string
-     *         example: Milk Tea
+     *         example: Cheeseburger
      *   responses:
      *    200:
      *     description: Success
@@ -96,12 +100,16 @@ export const RecipeRoute = (app: Express, controller: RecipeController) => {
      *       properties:
      *        name:
      *         type: string
-     *         example: First Course
-     *        steps:
-     *         type: object
+     *         example: Whooper
+     *        ingredients:
+     *         type: array
+     *         items:
+     *          type: string
+     *          example: "top_bun"
+     *         example: ["top_bun", "cheese", "patty", "bottom_bun"]
      *        category:
      *         type: string
-     *         example: Milk Tea
+     *         example: Cheeseburger
      *   responses:
      *    200:
      *     description: Success

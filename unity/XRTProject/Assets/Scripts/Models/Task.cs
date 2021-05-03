@@ -3,6 +3,9 @@ using Valve.Newtonsoft.Json;
 [JsonObject(MemberSerialization.OptIn)]
 public class Task
 {
+    [JsonProperty("_id")]
+    public string Id { get; private set; }
+
     [JsonProperty("name")]
     public string Name { get; private set; }
     
