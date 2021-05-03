@@ -11,7 +11,9 @@ public class TestingEnv : MonoBehaviour
     
     private void Start()
     {
-        string testText = string.Join(" | " , Environment.GetCommandLineArgs());
-        testingText.text = testText;
+        // string testText = string.Join(" | " , Environment.GetCommandLineArgs());
+        // testingText.text = testText;
+
+        testingText.text = "token : " + LaunchArgsService.GetToken() + "   courseId : " + LaunchArgsService.GetModuleId();
     }
 }
