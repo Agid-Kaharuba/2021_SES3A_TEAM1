@@ -31,6 +31,12 @@ public class UITaskSelector : MonoBehaviour
     private void OnEnable()
     {
         UpdateTaskList();
+        TrainingManager.Instance.OnCurrentTaskChanged.AddListener(UpdateTaskList);
+    }
+
+    private void OnDisable()
+    {
+        TrainingManager.Instance.OnCurrentTaskChanged.RemoveListener(UpdateTaskList);
     }
 
     private void UpdateTaskList()
@@ -44,6 +50,7 @@ public class UITaskSelector : MonoBehaviour
             item.canDrag = isReorderable;
             item.Text.text = task.Name;
             item.Text.fontSize = sampleItem.Text.fontSize;
+            item.SetHighlighted(TrainingManager.Instance.CurrentTask == task);
             rectTransform.sizeDelta = itemSizeDelta;
             item.GetComponent<UIBoxColliderAutoScaler>()?.AutoScale();
 

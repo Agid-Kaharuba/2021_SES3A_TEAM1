@@ -290,6 +290,8 @@ MonoBehaviour:
   text: {fileID: 7768965350315626736}
   hoverTextColor: {r: 1, g: 0.92866635, b: 0.25, a: 1}
   swapToTextColor: {r: 1, g: 0.86666673, b: 0, a: 1}
+  iconImage: {fileID: 7768965352212026709}
+  highlightedIconColor: {r: 0, g: 0.5943396, b: 0, a: 1}
   canDrag: 1
   OnClick:
     m_PersistentCalls:
