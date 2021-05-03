@@ -264,7 +264,7 @@ export default function AboutUsPage() {
               alignItems='center'
               justify='center'>
                 <Avatar src={Lakshva} className={profiles.large}/>
-                <WhiteTextTypography style={{fontWeight: '600', fontSize: '1.2rem'}}>Lakshva Sharma</WhiteTextTypography>
+                <WhiteTextTypography style={{fontWeight: '600', fontSize: '1.2rem'}}>Lakshya Sharma</WhiteTextTypography>
                 <WhiteTextTypography>Back-End Developer</WhiteTextTypography>
               </Grid>
             </Grid>

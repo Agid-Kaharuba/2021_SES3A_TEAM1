@@ -11,6 +11,7 @@ import SignOut from "./components/signout";
 // IMPORT PAGES
 import HomePage from "./pages/home/home.js";
 import Dashboard from "./pages/dashboard/dashboard.js";
+import CreateTask from "./pages/createtask/createtask.js";
 import CreateNewCourse from './pages/supervisor/CreateCourse';
 import EmployeeProfile from "./pages/profile/employeeProfile";
 import LogIn from "./pages/login/login.js";
@@ -66,6 +67,11 @@ function AppRouter(props) {
       <Route path="/aboutus"
         exact={true}
         component={AboutUs}>
+      </Route>
+
+      <Route path="/createtask"
+        exact={true}
+        component={CreateTask}>
       </Route>
 
       <Route path="/"
