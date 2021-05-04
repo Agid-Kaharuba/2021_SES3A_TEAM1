@@ -47,7 +47,13 @@ export default class ProgressController {
                     { $or: [{ undefined: { $eq: req.query.courseId } }, { courseId: req.query.courseId }] }
                 ]
             });
-            ResponseService.successResponse(res, search);
+            if (search.length > 0) {
+                ResponseService.successResponse(res, search);
+            }
+            else {
+                ResponseService.notFoundResponse(res, "Query Not found");
+            }
+
         }
         catch (err) {
             ResponseService.mongoErrorResponse(res, err);
