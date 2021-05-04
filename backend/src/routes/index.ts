@@ -11,7 +11,8 @@ import { AuthRoute } from "./auth-router";
 import AuthController from "../controllers/auth";
 import { ImageRoute } from "./image-router";
 import ImageController from "../controllers/image";
-
+import { ProgressRoute } from "./progress-router";
+import ProgressController from "../controllers/progress";
 
 export const Routes = (init: ApiInitializer) => {
     CourseRoute(init.getApp(), new CourseController());
@@ -20,4 +21,5 @@ export const Routes = (init: ApiInitializer) => {
     UserRoute(init.getApp(), new UserController());
     AuthRoute(init.getApp(), new AuthController());
     ImageRoute(init.getApp(), new ImageController());
+    ProgressRoute(init.getApp(), new ProgressController());
 }
