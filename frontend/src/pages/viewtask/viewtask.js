@@ -22,7 +22,7 @@ const useStyles = makeStyles({
   })
 
 
-export default function CreateTask() {
+export default function ViewTask() {
     const classes = useStyles();
 return(
 <Box m={5}>
@@ -30,7 +30,7 @@ return(
          <Grid container spacing={2} direction="column" justify="space-between">
             <Grid item>
                 <Typography className={classes.bold} variant='h4'>
-                Create A New Task
+                TASK NAME
                 </Typography>
                 <underline/>
             </Grid>
@@ -65,14 +65,10 @@ return(
                     margin="normal">
             <Box m={1}>
                 <Button variant="contained" color="primary" size="large">
-                    Cancel
+                    Edit
                 </Button>
             </Box>
-            <Box m={1}> 
-                <Button variant="contained" color="primary" size="large">
-                    Save
-                </Button>
-            </Box>
+
             </Grid>
 
         </Grid>
