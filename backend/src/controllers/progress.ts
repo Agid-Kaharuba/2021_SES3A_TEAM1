@@ -36,19 +36,22 @@ export default class ProgressController {
                     ResponseService.successResponse(res, newProgressRequest);
                 }
             })
-            // ResponseService.mongoNotFoundResponse(res, err);
         }
     }
 
-    //query
-    // ?;6
-    // SELECT * FROM TABLE ((body.userId IS NULL OR body.userId = userId) AND (body.taskId IS NULL OR body.taskId = taskId))
-
-
-    //   .find({
-    //     $and: [
-    //         {$or: [{undefined: {$eq: req.query.userId}}, {'city':req.query.userId}]},
-    //         {$or: [{undefined: {$eq: qP.name}}, {'name': qP.name}]}
-    //     ]
-    // });
+    public async searchProgress(req: Request, res: Response) {
+        try {
+            const search = await Progress.find({
+                $and: [
+                    { $or: [{ undefined: { $eq: req.query.userId } }, { userId: req.query.userId }] },
+                    { $or: [{ undefined: { $eq: req.query.taskId } }, { taskId: req.query.taskId }] },
+                    { $or: [{ undefined: { $eq: req.query.courseId } }, { courseId: req.query.courseId }] }
+                ]
+            });
+            ResponseService.successResponse(res, search);
+        }
+        catch (err) {
+            ResponseService.mongoErrorResponse(res, err);
+        }
+    }
 }
