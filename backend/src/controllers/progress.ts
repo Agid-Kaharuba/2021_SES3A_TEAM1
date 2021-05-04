@@ -13,7 +13,6 @@ export default class ProgressController {
                 taskId: req.body.taskId,
                 courseId: req.body.courseId
             })
-            //Similar to other update
             const response = await Progress.updateOne({ _id: progress._id }, req.body);
             ResponseService.successResponse(res, response);
         }
