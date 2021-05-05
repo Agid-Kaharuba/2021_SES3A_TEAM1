@@ -19,6 +19,7 @@ import Calvin from '../../images/profile-photos/calvin-dong.jpg';
 import Brendon from '../../images/profile-photos/brendon-tong.png';
 import Lakshva from '../../images/profile-photos/lakshva-sharma.jpg';
 import MitchGif from '../../images/mitchellvr.gif';
+import VanishaGif from '../../images/vanishavr.gif';
 
 // import { Link } from "react-router-dom";
 // import { AuthContext } from "../../context/auth";
@@ -114,13 +115,30 @@ export default function AboutUsPage() {
           </Box>
           </Container>
           <Container>
-            <Grid container alignItems="center" justify="center" direction='column'>\
-              <Box>
-                <img src={MitchGif}></img>
-              </Box>
-              <Box color='white' fontStyle="italic">
-              <text>- "Mitchell trying VR"</text>
-              </Box>
+            <Grid container alignItems="center" justify="center" direction='column'>
+              <WhiteTextTypography>
+                VR Training
+              </WhiteTextTypography>
+              <Grid container alignItems="center" justify="space-around" direction='row'>
+                <Box>
+                  <img src={MitchGif}></img>
+                  <Box color='white' fontStyle="italic">
+                  <text>- "Mitchell trying VR"</text>
+                  </Box>
+                </Box>
+                <Box>
+                  <img src={VanishaGif}></img>
+                  <Box color='white' fontStyle="italic">
+                  <text>- "Vanisha trying VR"</text>
+                  </Box>
+                </Box>
+                <Box>
+                  <img src={VanishaGif}></img>
+                  <Box color='white' fontStyle="italic">
+                  <text>- "Vanisha trying VR"</text>
+                  </Box>
+                </Box>
+              </Grid>
   
             </Grid>
           </Container>
