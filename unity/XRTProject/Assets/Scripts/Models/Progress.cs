@@ -22,6 +22,9 @@ public class Progress
     [JsonProperty("score")]
     public int Score { get; private set; }
 
+    [JsonProperty("data")]
+    public object Data { get; set; }
+
 
     public Progress(string course, string task, string user, bool completed, int score)
     {
