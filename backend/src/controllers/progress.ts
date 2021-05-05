@@ -5,7 +5,14 @@ import { MongoError } from "mongodb";
 
 export default class ProgressController {
     public async put(req: Request, res: Response) {
-        console.log(req.body)
+        const body = {
+            data: req.body.data,
+            userId: req.body.userId,
+            taskId: req.body.taskId,
+            courseId: req.body.courseId,
+            completed: req.body.completed,
+            score: req.body.score
+        }
         try {
 
             const progress = await Progress.findOne({
@@ -14,22 +21,13 @@ export default class ProgressController {
                 courseId: req.body.courseId
             })
             if (progress){
-                const response = await Progress.updateOne({ _id: progress._id }, req.body);
+                const response = await Progress.updateOne({ _id: progress._id }, body);
                 ResponseService.successResponse(res, response);
             }
             else {
-                const body = req.body;
-                const newProgressRequest = new Progress({
-                    data: body.data,
-                    userId: body.userId,
-                    taskId: body.taskId,
-                    courseId: body.courseId,
-                    completed: body.completed,
-                    score: body.score
-                } as any);
+                const newProgressRequest = new Progress(body as any);
                 newProgressRequest.save((err: MongoError) => {
                     if (err) {
-                        console.log(err);
                         ResponseService.mongoErrorResponse(res, err);
                     }
                     else {
@@ -40,7 +38,6 @@ export default class ProgressController {
             }
         }
         catch (err) {
-            console.log(err);
             ResponseService.mongoErrorResponse(res, err);
         }
     }
