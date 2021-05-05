@@ -6,7 +6,7 @@ export const ProgressRoute = (app: Express, controller: ProgressController) => {
     /**
      * @swagger
      * /progress:
-     *  put:
+     *  post:
      *   description: Create or Updates a progress
      *   tags: [Progress]
      *   requestBody:
@@ -39,7 +39,7 @@ export const ProgressRoute = (app: Express, controller: ProgressController) => {
      *    200:
      *     description: Success
      */
-    app.put("/progress", controller.put);
+    app.post("/progress", controller.put);
 
     /**
      * @swagger
