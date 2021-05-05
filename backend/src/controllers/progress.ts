@@ -2,10 +2,10 @@ import { Request, Response } from "express";
 import Progress from "../model/progress";
 import ResponseService from "../helpers/response"
 import { MongoError } from "mongodb";
-import progress from "../model/progress";
 
 export default class ProgressController {
     public async put(req: Request, res: Response) {
+        console.log(req.body)
         try {
 
             const progress = await Progress.findOne({
@@ -13,28 +13,35 @@ export default class ProgressController {
                 taskId: req.body.taskId,
                 courseId: req.body.courseId
             })
-            const response = await Progress.updateOne({ _id: progress._id }, req.body);
-            ResponseService.successResponse(res, response);
+            if (progress){
+                const response = await Progress.updateOne({ _id: progress._id }, req.body);
+                ResponseService.successResponse(res, response);
+            }
+            else {
+                const body = req.body;
+                const newProgressRequest = new Progress({
+                    data: body.data,
+                    userId: body.userId,
+                    taskId: body.taskId,
+                    courseId: body.courseId,
+                    completed: body.completed,
+                    score: body.score
+                } as any);
+                newProgressRequest.save((err: MongoError) => {
+                    if (err) {
+                        console.log(err);
+                        ResponseService.mongoErrorResponse(res, err);
+                    }
+                    else {
+                        ResponseService.successResponse(res, newProgressRequest);
+                    }
+                })
+
+            }
         }
         catch (err) {
             console.log(err);
-            const body = req.body;
-            const newProgressRequest = new Progress({
-                data: body.data,
-                userId: body.userId,
-                taskId: body.taskId,
-                courseId: body.courseId,
-                completed: body.completed,
-                score: body.score
-            } as any);
-            newProgressRequest.save((err: MongoError) => {
-                if (err) {
-                    ResponseService.mongoErrorResponse(res, err);
-                }
-                else {
-                    ResponseService.successResponse(res, newProgressRequest);
-                }
-            })
+            ResponseService.mongoErrorResponse(res, err);
         }
     }
 
