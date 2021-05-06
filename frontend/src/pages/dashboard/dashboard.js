@@ -8,6 +8,8 @@ import { Link, Redirect } from "react-router-dom";
 import { AuthContext } from "../../context/auth";
 import api from "../../helpers/api";
 
+import isAuthenticated from "../../helpers/auth/isAuthenticated"
+
 
 const useStyles = makeStyles({
   bold: {
@@ -58,12 +60,9 @@ export default function CreateNewTrainingPage() {
     }
   });
 
-  const handleLaunchXR = (param) => {
-  //handleLaunchXR(value) {
-    //history.push('/xrt-training://?token=${authState.token}')
-    //'xrt-training://?moduleId=${param}'
-    var token = authState.getAccessToken
-    window.open('xrt-training://courseID=' + param)
+  const handleLaunchXR = (courseID) => {
+    const token = authState.token
+    window.open('xrt-training://courseID=' + courseID + '&token=' + token)
   }
 
   const buildCourse = (course) => {
