@@ -16,6 +16,8 @@ import Dashboard from "./pages/dashboard/dashboard.js";
 import CreateNewCourse from './pages/supervisor/CreateCourse';
 import EmployeeProfile from "./pages/profile/employeeProfile";
 import LogIn from "./pages/login/login.js";
+import AboutUs from "./pages/aboutus/aboutus.js";
+import ViewTask from "./pages/viewtask/viewtask.js";
 import SignUp from "./pages/signup/signup.js";
 import taskList from "./pages/taskslist/taskslist.js";
 import Statistics from "./pages/statistics/Statistics.js";
@@ -45,7 +47,7 @@ function AppRouter(props) {
         exact={true}
         component={Dashboard} />
 
-      <PrivateRoute path="/dashboard/create"
+      <PrivateRoute path="/dashboard/create-course"
         exact={true}
         component={CreateNewCourse} />
 
@@ -56,6 +58,11 @@ function AppRouter(props) {
       <Route path="/dashboard/taskList" 
         exact={true}
         component={taskList}>
+      </Route>
+
+      <Route path="/statistics" 
+        exact={true}
+        component={Statistics}>
       </Route>
 
       <Route path="/login"
@@ -76,6 +83,16 @@ function AppRouter(props) {
       <Route path="/taskslist"
         exact={true}
         component={TasksList}>
+      </Route>
+
+      <Route path="/taskslist/viewtask"
+        exact={true}
+        component={ViewTask}>
+      </Route>
+
+      <Route path="/aboutus"
+        exact={true}
+        component={AboutUs}>
       </Route>
 
       <Route path="/statistics"

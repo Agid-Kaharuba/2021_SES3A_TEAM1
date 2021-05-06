@@ -31,10 +31,18 @@ public class UITaskSelector : MonoBehaviour
     private void OnEnable()
     {
         UpdateTaskList();
+        TrainingManager.Instance.OnTrainingModuleChanged.AddListener(UpdateTaskList);
+    }
+
+    private void OnDisable()
+    {
+        TrainingManager.Instance.OnTrainingModuleChanged.RemoveListener(UpdateTaskList);
     }
 
     private void UpdateTaskList()
     {
+        if (!TrainingManager.Instance.IsTrainingModuleReady) return;
+        
         ClearTaskList();
 
         foreach (Task task in TrainingManager.Instance.Tasks)

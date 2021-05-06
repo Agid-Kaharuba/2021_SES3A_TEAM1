@@ -4,6 +4,9 @@ using Valve.Newtonsoft.Json;
 [JsonObject(MemberSerialization.OptIn)]
 public class TrainingModule
 {
+    [JsonProperty("_id")]
+    public string Id { get; private set; }
+    
     [JsonProperty("tasks")]
     public List<Task> Tasks { get; } = new List<Task>();
     
