@@ -62,6 +62,7 @@ export default function CreateNewTrainingPage() {
   //handleLaunchXR(value) {
     //history.push('/xrt-training://?token=${authState.token}')
     //'xrt-training://?moduleId=${param}'
+    var token = authState.getAccessToken
     window.open('xrt-training://courseID=' + param)
   }
 
