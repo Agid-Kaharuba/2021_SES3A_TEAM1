@@ -8,8 +8,6 @@ import { Link, Redirect } from "react-router-dom";
 import { AuthContext } from "../../context/auth";
 import api from "../../helpers/api";
 
-import isAuthenticated from "../../helpers/auth/isAuthenticated"
-
 
 const useStyles = makeStyles({
   bold: {
@@ -60,6 +58,7 @@ export default function CreateNewTrainingPage() {
     }
   });
 
+  //Passes courseID and authState token to launch XR training module
   const handleLaunchXR = (courseID) => {
     const token = authState.token
     window.open('xrt-training://courseID=' + courseID + '&token=' + token)
