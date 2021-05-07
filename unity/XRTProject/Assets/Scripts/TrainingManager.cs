@@ -83,4 +83,9 @@ public class TrainingManager : MonoBehaviour
     {
         SwitchTask(CurrentTaskIndex - 1);
     }
+
+    public void SubmitTask()
+    {
+        
+    }
 }

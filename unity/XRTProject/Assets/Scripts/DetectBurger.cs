@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using System.Text;
 using TMPro;
+using Valve.Newtonsoft.Json;
 public class DetectBurger : MonoBehaviour
 {
     [SerializeField] private Canvas canvas;
@@ -32,7 +33,11 @@ public class DetectBurger : MonoBehaviour
     private IEnumerator FinalText(GameObject colliderobject)
     {
         yield return new WaitForSeconds(3);
-        Destroy(colliderobject);
+        //send the burger recipe to training manager
+        Recipe buger = colliderobject.GetComponent<BurgerBoard>().GetCurrentBurger();
+        Debug.Log(buger.Ingredients.Count);
+        Debug.Log(JsonConvert.SerializeObject(buger.Ingredients));
+        //Destroy(colliderobject);
         canvas.gameObject.SetActive(true);
     }
 }
