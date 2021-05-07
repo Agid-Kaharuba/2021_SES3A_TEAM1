@@ -12,7 +12,7 @@ public class PropConverter : JsonConverter
 
     public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
     {
-        string propId = reader.ReadAsString();
+        string propId = (string )reader.Value;
         PropData propData = PropManager.Instance.GetProp(propId);
 
         if (propData == null)

@@ -2,7 +2,6 @@ import React, { useEffect, useState, useContext } from "react";
 
 // IMPORT COMPONENTS
 import { Box, Button, Typography, Divider, TextField, Card, CardContent, CardActions, Paper, Grid } from "@material-ui/core";
-import AddIcon from '@material-ui/icons/Add';
 import { makeStyles } from "@material-ui/core/styles";
 
 import { Link, Redirect } from "react-router-dom";
@@ -44,7 +43,6 @@ const cardStyles = makeStyles({
 
 export default function CreateNewTrainingPage() {
   const classes = useStyles();
-  const cardStyle = cardStyles();
   const { authState } = useContext(AuthContext);
   const [coursesState, setCoursesState] = useState(undefined);
   // const [coursesState, setCoursesState] = useState([{"name":"test","description":"asdsdf"},{"name":"test","description":"asdsdf"}]);
@@ -60,6 +58,12 @@ export default function CreateNewTrainingPage() {
     }
   });
 
+  //Passes courseID and authState token to launch XR training module
+  const handleLaunchXR = (courseID) => {
+    const token = authState.token
+    window.open('xrt-training://courseID=' + courseID + '&token=' + token)
+  }
+
   const buildCourse = (course) => {
     return (
       <Box mx={5} my={2}>
@@ -67,12 +71,13 @@ export default function CreateNewTrainingPage() {
           <Card className={classes.root} variant="outlined">
             <CardContent>
               <Typography className={classes.title} color="textSecondary" gutterBottom>
-                {course.name} - {course.description}
+                [{course._id}] {course.name} - {course.description}
               </Typography>
-
+            
             </CardContent>
             <CardActions>
               <Button size="small">View Training</Button>
+              <Button size="small" onClick={() => handleLaunchXR(course._id)}>Launch XR</Button>
             </CardActions>
           </Card>
         </Paper>
@@ -95,7 +100,7 @@ export default function CreateNewTrainingPage() {
             </Typography>
           </Grid>
           <Grid item>
-            <Button component={Link} color="primary" variant="contained" to={"/dashboard/create"}>
+            <Button component={Link} color="primary" variant="contained" to={"/dashboard/create-course"}>
               Create Course
             </Button>
           </Grid>

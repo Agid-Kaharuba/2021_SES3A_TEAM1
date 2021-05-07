@@ -5,6 +5,9 @@ import { Link, useHistory } from "react-router-dom";
 import { Box, Button, Typography, Divider, TextField, Grid} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
+import { AuthContext } from "../../context/auth";
+import api from "../../helpers/api";
+
 const useStyles = makeStyles({
   bold: {
     fontWeight: 600
@@ -20,30 +23,29 @@ const useStyles = makeStyles({
   },
 })
 
-
-
 export default function CreateNewTaskPage() {
   const classes = useStyles();
-  // const [formState, setFormState] = useState({name: "", description: ""});
-  // const { authState, setAuthState } = React.useContext(AuthContext);
-  // let history = useHistory();
 
-  // const handleChange = async (event) => {
-  //   const target = event.target;
-  //   const value = target.value;
-  //   const name = target.name;
+  const [formState, setFormState] = useState({name: "", description: "", recipe: ""});
+  const { authState, setAuthState } = React.useContext(AuthContext);
+  let history = useHistory();
 
-  //   setFormState({
-  //     ...formState, [name]: value,
-  //   });
-  // }
+  const handleChange = async (event) => {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
 
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault();
-  //   console.log(formState);
-  //   api.course.create(authState.token, formState);
-  //   history.push('/createnewtask');
-  // }
+    setFormState({
+      ...formState, [name]: value,
+    });
+  }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    console.log(formState);
+    api.task.createTask(authState.token, formState);
+    history.push('/dashboard/create-course');
+  }
 
   return (
     <div>
@@ -78,7 +80,7 @@ export default function CreateNewTaskPage() {
             fullWidth='true'
             variant="filled"
             name="name"
-            // onChange={handleChange}
+            onChange={handleChange}
           />
         </Box>
         <Box my={2}>
@@ -90,19 +92,19 @@ export default function CreateNewTaskPage() {
             fullWidth='true'
             variant="filled"
             name="description"
-            // onChange={handleChange}
+            onChange={handleChange}
           />
         </Box>
         <Box my={2}>
           <TextField
             id="filled-multiline-static"
-            label="Enter the Task's Duration"
+            label="Enter the Task's Recipe"
             multiline
             rows={4}
             fullWidth='true'
             variant="filled"
-            name="description"
-            // onChange={handleChange}
+            name="recipe"
+            onChange={handleChange}
           />
         </Box>
       </Box>
@@ -110,14 +112,12 @@ export default function CreateNewTaskPage() {
 
       <Box justifyContent='center' display="flex" m={6}>
         <Box mr={6}>
-          <Button variant="contained" color="secondary" component={Link} to="/dashboard/create">
+          <Button variant="contained" color="secondary" component={Link} to="/dashboard/create-course">
             Back
           </Button>
         </Box>
         <Box>
-          <Button variant="contained" color="primary" component={Link} to="/dashboard/create"
-          // onClick={handleSubmit} 
-          >
+          <Button variant="contained" color="primary"onClick={handleSubmit}>
             Save
           </Button>
         </Box>
