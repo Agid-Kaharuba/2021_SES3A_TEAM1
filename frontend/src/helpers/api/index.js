@@ -1,5 +1,3 @@
-import {getAllTasks} from "./task";
-
 import {
   verify,
   registerUser,
@@ -17,6 +15,10 @@ import {
   getAllCourses,
   createCourse
 } from "./course";
+import {
+  getAllTasks,
+  createTask
+} from "./task";
 
 export const API_HOST = "http://localhost:4000";
 
@@ -39,6 +41,7 @@ export default {
     create: createCourse
   },
   task: {
-    getAll: getAllTasks,
+    getAllTasks: getAllTasks,
+    createTask: createTask
   }
 }

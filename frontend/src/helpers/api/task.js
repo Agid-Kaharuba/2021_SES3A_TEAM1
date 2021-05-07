@@ -9,3 +9,13 @@ export const getAllTasks = async (token) => {
 	);
 	return res;
 }
+
+export const createTask = async (token, data) => {
+	const res = await axios.post(`${API_HOST}/task`,
+		data,
+		{
+			headers: { Authorization: `Bearer ${token}` },
+		}
+	);
+	return res;
+}

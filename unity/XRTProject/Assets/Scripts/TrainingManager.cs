@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Valve.Newtonsoft.Json;
 
 public class TrainingManager : MonoBehaviour
 {
     [SerializeField] public UnityEvent OnCurrentTaskChanged;
+    [SerializeField] public UnityEvent OnTrainingModuleChanged;
     
     private TrainingModule trainingModule;
     
@@ -18,8 +20,23 @@ public class TrainingManager : MonoBehaviour
     public int CurrentTaskIndex => HasCurrentTask ? trainingModule.Tasks.BinarySearch(CurrentTask) : -1;
 
     public IList<Task> Tasks => trainingModule.Tasks;
-    
-    public TrainingModule TrainingModule => trainingModule;
+
+    public TrainingModule TrainingModule
+    {
+        get
+        {
+            return trainingModule;
+        }
+        private set
+        {
+            trainingModule = value;
+            OnTrainingModuleChanged?.Invoke();
+        }
+    }
+
+    public bool IsTrainingModuleReady => TrainingModule != null;
+
+    public ApiService apiService;
 
     private void Awake()
     {
@@ -28,23 +45,46 @@ public class TrainingManager : MonoBehaviour
             Destroy(this);
             return;
         }
-        
+
+        apiService = new ApiService("");
+
         // TODO remove Sample tasks and query backend
-        trainingModule = new TrainingModule("Make a Simple burger");
         
-        Task whooperTask = new Task("Learn to make a Whooper", TaskType.Recipe);
-        whooperTask.Recipe = new Recipe("Whooper", "top_bun", "lettuce", "cheese", "patty", "bottom_bun");
-        trainingModule.Tasks.Add(whooperTask);
+
+        //trainingModule = new TrainingModule("Make a Simple burger");
         
-        Task cheeseBurgerTask = new Task("Learn to make a Cheeseburger", TaskType.Recipe);
-        cheeseBurgerTask.Recipe = new Recipe("Cheeseburger", "top_bun", "cheese", "patty", "bottom_bun");
-        trainingModule.Tasks.Add(cheeseBurgerTask);
+        //Task whooperTask = new Task("Learn to make a Whooper", TaskType.Recipe);
+        //whooperTask.Recipe = new Recipe("Whooper", "top_bun", "lettuce", "cheese", "patty", "bottom_bun");
+        //trainingModule.Tasks.Add(whooperTask);
         
-        trainingModule.Tasks.Add(new Task("Remembering to make a Whooper", TaskType.Testing));
-        trainingModule.Tasks.Add(new Task("Serve 5 customers", TaskType.Performance));
-        CurrentTask = whooperTask;
+        //Task cheeseBurgerTask = new Task("Learn to make a Cheeseburger", TaskType.Recipe);
+        //cheeseBurgerTask.Recipe = new Recipe("Cheeseburger", "top_bun", "cheese", "patty", "bottom_bun");
+        //trainingModule.Tasks.Add(cheeseBurgerTask);
+        
+        //trainingModule.Tasks.Add(new Task("Remembering to make a Whooper", TaskType.Testing));
+        //trainingModule.Tasks.Add(new Task("Serve 5 customers", TaskType.Performance));
+        //CurrentTask = whooperTask;
 
         Instance = this;
+    }
+
+    private void Start()
+    {
+        // TODO fetch this from the command line when launching from web to unity
+        string trainingModuleId = "608eae5ab7dd3233a46916f7";
+        
+        StartCoroutine(apiService.GetTrainingModule(trainingModuleId, (response) =>
+        {
+            if (response is BackendErrorResponse errorReponse)
+            {
+                Debug.LogError($"Could not get training module got {errorReponse.Message}");
+            }
+            else if (response is TrainingModule module)
+            {
+                TrainingModule = module;
+                SwitchTask(0);
+            }
+        }));
     }
 
     public void ReorderTask(int fromIndex, int toIndex)
