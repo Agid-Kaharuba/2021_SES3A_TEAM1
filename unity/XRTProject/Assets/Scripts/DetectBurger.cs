@@ -37,7 +37,7 @@ public class DetectBurger : MonoBehaviour
         Recipe buger = colliderobject.GetComponent<BurgerBoard>().GetCurrentBurger();
         Debug.Log(buger.Ingredients.Count);
         Debug.Log(JsonConvert.SerializeObject(buger.Ingredients));
-        //Destroy(colliderobject);
+        Destroy(colliderobject);
         canvas.gameObject.SetActive(true);
     }
 }

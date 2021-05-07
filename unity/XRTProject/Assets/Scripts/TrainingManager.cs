@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Valve.Newtonsoft.Json;
+using System.Linq;
 
 public class TrainingManager : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class TrainingManager : MonoBehaviour
 
     public bool HasCurrentTask => CurrentTask != null;
     
-    public int CurrentTaskIndex => HasCurrentTask ? trainingModule.Tasks.BinarySearch(CurrentTask) : -1;
+    public int CurrentTaskIndex => HasCurrentTask ? trainingModule.Tasks.FindIndex(t => t == CurrentTask) : -1;
 
     public IList<Task> Tasks => trainingModule.Tasks;
 
@@ -46,24 +47,24 @@ public class TrainingManager : MonoBehaviour
             return;
         }
 
-        apiService = new ApiService("");
+        // apiService = new ApiService("");
 
         // TODO remove Sample tasks and query backend
-        
 
-        //trainingModule = new TrainingModule("Make a Simple burger");
-        
-        //Task whooperTask = new Task("Learn to make a Whooper", TaskType.Recipe);
-        //whooperTask.Recipe = new Recipe("Whooper", "top_bun", "lettuce", "cheese", "patty", "bottom_bun");
-        //trainingModule.Tasks.Add(whooperTask);
-        
-        //Task cheeseBurgerTask = new Task("Learn to make a Cheeseburger", TaskType.Recipe);
-        //cheeseBurgerTask.Recipe = new Recipe("Cheeseburger", "top_bun", "cheese", "patty", "bottom_bun");
-        //trainingModule.Tasks.Add(cheeseBurgerTask);
-        
-        //trainingModule.Tasks.Add(new Task("Remembering to make a Whooper", TaskType.Testing));
-        //trainingModule.Tasks.Add(new Task("Serve 5 customers", TaskType.Performance));
-        //CurrentTask = whooperTask;
+
+        trainingModule = new TrainingModule("Make a Simple burger");
+
+        Task whooperTask = new Task("Learn to make a Whooper", TaskType.Recipe);
+        whooperTask.Recipe = new Recipe("Whooper", "top_bun", "lettuce", "cheese", "patty", "bottom_bun");
+        trainingModule.Tasks.Add(whooperTask);
+
+        Task cheeseBurgerTask = new Task("Learn to make a Cheeseburger", TaskType.Recipe);
+        cheeseBurgerTask.Recipe = new Recipe("Cheeseburger", "top_bun", "cheese", "patty", "bottom_bun");
+        trainingModule.Tasks.Add(cheeseBurgerTask);
+
+        trainingModule.Tasks.Add(new Task("Remembering to make a Whooper", TaskType.Testing));
+        trainingModule.Tasks.Add(new Task("Serve 5 customers", TaskType.Performance));
+        CurrentTask = whooperTask;
 
         Instance = this;
     }
