@@ -19,15 +19,17 @@ public class ApiHandler : MonoBehaviour
 
     public void OnClick()
     {
+        Progress p = new Progress("asdfasdf", "tester", "sadfdsf", false, 22);
+        User user = new User("My", "Guy");
+        p.Data = user;
 
-
-        StartCoroutine(apiService.GetTrainingModule("608eae5ab7dd3233a46916f7", (response) =>
+        StartCoroutine(apiService.SubmitTaskProgress(p, (response) =>
         {
             if (response is BackendErrorResponse errorReponse)
             {
                 Debug.LogError($"Could not get training module got {errorReponse.Message}");
             }
-            else if (response is TrainingModule module)
+            else if (response is Progress progress)
             {
 
             }
