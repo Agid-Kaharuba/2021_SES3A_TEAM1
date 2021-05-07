@@ -35,8 +35,9 @@ public class DetectBurger : MonoBehaviour
         yield return new WaitForSeconds(3);
         //send the burger recipe to training manager
         Recipe buger = colliderobject.GetComponent<BurgerBoard>().GetCurrentBurger();
-        Debug.Log(buger.Ingredients.Count);
-        Debug.Log(JsonConvert.SerializeObject(buger.Ingredients));
+        //Debug.Log(buger.Ingredients.Count);
+        //Debug.Log(JsonConvert.SerializeObject(buger.Ingredients));
+        TrainingManager.Instance.SubmitTask(buger);
         Destroy(colliderobject);
         canvas.gameObject.SetActive(true);
     }

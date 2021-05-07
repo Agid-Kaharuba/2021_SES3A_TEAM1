@@ -47,12 +47,12 @@ public class TrainingManager : MonoBehaviour
             return;
         }
 
-        // apiService = new ApiService("");
+        apiService = new ApiService("");
 
         // TODO remove Sample tasks and query backend
 
 
-        trainingModule = new TrainingModule("Make a Simple burger");
+        trainingModule = new TrainingModule("Make a Simple burger", "courseId");
 
         Task whooperTask = new Task("Learn to make a Whooper", TaskType.Recipe);
         whooperTask.Recipe = new Recipe("Whooper", "top_bun", "lettuce", "cheese", "patty", "bottom_bun");
@@ -125,8 +125,17 @@ public class TrainingManager : MonoBehaviour
         SwitchTask(CurrentTaskIndex - 1);
     }
 
-    public void SubmitTask()
+    public void SubmitTask(Recipe recipe)
     {
-        
+        // Progress progress = new Progress(trainingModule.Id, CurrentTask.Id, "userId", true, 100);
+        Progress progress = new Progress("sdfsdf", "sdf", "userId", true, 100);
+        progress.Data = recipe;
+
+        StartCoroutine(apiService.SubmitTaskProgress(progress, (obj) => { 
+            if (obj is BackendErrorResponse error)
+            {
+                Debug.LogError($"Error posting progress: {error.Message}");
+            }
+        }));
     }
 }

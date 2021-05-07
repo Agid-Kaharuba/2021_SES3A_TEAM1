@@ -16,9 +16,10 @@ public class TrainingModule
     [JsonProperty("description")]
     public string Description { get; set; }
 
-    public TrainingModule(string name)
+    public TrainingModule(string name, string id)
     {
         Name = name;
         Description = "No Description";
+        Id = id;
     }
 }
