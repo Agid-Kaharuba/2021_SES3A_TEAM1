@@ -80,12 +80,12 @@ function AppRouter(props) {
         component={SignOut}>
       </Route>
 
-      <Route path="/taskslist"
+      <Route path="/task"
         exact={true}
         component={TasksList}>
       </Route>
 
-      <Route path="/taskslist/viewtask"
+      <Route path="/task/:taskId"
         exact={true}
         component={ViewTask}>
       </Route>

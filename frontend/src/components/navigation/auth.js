@@ -125,6 +125,13 @@ const MyDrawer = withStyles(styles)(
           <ListItem 
           button 
           component={Link}
+          to="/aboutus"
+          onClick={onItemClick("AboutUs")}>
+            <ListItemText>About Us</ListItemText>
+          </ListItem>
+          <ListItem 
+          button 
+          component={Link}
           to="/signout"
           onClick={onItemClick("SignOut")}>
             <ListItemText>Sign Out</ListItemText>

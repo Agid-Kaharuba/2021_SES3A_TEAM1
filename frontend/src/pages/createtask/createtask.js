@@ -43,7 +43,7 @@ export default function CreateNewTaskPage() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(formState);
-    api.task.createTask(authState.token, formState);
+    api.task.create(authState.token, formState);
     history.push('/dashboard/create-course');
   }
 
