@@ -46,7 +46,7 @@ export default class TaskController {
             name: body.name,
             description: body.description,
             recipe: body.recipe,
-            type: body.type,
+            type: body.type
         } as any);
         newTaskRequest.save((err: MongoError) => {
             if (err) {

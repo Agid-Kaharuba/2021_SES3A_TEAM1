@@ -13,6 +13,10 @@ const taskSchema = new mongoose.Schema({
         type: String,
         required: false
     },
+    type: {
+        type: String,
+        required: true
+    },
     archive: {
         type: Boolean,
         required: false
