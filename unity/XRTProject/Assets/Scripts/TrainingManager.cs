@@ -48,7 +48,7 @@ public class TrainingManager : MonoBehaviour
             return;
         }
 
-        apiService = new ApiService("");
+        apiService = new ApiService(LaunchArgsService.GetToken());
         string userId = "Enter a userId from your database";
 
         // Use apiService.GetCurrentUser once the token is provided.
