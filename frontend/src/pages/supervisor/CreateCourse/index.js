@@ -102,9 +102,9 @@ export default function CreateNewTrainingPage() {
         <TableCell align="left">{task.description}</TableCell>
         <TableCell align="left">{task.recipe}</TableCell>
         <TableCell align="right">
-        <Button component={Link} color="secondary" variant="outlined" to={"/dashboard/create"}>
-            View
-          </Button>
+        <Link to={`/task/${task._id}`}>
+          <Button variant="outlined" color="secondary">View Task</Button>
+        </Link>
         </TableCell>
       </TableRow>
     )
