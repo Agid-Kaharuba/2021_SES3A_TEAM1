@@ -135,20 +135,27 @@ export default function CreateNewTrainingPage() {
     }
   });
 
+
+  const [rows, setRows] = React.useState([]);
+  
   const [checked, setChecked] = React.useState([1]);
 
 
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
+    const newrows = [...rows];
 
     if (currentIndex === -1) {
       newChecked.push(value);
+      newrows.push(createData(value.firstname, value.lastname, value.staffid),);
     } else {
       newChecked.splice(currentIndex, 1);
+      newrows.push(createData(value.firstname, value.lastname, value.staffid),);
     }
 
     setChecked(newChecked);
+    setRows(newrows);
   };
 
   const buildUser = (user) => {
@@ -199,6 +206,26 @@ export default function CreateNewTrainingPage() {
       <TableRow key={user}>
         <TableCell align="left">{user.firstname + " " + user.lastname}</TableCell>
         <TableCell align="left">{user.staffid}</TableCell>
+        <TableCell align="right">
+          <Button component={Link} color="secondary" variant="outlined" to={"/statistics"}>
+            View
+          </Button>
+        </TableCell>
+      </TableRow>
+    )
+  }
+
+  function createData(firstname, lastname, staffid) {
+    return { firstname, lastname, staffid};
+  }
+  
+
+
+  const buildRowTable = (row) => {
+    return (
+      <TableRow key={row}>
+        <TableCell align="left">{row.firstname + " " + row.lastname}</TableCell>
+        <TableCell align="left">{row.staffid}</TableCell>
         <TableCell align="right">
           <Button component={Link} color="secondary" variant="outlined" to={"/statistics"}>
             View
@@ -333,16 +360,16 @@ export default function CreateNewTrainingPage() {
                   </Toolbar>
                 </AppBar>
                 <List>
-                <ListSubheader component="div" id="nested-list-subheader">
-                  Select the employees to add to this course.
-                </ListSubheader>
-                  {usersState ?
-                  usersState.map((user) => {
-                    return buildUser(user);
-                  })
-                  :
-                  <h1>LOADING</h1>
-                }
+                  <ListSubheader component="div" id="nested-list-subheader">
+                    Select the employees to add to this course.
+                  </ListSubheader>
+                    {usersState ?
+                    usersState.map((user) => {
+                      return buildUser(user);
+                    })
+                    :
+                    <h1>LOADING</h1>
+                  }
                 </List>
               </Dialog>
             </div>
@@ -364,10 +391,19 @@ export default function CreateNewTrainingPage() {
                 <TableCell align="right"></TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
+            {/* <TableBody>
               {usersState ?
                   usersState.map((user) => {
                     return buildUserTable(user);
+                  })
+                  :
+                  <h1>LOADING</h1>
+                }
+            </TableBody> */}
+            <TableBody>
+              {rows ?
+                  rows.map((row) => {
+                    return buildRowTable(row);
                   })
                   :
                   <h1>LOADING</h1>
