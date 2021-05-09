@@ -55,6 +55,43 @@ public class ApiService
         }
     }
 
+    // Get the current user using the token.
+    public IEnumerator GetCurrentUser(Action<object> callback = null)
+    {
+        UnityWebRequest www = UnityWebRequest.Get($"{API_HOST}/user");
+        www.SetRequestHeader("Authorization", $"Bearer {token}");
+        yield return www.SendWebRequest();
+
+        if (www.result != UnityWebRequest.Result.Success)
+        {
+            BackendErrorResponse response = JsonConvert.DeserializeObject<BackendErrorResponse>(www.downloadHandler.text);
+            response.Status = www.responseCode;
+            callback?.Invoke(response);
+        }
+        else
+        {
+            callback?.Invoke(JsonConvert.DeserializeObject<User>(www.downloadHandler.text));
+        }
+    }
+
+    public IEnumerator GetUser(string userId, Action<object> callback = null)
+    {
+        UnityWebRequest www = UnityWebRequest.Get($"{API_HOST}/user/{userId}");
+        www.SetRequestHeader("Authorization", $"Bearer {token}");
+        yield return www.SendWebRequest();
+
+        if (www.result != UnityWebRequest.Result.Success)
+        {
+            BackendErrorResponse response = JsonConvert.DeserializeObject<BackendErrorResponse>(www.downloadHandler.text);
+            response.Status = www.responseCode;
+            callback?.Invoke(response);
+        }
+        else
+        {
+            callback?.Invoke(JsonConvert.DeserializeObject<User>(www.downloadHandler.text));
+        }
+    }
+
     public IEnumerator HasAuth(Action<bool> callback = null)
     {
         UnityWebRequest www = UnityWebRequest.Get($"{API_HOST}/auth");
