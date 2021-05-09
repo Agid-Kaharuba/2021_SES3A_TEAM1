@@ -91,7 +91,7 @@ export default function CreateNewTrainingPage() {
   const [tasksState, setTasksState] = useState(undefined);
 
   const fetchData = async () => {
-    const res = await api.task.getAllTasks(authState.token);
+    const res = await api.task.getAll(authState.token);
     setTasksState(res.data);
   };
 

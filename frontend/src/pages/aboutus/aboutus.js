@@ -26,11 +26,11 @@ import VanishaGif from '../../images/vanishavr.gif';
 
 const WhiteTextTypography = withStyles({
   root: {
-    color: "#FFFFFF"
+    color: "#FFFFFF",
   }
 })(Typography);
 
-const profileStyles = makeStyles((theme) =>  ({
+const profileStyles = makeStyles((theme) => ({
   large: {
     width: theme.spacing(20),
     height: theme.spacing(20),
@@ -38,261 +38,239 @@ const profileStyles = makeStyles((theme) =>  ({
 }));
 
 export default function AboutUsPage() {
-    const history = useHistory();
+  const history = useHistory();
   //   const { authState, setAuthState } = React.useContext(AuthContext);
-    const profiles = profileStyles();
+  const profiles = profileStyles();
   //   if (authState.authenticated) {
   //     return authState.user.claims.teacher ? <Redirect to="/teacher/subjectList" />: <Redirect to="/student/dashboard" />; 
   //   } else {
-      return (
-
-        <Grid 
-        container
-        spacing={2}
-        direction='column'
-        alignItems='center'
-        justify='center'
-        style={{ minHeight: '100vh', backgroundImage: "linear-gradient(45deg, #662D8C  10%, #ED1E79)"}}>
-        <Grid item>
-          <br></br>
-              <WhiteTextTypography variant='h3'>
-                <Box style={{fontWeight: '600', letterSpacing:6}} display='inline'> About Us</Box>
-              </WhiteTextTypography>
-        </Grid>
-        <Grid container direction="column" color='white' alignItems='flex-start'>
+  return (
+    // Orignial Gradient linear-gradient(45deg, #662D8C  10%, #ED1E79)
+    <Grid
+      container
+      spacing={2}
+      direction='column'
+      alignItems='center'
+      justify='center'
+      style={{ minHeight: '100vh', backgroundImage: "linear-gradient(45deg, #662D8C  10%, #ED1E79)" }}>
+      <Grid item>
+        <br></br>
+        <WhiteTextTypography variant='h3'>
+          <Box style={{ fontWeight: '600', letterSpacing: 6 }} display='inline'> About Us</Box>
+        </WhiteTextTypography>
+      </Grid>
+      <Grid container direction="column" alignItems='flex-start'>
         <Container>
-          <Box color="white" fontSize="24px">
-        <h2>Project Outline</h2>
+          <Box style={{ fontSize: '24px', fontFamily: 'Roboto', color: "white" }}>
+            <h2>Project Outline</h2>
 
-        <p>The Virtual Organizational Training Experience is focusing on large corporate organizations that are looking to improve their training experience. 
-          The training experience is envisioned to eventually become a platform where companies can create their own XR training modules however, due to the time constraints
+            <p>The Virtual Organizational Training Experience is focusing on large corporate organizations that are looking to improve their training experience.
+            The training experience is envisioned to eventually become a platform where companies can create their own XR training modules however, due to the time constraints
            of Software Studio 3A/3B, we will focus on creating the webapp component of the product, and one specific training scenario which is burger training for now. </p>
-        
-        <p>Our team's objective is:
+
+            <p>Our team's objective is:
           <ul>
-            <li>Create an example of an immersive training experience module in XR </li>
-            <li>Expandable for use as a platform to create training modules</li>
-            <li>Create a webapp that links into the XR modules so users can access them and be assessed </li>
-          </ul>
+                <li>Create an example of an immersive training experience module in XR </li>
+                <li>Expandable for use as a platform to create training modules</li>
+                <li>Create a webapp that links into the XR modules so users can access them and be assessed </li>
+              </ul>
+            </p>
+
+            <h2>Storing Information</h2>
+            <p>
+              This system employs a database using MongoDB to store supervisor and employee information, including their credentials for authentication and recording.
         </p>
 
-        <h4>User Stories</h4>
-        <ul>
-          <li>Supervisor</li>
-            <ul>
-              <li>As a supervisor, I would like to be able to create viewable training modules so that employees can easily know what they need to learn. </li>
-              <li>As a supervisor, I want to create tasks for employees so that I can instruct the employees for the things they need to learn. </li>
-              <li>As a supervisor, I want to have our own company subdivision so that I can choose what features and create training modules specifically for our company. </li>
-              <li>As a supervisor, I want the system to have checkpoints so that I can mark the employee training. </li>
-              <li>As a supervisor, I want to have a grading system so that I can determine if the employee has passed the training. </li>
-              <li>As a supervisor, I want to create my own XR training course without any technical expertise so that I can easily tailor the training experience to what I want. </li>
-              <li>As a supervisor, I want to view an employee training session by video footage so that I can assess and review the employee. </li> 
-            </ul>
-
-          <li>Employee</li>
-            <ul>
-              <li>As a user, I want to sign up and login so that I can have access and use the platform. </li>
-              <li>As an employee, I want to have an engaging interaction with the XR training session so that I have a good and beneficial training experience. </li>
-              <li>As an employee, I want the system to store my statistics from training sessions so that I can have information about my performance. </li>
-              <li>As an employee, I want to view my statistics so that I can review my training session. </li>
-              <li>As an employee, I want to see my training completion progress so that I can see how well I am progressing with my training. </li>
-            </ul>
-        </ul>
-
-        <h2>Storing Information</h2>
-        <p>
-        This system employs a database using MongoDB to store supervisor and employee information, including their credentials for authentication and recording. 
+            <h2>Team Communication</h2>
+            <p>
+              All tasks were split and assigned to team members on Trello so that it was always transparent which tasks were being worked on, have been completed or still required additional progress.
         </p>
-
-        <h2>Team Communication</h2>
-        <p>
-          All tasks were split and assigned to team members on Trello so that it was always transparent which tasks were being worked on, have been completed or still required additional progress.  
-        </p>
-        <p>
-          Microsoft Teams was the main form of communication used for collaborating and holding meetings, while Facebook Messenger was used for general communication. 
+            <p>
+              Microsoft Teams was the main form of communication used for collaborating and holding meetings, while Facebook Messenger was used for general communication.
           The code for this project can be found at our <a href="https://github.com/Agid-Kaharuba/2021_SES3A_TEAM1">GitHub repository</a>.
         </p>
           </Box>
-          </Container>
-          <Container>
-            <Grid container alignItems="center" justify="center" direction='column'>
-              <WhiteTextTypography>
-                VR Training
+        </Container>
+        <Container>
+          <Grid container alignItems="center" justify="center" direction='column'>
+            <WhiteTextTypography>
+              Customer Training
               </WhiteTextTypography>
-              <Grid container alignItems="center" justify="space-around" direction='row'>
+            <Grid container alignItems="center" justify="space-around" direction='row'>
+              <Grid alignItems="center" justify="center" direction='column'>
                 <Box>
                   <img src={MitchGif}></img>
-                  <Box color='white' fontStyle="italic">
-                  <text>- "Mitchell trying VR"</text>
-                  </Box>
                 </Box>
-                <Box>
-                  <img src={VanishaGif}></img>
-                  <Box color='white' fontStyle="italic">
-                  <text>- "Vanisha trying VR"</text>
-                  </Box>
-                </Box>
-                <Box>
-                  <img src={VanishaGif}></img>
-                  <Box color='white' fontStyle="italic">
-                  <text>- "Vanisha trying VR"</text>
-                  </Box>
+                <Box fontStyle="italic">
+                  <WhiteTextTypography >- "Mitchell trying VR"</WhiteTextTypography>
                 </Box>
               </Grid>
-  
+              <Box>
+                <img src={VanishaGif}></img>
+                <Box fontStyle="italic" >
+                  <WhiteTextTypography>- "Vanisha trying VR"</WhiteTextTypography>
+                </Box>
+              </Box>
+              <Box>
+                <img src={VanishaGif}></img>
+                <Box fontStyle="italic">
+                  <WhiteTextTypography>- "Vanisha trying VR"</WhiteTextTypography>
+                </Box>
+              </Box>
             </Grid>
-          </Container>
-        </Grid>
-        <Box color='white' fontSize="24px"> 
+
+          </Grid>
+        </Container>
+      </Grid>
+      <Box color='white' fontSize="24px">
         <h2>
           Team Structure
         </h2>
-        </Box>
-        <Box mt={6}>
-          <Grid
-            container
-            spacing={4}
-            direction='row'
-            alignItems='center'
-            justify='center'>
-            <Grid item>
-              <Grid 
+      </Box>
+      <Box mt={6}>
+        <Grid
+          container
+          spacing={4}
+          direction='row'
+          alignItems='center'
+          justify='center'>
+          <Grid item>
+            <Grid
               container
               direction='column'
               alignItems='center'
               justify='center'>
-                <Avatar src={Andrew} className={profiles.large}/>
-                <WhiteTextTypography style={{fontWeight: '600', fontSize: '1.2rem' }}>Andrew Do</WhiteTextTypography>
-                <WhiteTextTypography>Front-End Co-Lead</WhiteTextTypography>
-              </Grid>
-            </Grid>
-            <Grid item>
-              <Grid 
-              container
-              direction='column'
-              alignItems='center'
-              justify='center'>
-                <Avatar src={Vanisha} className={profiles.large}/>
-                <WhiteTextTypography style={{fontWeight: '600', fontSize: '1.2rem'}}>Vanisha Singh</WhiteTextTypography>
-                <WhiteTextTypography>UI/UX Design Lead</WhiteTextTypography>
-              </Grid>
-            </Grid>
-            <Grid item>
-              <Grid 
-              container
-              direction='column'
-              alignItems='center'
-              justify='center'>
-                <Avatar src={Andy} className={profiles.large}/>
-                <WhiteTextTypography style={{fontWeight: '600', fontSize: '1.2rem'}}>Andy Lee</WhiteTextTypography>
-                <WhiteTextTypography>Unity Dev / Scrum Master</WhiteTextTypography>
-              </Grid>
-            </Grid>
-            <Grid item>
-              <Grid 
-              container
-              direction='column'
-              alignItems='center'
-              justify='center'>
-                <Avatar src={Agid} className={profiles.large}/>
-                <WhiteTextTypography style={{fontWeight: '600', fontSize: '1.2rem'}}>Agid Kaharuba</WhiteTextTypography>
-                <WhiteTextTypography>Unity/XR Lead</WhiteTextTypography>
-              </Grid>
-            </Grid>
-            <Grid item>
-              <Grid 
-              container
-              direction='column'
-              alignItems='center'
-              justify='center'>
-                <Avatar src={Mitchell} className={profiles.large}/>
-                <WhiteTextTypography style={{fontWeight: '600', fontSize: '1.2rem'}}>Mitchell Murphy</WhiteTextTypography>
-                <WhiteTextTypography>Back-End Lead</WhiteTextTypography>
-              </Grid>
-            </Grid>
-            <Grid item>
-              <Grid 
-              container
-              direction='column'
-              alignItems='center'
-              justify='center'>
-                <Avatar src={Herrick} className={profiles.large}/>
-                <WhiteTextTypography style={{fontWeight: '600', fontSize: '1.2rem'}}>Herrick Feng</WhiteTextTypography>
-                <WhiteTextTypography>Front-End Co-Lead</WhiteTextTypography>
-              </Grid>
+              <Avatar src={Andrew} className={profiles.large} />
+              <WhiteTextTypography style={{ fontWeight: '600', fontSize: '1.2rem' }}>Andrew Do</WhiteTextTypography>
+              <WhiteTextTypography>Front-End Co-Lead</WhiteTextTypography>
             </Grid>
           </Grid>
-        </Box>
-
-        <Box m={6}>
-          <Grid
-            container
-            spacing={4}
-            direction='row'
-            alignItems='center'
-            justify='center'>
-            <Grid item>
-              <Grid 
+          <Grid item>
+            <Grid
               container
               direction='column'
               alignItems='center'
               justify='center'>
-                <Avatar src={Bryan} className={profiles.large}/>
-                <WhiteTextTypography style={{fontWeight: '600', fontSize: '1.2rem'}}>Bryan Dinh</WhiteTextTypography>
-                <WhiteTextTypography>Front-End Developer</WhiteTextTypography>
-              </Grid>
-            </Grid>
-            <Grid item>
-              <Grid 
-              container
-              direction='column'
-              alignItems='center'
-              justify='center'>
-                <Avatar src={Kelvin} className={profiles.large}/>
-                <WhiteTextTypography style={{fontWeight: '600', fontSize: '1.2rem'}}>Kelvin Luong</WhiteTextTypography>
-                <WhiteTextTypography>Front-End Developer</WhiteTextTypography>
-              </Grid>
-            </Grid>
-            <Grid item>
-              <Grid 
-              container
-              direction='column'
-              alignItems='center'
-              justify='center'>
-                <Avatar src={Brendon} className={profiles.large}/>
-                <WhiteTextTypography style={{fontWeight: '600', fontSize: '1.2rem'}}>Brendon Tong</WhiteTextTypography>
-                <WhiteTextTypography>Back-End Developer</WhiteTextTypography>
-              </Grid>
-            </Grid>
-            <Grid item>
-              <Grid 
-              container
-              direction='column'
-              alignItems='center'
-              justify='center'>
-                <Avatar src={Calvin} className={profiles.large}/>
-                <WhiteTextTypography style={{fontWeight: '600', fontSize: '1.2rem'}}>Calvin Dong</WhiteTextTypography>
-                <WhiteTextTypography>Back-End Developer</WhiteTextTypography>
-              </Grid>
-            </Grid>
-            <Grid item>
-              <Grid 
-              container
-              direction='column'
-              alignItems='center'
-              justify='center'>
-                <Avatar src={Lakshva} className={profiles.large}/>
-                <WhiteTextTypography style={{fontWeight: '600', fontSize: '1.2rem'}}>Lakshya Sharma</WhiteTextTypography>
-                <WhiteTextTypography>Back-End Developer</WhiteTextTypography>
-              </Grid>
+              <Avatar src={Vanisha} className={profiles.large} />
+              <WhiteTextTypography style={{ fontWeight: '600', fontSize: '1.2rem' }}>Vanisha Singh</WhiteTextTypography>
+              <WhiteTextTypography>UI/UX Design Lead</WhiteTextTypography>
             </Grid>
           </Grid>
+          <Grid item>
+            <Grid
+              container
+              direction='column'
+              alignItems='center'
+              justify='center'>
+              <Avatar src={Andy} className={profiles.large} />
+              <WhiteTextTypography style={{ fontWeight: '600', fontSize: '1.2rem' }}>Andy Lee</WhiteTextTypography>
+              <WhiteTextTypography>Unity Dev / Scrum Master</WhiteTextTypography>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Grid
+              container
+              direction='column'
+              alignItems='center'
+              justify='center'>
+              <Avatar src={Agid} className={profiles.large} />
+              <WhiteTextTypography style={{ fontWeight: '600', fontSize: '1.2rem' }}>Agid Kaharuba</WhiteTextTypography>
+              <WhiteTextTypography>Unity/XR Lead</WhiteTextTypography>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Grid
+              container
+              direction='column'
+              alignItems='center'
+              justify='center'>
+              <Avatar src={Mitchell} className={profiles.large} />
+              <WhiteTextTypography style={{ fontWeight: '600', fontSize: '1.2rem' }}>Mitchell Murphy</WhiteTextTypography>
+              <WhiteTextTypography>Back-End Lead</WhiteTextTypography>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Grid
+              container
+              direction='column'
+              alignItems='center'
+              justify='center'>
+              <Avatar src={Herrick} className={profiles.large} />
+              <WhiteTextTypography style={{ fontWeight: '600', fontSize: '1.2rem' }}>Herrick Feng</WhiteTextTypography>
+              <WhiteTextTypography>Front-End Co-Lead</WhiteTextTypography>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Box>
 
-        </Box>
+      <Box m={6}>
+        <Grid
+          container
+          spacing={4}
+          direction='row'
+          alignItems='center'
+          justify='center'>
+          <Grid item>
+            <Grid
+              container
+              direction='column'
+              alignItems='center'
+              justify='center'>
+              <Avatar src={Bryan} className={profiles.large} />
+              <WhiteTextTypography style={{ fontWeight: '600', fontSize: '1.2rem' }}>Bryan Dinh</WhiteTextTypography>
+              <WhiteTextTypography>Front-End Developer</WhiteTextTypography>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Grid
+              container
+              direction='column'
+              alignItems='center'
+              justify='center'>
+              <Avatar src={Kelvin} className={profiles.large} />
+              <WhiteTextTypography style={{ fontWeight: '600', fontSize: '1.2rem' }}>Kelvin Luong</WhiteTextTypography>
+              <WhiteTextTypography>Front-End Developer</WhiteTextTypography>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Grid
+              container
+              direction='column'
+              alignItems='center'
+              justify='center'>
+              <Avatar src={Brendon} className={profiles.large} />
+              <WhiteTextTypography style={{ fontWeight: '600', fontSize: '1.2rem' }}>Brendon Tong</WhiteTextTypography>
+              <WhiteTextTypography>Back-End Developer</WhiteTextTypography>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Grid
+              container
+              direction='column'
+              alignItems='center'
+              justify='center'>
+              <Avatar src={Calvin} className={profiles.large} />
+              <WhiteTextTypography style={{ fontWeight: '600', fontSize: '1.2rem' }}>Calvin Dong</WhiteTextTypography>
+              <WhiteTextTypography>Back-End Developer</WhiteTextTypography>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Grid
+              container
+              direction='column'
+              alignItems='center'
+              justify='center'>
+              <Avatar src={Lakshva} className={profiles.large} />
+              <WhiteTextTypography style={{ fontWeight: '600', fontSize: '1.2rem' }}>Lakshya Sharma</WhiteTextTypography>
+              <WhiteTextTypography>Back-End Developer</WhiteTextTypography>
+            </Grid>
+          </Grid>
+        </Grid>
+
+      </Box>
 
     </Grid>
 
-)
-//   }
+  )
+  //   }
 }
-      
