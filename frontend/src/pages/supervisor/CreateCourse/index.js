@@ -50,12 +50,6 @@ function createData(name, description, recipe, task) {
   return { name, description, recipe, task };
 }
 
-const rows = [
-  createData('Task 1', 'Learn the essentials of CPR through an interactive simulation', 10, 0),
-  createData('Task 2', 'Learn how to mitigate safety hazards in the workplace', 20, 0),
-  createData('Task 3', 'Learn the safety terminology', 5, 0),
-];
-
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -273,7 +267,7 @@ export default function CreateNewTrainingPage() {
             </Button>
           </Grid>
           <Grid item >
-            <Button component={Link} color="primary" variant="contained" to={"/createTask"}>
+            <Button component={Link} color="primary" variant="contained" to={"/createtask"}>
               Create Task
             </Button>
           </Grid>
@@ -289,10 +283,10 @@ export default function CreateNewTrainingPage() {
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell align="left">Name</TableCell>
-                <TableCell align="left">Description</TableCell>
-                <TableCell align="left">Task Type</TableCell>
-                <TableCell align="right">View Task</TableCell>
+                <TableCell className={classes.bold} align="left">Name</TableCell>
+                <TableCell className={classes.bold} align="left">Description</TableCell>
+                <TableCell className={classes.bold} align="left">Task Type</TableCell>
+                <TableCell align="right"></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -365,9 +359,9 @@ export default function CreateNewTrainingPage() {
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell align="left">Name</TableCell>
-                <TableCell align="left">Staff ID</TableCell>
-                <TableCell align="right">View Profile</TableCell>
+                <TableCell className={classes.bold} align="left">Name</TableCell>
+                <TableCell className={classes.bold} align="left">Staff ID</TableCell>
+                <TableCell align="right"></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

@@ -28,10 +28,10 @@ export default function Tasks({tasksState}){
           <TableRow key={task.name}>
               <TableCell align="left">{task.name}</TableCell>
               <TableCell align="left">{task.description}</TableCell>
-              <TableCell align="left">{task.duration}</TableCell>
-              <TableCell align="left">
+              <TableCell align="left">{task.recipe}</TableCell>
+              <TableCell align="right">
               <Link to={`/task/${task._id}`}>
-                  <Button size="small" variant="outlined" color="secondary">View Task</Button>
+                  <Button variant="outlined" color="secondary">View Task</Button>
               </Link>
               </TableCell>
           </TableRow>
@@ -48,7 +48,7 @@ export default function Tasks({tasksState}){
                     </Typography>
                 </Grid>
                 <Grid item align="right">
-                    <Button size="small" variant="outlined" color="secondary">Add Task</Button>
+                    <Button  variant="contained" color="primary" component={Link} to={"/taskslist/createtask"}>Create Task</Button>
                 </Grid>
               </Grid>
             <Divider variant="middle" />
@@ -59,10 +59,10 @@ export default function Tasks({tasksState}){
                 <Table className={classes.table} aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            <TableCell className={classes.bold}>Name</TableCell>
-                            <TableCell className={classes.bold}>Description</TableCell>
-                            <TableCell className={classes.bold}>Duration</TableCell>
-                            <TableCell></TableCell>
+                            <TableCell className={classes.bold} align="left">Name</TableCell>
+                            <TableCell className={classes.bold} align="left">Description</TableCell>
+                            <TableCell className={classes.bold} align="left">Task Type</TableCell>
+                            <TableCell align="right"></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
