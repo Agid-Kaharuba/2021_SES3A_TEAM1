@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,12 +8,18 @@ using System.Linq;
 
 public class TrainingManager : MonoBehaviour
 {
+    [Tooltip("This is useful for debugging only")]
+    [SerializeField] public bool forceCanCustomize;
     [SerializeField] public UnityEvent OnCurrentTaskChanged;
     [SerializeField] public UnityEvent OnTrainingModuleChanged;
+    [SerializeField] public UnityEvent OnUserReady;
+    [SerializeField] public UnityEvent OnCustomizationSettingsChanged;
     
     private TrainingModule trainingModule;
     
     public static TrainingManager Instance { get; private set; }
+
+    public bool CanCustomize => forceCanCustomize || (CurrentUser != null && CurrentUser.IsSupervisor);
 
     public Task CurrentTask { get; private set; }
     
@@ -48,8 +55,21 @@ public class TrainingManager : MonoBehaviour
             Destroy(this);
             return;
         }
+        
+        Instance = this;
 
-        apiService = new ApiService(LaunchArgsService.GetToken());
+        string token = "";
+        
+        try
+        {
+            token = LaunchArgsService.GetToken();
+        }
+        catch (Exception e)
+        {
+            Debug.Log($"Could not get token : {e}");
+        }
+        
+        apiService = new ApiService(token);
         string userId = "Enter a userId from your database";
 
         // Use apiService.GetCurrentUser once the token is provided.
@@ -62,12 +82,11 @@ public class TrainingManager : MonoBehaviour
             else if (response is User user)
             {
                 CurrentUser = user;
-                Debug.Log("retrieved user");
+                OnUserReady?.Invoke();
+                OnCustomizationSettingsChanged?.Invoke();
+                Debug.Log("Retrieved user data!");
             }
         }));
-
-        // TODO remove Sample tasks and query backend
-
 
         // trainingModule = new TrainingModule("Make a Simple burger", "courseId");
         //
@@ -82,8 +101,6 @@ public class TrainingManager : MonoBehaviour
         // trainingModule.Tasks.Add(new Task("Remembering to make a Whooper", TaskType.Testing));
         // trainingModule.Tasks.Add(new Task("Serve 5 customers", TaskType.Performance));
         // CurrentTask = whooperTask;
-
-        Instance = this;
     }
 
     private void Start()
@@ -103,6 +120,9 @@ public class TrainingManager : MonoBehaviour
                 SwitchTask(0);
             }
         }));
+        
+        if (forceCanCustomize)
+            OnCustomizationSettingsChanged?.Invoke();
     }
 
     public void ReorderTask(int fromIndex, int toIndex)

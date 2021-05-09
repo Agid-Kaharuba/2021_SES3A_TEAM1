@@ -145,6 +145,7 @@ GameObject:
   - component: {fileID: 224474986518604191}
   - component: {fileID: 224474986518604190}
   - component: {fileID: 224474986518604185}
+  - component: {fileID: 1000808407095557628}
   m_Layer: 0
   m_Name: List
   m_TagString: Untagged
@@ -214,9 +215,52 @@ MonoBehaviour:
   itemPrefab: {fileID: 7768965350888779908, guid: 185699473ed224c4ba77a46e636e24d7, type: 3}
   sampleItem: {fileID: 224474986648461290}
   shouldCloseOnSelect: 1
+  canDrag: 0
   OnTaskSelected:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1000808407095557628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 224474986518604188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e50e3698fe2048d280fd17965d37ea3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnCanCustomize:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 224474986518604185}
+        m_TargetAssemblyTypeName: UITaskSelector, Assembly-CSharp
+        m_MethodName: SetCanDrag
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  OnCannotCustomize:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 224474986518604185}
+        m_TargetAssemblyTypeName: UITaskSelector, Assembly-CSharp
+        m_MethodName: SetCanDrag
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &224474986695004632
 GameObject:
   m_ObjectHideFlags: 0
@@ -476,7 +520,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &224474986873486924
 MonoBehaviour:
   m_ObjectHideFlags: 0

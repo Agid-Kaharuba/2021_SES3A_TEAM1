@@ -562,6 +562,8 @@ GameObject:
   - component: {fileID: 999430878840215921}
   - component: {fileID: 1180864941}
   - component: {fileID: 4167295344600645690}
+  - component: {fileID: 6014944351238057700}
+  - component: {fileID: 1422199261959339308}
   m_Layer: 0
   m_Name: SquarePlate
   m_TagString: Untagged
@@ -710,7 +712,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3966476886739191017}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6c50db2c921b4da7aa035fa110cf9dd1, type: 3}
   m_Name: 
@@ -747,6 +749,66 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   propData: {fileID: 11400000, guid: 758174e44fc337e46b817c5ec9d39b90, type: 2}
+--- !u!114 &6014944351238057700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3966476886739191017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e50e3698fe2048d280fd17965d37ea3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnCanCustomize:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCannotCustomize:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1422199261959339308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3966476886739191017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e50e3698fe2048d280fd17965d37ea3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnCanCustomize:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1180864941}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  OnCannotCustomize:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1180864941}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4677867848936440909
 GameObject:
   m_ObjectHideFlags: 0
