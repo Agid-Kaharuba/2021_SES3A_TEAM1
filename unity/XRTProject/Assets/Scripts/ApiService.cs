@@ -111,4 +111,25 @@ public class ApiService
             callback?.Invoke(JsonConvert.DeserializeObject<Progress>(www.downloadHandler.text));
         }
     }
+
+    public IEnumerator UpdateRecipe(Recipe recipe, Action<object> callback = null)
+    {
+        string jsonString = JsonConvert.SerializeObject(recipe);
+
+        UnityWebRequest www = UnityWebRequest.Put($"{API_HOST}/recipe/{recipe.Id}", jsonString);
+        www.SetRequestHeader("Authorization", $"Bearer {token}");
+        www.SetRequestHeader("Content-Type", "application/json");
+        yield return www.SendWebRequest();
+
+        if (www.result != UnityWebRequest.Result.Success)
+        {
+            BackendErrorResponse response = JsonConvert.DeserializeObject<BackendErrorResponse>(www.downloadHandler.text);
+            response.Status = www.responseCode;
+            callback?.Invoke(response);
+        }
+        else
+        {
+            callback?.Invoke(JsonConvert.DeserializeObject<Progress>(www.downloadHandler.text));
+        }
+    }
 }
