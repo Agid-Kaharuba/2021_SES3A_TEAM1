@@ -2,7 +2,7 @@ import React, { useState} from "react";
 import { Link, useHistory } from "react-router-dom";
 
 // IMPORT COMPONENTS
-import { Box, Button, Typography, Divider, TextField, Grid} from "@material-ui/core";
+import { Box, Button, Typography, Divider, TextField, Grid, FormControl, Select, MenuItem, Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { AuthContext } from "../../context/auth";
@@ -20,6 +20,13 @@ const useStyles = makeStyles({
   },
   table: {
     minWidth: 650,
+  },
+  formControl: {
+    margin: 2,
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: 2,
   },
 })
 
@@ -67,48 +74,68 @@ export default function CreateNewTaskPage() {
       </Box>
 
       <Box m={5}>
-        <Box my={2}>
-          <Typography variant='h5'>
-            Task Details
-          </Typography>
-        </Box>
+        <Paper style={{backgroundColor: "white"}} elevation={3}>
+          <Box m={5} p={2}>
+            <Box my={2} pb={2} fontStyle="italic">
+              <Typography variant='h6'>
+                Please enter the details of your desired task below.
+              </Typography>
+            </Box>
 
-        <Box my={2}>
-          <TextField
-            id="filled-multiline-static"
-            label="Enter the Task's Name"
-            fullWidth='true'
-            variant="filled"
-            name="name"
-            onChange={handleChange}
-          />
-        </Box>
-        <Box my={2}>
-          <TextField
-            id="filled-multiline-static"
-            label="Enter the Task's Description"
-            multiline
-            rows={4}
-            fullWidth='true'
-            variant="filled"
-            name="description"
-            onChange={handleChange}
-          />
-        </Box>
-        <Box my={2}>
-          <TextField
-            id="filled-multiline-static"
-            label="Enter the Task's Recipe"
-            multiline
-            rows={4}
-            fullWidth='true'
-            variant="filled"
-            name="recipe"
-            onChange={handleChange}
-          />
-        </Box>
+            <Box my={2}>
+                <Typography className={classes.bold} variant='h6'>
+                  Task Name
+                </Typography>
+              <TextField
+                id="outlined-multiline-static"
+    
+                fullWidth='true'
+                variant="outlined"
+                name="name"
+                onChange={handleChange}
+              />
+            </Box>
+
+            <Box my={2}>
+              <Typography className={classes.bold} variant='h6'>
+                Task Description
+              </Typography>
+              <TextField
+                id="outlined-multiline-static"
+                multiline
+                rows={4}
+                fullWidth='true'
+                variant="outlined"
+                name="description"
+                onChange={handleChange}
+              />
+            </Box>
+
+            <Box my={2}>
+              <FormControl className={classes.formControl}>
+              <Typography className={classes.bold} variant='h6'>
+                  Task Type
+              </Typography>
+              <Select
+                id="demo-simple-select-placeholder-label"
+                onChange={handleChange}
+                displayEmpty
+                name="recipe"
+                className={classes.selectEmpty}
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value={"Practice"}>Practice</MenuItem>
+                <MenuItem value={"Testing"}>Testing</MenuItem>
+                <MenuItem value={"Performance"}>Performance</MenuItem>
+              </Select>
+            </FormControl>
+            </Box>
+            
+          </Box>
+        </Paper>
       </Box>
-
 
       <Box justifyContent='center' display="flex" m={6}>
         <Box mr={6}>
@@ -122,6 +149,8 @@ export default function CreateNewTaskPage() {
           </Button>
         </Box>
       </Box>
+
+      
     </div>
   )
 }

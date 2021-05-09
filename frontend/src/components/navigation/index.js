@@ -16,7 +16,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Box from "@material-ui/core/Box";
 import { Divider, ListItemIcon } from "@material-ui/core";
 import HomeIcon from '@material-ui/icons/Home';
-import {grey, purple} from '@material-ui/core/colors'
+
 //import { AuthContext } from "../../context/auth";
 const drawerWidth = 240;
 const history = createBrowserHistory();

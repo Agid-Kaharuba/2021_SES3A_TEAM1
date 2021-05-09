@@ -20,7 +20,7 @@ import AboutUs from "./pages/aboutus/aboutus.js";
 import ViewTask from "./pages/viewtask/viewtask.js";
 import SignUp from "./pages/signup/signup.js";
 import taskList from "./pages/taskslist/taskslist.js";
-import Statistics from "./pages/statistics/Statistics.js";
+import Statistics from "./pages/statistics/statistics.js";
 import CreateNewTask from "./pages/createtask/createtask.js";
 
 // import appTheme from "./helpers/appTheme";
@@ -55,7 +55,7 @@ function AppRouter(props) {
         exact={true}
         component={EmployeeProfile} />
 
-      <Route path="/dashboard/taskList" 
+      <Route path="/taskslist" 
         exact={true}
         component={taskList}>
       </Route>
@@ -100,7 +100,7 @@ function AppRouter(props) {
         component={Statistics}>
       </Route>
     
-      <Route path="/createtask"
+      <Route path="/createTask"
         exact={true}
         component={CreateNewTask}>
       </Route>
