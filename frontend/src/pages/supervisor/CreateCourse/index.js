@@ -273,7 +273,7 @@ export default function CreateNewTrainingPage() {
             </Button>
           </Grid>
           <Grid item >
-            <Button component={Link} color="primary" variant="contained" to={"/create-task"}>
+            <Button component={Link} color="primary" variant="contained" to={"/createTask"}>
               Create Task
             </Button>
           </Grid>
@@ -291,7 +291,7 @@ export default function CreateNewTrainingPage() {
               <TableRow>
                 <TableCell align="left">Name</TableCell>
                 <TableCell align="left">Description</TableCell>
-                <TableCell align="left">Recipe</TableCell>
+                <TableCell align="left">Task Type</TableCell>
                 <TableCell align="right">View Task</TableCell>
               </TableRow>
             </TableHead>

@@ -57,7 +57,7 @@ export default function ViewTask(props) {
                     <Grid container direction="row" justify="space-between">
                         <Typography className={classes.bold} variant='h4'>
                             View Task
-                </Typography>
+                        </Typography>
                         <underline />
                         <Box m={1}>
                             <Button variant="contained" color="primary" size="large" onClick={() => setEditState(!editState)}>
