@@ -18,7 +18,8 @@ import {
 import {
   getAllTasks,
   createTask,
-  getTask
+  getTask,
+  updateTask
 } from "./task";
 
 export const API_HOST = "http://localhost:4000";
@@ -44,6 +45,7 @@ export default {
   task: {
     getAll: getAllTasks,
     create: createTask,
-    get: getTask
+    get: getTask,
+    update: updateTask
   }
 }
