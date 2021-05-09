@@ -28,8 +28,8 @@ export default function Tasks({tasksState}){
           <TableRow key={task.name}>
               <TableCell align="left">{task.name}</TableCell>
               <TableCell align="left">{task.description}</TableCell>
-              <TableCell align="left">{task.recipe}</TableCell>
-              <TableCell align="right">
+              <TableCell align="left">{task.type}</TableCell>
+              <TableCell align="left">
               <Link to={`/task/${task._id}`}>
                   <Button variant="outlined" color="secondary">View Task</Button>
               </Link>

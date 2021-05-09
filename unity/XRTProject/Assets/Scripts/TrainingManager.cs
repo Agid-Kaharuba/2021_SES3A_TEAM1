@@ -14,6 +14,8 @@ public class TrainingManager : MonoBehaviour
     public static TrainingManager Instance { get; private set; }
 
     public Task CurrentTask { get; private set; }
+    
+    public User CurrentUser { get; private set; }
 
     public bool HasCurrentTask => CurrentTask != null;
     
@@ -46,21 +48,36 @@ public class TrainingManager : MonoBehaviour
             return;
         }
 
-        apiService = new ApiService("");
+        apiService = new ApiService(LaunchArgsService.GetToken());
+        string userId = "Enter a userId from your database";
+
+        // Use apiService.GetCurrentUser once the token is provided.
+        StartCoroutine(apiService.GetUser(userId, (response) =>
+        {
+            if (response is BackendErrorResponse errorReponse)
+            {
+                Debug.LogError($"Could not get training module got {errorReponse.Message}");
+            }
+            else if (response is User user)
+            {
+                CurrentUser = user;
+                Debug.Log("retrieved user");
+            }
+        }));
 
         // TODO remove Sample tasks and query backend
-        
+
 
         //trainingModule = new TrainingModule("Make a Simple burger");
-        
+
         //Task whooperTask = new Task("Learn to make a Whooper", TaskType.Recipe);
         //whooperTask.Recipe = new Recipe("Whooper", "top_bun", "lettuce", "cheese", "patty", "bottom_bun");
         //trainingModule.Tasks.Add(whooperTask);
-        
+
         //Task cheeseBurgerTask = new Task("Learn to make a Cheeseburger", TaskType.Recipe);
         //cheeseBurgerTask.Recipe = new Recipe("Cheeseburger", "top_bun", "cheese", "patty", "bottom_bun");
         //trainingModule.Tasks.Add(cheeseBurgerTask);
-        
+
         //trainingModule.Tasks.Add(new Task("Remembering to make a Whooper", TaskType.Testing));
         //trainingModule.Tasks.Add(new Task("Serve 5 customers", TaskType.Performance));
         //CurrentTask = whooperTask;

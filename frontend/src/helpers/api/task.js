@@ -28,3 +28,13 @@ export const getTask = async (token, taskId) => {
 	);
 	return res;
 }
+
+export const updateTask = async (token, taskId, data) => {
+	const res = await axios.put(`${API_HOST}/task/${taskId}`,
+		data,
+		{
+			headers: { Authorization: `Bearer ${token}` },
+		}
+	);
+	return res;
+}

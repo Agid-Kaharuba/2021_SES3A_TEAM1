@@ -45,7 +45,8 @@ export default class TaskController {
         const newTaskRequest = new Task({
             name: body.name,
             description: body.description,
-            recipe: body.recipe
+            recipe: body.recipe,
+            type: body.type
         } as any);
         newTaskRequest.save((err: MongoError) => {
             if (err) {
