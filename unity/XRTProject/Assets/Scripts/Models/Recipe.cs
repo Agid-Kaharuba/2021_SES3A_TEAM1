@@ -59,4 +59,37 @@ public class Recipe
     {
         return !Ingredients.Except(other.Ingredients).Any();
     }
+
+    public void SetIngredients(IEnumerable<PropData> ingredients)
+    {
+        this.ingredients = new List<PropData>(ingredients);
+    }
+
+    public int CalculateScore(Recipe sampleRecipe, int maxScore)
+    {
+        float totalScore = 0f;
+        float singleItemScore = maxScore / (float) Ingredients.Count;
+
+        for (int i = 0; i < Ingredients.Count; i++)
+        {
+            int targetIndex = i;
+            PropData expectedIngredient = Ingredients[i];
+
+            while (targetIndex < sampleRecipe.Ingredients.Count)
+            {
+                PropData foundIngredient = sampleRecipe.Ingredients[targetIndex++];
+
+                // If we found the correct ingredients
+                if (expectedIngredient == foundIngredient)
+                {
+                    // If found in the same place as expected, it will just return the singleItemScore
+                    totalScore += singleItemScore / 1f + (targetIndex - i);
+                }
+            }
+        }
+
+        totalScore /= Mathf.Max(1f, 1f + (sampleRecipe.Ingredients.Count - Ingredients.Count));
+        
+        return Mathf.RoundToInt(Mathf.Max(0, totalScore));
+    }
 }

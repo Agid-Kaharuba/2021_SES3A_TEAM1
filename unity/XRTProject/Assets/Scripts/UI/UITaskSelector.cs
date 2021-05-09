@@ -14,29 +14,30 @@ public class UITaskSelector : MonoBehaviour
     [SerializeField] private UIReorderableElement itemPrefab;
     [SerializeField] private UIReorderableElement sampleItem;
     [SerializeField] private bool shouldCloseOnSelect = true;
+    [SerializeField] private bool canDrag = false;
     [SerializeField] public OnTaskSelectedEvent OnTaskSelected;
 
     private float itemFontSize;
     private Vector2 itemSizeDelta;
-    private bool isReorderable;
 
     private void Awake()
     {
         itemFontSize = sampleItem.Text.fontSize;
         RectTransform sampleRectTransform = sampleItem.GetComponent<RectTransform>();
         itemSizeDelta = sampleRectTransform.sizeDelta;
-        isReorderable = sampleItem.canDrag;
     }
 
     private void OnEnable()
     {
         UpdateTaskList();
         TrainingManager.Instance.OnTrainingModuleChanged.AddListener(UpdateTaskList);
+        TrainingManager.Instance.OnCurrentTaskChanged.AddListener(UpdateTaskList);
     }
 
     private void OnDisable()
     {
         TrainingManager.Instance.OnTrainingModuleChanged.RemoveListener(UpdateTaskList);
+        TrainingManager.Instance.OnCurrentTaskChanged.RemoveListener(UpdateTaskList);
     }
 
     private void UpdateTaskList()
@@ -49,9 +50,10 @@ public class UITaskSelector : MonoBehaviour
         {
             UIReorderableElement item = Instantiate(itemPrefab, taskList);
             RectTransform rectTransform = item.GetComponent<RectTransform>();
-            item.canDrag = isReorderable;
+            item.canDrag = canDrag;
             item.Text.text = task.Name;
             item.Text.fontSize = sampleItem.Text.fontSize;
+            item.SetHighlighted(TrainingManager.Instance.CurrentTask == task);
             rectTransform.sizeDelta = itemSizeDelta;
             item.GetComponent<UIBoxColliderAutoScaler>()?.AutoScale();
 
@@ -88,6 +90,12 @@ public class UITaskSelector : MonoBehaviour
         {
             Destroy(taskList.GetChild(i).gameObject);
         }
+    }
+
+    public void SetCanDrag(bool canDrag)
+    {
+        this.canDrag = canDrag;
+        UpdateTaskList();
     }
 
     public void OnCancel()
