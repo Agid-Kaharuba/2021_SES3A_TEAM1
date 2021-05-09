@@ -30,6 +30,9 @@ namespace VRKeys
     public class Keyboard : MonoBehaviour
     {
         [SerializeField] private bool shouldParentPlayer;
+
+        [Tooltip("If filled, the keyboard will edit and display the text in the target text instead")]
+        [SerializeField] public TMP_Text targetText;
         
         private GameObject playerSpace;
 
@@ -200,7 +203,7 @@ namespace VRKeys
 
             disabled = false;
 
-            if (canvas != null)
+            if (canvas != null && targetText == null)
             {
                 canvas.SetActive(true);
             }
@@ -626,6 +629,11 @@ namespace VRKeys
                 display,
                 ColorUtility.ToHtmlStringRGB(caretColor)
             );
+
+            if (targetText != null)
+            {
+                targetText.text = text;
+            }
         }
 
         /// <summary>
