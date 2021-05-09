@@ -58,6 +58,12 @@ export default function CreateNewTrainingPage() {
     }
   });
 
+  //Passes courseID and authState token to launch XR training module
+  const handleLaunchXR = (courseID) => {
+    const token = authState.token
+    window.open('xrt-training://courseID=' + courseID + '&token=' + token)
+  }
+
   const buildCourse = (course) => {
     return (
       <Box mx={5} my={2}>
@@ -65,12 +71,13 @@ export default function CreateNewTrainingPage() {
           <Card className={classes.root} variant="outlined">
             <CardContent>
               <Typography className={classes.title} color="textSecondary" gutterBottom>
-                {course.name} - {course.description}
+                [{course._id}] {course.name} - {course.description}
               </Typography>
-
+            
             </CardContent>
             <CardActions>
               <Button size="small">View Training</Button>
+              <Button size="small" onClick={() => handleLaunchXR(course._id)}>Launch XR</Button>
             </CardActions>
           </Card>
         </Paper>
