@@ -54,7 +54,7 @@ export default function HomePage() {
             direction='column'
             alignItems='center'
             justify='center'
-            style={{ minHeight: '100vh', backgroundImage: "linear-gradient(45deg, #662D8C  10%, #ED1E79)"}}>
+            style={{ minHeight: ' calc(100vh - 64px)', backgroundImage: "linear-gradient(45deg, #662D8C  10%, #ED1E79)"}}>
               
             <Grid item>
               <img src={VRLogo} width='200' height='200'/>
