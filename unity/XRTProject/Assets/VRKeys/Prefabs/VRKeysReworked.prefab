@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keyboard: {fileID: 7251323914625454686}
-  label: {fileID: 114000013963117480, guid: f28287b1c722ebd4aa4f4d8547ed7fa8, type: 3}
+  label: {fileID: 7292703037783376584}
   inactiveMat: {fileID: 2100000, guid: 021552db260a9654ea7d9d472e44eb58, type: 2}
   activeMat: {fileID: 2100000, guid: 157abfb689445624c97d685110ed6172, type: 2}
   disabledMat: {fileID: 2100000, guid: 05726c44b31fc344db9d054567e02ee4, type: 2}
@@ -420,7 +420,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7363152384607233122}
-  - component: {fileID: 7296358697763387316}
   - component: {fileID: 7306339039767786500}
   - component: {fileID: 7358970921464834682}
   m_Layer: 0
@@ -449,14 +448,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0.55}
   m_SizeDelta: {x: 1.4, y: 0.8}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!33 &7296358697763387316
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7293420472587087088}
-  m_Mesh: {fileID: 0}
 --- !u!23 &7306339039767786500
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1149,7 +1140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keyboard: {fileID: 7251323914625454686}
-  label: {fileID: 114000013264606984, guid: f28287b1c722ebd4aa4f4d8547ed7fa8, type: 3}
+  label: {fileID: 7292703037146616680}
   inactiveMat: {fileID: 2100000, guid: 021552db260a9654ea7d9d472e44eb58, type: 2}
   activeMat: {fileID: 2100000, guid: 157abfb689445624c97d685110ed6172, type: 2}
   disabledMat: {fileID: 2100000, guid: 05726c44b31fc344db9d054567e02ee4, type: 2}
@@ -1747,7 +1738,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keyboard: {fileID: 7251323914625454686}
-  label: {fileID: 114000011330636678, guid: f28287b1c722ebd4aa4f4d8547ed7fa8, type: 3}
+  label: {fileID: 7292703036729005513}
   inactiveMat: {fileID: 2100000, guid: 021552db260a9654ea7d9d472e44eb58, type: 2}
   activeMat: {fileID: 2100000, guid: 157abfb689445624c97d685110ed6172, type: 2}
   disabledMat: {fileID: 2100000, guid: 05726c44b31fc344db9d054567e02ee4, type: 2}
@@ -2255,7 +2246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keyboard: {fileID: 7251323914625454686}
-  label: {fileID: 114000014124921810, guid: f28287b1c722ebd4aa4f4d8547ed7fa8, type: 3}
+  label: {fileID: 7292703037439177724}
   inactiveMat: {fileID: 2100000, guid: 021552db260a9654ea7d9d472e44eb58, type: 2}
   activeMat: {fileID: 2100000, guid: 157abfb689445624c97d685110ed6172, type: 2}
   disabledMat: {fileID: 2100000, guid: 05726c44b31fc344db9d054567e02ee4, type: 2}
@@ -2862,7 +2853,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7363152385034602104}
-  - component: {fileID: 7296358697484045010}
   - component: {fileID: 7306339040810279040}
   - component: {fileID: 7358970933507318384}
   m_Layer: 0
@@ -2891,14 +2881,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0.55}
   m_SizeDelta: {x: 0.7, y: 0.8}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!33 &7296358697484045010
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7293420474486825744}
-  m_Mesh: {fileID: 0}
 --- !u!23 &7306339040810279040
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4313,7 +4295,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keyboard: {fileID: 7251323914625454686}
-  label: {fileID: 114000012530348626, guid: f28287b1c722ebd4aa4f4d8547ed7fa8, type: 3}
+  label: {fileID: 7292703036935785310}
   inactiveMat: {fileID: 2100000, guid: 021552db260a9654ea7d9d472e44eb58, type: 2}
   activeMat: {fileID: 2100000, guid: 157abfb689445624c97d685110ed6172, type: 2}
   disabledMat: {fileID: 2100000, guid: 05726c44b31fc344db9d054567e02ee4, type: 2}
@@ -4508,7 +4490,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keyboard: {fileID: 7251323914625454686}
-  label: {fileID: 114000010527790036, guid: f28287b1c722ebd4aa4f4d8547ed7fa8, type: 3}
+  label: {fileID: 7292703037072489902}
   inactiveMat: {fileID: 2100000, guid: 021552db260a9654ea7d9d472e44eb58, type: 2}
   activeMat: {fileID: 2100000, guid: 157abfb689445624c97d685110ed6172, type: 2}
   disabledMat: {fileID: 2100000, guid: 05726c44b31fc344db9d054567e02ee4, type: 2}
