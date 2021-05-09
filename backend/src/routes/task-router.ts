@@ -37,6 +37,9 @@ export const TaskRoute = (app: Express, controller: TaskController) => {
      *        recipe:
      *         type: string
      *         example: recipe01
+     *        type;
+     *         type: string
+     *         example: liquid
      *   responses:
      *    200:
      *     description: Success
@@ -84,6 +87,9 @@ export const TaskRoute = (app: Express, controller: TaskController) => {
      *        description:
      *         type: string
      *         example: Boil water
+     *        type:
+     *         type: string
+     *         example: liquid
      *        recipe:
      *         type: string
      *         example: recipe01
