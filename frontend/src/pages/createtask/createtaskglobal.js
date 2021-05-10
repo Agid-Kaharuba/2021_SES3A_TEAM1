@@ -1,5 +1,5 @@
 import React, { useState} from "react";
-import { Link, useHistory, withRouter } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 // IMPORT COMPONENTS
 import { Box, Button, Typography, Divider, TextField, Grid, FormControl, Select, MenuItem, Paper } from "@material-ui/core";
@@ -30,11 +30,10 @@ const useStyles = makeStyles({
   },
 })
 
-export default function CreateNewTaskPage() {
+export default function CreateNewTaskGlobalPage() {
   const classes = useStyles();
 
-  const [formState, setFormState] = useState({name: "", description: "", type: ""});
-
+  const [formState, setFormState] = useState({name: "", description: "", recipe: ""});
   const { authState, setAuthState } = React.useContext(AuthContext);
   let history = useHistory();
 
@@ -52,7 +51,7 @@ export default function CreateNewTaskPage() {
     event.preventDefault();
     console.log(formState);
     api.task.create(authState.token, formState);
-    history.push('/dashboard/create-course');
+    history.push('/taskslist');
   }
 
   return (
@@ -140,17 +139,18 @@ export default function CreateNewTaskPage() {
 
       <Box justifyContent='center' display="flex" m={6}>
         <Box mr={6}>
-          <Button variant="contained" color="secondary" component={Link} to="/dashboard/create-course">
+          <Button variant="contained" color="secondary" component={Link} to="/taskslist">
             Back
           </Button>
         </Box>
         <Box>
-          <Button variant="contained" color="primary" onClick={handleSubmit}>
+          <Button variant="contained" color="primary"onClick={handleSubmit}>
             Save
           </Button>
         </Box>
       </Box>
 
+      
     </div>
   )
 }
