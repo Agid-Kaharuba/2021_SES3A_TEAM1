@@ -1,5 +1,5 @@
 import React, { useState} from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, withRouter } from "react-router-dom";
 
 // IMPORT COMPONENTS
 import { Box, Button, Typography, Divider, TextField, Grid, FormControl, Select, MenuItem, Paper } from "@material-ui/core";
@@ -33,7 +33,8 @@ const useStyles = makeStyles({
 export default function CreateNewTaskPage() {
   const classes = useStyles();
 
-  const [formState, setFormState] = useState({name: "", description: "", recipe: ""});
+  const [formState, setFormState] = useState({name: "", description: "", type: ""});
+
   const { authState, setAuthState } = React.useContext(AuthContext);
   let history = useHistory();
 

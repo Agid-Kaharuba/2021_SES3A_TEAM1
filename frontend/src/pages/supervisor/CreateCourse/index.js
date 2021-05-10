@@ -177,9 +177,6 @@ export default function CreateNewTrainingPage() {
   }
 
 
-  
-  
-
 
   //ASSIGN EMPLOYEE
   const [open, setOpen] = React.useState(false);
@@ -273,20 +270,6 @@ export default function CreateNewTrainingPage() {
       fetchDataUserTable();
     }
   });
-
-  const buildUserTable = (user) => {
-    return (
-      <TableRow key={user}>
-        <TableCell align="left">{user.firstname + " " + user.lastname}</TableCell>
-        <TableCell align="left">{user.staffid}</TableCell>
-        <TableCell align="right">
-          <Button component={Link} color="secondary" variant="outlined" to={"/statistics"}>
-            View
-          </Button>
-        </TableCell>
-      </TableRow>
-    )
-  }
 
   function createData(name, description, type) {
     return { name, description, type};
@@ -437,7 +420,6 @@ export default function CreateNewTrainingPage() {
                   <h1>LOADING</h1>
                 }
             </TableBody>
-            
           </Table>
         </TableContainer>
       </Box>
