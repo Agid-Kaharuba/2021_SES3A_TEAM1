@@ -84,7 +84,7 @@ export default function CreateNewTrainingPage() {
       </Box>
     )
   }
-
+  //Course is now changed to Training
   return (
     <Box>
 
@@ -101,7 +101,7 @@ export default function CreateNewTrainingPage() {
           </Grid>
           <Grid item>
             <Button component={Link} color="primary" variant="contained" to={"/dashboard/create-course"}>
-              Create Course
+              Create Training
             </Button>
           </Grid>
         </Grid>
