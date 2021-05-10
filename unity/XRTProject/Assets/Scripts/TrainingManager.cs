@@ -82,9 +82,10 @@ public class TrainingManager : MonoBehaviour
             {
                 CurrentUser = user;
                 OnUserReady?.Invoke();
-                OnCustomizationSettingsChanged?.Invoke();
                 Debug.Log("Retrieved user data!");
             }
+            
+            OnCustomizationSettingsChanged?.Invoke();
         }));
 
         // trainingModule = new TrainingModule("Make a Simple burger", "courseId");

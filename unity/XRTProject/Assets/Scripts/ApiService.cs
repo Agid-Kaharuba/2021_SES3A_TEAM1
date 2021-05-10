@@ -83,7 +83,10 @@ public class ApiService
         if (www.result != UnityWebRequest.Result.Success)
         {
             BackendErrorResponse response = JsonConvert.DeserializeObject<BackendErrorResponse>(www.downloadHandler.text);
-            response.Status = www.responseCode;
+            
+            // If the backend returns a non-json (like empty text), then response would be null
+            if (response != null)
+                response.Status = www.responseCode;
             callback?.Invoke(response);
         }
         else
@@ -117,7 +120,10 @@ public class ApiService
         if (www.result != UnityWebRequest.Result.Success)
         {
             BackendErrorResponse response = JsonConvert.DeserializeObject<BackendErrorResponse>(www.downloadHandler.text);
-            response.Status = www.responseCode;
+            
+            // If the backend returns a non-json (like empty text), then response would be null
+            if (response != null)
+                response.Status = www.responseCode;
             callback?.Invoke(response);
         }
         else

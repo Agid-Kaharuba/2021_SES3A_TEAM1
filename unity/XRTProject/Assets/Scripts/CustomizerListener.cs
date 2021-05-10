@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 
-public class CustomizerFilter : MonoBehaviour
+public class CustomizerListener : MonoBehaviour
 {
     public UnityEvent OnCanCustomize;
     public UnityEvent OnCannotCustomize;
@@ -20,22 +20,13 @@ public class CustomizerFilter : MonoBehaviour
 
     private void OnCustomizationSettingsChanged()
     {
-        User user = TrainingManager.Instance.CurrentUser;
-
-        if (TrainingManager.Instance.forceCanCustomize)
+        if (TrainingManager.Instance.CanCustomize)
         {
             OnCanCustomize?.Invoke();
         }
-        else if (user != null)
+        else
         {
-            if (user.IsSupervisor)
-            {
-                OnCanCustomize?.Invoke();
-            }
-            else
-            {
-                OnCannotCustomize?.Invoke();
-            }
+            OnCannotCustomize?.Invoke();
         }
     }
 }
