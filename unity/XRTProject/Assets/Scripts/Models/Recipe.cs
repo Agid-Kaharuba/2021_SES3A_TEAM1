@@ -60,6 +60,11 @@ public class Recipe
         return !Ingredients.Except(other.Ingredients).Any();
     }
 
+    public void SetIngredients(IEnumerable<PropData> ingredients)
+    {
+        this.ingredients = new List<PropData>(ingredients);
+    }
+
     public int CalculateScore(Recipe sampleRecipe, int maxScore)
     {
         float totalScore = 0f;

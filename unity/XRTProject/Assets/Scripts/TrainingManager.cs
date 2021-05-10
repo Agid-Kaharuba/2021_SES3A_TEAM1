@@ -16,6 +16,7 @@ public class TrainingManager : MonoBehaviour
     [SerializeField] public UnityEvent OnCustomizationSettingsChanged;
     
     private TrainingModule trainingModule;
+    private ApiService apiService;
     
     public static TrainingManager Instance { get; private set; }
 
@@ -45,8 +46,6 @@ public class TrainingManager : MonoBehaviour
     }
 
     public bool IsTrainingModuleReady => TrainingModule != null;
-
-    public ApiService apiService;
 
     private void Awake()
     {
@@ -88,19 +87,19 @@ public class TrainingManager : MonoBehaviour
             }
         }));
 
-        trainingModule = new TrainingModule("Make a Simple burger", "courseId");
-        
-        Task whooperTask = new Task("Learn to make a Whooper", TaskType.Recipe);
-        whooperTask.Recipe = new Recipe("Whooper", "top_bun", "lettuce", "cheese", "patty", "bottom_bun");
-        trainingModule.Tasks.Add(whooperTask);
-        
-        Task cheeseBurgerTask = new Task("Learn to make a Cheeseburger", TaskType.Recipe);
-        cheeseBurgerTask.Recipe = new Recipe("Cheeseburger", "top_bun", "cheese", "patty", "bottom_bun");
-        trainingModule.Tasks.Add(cheeseBurgerTask);
-        
-        trainingModule.Tasks.Add(new Task("Remembering to make a Whooper", TaskType.Testing));
-        trainingModule.Tasks.Add(new Task("Serve 5 customers", TaskType.Performance));
-        CurrentTask = whooperTask;
+        // trainingModule = new TrainingModule("Make a Simple burger", "courseId");
+        //
+        // Task whooperTask = new Task("Learn to make a Whooper", TaskType.Recipe);
+        // whooperTask.Recipe = new Recipe("Whooper", "top_bun", "lettuce", "cheese", "patty", "bottom_bun");
+        // trainingModule.Tasks.Add(whooperTask);
+        //
+        // Task cheeseBurgerTask = new Task("Learn to make a Cheeseburger", TaskType.Recipe);
+        // cheeseBurgerTask.Recipe = new Recipe("Cheeseburger", "top_bun", "cheese", "patty", "bottom_bun");
+        // trainingModule.Tasks.Add(cheeseBurgerTask);
+        //
+        // trainingModule.Tasks.Add(new Task("Remembering to make a Whooper", TaskType.Testing));
+        // trainingModule.Tasks.Add(new Task("Serve 5 customers", TaskType.Performance));
+        // CurrentTask = whooperTask;
     }
 
     private void Start()
@@ -160,6 +159,21 @@ public class TrainingManager : MonoBehaviour
     public void SwitchPreviousTask()
     {
         SwitchTask(CurrentTaskIndex - 1);
+    }
+
+    public void UpdateTaskWithNewRecipe(Task task, Recipe recipe)
+    {
+        if (task.Recipe == null) return;
+        
+        task.Recipe.SetIngredients(recipe.Ingredients);
+
+        StartCoroutine(apiService.UpdateRecipe(task.Recipe, (obj) =>
+        {
+            if (obj is BackendErrorResponse error)
+            {
+                Debug.LogError($"Error updating recipe: {error.Message}");
+            }
+        }));
     }
 
     public void SubmitTask(Recipe recipe)
