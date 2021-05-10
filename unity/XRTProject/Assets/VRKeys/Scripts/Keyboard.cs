@@ -29,12 +29,10 @@ namespace VRKeys
     /// </summary>
     public class Keyboard : MonoBehaviour
     {
-        [SerializeField] private bool shouldParentPlayer;
-
         [Tooltip("If filled, the keyboard will edit and display the text in the target text instead")]
         [SerializeField] public TMP_Text targetText;
         
-        private GameObject playerSpace;
+        public GameObject playerSpace;
 
         private GameObject leftHand;
 
@@ -134,7 +132,6 @@ namespace VRKeys
         private IEnumerator Start()
         {
             // Directly source SteamVR left hand and right hand
-            playerSpace = Player.instance.gameObject;
             leftHand = Player.instance.leftHand.gameObject;
             rightHand = Player.instance.rightHand.gameObject;
             
@@ -152,7 +149,7 @@ namespace VRKeys
 
         private void PositionAndAttachMallets()
         {
-            if (shouldParentPlayer)
+            if (playerSpace != null)
                 transform.SetParent(playerSpace.transform, false);
             transform.localPosition = positionRelativeToUser;
 
