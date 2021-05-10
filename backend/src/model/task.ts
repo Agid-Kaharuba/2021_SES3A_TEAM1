@@ -20,10 +20,6 @@ const taskSchema = new mongoose.Schema({
     archive: {
         type: Boolean,
         required: false
-    },
-    type: {
-        type: String,
-        required: false
     }
 });
 
