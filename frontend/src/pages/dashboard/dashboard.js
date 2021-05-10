@@ -71,7 +71,7 @@ export default function CreateNewTrainingPage() {
           <Card className={classes.root} variant="outlined">
             <CardContent>
               <Typography className={classes.title} color="textSecondary" gutterBottom>
-                [{course._id}] {course.name} - {course.description}
+                {course.name} - {course.description}
               </Typography>
             
             </CardContent>
