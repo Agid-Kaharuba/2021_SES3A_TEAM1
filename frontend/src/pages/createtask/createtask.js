@@ -144,7 +144,7 @@ export default function CreateNewTaskPage() {
           </Button>
         </Box>
         <Box>
-          <Button variant="contained" color="primary"onClick={handleSubmit}>
+          <Button variant="contained" color="primary" onClick={handleSubmit}>
             Save
           </Button>
         </Box>

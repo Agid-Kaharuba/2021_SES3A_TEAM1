@@ -46,9 +46,9 @@ const useStyles = makeStyles({
   },
 })
 
-function createData(name, description, recipe, task) {
-  return { name, description, recipe, task };
-}
+// function createData(name, description, recipe, task) {
+//   return { name, description, recipe, task };
+// }
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -56,7 +56,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function CreateNewTrainingPage() {
   const classes = useStyles();
-
 
   //SAVE COURSE
   const [formState, setFormState] = useState({name: "", description: ""});
@@ -82,25 +81,92 @@ export default function CreateNewTrainingPage() {
 
 
   // CREATE TASKS
+  const [openTask, setOpenTask] = React.useState(false);
+
+  const handleClickOpenTask = () => {
+    setOpenTask(true);
+  };
+
+  const handleCloseTask = () => {
+    setOpenTask(false);
+  };
+
   const [tasksState, setTasksState] = useState(undefined);
 
-  const fetchData = async () => {
+  const fetchDataTask = async () => {
     const res = await api.task.getAll(authState.token);
     setTasksState(res.data);
   };
 
   useEffect(() => {
     if (tasksState === undefined) {
-      fetchData();
+      fetchDataTask();
     }
   });
 
+
+  const [rowTasks, setRowsTasks] = React.useState([]);
+  
+  const [checkedTask, setCheckedTask] = React.useState([1]);
+
+
+  const handleToggleTask = (value) => () => {
+    const currentIndex = checkedTask.indexOf(value);
+    const newChecked = [...checkedTask];
+    const newrows = [...rowTasks];
+
+    if (currentIndex === -1) {
+      newChecked.push(value);
+      newrows.push(createData(value.name, value.description, value.type),);
+    } else {
+      newChecked.splice(currentIndex, 1);
+      newrows.push(createData(value.name, value.description, value.type),);
+    }
+
+    setCheckedTask(newChecked);
+    setRowsTasks(newrows);
+  };
+
   const buildTask = (task) => {
+    return (
+      <div>
+        {[0].map((value) => {
+        const labelId = `checkbox-list-secondary-label-${task}`;
+        return (
+          <ListItem key={task} button>
+            <ListItemAvatar>
+              <Avatar
+                // alt={`Avatar n°${user + 1}`}
+                // src={`/static/images/avatar/${user + 1}.jpg`}
+              />
+            </ListItemAvatar>
+            <ListItemText id={labelId} primary={task.name} alignItems="flex-start"
+            secondary={task.description}/>
+            
+            <ListItemSecondaryAction>
+              <Checkbox
+                edge="end"
+                onChange={handleToggleTask(task)}
+                checked={checkedTask.indexOf(task) !== -1}
+                inputProps={{ 'aria-labelledby': labelId }}
+              />
+            </ListItemSecondaryAction>
+          </ListItem>
+        );
+      })}
+      </div>
+    )
+  }
+
+  // const [tasksState, setTasksState] = useState(undefined);
+
+
+  const buildTaskTable = (task) => {
     return (
       <TableRow key={task.name}>
         <TableCell align="left">{task.name}</TableCell>
         <TableCell align="left">{task.description}</TableCell>
-        <TableCell align="left">{task.recipe}</TableCell>
+        <TableCell align="left">{task.type}</TableCell>
         <TableCell align="right">
         <Link to={`/task/${task._id}`}>
           <Button variant="outlined" color="secondary">View Task</Button>
@@ -109,6 +175,10 @@ export default function CreateNewTrainingPage() {
       </TableRow>
     )
   }
+
+
+  
+  
 
 
   //ASSIGN EMPLOYEE
@@ -135,6 +205,9 @@ export default function CreateNewTrainingPage() {
     }
   });
 
+  function createDataTask(firstname, lastname, staffid) {
+    return { firstname, lastname, staffid};
+  }
 
   const [rows, setRows] = React.useState([]);
   
@@ -148,10 +221,10 @@ export default function CreateNewTrainingPage() {
 
     if (currentIndex === -1) {
       newChecked.push(value);
-      newrows.push(createData(value.firstname, value.lastname, value.staffid),);
+      newrows.push(createDataTask(value.firstname, value.lastname, value.staffid),);
     } else {
       newChecked.splice(currentIndex, 1);
-      newrows.push(createData(value.firstname, value.lastname, value.staffid),);
+      newrows.push(createDataTask(value.firstname, value.lastname, value.staffid),);
     }
 
     setChecked(newChecked);
@@ -215,11 +288,9 @@ export default function CreateNewTrainingPage() {
     )
   }
 
-  function createData(firstname, lastname, staffid) {
-    return { firstname, lastname, staffid};
+  function createData(name, description, type) {
+    return { name, description, type};
   }
-  
-
 
   const buildRowTable = (row) => {
     return (
@@ -288,16 +359,57 @@ export default function CreateNewTrainingPage() {
             </Typography>
           </Grid>
 
-          <Grid item>
-            <Button component={Link} color="secondary" variant="contained" to={"/dashboard/create"}>
-              Add Task
-            </Button>
-          </Grid>
           <Grid item >
-            <Button component={Link} color="primary" variant="contained" to={"/createtask"}>
+            <Button component={Link} color="secondary" variant="contained" to={"/createtask"}>
               Create Task
             </Button>
           </Grid>
+
+          <Grid item>
+            {/* <Button component={Link} color="secondary" variant="contained" onClick={handleClickOpenTask}>
+              Add Task
+            </Button> */}
+            <div>
+              <Button variant="contained" color="primary" onClick={handleClickOpenTask}>
+                Assign Task
+              </Button>
+              <Dialog fullScreen open={openTask} onClose={handleCloseTask} TransitionComponent={Transition}>
+                <AppBar className={classes.appBar}>
+                  <Toolbar>
+                    <IconButton edge="start" color="inherit" onClick={handleCloseTask} aria-label="close">
+                      <CloseIcon />
+                    </IconButton>
+                    <Typography variant="h6" className={classes.title}>
+                      Available Tasks
+                    </Typography>
+                    <Button autoFocus color="inherit" onClick={handleCloseTask}>
+                      Save
+                    </Button>
+                  </Toolbar>
+                </AppBar>
+                <List>
+                  <ListSubheader component="div" id="nested-list-subheader">
+                    Select the tasks to add to this course.
+                  </ListSubheader>
+                    {/* {usersState ?
+                    usersState.map((task) => {
+                      return buildTask(task);
+                    })
+                    :
+                    <h1>LOADING</h1>
+                  } */}
+                  {tasksState ?
+                    tasksState.map((task) => {
+                      return buildTask(task);
+                    })
+                    :
+                    <h1>LOADING</h1>
+                  }
+                </List>
+              </Dialog>
+            </div>
+          </Grid>
+          
  
         </Grid>
         <Box my={1}>
@@ -317,14 +429,15 @@ export default function CreateNewTrainingPage() {
               </TableRow>
             </TableHead>
             <TableBody>
-                {tasksState ?
-                  tasksState.map((task) => {
-                    return buildTask(task);
+                {rowTasks ?
+                  rowTasks.map((task) => {
+                    return buildTaskTable(task);
                   })
                   :
                   <h1>LOADING</h1>
                 }
             </TableBody>
+            
           </Table>
         </TableContainer>
       </Box>
@@ -343,7 +456,7 @@ export default function CreateNewTrainingPage() {
           <Grid item>
             <div>
               <Button variant="contained" color="primary" onClick={handleClickOpen}>
-                Assign
+                Assign User
               </Button>
               <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
                 <AppBar className={classes.appBar}>
