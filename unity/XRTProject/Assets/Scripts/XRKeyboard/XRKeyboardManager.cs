@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using Valve.VR.InteractionSystem;
 using VRKeys;
 
@@ -10,6 +11,8 @@ public class XRKeyboardManager : MonoBehaviour
     [SerializeField] private Keyboard keyboard;
     [SerializeField] private float targetY;
     [SerializeField] private float targetDistance;
+    public UnityEvent OnKeyboardEnabled;
+    public UnityEvent OnKeyboardDisabled;
 
     private Vector3 originalKeyboardPos = Vector3.zero;
     
@@ -52,10 +55,12 @@ public class XRKeyboardManager : MonoBehaviour
 
         keyboard.transform.rotation = forwardRotation;
         keyboard.transform.position = playerPos + forwardVector * (1 + targetDistance);
+        OnKeyboardEnabled?.Invoke();
     }
 
     public void DisableKeyboard()
     {
+        OnKeyboardDisabled?.Invoke();
         keyboard.Disable();
         keyboard.targetText = null;
         keyboard.transform.position = originalKeyboardPos;
