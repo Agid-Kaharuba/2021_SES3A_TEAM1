@@ -23,8 +23,6 @@ import api from "../../helpers/api";
 const drawerWidth = 240;
 const history = createBrowserHistory();
 
-const { authState } = useContext(AuthContext);
-
 const styles = theme => ({
 	root: {
     flexGrow: 1
@@ -157,6 +155,7 @@ const MyDrawer = withStyles(styles)(
 function AppBarInteraction({ classes, variant }) {
   const [drawer, setDrawer] = useState(false);
   // const [title, setTitle] = useState("Home");
+  const { authState } = useContext(AuthContext);
 
   const toggleDrawer = () => {
     setDrawer(!drawer);
