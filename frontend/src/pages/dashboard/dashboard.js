@@ -85,6 +85,7 @@ export default function CreateNewTrainingPage() {
     )
   }
   //Course is now changed to Training
+  //Line 104 checks if the user is a supervisor and show create training button if they are.
   return (
     <Box>
 
@@ -100,9 +101,10 @@ export default function CreateNewTrainingPage() {
             </Typography>
           </Grid>
           <Grid item>
+          {authState.user.isSupervisor && (
             <Button component={Link} color="primary" variant="contained" to={"/dashboard/create-course"}>
               Create Training
-            </Button>
+            </Button>)}
           </Grid>
         </Grid>
         <Box my={1}>
