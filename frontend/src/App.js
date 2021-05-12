@@ -21,7 +21,7 @@ import ViewTask from "./pages/viewtask/viewtask.js";
 import SignUp from "./pages/signup/signup.js";
 import TaskList from "./pages/taskslist/taskslist.js";
 import CreateTaskGlobal from "./pages/createtask/createtaskglobal.js";
-import Statistics from "./pages/statistics/Statistics";
+import Statistics from "./pages/statistics/statistics.js";
 import CreateNewTask from "./pages/createtask/createtask.js";
 
 // import appTheme from "./helpers/appTheme";
