@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 //STYLES
-import {ThemeProvider} from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/core/styles";
 import Theme from './theme'
 
 // IMPORT COMPONENTS
@@ -56,21 +56,20 @@ function AppRouter(props) {
         exact={true}
         component={EmployeeProfile} />
 
-      <Route path="/taskslist" 
+      <Route path="/taskslist"
         exact={true}
         component={TaskList}>
       </Route>
 
-      <Route path="/taskslist/createtask" 
+      <Route path="/taskslist/createtask"
         exact={true}
         component={CreateTaskGlobal}>
       </Route>
 
 
-      <Route path="/statistics" 
+      <PrivateRoute path="/dashboard/:courseId/statistics"
         exact={true}
-        component={Statistics}>
-      </Route>
+        component={Statistics} />
 
       <Route path="/login"
         exact={true}
@@ -106,7 +105,7 @@ function AppRouter(props) {
         exact={true}
         component={Statistics}>
       </Route>
-    
+
       <Route path="/createtask"
         exact={true}
         component={CreateNewTask}>
