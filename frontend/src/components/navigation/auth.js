@@ -2,7 +2,7 @@ import React, { useState, Fragment } from "react";
 import clsx from "clsx";
 import { Router, Route, Link } from "react-router-dom";
 import { createBrowserHistory } from "history";
-
+//import {authState} from 'pages/signup.js'
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -18,8 +18,12 @@ import { Divider, ListItemIcon } from "@material-ui/core";
 import HomeIcon from '@material-ui/icons/Home';
 import {grey, purple} from '@material-ui/core/colors'
 import { AuthContext } from "../../context/auth";
+import api from "../../helpers/api";
+
 const drawerWidth = 240;
 const history = createBrowserHistory();
+
+const { authState } = useContext(AuthContext);
 
 const styles = theme => ({
 	root: {
@@ -115,13 +119,14 @@ const MyDrawer = withStyles(styles)(
           onClick={onItemClick("Profile")}>
             <ListItemText>Profile</ListItemText>
           </ListItem>
-          <ListItem 
+          {authState.user.isSupervisor && (
+            <ListItem 
           button 
           component={Link}
           to="/task"
           onClick={onItemClick("Tasks")}>
             <ListItemText>Tasks</ListItemText>
-          </ListItem>
+          </ListItem>)}
           <ListItem 
           button 
           component={Link}
