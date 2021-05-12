@@ -20,7 +20,7 @@ export default class ProgressController {
                 taskId: req.body.taskId,
                 courseId: req.body.courseId
             })
-            if (progress){
+            if (progress) {
                 const response = await Progress.updateOne({ _id: progress._id }, body);
                 ResponseService.successResponse(res, response);
             }
@@ -51,13 +51,7 @@ export default class ProgressController {
                     { $or: [{ undefined: { $eq: req.query.courseId } }, { courseId: req.query.courseId }] }
                 ]
             });
-            if (search.length > 0) {
-                ResponseService.successResponse(res, search);
-            }
-            else {
-                ResponseService.notFoundResponse(res, "Query Not found");
-            }
-
+            ResponseService.successResponse(res, search);
         }
         catch (err) {
             ResponseService.mongoErrorResponse(res, err);
