@@ -20,6 +20,7 @@ import Brendon from '../../images/profile-photos/brendon-tong.png';
 import Lakshva from '../../images/profile-photos/lakshva-sharma.jpg';
 import MitchGif from '../../images/mitchellvr.gif';
 import VanishaGif from '../../images/vanishavr.gif';
+import BryanGif from '../../images/bryanvr.gif';
 
 // import { Link } from "react-router-dom";
 // import { AuthContext } from "../../context/auth";
@@ -112,9 +113,9 @@ export default function AboutUsPage() {
                 </Box>
               </Box>
               <Box>
-                <img src={VanishaGif}></img>
+                <img src={BryanGif}></img>
                 <Box fontStyle="italic">
-                  <WhiteTextTypography>- "Vanisha trying VR"</WhiteTextTypography>
+                  <WhiteTextTypography>- "Bryan trying VR"</WhiteTextTypography>
                 </Box>
               </Box>
             </Grid>
