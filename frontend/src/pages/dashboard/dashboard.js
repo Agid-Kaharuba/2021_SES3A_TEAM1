@@ -61,7 +61,7 @@ export default function CreateNewTrainingPage() {
   //Passes courseID and authState token to launch XR training module
   const handleLaunchXR = (courseID) => {
     const token = authState.token
-    window.open('xrt-training://courseID=' + courseID + '&token=' + token)
+    window.open('xrt-training://?courseID=' + courseID + '&token=' + token)
   }
 
   const buildCourse = (course) => {
@@ -71,7 +71,7 @@ export default function CreateNewTrainingPage() {
           <Card className={classes.root} variant="outlined">
             <CardContent>
               <Typography className={classes.title} color="textSecondary" gutterBottom>
-                [{course._id}] {course.name} - {course.description}
+                {course.name} - {course.description}
               </Typography>
             
             </CardContent>
@@ -84,7 +84,8 @@ export default function CreateNewTrainingPage() {
       </Box>
     )
   }
-
+  //Course is now changed to Training
+  //Line 104 checks if the user is a supervisor and show create training button if they are.
   return (
     <Box>
 
@@ -100,9 +101,10 @@ export default function CreateNewTrainingPage() {
             </Typography>
           </Grid>
           <Grid item>
+          {authState.user.isSupervisor && (
             <Button component={Link} color="primary" variant="contained" to={"/dashboard/create-course"}>
-              Create Course
-            </Button>
+              Create Training
+            </Button>)}
           </Grid>
         </Grid>
         <Box my={1}>

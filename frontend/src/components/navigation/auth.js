@@ -1,8 +1,8 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useContext } from "react";
 import clsx from "clsx";
 import { Router, Route, Link } from "react-router-dom";
 import { createBrowserHistory } from "history";
-
+//import {authState} from 'pages/signup.js'
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -18,6 +18,8 @@ import { Divider, ListItemIcon } from "@material-ui/core";
 import HomeIcon from '@material-ui/icons/Home';
 import {grey, purple} from '@material-ui/core/colors'
 import { AuthContext } from "../../context/auth";
+import api from "../../helpers/api";
+
 const drawerWidth = 240;
 const history = createBrowserHistory();
 
@@ -70,7 +72,7 @@ const MyToolbar = withStyles(styles)(({ classes, title, onMenuClick }) => (
 ));
 //Guest drawer
 const MyDrawer = withStyles(styles)(
-  ({ classes, variant, open, onClose, onItemClick }) => (
+  ({ classes, variant, open, onClose, onItemClick, authState }) => (
     <Box>
       <Drawer
         variant={variant}
@@ -115,13 +117,14 @@ const MyDrawer = withStyles(styles)(
           onClick={onItemClick("Profile")}>
             <ListItemText>Profile</ListItemText>
           </ListItem>
-          <ListItem 
+          {authState.user.isSupervisor && (
+            <ListItem 
           button 
           component={Link}
           to="/task"
           onClick={onItemClick("Tasks")}>
             <ListItemText>Tasks</ListItemText>
-          </ListItem>
+          </ListItem>)}
           <ListItem 
           button 
           component={Link}
@@ -152,7 +155,7 @@ const MyDrawer = withStyles(styles)(
 function AppBarInteraction({ classes, variant }) {
   const [drawer, setDrawer] = useState(false);
   // const [title, setTitle] = useState("Home");
-
+  const { authState } = useContext(AuthContext);
   const toggleDrawer = () => {
     setDrawer(!drawer);
   };
@@ -172,6 +175,7 @@ function AppBarInteraction({ classes, variant }) {
         onClose={toggleDrawer}
         onItemClick={onItemClick}
         variant={variant}
+        authState={authState}
       />
     </div>
   );
