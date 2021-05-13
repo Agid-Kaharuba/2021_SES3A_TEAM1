@@ -1,6 +1,6 @@
 import React, { useState, Fragment, useContext } from "react";
 import clsx from "clsx";
-import { Router, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { createBrowserHistory } from "history";
 //import {authState} from 'pages/signup.js'
 import { withStyles } from "@material-ui/core/styles";
@@ -16,9 +16,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Box from "@material-ui/core/Box";
 import { Divider, ListItemIcon } from "@material-ui/core";
 import HomeIcon from '@material-ui/icons/Home';
-import {grey, purple} from '@material-ui/core/colors'
 import { AuthContext } from "../../context/auth";
-import api from "../../helpers/api";
 
 const drawerWidth = 240;
 const history = createBrowserHistory();

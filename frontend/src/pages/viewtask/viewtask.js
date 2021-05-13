@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Button, Container, Typography, Divider, Box, FormControl, Select, MenuItem, InputLabel, Grid, TextField } from "@material-ui/core";
+import { Button, Typography, Divider, Box, FormControl, Select, MenuItem, Grid, TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { Link, Redirect } from "react-router-dom";
 import { AuthContext } from "../../context/auth";
 import api from "../../helpers/api";
 

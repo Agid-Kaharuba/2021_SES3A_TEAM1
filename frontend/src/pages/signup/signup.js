@@ -14,7 +14,6 @@ import { Radio } from '@material-ui/core';
 
 import api from "../../helpers/api";
 import { AuthContext } from "../../context/auth";
-import isAuthenticated from "../../helpers/auth/isAuthenticated"
 
 //creating the react hook
 const useStyles = makeStyles((theme) => ({

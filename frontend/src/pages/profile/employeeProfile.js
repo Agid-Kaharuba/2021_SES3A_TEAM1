@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
-import { Button, TextField, Container, Typography, Avatar } from "@material-ui/core";
 import Profile from '../../components/profile'
-import UploadImageForm from "../../components/upload";
 import api from '../../helpers/api'
 import { AuthContext } from "../../context/auth";
 
@@ -11,10 +9,6 @@ export default function EmployeeProfile(props) {
   const [resultState, setResultState] = useState(undefined);
   const [img, setImg] = useState(undefined);
   const uploadedImage = useRef(null);
-  const pImage = useState({
-    profileImg: 'https://cdn3.iconfinder.com/data/icons/gradient-general-pack/512/user-01-512.png'
-  });
-  // const {profileImg} = this.pImage;
 
   const fetchData = async () => {
     const res = await api.user.current(authState.token);
