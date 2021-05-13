@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { Link } from "react-router-dom"
 import { Button, Typography, Divider, Box, FormControl, Select, MenuItem, Grid, TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import LoadingSpinner from "../../components/loadingSpinner/index.js"
@@ -113,7 +114,7 @@ export default function ViewTask(props) {
                                     {editState ? "Edit" : "Save"}
                                 </Button>
                             </Box>
-                            <Box>
+                            <Box style={{ padding: "1vw" }}>
                                 <Button variant="contained" color='primary' size="large" component={Link} to="/taskslist">
                                     Back
                             </Button>
