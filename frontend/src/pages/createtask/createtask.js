@@ -121,7 +121,7 @@ export default function CreateNewTaskPage() {
                 id="demo-simple-select-placeholder-label"
                 onChange={handleChange}
                 displayEmpty
-                name="recipe"
+                name="type"
                 className={classes.selectEmpty}
               >
                 <MenuItem value="">

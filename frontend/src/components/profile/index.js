@@ -19,8 +19,8 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(0.5)
   },
   image: {
-    height: 160,
-    width: 160,
+    height: 200,
+    width: 200,
     borderRadius: 100,
     margin: theme.spacing(2),
   },
@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
   },
   uploadBtn: {
-    marginLeft: theme.spacing(4)
+    marginLeft: theme.spacing(4),
   }
 }));
 
@@ -49,7 +49,7 @@ function ProfilePicture(props) {
     <>
       {/*Accepting only files with image type*/}
       <input type="file" id="input" accept="image/*" onChange={handleImageUpload} ref={imageUploader} className={classes.imageUpload} />
-      <div>
+      <div className={classes.container}>
         <img className={classes.image} src={props.image.data} />
         <br />
         <Button size="small" onClick={() => imageUploader.current.click()} variant="outlined" color="secondary" className={classes.uploadBtn}>Upload Image</Button>

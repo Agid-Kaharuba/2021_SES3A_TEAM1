@@ -192,7 +192,7 @@ export default function CreateNewTrainingPage() {
   const [usersState, setUsersState] = useState(undefined);
 
   const fetchDataUser = async () => {
-    const res = await api.user.all(authState.token);
+    const res = await api.user.search(authState.token, "isSupervisor=false");
     setUsersState(res.data);
   };
 

@@ -9,7 +9,7 @@ const useStyles = makeStyles({
       fontWeight: 600
     },
     underline: {
-      textDecorationLine: 'underline'
+      textDecoration: 'none'
     },
     italic: {
       fontStyle: 'italic'
@@ -30,7 +30,7 @@ export default function Tasks({tasksState}){
               <TableCell align="left">{task.description}</TableCell>
               <TableCell align="left">{task.type}</TableCell>
               <TableCell align="left">
-              <Link to={`/task/${task._id}`}>
+              <Link className={classes.underline} to={`/task/${task._id}`}>
                   <Button variant="outlined" color="secondary">View Task</Button>
               </Link>
               </TableCell>
