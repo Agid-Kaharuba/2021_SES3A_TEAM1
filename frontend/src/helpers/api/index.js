@@ -22,6 +22,9 @@ import {
   getTask,
   updateTask
 } from "./task";
+import {
+  getAllRecipes
+} from "./recipe";
 
 export const API_HOST = "http://localhost:4000";
 
@@ -49,5 +52,8 @@ export default {
     create: createTask,
     get: getTask,
     update: updateTask
+  },
+  recipe: {
+    getAll: getAllRecipes
   }
 }
