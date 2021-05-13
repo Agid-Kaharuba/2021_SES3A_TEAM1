@@ -125,6 +125,14 @@ const MyDrawer = withStyles(styles)(
           onClick={onItemClick("Tasks")}>
             <ListItemText>Tasks</ListItemText>
           </ListItem>)}
+          {authState.user.isSupervisor && (
+            <ListItem 
+          button 
+          component={Link}
+          to="/user"
+          onClick={onItemClick("Users")}>
+            <ListItemText>Users</ListItemText>
+          </ListItem>)}
           <ListItem 
           button 
           component={Link}
