@@ -105,7 +105,7 @@ function AppRouter(props) {
         component={ViewTask}>
       </Route>
 
-      <Route path="/recipe/:recipeId"
+      <Route path="/recipelist/:recipeId"
         exact={true}
         component={ViewRecipe}>
       </Route>

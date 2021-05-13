@@ -34,6 +34,8 @@ export default function ViewRecipe(props) {
     }
 
     const handleEdit = async (e) => {
+        //Set editState to enable if user is an employee
+        //Update if button is selected
         if (!editState) {
             console.log(recipeState)
             const res = await api.recipe.update(authState.token, recipeId, recipeState);
@@ -67,9 +69,10 @@ export default function ViewRecipe(props) {
                    </Typography>
                     </Grid>
                     <Grid item align="right">
+                    {authState.user.isSupervisor && (
                         <Button variant="contained" style={{ width: 80 }} color={editState ? "secondary" : "primary"} size="large" onClick={handleEdit}>
                             {editState ? "Edit" : "Save"}
-                        </Button>
+                        </Button>)}
                     </Grid>
                 </Grid>
                 <Divider variant="middle" />
@@ -87,7 +90,7 @@ export default function ViewRecipe(props) {
                         <Typography className={classes.bold} variant='h6'>
                             Category
             </Typography>
-                        <TextField value={recipeState.category} id="name" disabled={editState} variant="outlined" fullWidth margin='normal' onChange={handleChange} />
+                        <TextField value={recipeState.category} id="category" disabled={editState} variant="outlined" fullWidth margin='normal' onChange={handleChange} />
                     </Grid>
                     <Grid>
                         <Typography className={classes.bold} variant='h6'>
