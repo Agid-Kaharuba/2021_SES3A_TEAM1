@@ -8,12 +8,10 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
 import { Alert } from "@material-ui/lab";
 
 import api from "../../helpers/api";
 import { AuthContext } from "../../context/auth";
-import isAuthenticated from "../../helpers/auth/isAuthenticated"
 
 //creating the react hook
 const useStyles = makeStyles((theme) => ({

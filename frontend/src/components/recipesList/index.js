@@ -3,7 +3,6 @@ import { Button, Typography, Box, Divider,Table, TableBody, TableCell, TableCont
 import { makeStyles } from "@material-ui/core/styles";
 
 import { Link} from "react-router-dom";
-import BackButton from '../backbutton';
 
 const useStyles = makeStyles({
     bold: {
@@ -21,18 +20,17 @@ const useStyles = makeStyles({
   })
 
 
-export default function Tasks({tasksState}){
+export default function Recipes({recipesState}){
     const classes = useStyles();
 
-    function buildTask(task) {
+    function buildRecipe(recipe) {
         return (
-          <TableRow key={task.name}>
-              <TableCell align="left">{task.name}</TableCell>
-              <TableCell align="left">{task.description}</TableCell>
-              <TableCell align="left">{task.type}</TableCell>
+          <TableRow key={recipe.name}>
+              <TableCell align="left">{recipe.name}</TableCell>
+              <TableCell align="left">{recipe.category}</TableCell>
               <TableCell align="left">
-              <Link className={classes.underline} to={`/task/${task._id}`}>
-                  <Button variant="outlined" color="secondary">View Task</Button>
+              <Link className={classes.underline} to={`/recipe/${recipe._id}`}>
+                  <Button variant="outlined" color="secondary">View Recipe</Button>
               </Link>
               </TableCell>
           </TableRow>
@@ -43,14 +41,13 @@ export default function Tasks({tasksState}){
         <>
          <Box m={5}>
              <Grid container spacing={2} justify="space-between">
-               <BackButton/>
                 <Grid item>
                     <Typography className={classes.bold} variant='h4'>
-                    Tasks
+                    Recipes
                     </Typography>
                 </Grid>
                 <Grid item align="right">
-                    <Button  variant="contained" color="primary" component={Link} to={"/taskslist/createtask"}>Create Task</Button>
+                    <Button  variant="contained" color="primary" component={Link} to={"/recipeslist/createRecipe"}>Create Recipe</Button>
                 </Grid>
               </Grid>
             <Divider variant="middle" />
@@ -62,14 +59,13 @@ export default function Tasks({tasksState}){
                     <TableHead>
                         <TableRow>
                             <TableCell className={classes.bold} align="left">Name</TableCell>
-                            <TableCell className={classes.bold} align="left">Description</TableCell>
-                            <TableCell className={classes.bold} align="left">Task Type</TableCell>
+                            <TableCell className={classes.bold} align="left">Category</TableCell>
                             <TableCell align="right"></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {tasksState && tasksState.map((task) => {
-                            return buildTask(task);
+                        {recipesState && recipesState.map((recipe) => {
+                            return buildRecipe(recipe);
                         })}
                     </TableBody>
                 </Table>
@@ -78,5 +74,3 @@ export default function Tasks({tasksState}){
         </>
         );
 }
-
-

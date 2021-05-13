@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, TextField, Container, Typography, Avatar } from "@material-ui/core";
+import { Button, TextField, Container, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import BackButton from "../backbutton";
 
@@ -43,7 +43,7 @@ function ProfilePicture(props) {
   // TODO: I dont know what these are for
   // There were declared before this component was pulled from being hardcoded in a page
   // Just propping them in for now.
-  const { uploadedImage, imageUploader, handleImageUpload } = props;
+  const { imageUploader, handleImageUpload } = props;
   
 
   return (
@@ -51,7 +51,7 @@ function ProfilePicture(props) {
       {/*Accepting only files with image type*/}
       <input type="file" id="input" accept="image/*" onChange={handleImageUpload} ref={imageUploader} className={classes.imageUpload} />
       <div className={classes.container}>
-        <img className={classes.image} src={props.image.data} />
+        <img className={classes.image} src={props.image.data} alt="profile image"/>
         <br />
         <Button size="small" onClick={() => imageUploader.current.click()} variant="outlined" color="secondary" className={classes.uploadBtn}>Upload Image</Button>
       </div>

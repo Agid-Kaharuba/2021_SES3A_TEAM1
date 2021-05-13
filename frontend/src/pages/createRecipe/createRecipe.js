@@ -30,10 +30,10 @@ const useStyles = makeStyles({
   },
 })
 
-export default function CreateNewTaskPage() {
+export default function CreateNewRecipePage() {
   const classes = useStyles();
 
-  const [formState, setFormState] = useState({name: "", description: "", type: ""});
+  const [formState, setFormState] = useState({category: "", name: "", steps: "", ingredients: ""});
 
   const { authState, setAuthState } = React.useContext(AuthContext);
   let history = useHistory();
@@ -42,6 +42,7 @@ export default function CreateNewTaskPage() {
     const target = event.target;
     const value = target.value;
     const name = target.name;
+    console.log(name);
 
     setFormState({
       ...formState, [name]: value,
@@ -49,10 +50,14 @@ export default function CreateNewTaskPage() {
   }
 
   const handleSubmit = async (event) => {
+    const test = new Array(formState.steps);
+    setFormState({
+      ...formState, steps: test, ingredients: [formState.ingredients], 
+    })
     event.preventDefault();
     console.log(formState);
-    api.task.create(authState.token, formState);
-    history.push('/dashboard/create-course');
+    api.recipe.create(authState.token, formState);
+    history.push('/recipeslist');
   }
 
   return (
@@ -65,7 +70,7 @@ export default function CreateNewTaskPage() {
         alignItems='baseline'>
           <Grid item>
             <Typography className={classes.bold} variant='h4'>
-              Create New Task
+              Create New Recipe
             </Typography>
           </Grid>
         </Grid>
@@ -79,13 +84,27 @@ export default function CreateNewTaskPage() {
           <Box m={5} p={2}>
             <Box my={2} pb={2} fontStyle="italic">
               <Typography variant='h6'>
-                Please enter the details of your desired task below.
+                Please enter the steps of your recipe below.
               </Typography>
             </Box>
-
             <Box my={2}>
+            
                 <Typography className={classes.bold} variant='h6'>
-                  Task Name
+                  Category
+                </Typography>
+              <TextField
+                id="outlined-multiline-static"
+    
+                fullWidth='true'
+                variant="outlined"
+                name="category"
+                onChange={handleChange}
+              />
+            </Box>
+            <Box my={2}>
+            
+                <Typography className={classes.bold} variant='h6'>
+                  Recipe Name
                 </Typography>
               <TextField
                 id="outlined-multiline-static"
@@ -99,7 +118,7 @@ export default function CreateNewTaskPage() {
 
             <Box my={2}>
               <Typography className={classes.bold} variant='h6'>
-                Task Description
+                Ingredients
               </Typography>
               <TextField
                 id="outlined-multiline-static"
@@ -107,32 +126,26 @@ export default function CreateNewTaskPage() {
                 rows={4}
                 fullWidth='true'
                 variant="outlined"
-                name="description"
+                name="ingredients"
                 onChange={handleChange}
               />
             </Box>
 
             <Box my={2}>
-              <FormControl className={classes.formControl}>
               <Typography className={classes.bold} variant='h6'>
-                  Task Type
+                Steps
               </Typography>
-              <Select
-                id="demo-simple-select-placeholder-label"
+              <TextField
+                id="outlined-multiline-static"
+                multiline
+                rows={4}
+                fullWidth='true'
+                variant="outlined"
+                name="steps"
                 onChange={handleChange}
-                displayEmpty
-                name="type"
-                className={classes.selectEmpty}
-              >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value={"Practice"}>Practice</MenuItem>
-                <MenuItem value={"Testing"}>Testing</MenuItem>
-                <MenuItem value={"Performance"}>Performance</MenuItem>
-              </Select>
-            </FormControl>
+              />
             </Box>
+
             
           </Box>
         </Paper>

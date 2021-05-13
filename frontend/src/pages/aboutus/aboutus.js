@@ -2,7 +2,7 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 
 // IMPORT COMPONENTS
-import { Box, Grid, Container, Button, Typography, Paper, Avatar } from "@material-ui/core";
+import { Box, Grid, Container, Typography, Paper, Avatar } from "@material-ui/core";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 
 // IMPORT IMAGES

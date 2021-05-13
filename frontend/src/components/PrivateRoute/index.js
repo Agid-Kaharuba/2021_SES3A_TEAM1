@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { AuthContext } from "../../context/auth";
 import { Route, Redirect } from "react-router-dom";
 import isAuthenticated from "../../helpers/auth/isAuthenticated"
