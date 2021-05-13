@@ -87,7 +87,19 @@ export default function ViewRecipe(props) {
                         <Typography className={classes.bold} variant='h6'>
                             Category
             </Typography>
-                        <TextField value={recipeState.category} id="description" disabled={editState} variant="outlined" fullWidth margin='normal' multiline rows={10} onChange={handleChange} />
+                        <TextField value={recipeState.category} id="name" disabled={editState} variant="outlined" fullWidth margin='normal' onChange={handleChange} />
+                    </Grid>
+                    <Grid>
+                        <Typography className={classes.bold} variant='h6'>
+                            Ingredients
+            </Typography>
+                        <TextField value={recipeState.ingredients} id="ingredients" disabled={editState} variant="outlined" fullWidth margin='normal' multiline rows={10} onChange={handleChange} />
+                    </Grid>
+                    <Grid>
+                        <Typography className={classes.bold} variant='h6'>
+                            Steps
+            </Typography>
+                        <TextField value={recipeState.steps} id="steps" disabled={editState} variant="outlined" fullWidth margin='normal' multiline rows={10} onChange={handleChange} />
                     </Grid>
                     <Grid container
                         direction="row"
