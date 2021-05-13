@@ -31,7 +31,7 @@ export default function Tasks({tasksState}){
               <TableCell align="left">{task.description}</TableCell>
               <TableCell align="left">{task.type}</TableCell>
               <TableCell align="left">
-              <Link className={classes.underline} to={`/task/${task._id}`}>
+              <Link className={classes.underline} to={`/task/${task.id}`}>
                   <Button variant="outlined" color="secondary">View Task</Button>
               </Link>
               </TableCell>
