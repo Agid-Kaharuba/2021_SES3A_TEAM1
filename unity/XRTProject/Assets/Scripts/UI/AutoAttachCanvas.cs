@@ -29,6 +29,11 @@ public class AutoAttachCanvas : MonoBehaviour
         DisableCanvas();
     }
 
+    private void OnDisable()
+    {
+        DisableCanvas();
+    }
+
     private void Update()
     {
         if (IsCanvasEnabled)
@@ -39,7 +44,8 @@ public class AutoAttachCanvas : MonoBehaviour
 
     private void OnHandHoverBegin(Hand hand)
     {
-        EnableCanvas();
+        if (this.enabled)
+            EnableCanvas();
     }
 
     private void OnHandHoverEnd(Hand hand)

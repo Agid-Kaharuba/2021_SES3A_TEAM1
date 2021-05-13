@@ -28,7 +28,7 @@ export default function Tasks({tasksState}){
           <TableRow key={task.name}>
               <TableCell align="left">{task.name}</TableCell>
               <TableCell align="left">{task.description}</TableCell>
-              <TableCell align="left">{task.duration}</TableCell>
+              <TableCell align="left">{task.type}</TableCell>
               <TableCell align="left">
               <Link to={`/task/${task._id}`}>
                   <Button size="small" variant="outlined" color="secondary">View Task</Button>
@@ -61,7 +61,7 @@ export default function Tasks({tasksState}){
                         <TableRow>
                             <TableCell className={classes.bold}>Name</TableCell>
                             <TableCell className={classes.bold}>Description</TableCell>
-                            <TableCell className={classes.bold}>Duration</TableCell>
+                            <TableCell className={classes.bold}>Type</TableCell>
                             <TableCell></TableCell>
                         </TableRow>
                     </TableHead>

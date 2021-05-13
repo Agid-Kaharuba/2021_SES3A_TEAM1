@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 7768965350315626743}
   - component: {fileID: 7768965350315626736}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: NameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -319,6 +319,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collider: {fileID: 7768965351419594231}
   depth: 0.06
+  width: 0
+  height: 0
 --- !u!1 &7768965351419594225
 GameObject:
   m_ObjectHideFlags: 0
