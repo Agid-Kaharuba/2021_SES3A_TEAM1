@@ -8,6 +8,8 @@ using Valve.Newtonsoft.Json;
 public class DetectBurger : MonoBehaviour
 {
     [SerializeField] private Canvas canvas;
+    [SerializeField] private TMP_Text MarkText;
+    private int bugerscore;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +39,9 @@ public class DetectBurger : MonoBehaviour
         Recipe buger = colliderobject.GetComponent<BurgerBoard>().GetCurrentBurger();
         //Debug.Log(buger.Ingredients.Count);
         //Debug.Log(JsonConvert.SerializeObject(buger.Ingredients));
+        //Debug.Log(buger.CalculateScore(buger, 100));
+        bugerscore = buger.CalculateScore(buger, 100);
+        MarkText.text = "Your Mark is: " + bugerscore + "/100";
         TrainingManager.Instance.SubmitTask(buger);
         Destroy(colliderobject);
         canvas.gameObject.SetActive(true);
