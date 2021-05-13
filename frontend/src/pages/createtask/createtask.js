@@ -1,5 +1,5 @@
 import React, { useState} from "react";
-import { Link, useHistory, withRouter } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 // IMPORT COMPONENTS
 import { Box, Button, Typography, Divider, TextField, Grid, FormControl, Select, MenuItem, Paper } from "@material-ui/core";

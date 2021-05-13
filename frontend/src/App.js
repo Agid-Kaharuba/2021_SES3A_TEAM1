@@ -20,6 +20,7 @@ import AboutUs from "./pages/aboutus/aboutus.js";
 import ViewTask from "./pages/viewtask/viewtask.js";
 import SignUp from "./pages/signup/signup.js";
 import TaskList from "./pages/taskslist/taskslist.js";
+import UserList from "./pages/userslist/userslist.js";
 import CreateTaskGlobal from "./pages/createtask/createtaskglobal.js";
 import Statistics from "./pages/statistics/statistics.js";
 import CreateNewTask from "./pages/createtask/createtask.js";
@@ -56,6 +57,11 @@ function AppRouter(props) {
         exact={true}
         component={EmployeeProfile} />
 
+      <PrivateRoute path="/user" 
+        exact={true}
+        component={UserList}>
+      </PrivateRoute>
+
       <Route path="/taskslist" 
         exact={true}
         component={TaskList}>
@@ -65,7 +71,6 @@ function AppRouter(props) {
         exact={true}
         component={CreateTaskGlobal}>
       </Route>
-
 
       <Route path="/statistics" 
         exact={true}

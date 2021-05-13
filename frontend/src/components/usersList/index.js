@@ -1,8 +1,6 @@
 import React from 'react';
-import { Button, Typography, Box, Divider,Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Grid} from "@material-ui/core";
+import { Typography, Box, Divider,Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Grid} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-
-import { Link} from "react-router-dom";
 
 const useStyles = makeStyles({
     bold: {
@@ -20,19 +18,19 @@ const useStyles = makeStyles({
   })
 
 
-export default function Tasks({tasksState}){
+export default function Users({usersState}){
     const classes = useStyles();
 
-    function buildTask(task) {
+    function buildUser(user) {
         return (
-          <TableRow key={task.name}>
-              <TableCell align="left">{task.name}</TableCell>
-              <TableCell align="left">{task.description}</TableCell>
-              <TableCell align="left">{task.type}</TableCell>
+          <TableRow key={user.name}>
+              <TableCell align="left">{user.firstname}</TableCell>
+              <TableCell align="left">{user.lastname}</TableCell>
+              <TableCell align="left">{user.staffid}</TableCell>
               <TableCell align="left">
-              <Link className={classes.underline} to={`/task/${task._id}`}>
-                  <Button variant="outlined" color="secondary">View Task</Button>
-              </Link>
+              {/* <Link className={classes.underline} to={`/user/${user._id}`}>
+                  <Button variant="outlined" color="secondary">View User</Button>
+              </Link> */}
               </TableCell>
           </TableRow>
         )
@@ -44,11 +42,8 @@ export default function Tasks({tasksState}){
              <Grid container spacing={2} justify="space-between">
                 <Grid item>
                     <Typography className={classes.bold} variant='h4'>
-                    Tasks
+                    Users
                     </Typography>
-                </Grid>
-                <Grid item align="right">
-                    <Button  variant="contained" color="primary" component={Link} to={"/taskslist/createtask"}>Create Task</Button>
                 </Grid>
               </Grid>
             <Divider variant="middle" />
@@ -59,15 +54,15 @@ export default function Tasks({tasksState}){
                 <Table className={classes.table} aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            <TableCell className={classes.bold} align="left">Name</TableCell>
-                            <TableCell className={classes.bold} align="left">Description</TableCell>
-                            <TableCell className={classes.bold} align="left">Task Type</TableCell>
+                            <TableCell className={classes.bold} align="left">First Name</TableCell>
+                            <TableCell className={classes.bold} align="left">Last Name</TableCell>
+                            <TableCell className={classes.bold} align="left">Staff ID</TableCell>
                             <TableCell align="right"></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {tasksState && tasksState.map((task) => {
-                            return buildTask(task);
+                        {usersState && usersState.map((user) => {
+                            return buildUser(user);
                         })}
                     </TableBody>
                 </Table>

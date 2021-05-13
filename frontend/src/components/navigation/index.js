@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from "react";
 import clsx from "clsx";
-import { Router, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { createBrowserHistory } from "history";
 
 import { withStyles } from "@material-ui/core/styles";
