@@ -9,3 +9,13 @@ export const getAllRecipes = async (token) => {
 	);
 	return res;
 }
+
+export const createRecipe = async (token, data) => {
+	const res = await axios.post(`${API_HOST}/recipe`,
+		data,
+		{
+			headers: { Authorization: `Bearer ${token}` },
+		}
+	);
+	return res;
+}

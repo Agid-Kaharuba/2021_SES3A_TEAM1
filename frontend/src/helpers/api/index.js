@@ -23,7 +23,8 @@ import {
   updateTask
 } from "./task";
 import {
-  getAllRecipes
+  getAllRecipes,
+  createRecipe
 } from "./recipe";
 
 export const API_HOST = "http://localhost:4000";
@@ -54,6 +55,7 @@ export default {
     update: updateTask
   },
   recipe: {
-    getAll: getAllRecipes
+    getAll: getAllRecipes,
+    create: createRecipe
   }
 }
