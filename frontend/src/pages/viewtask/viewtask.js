@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Button, Typography, Divider, Box, FormControl, Select, MenuItem, Grid, TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import LoadingSpinner from "../../components/loadingSpinner/index.js"
 
 import { AuthContext } from "../../context/auth";
 import api from "../../helpers/api";
+import BackButton from "../../components/backbutton/index.js";
 
 const useStyles = makeStyles({
     bold: {
@@ -58,23 +60,18 @@ export default function ViewTask(props) {
         }
     });
     if (taskState === undefined) {
-        // TODO: add loader
-        return (<h1>LOADING</h1>)
+        return (<LoadingSpinner></LoadingSpinner>)
     }
     else {
         return (
             <>
                 <Box m={5}>
-                    <Grid container spacing={2} justify="space-between">
+                    <Grid container spacing={2} justify="flex-start" direction='row'>
+                            <BackButton></BackButton>
                         <Grid item>
                             <Typography className={classes.bold} variant='h4'>
                                 Task
                        </Typography>
-                        </Grid>
-                        <Grid item align="right">
-                            <Button variant="contained" style={{ width: 80 }} color={editState ? "secondary" : "primary"} size="large" onClick={handleEdit}>
-                                {editState ? "Edit" : "Save"}
-                            </Button>
                         </Grid>
                     </Grid>
                     <Divider variant="middle" />
@@ -111,8 +108,17 @@ export default function ViewTask(props) {
                             justify="center"
                             alignItems="center"
                             margin="normal">
+                            <Box>
+                                <Button variant="contained" style={{ width: 80 }} color={editState ? "secondary" : "primary"} size="large" onClick={handleEdit}>
+                                    {editState ? "Edit" : "Save"}
+                                </Button>
+                            </Box>
+                            <Box>
+                                <Button variant="contained" color='primary' size="large" component={Link} to="/taskslist">
+                                    Back
+                            </Button>
+                            </Box>
                         </Grid>
-
                     </Grid>
                 </Box>
             </>
