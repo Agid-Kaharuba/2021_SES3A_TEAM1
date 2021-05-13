@@ -65,6 +65,12 @@ export const RecipeRoute = (app: Express, controller: RecipeController) => {
      *        name:
      *         type: string
      *         example: Whooper
+     *        steps:
+     *         type: array
+     *         items:
+     *          type: object
+     *          example: ["1) Put bottom bun on plate"]
+     *         example: ["1) Put bottom bun on plate", "2) Insert beef patty", "3) Place lettuce on top", "4) Put on top bun"]
      *        ingredients:
      *         type: array
      *         items:
@@ -101,6 +107,12 @@ export const RecipeRoute = (app: Express, controller: RecipeController) => {
      *        name:
      *         type: string
      *         example: Whooper
+     *        steps:
+     *         type: array
+     *         items:
+     *          type: object
+     *          example: ["1) Put bottom bun on plate"]
+     *         example: ["1) Put bottom bun on plate", "2) Insert beef patty", "3) Place lettuce on top", "4) Put on top bun"]
      *        ingredients:
      *         type: array
      *         items:
