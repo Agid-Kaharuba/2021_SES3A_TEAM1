@@ -24,6 +24,8 @@ import UserList from "./pages/userslist/userslist.js";
 import CreateTaskGlobal from "./pages/createtask/createtaskglobal.js";
 import Statistics from "./pages/statistics/statistics.js";
 import CreateNewTask from "./pages/createtask/createtask.js";
+import RecipesList from "./pages/recipesList/recipesList.js";
+import CreateRecipe from "./pages/createRecipe/createRecipe.js";
 
 // import appTheme from "./helpers/appTheme";
 
@@ -115,6 +117,16 @@ function AppRouter(props) {
       <Route path="/createtask"
         exact={true}
         component={CreateNewTask}>
+      </Route>
+
+      <Route path="/recipeslist"
+        exact={true}
+        component={RecipesList}>
+      </Route>
+
+      <Route path="/recipeslist/createrecipe"
+        exact={true}
+        component={CreateRecipe}>
       </Route>
 
       <Route path="/"
