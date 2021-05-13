@@ -26,6 +26,7 @@ import Statistics from "./pages/statistics/statistics.js";
 import CreateNewTask from "./pages/createtask/createtask.js";
 import RecipesList from "./pages/recipesList/recipesList.js";
 import CreateRecipe from "./pages/createRecipe/createRecipe.js";
+import ViewRecipe from "./pages/viewRecipe/viewRecipe.js";
 
 // import appTheme from "./helpers/appTheme";
 
@@ -102,6 +103,11 @@ function AppRouter(props) {
       <Route path="/task/:taskId"
         exact={true}
         component={ViewTask}>
+      </Route>
+
+      <Route path="/recipe/:recipeId"
+        exact={true}
+        component={ViewRecipe}>
       </Route>
 
       <Route path="/aboutus"

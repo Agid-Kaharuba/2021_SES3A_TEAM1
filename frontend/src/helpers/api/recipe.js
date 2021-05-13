@@ -19,3 +19,22 @@ export const createRecipe = async (token, data) => {
 	);
 	return res;
 }
+
+export const updateRecipe = async (token, recipeId, data) => {
+	const res = await axios.put(`${API_HOST}/task/${recipeId}`,
+		data,
+		{
+			headers: { Authorization: `Bearer ${token}` },
+		}
+	);
+	return res;
+}
+
+export const getRecipe = async (token, recipeId) => {
+	const res = await axios.get(`${API_HOST}/task/${recipeId}`,
+		{
+			headers: { Authorization: `Bearer ${token}` },
+		}
+	);
+	return res;
+}
