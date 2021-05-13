@@ -75,8 +75,9 @@ export default function CreateNewTrainingPage() {
               </Typography>
             
             </CardContent>
-            <CardActions>
-              <Button size="small">View Training</Button>
+            <CardActions><Link className={classes.underline} to={`/course/${course._id}`}>
+                  <Button variant="outlined" color="secondary">View Training</Button>
+              </Link>
               <Button size="small" onClick={() => handleLaunchXR(course._id)}>Launch XR</Button>
             </CardActions>
           </Card>
