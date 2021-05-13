@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
 
 // IMPORT COMPONENTS
-import { Box, Button, Typography, Divider, TextField, Card, CardContent, CardActions, Paper, Grid } from "@material-ui/core";
+import { Box, Button, Typography, Divider, Card, CardContent, CardActions, Paper, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/auth";
 import api from "../../helpers/api";
 

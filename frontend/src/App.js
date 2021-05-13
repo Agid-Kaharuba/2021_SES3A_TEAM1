@@ -57,6 +57,11 @@ function AppRouter(props) {
         exact={true}
         component={EmployeeProfile} />
 
+      <PrivateRoute path="/user" 
+        exact={true}
+        component={UserList}>
+      </PrivateRoute>
+
       <Route path="/taskslist" 
         exact={true}
         component={TaskList}>
@@ -66,12 +71,6 @@ function AppRouter(props) {
         exact={true}
         component={CreateTaskGlobal}>
       </Route>
-
-      <Route path="/user" 
-        exact={true}
-        component={UserList}>
-      </Route>
-
 
       <Route path="/statistics" 
         exact={true}

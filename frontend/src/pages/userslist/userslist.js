@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import Users from "../../components/usersList/index.js";
-import { Box, Button, Typography, Divider, TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Grid } from "@material-ui/core";
 import { AuthContext } from "../../context/auth";
 import api from "../../helpers/api";
 
