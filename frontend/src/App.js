@@ -30,6 +30,7 @@ import CreateNewTask from "./pages/createtask/createtask.js";
 // IMPORT CONTEXTS
 import { AuthProvider } from "./context/auth";
 import TasksList from './pages/taskslist/taskslist';
+import ViewTrainingPage from './pages/viewtraining/viewtraining';
 // import Signout from "./helpers/auth/signout.js";
 
 function AppProvider(props) {
@@ -52,6 +53,10 @@ function AppRouter(props) {
       <PrivateRoute path="/dashboard/create-course"
         exact={true}
         component={CreateNewCourse} />
+
+      <PrivateRoute path="/dashboard/view-training"
+        exact={true}
+        component={ViewTrainingPage} />  
 
       <PrivateRoute path="/profile"
         exact={true}
