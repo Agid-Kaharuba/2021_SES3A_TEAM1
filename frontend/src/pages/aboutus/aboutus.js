@@ -21,6 +21,7 @@ import Lakshva from '../../images/profile-photos/lakshva-sharma.jpg';
 import MitchGif from '../../images/mitchellvr.gif';
 import VanishaGif from '../../images/vanishavr.gif';
 import BryanGif from '../../images/bryanvr.gif';
+import BackButton from "../../components/backbutton";
 
 // import { Link } from "react-router-dom";
 // import { AuthContext } from "../../context/auth";
@@ -123,7 +124,7 @@ export default function AboutUsPage() {
           </Grid>
         </Container>
       </Grid>
-      <Box color='white' fontSize="24px">
+      <Box style={{ fontSize: '24px', fontFamily: 'Roboto', color: "white" }}>
         <h2>
           Team Structure
         </h2>

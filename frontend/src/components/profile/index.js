@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, TextField, Container, Typography, Avatar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import BackButton from "../backbutton";
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -64,6 +65,7 @@ export default function Profile(props) {
 
   return (
     <Container maxWidth="sm">
+        <BackButton/>
       <div className={classes.container}>
         <Typography variant="h4" className={classes.heading}>PROFILE</Typography>
         {/* TODO: implement profile picture */}
