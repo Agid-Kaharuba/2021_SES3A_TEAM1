@@ -15,7 +15,7 @@ export default class IngredientController {
         }
     }
 
-    //Create a task
+    //Create an ingredient
     public async create(req: Request, res: Response) {
         const body = req.body;
         const newIngredientRequest = new Ingredient({
@@ -32,9 +32,15 @@ export default class IngredientController {
         });
     }
 
+    //Search ingredient by id
     public async search(req: Request, res: Response) {
-        var ingredient = await Ingredient.find({ id: req.query.id });
-        ResponseService.successResponse(res, ingredient);
+        try{
+            var ingredient = await Ingredient.find({ id: req.query.id });
+            ResponseService.successResponse(res, ingredient);
+        }
+        catch(err){
+            ResponseService.mongoNotFoundResponse(res, err);
+        }
     }
     // //Update an ingredient
     // public async update(req: Request, res: Response) {
