@@ -5,7 +5,7 @@ export const IngredientRoute = (app: Express, controller: IngredientController) 
 
     /**
      * @swagger
-     * /task:
+     * /ingredient:
      *  get:
      *   description: Get all ingredients
      *   tags: [Ingredient]
@@ -17,10 +17,10 @@ export const IngredientRoute = (app: Express, controller: IngredientController) 
 
     /**
      * @swagger
-     * /task:
+     * /ingredient:
      *  post:
      *   description: Create an ingredient
-     *   tags: [Task]
+     *   tags: [Ingredient]
      *   requestBody:
      *    required: true,
      *    content:
@@ -42,12 +42,11 @@ export const IngredientRoute = (app: Express, controller: IngredientController) 
 
     /**
      * @swagger
-     * /task/{taskId}:
+     * /ingredient/search:
      *  get:
-     *   description: Get all tasks by name
-     *   tags: [Task]
+     *   description: Get an ingredient by id
      *   parameters:
-     *    - in: path
+     *    - in: query
      *      name: id
      *      required: true
      *      type: string
@@ -55,35 +54,5 @@ export const IngredientRoute = (app: Express, controller: IngredientController) 
      *    200:
      *     description: Success
      */
-    app.get("/task/:taskId", controller.get);
-
-    /**
-     * @swagger
-     * /ingredient/{ingredientId}:
-     *  put:
-     *   description: Update a ingredient by ingredientId
-     *   tags: [Ingredient]
-     *   parameters:
-     *    - in: path
-     *      name: ingredientId
-     *      required: true
-     *      type: string
-     *   requestBody:
-     *    required: true,
-     *    content:
-     *     application/json:
-     *      schema:
-     *       type: object
-     *       properties:
-     *        name:
-     *         type: string
-     *         example: Tomato
-     *        id:
-     *         type: string
-     *         example: VEG1
-     *   responses:
-     *    200:
-     *     description: Success
-     */
-    app.put("/task/:taskId", controller.update);
-}
+    app.get("/ingredient/search", controller.search);
+ }

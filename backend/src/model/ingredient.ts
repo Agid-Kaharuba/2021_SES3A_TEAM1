@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const ingredientSchema = new mongoose.Schema({
+const IngredientSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -9,6 +9,10 @@ const ingredientSchema = new mongoose.Schema({
         type: String,
         required: false
     },
+    archive: {
+        type: Boolean,
+        required: false
+    }
 });
 
-export default mongoose.model('Task', ingredientSchema);
+export default mongoose.model('Ingredient', IngredientSchema);
