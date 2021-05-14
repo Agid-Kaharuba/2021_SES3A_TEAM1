@@ -115,37 +115,6 @@ export default function CreateNewRecipePage() {
                 onChange={handleChange}
               />
             </Box>
-
-            <Box my={2}>
-              <Typography className={classes.bold} variant='h6'>
-                Ingredients
-              </Typography>
-              <TextField
-                id="outlined-multiline-static"
-                multiline
-                rows={4}
-                fullWidth='true'
-                variant="outlined"
-                name="ingredients"
-                onChange={handleChange}
-              />
-            </Box>
-
-            <Box my={2}>
-              <Typography className={classes.bold} variant='h6'>
-                Steps
-              </Typography>
-              <TextField
-                id="outlined-multiline-static"
-                multiline
-                rows={4}
-                fullWidth='true'
-                variant="outlined"
-                name="steps"
-                onChange={handleChange}
-              />
-            </Box>
-
             
           </Box>
         </Paper>
