@@ -33,7 +33,7 @@ export default class IngredientController {
     }
 
     public async search(req: Request, res: Response) {
-        var ingredient = await Ingredient.find({ id: req.params.id });
+        var ingredient = await Ingredient.find({ id: req.query.id });
         ResponseService.successResponse(res, ingredient);
     }
     // //Update an ingredient
