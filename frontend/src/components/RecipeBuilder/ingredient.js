@@ -11,21 +11,28 @@ export default function Ingredient(props) {
 	return (
 		<Draggable key={props.ingredient.id} draggableId={props.ingredient.id} index={props.index}>
 			{(provided) => (
-					<Box my={1}
+				<Box my={1}
 					{...provided.dragHandleProps}
 					{...provided.draggableProps}
 					ref={provided.innerRef}>
-						<Paper>
-							<Card variant="outlined">
-								<CardContent>
-									<img srcset={props.ingredient.src}/>
-									<Typography color="textSecondary" gutterBottom>
-										{props.ingredient.value}
-									</Typography>
-								</CardContent>
-							</Card>
-						</Paper>
-					</Box>
+					<Paper>
+						<Card variant="outlined"
+							style={{ maxWidth: "10vw", maxHeight: "10vw" }}
+						>
+							<CardContent>
+								<Typography color="textSecondary" align="center" gutterBottom>
+									{props.ingredient.value}
+								</Typography>
+								<img
+									style={{
+										"max-width":"100%",
+										"max-height":"100%"
+									}}
+									srcset={props.ingredient.src} />
+							</CardContent>
+						</Card>
+					</Paper>
+				</Box>
 			)}
 		</Draggable>
 	);
