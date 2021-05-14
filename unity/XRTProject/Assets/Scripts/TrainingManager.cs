@@ -125,12 +125,27 @@ public class TrainingManager : MonoBehaviour
             OnCustomizationSettingsChanged?.Invoke();
     }
 
+    public void CreateNewTask(string taskName, TaskType taskType)
+    {
+        Task newTask = new Task(taskName, taskType);
+        trainingModule.Tasks.Add(newTask);
+        
+        // TODO Update changes to backend here
+    }
+
     public void ReorderTask(int fromIndex, int toIndex)
     {
         Task tempTask = trainingModule.Tasks[fromIndex];
         trainingModule.Tasks[fromIndex] = trainingModule.Tasks[toIndex];
         trainingModule.Tasks[toIndex] = tempTask;
         
+        // TODO Update changes to backend here
+    }
+
+    public void RemoveTask(Task task)
+    {
+        trainingModule.Tasks.Remove(task);
+
         // TODO Update changes to backend here
     }
 

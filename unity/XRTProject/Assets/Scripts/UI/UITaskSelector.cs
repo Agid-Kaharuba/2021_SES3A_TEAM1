@@ -56,6 +56,7 @@ public class UITaskSelector : MonoBehaviour
             item.SetHighlighted(TrainingManager.Instance.CurrentTask == task);
             rectTransform.sizeDelta = itemSizeDelta;
             item.GetComponent<UIBoxColliderAutoScaler>()?.AutoScale();
+            UIRemoveButton removeButton = item.GetComponent<UIRemoveButton>();
 
             item.OnClick.AddListener(() =>
             {
@@ -65,6 +66,11 @@ public class UITaskSelector : MonoBehaviour
             item.OnReorderEvent.AddListener((fromIndex, toIndex, otherItem) =>
             {
                 ReorderTasks(item, fromIndex, otherItem, toIndex);
+            });
+            
+            removeButton.OnRemove.AddListener(() =>
+            {
+                TrainingManager.Instance.RemoveTask(task);
             });
         }
     }
