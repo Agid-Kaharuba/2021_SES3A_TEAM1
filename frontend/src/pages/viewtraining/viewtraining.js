@@ -49,7 +49,7 @@ export default function ViewCourse(props) {
     const fetchData = async () => {
         const res = await api.course.get(authState.token, courseId);
         console.log(res.data);
-        courseState(res.data);
+        setCourseState(res.data);
     };
 
     useEffect(() => {
