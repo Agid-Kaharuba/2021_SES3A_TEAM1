@@ -299,9 +299,11 @@ MonoBehaviour:
   itemPrefab: {fileID: 7768965350888779908, guid: 185699473ed224c4ba77a46e636e24d7, type: 3}
   sampleItem: {fileID: 4419721100731419654}
   shouldCloseOnSelect: 1
+  canDrag: 0
   OnTaskSelected:
     m_PersistentCalls:
       m_Calls: []
+  taskFilter: 1
 --- !u!1 &8764929206060465396
 GameObject:
   m_ObjectHideFlags: 0
