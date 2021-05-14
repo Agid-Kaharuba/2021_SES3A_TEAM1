@@ -114,7 +114,7 @@ export default function ViewTask(props) {
                                 </Button>
                             </Box>
                             <Box>
-                                <Button variant="contained" color='primary' size="large" component={Link} to="/tasklist">
+                                <Button variant="contained" color='primary' size="large" component={Link} to="/taskslist">
                                     Back
                             </Button>
                             </Box>
