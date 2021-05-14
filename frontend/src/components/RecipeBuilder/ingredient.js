@@ -17,7 +17,7 @@ export default function Ingredient(props) {
 					ref={provided.innerRef}>
 					<Paper>
 						<Card variant="outlined"
-							style={{ maxWidth: "10vw", maxHeight: "10vw" }}
+							style={{ width: "8vw", height: "8vw" }}
 						>
 							<CardContent>
 								<Typography color="textSecondary" align="center" gutterBottom>
