@@ -45,6 +45,7 @@ export const IngredientRoute = (app: Express, controller: IngredientController) 
      * /ingredient/search:
      *  get:
      *   description: Get an ingredient by id
+     *   tags: [Ingredient]
      *   parameters:
      *    - in: query
      *      name: id
