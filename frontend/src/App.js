@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 //STYLES
-import {ThemeProvider} from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/core/styles";
 import Theme from './theme'
 
 // IMPORT COMPONENTS
@@ -27,6 +27,7 @@ import CreateNewTask from "./pages/createtask/createtask.js";
 import RecipesList from "./pages/recipesList/recipesList.js";
 import CreateRecipe from "./pages/createRecipe/createRecipe.js";
 import ViewRecipe from "./pages/viewRecipe/viewRecipe.js";
+import RecipeBuilder from "./components/RecipeBuilder";
 
 // import appTheme from "./helpers/appTheme";
 
@@ -48,6 +49,11 @@ function AppProvider(props) {
 function AppRouter(props) {
   return (
     <Switch>
+      <Route path="/recipebuilder"
+        exact={true}
+        component={RecipeBuilder}>
+      </Route>
+
       <PrivateRoute path="/dashboard"
         exact={true}
         component={Dashboard} />
@@ -60,22 +66,22 @@ function AppRouter(props) {
         exact={true}
         component={EmployeeProfile} />
 
-      <PrivateRoute path="/user" 
+      <PrivateRoute path="/user"
         exact={true}
         component={UserList}>
       </PrivateRoute>
 
-      <Route path="/taskslist" 
+      <Route path="/taskslist"
         exact={true}
         component={TaskList}>
       </Route>
 
-      <Route path="/taskslist/createtask" 
+      <Route path="/taskslist/createtask"
         exact={true}
         component={CreateTaskGlobal}>
       </Route>
 
-      <Route path="/statistics" 
+      <Route path="/statistics"
         exact={true}
         component={Statistics}>
       </Route>
@@ -119,7 +125,7 @@ function AppRouter(props) {
         exact={true}
         component={Statistics}>
       </Route>
-    
+
       <Route path="/createtask"
         exact={true}
         component={CreateNewTask}>
