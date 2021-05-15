@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -5,9 +6,10 @@ using VRKeys;
 
 public class KeyboardResponder : MonoBehaviour
 {
-    public class OnTextEditingFinishedEvent : UnityEvent<string> {}
+    [Serializable]
+    public class OnTextSubmitEvent : UnityEvent<string> {}
     
-    [SerializeField] public OnTextEditingFinishedEvent OnTextEditingFinished;
+    [SerializeField] public OnTextSubmitEvent OnTextSubmit;
     
     public void EnableTextEditing(TMP_Text text)
     {
@@ -19,7 +21,7 @@ public class KeyboardResponder : MonoBehaviour
 
     private void OnSubmit(string text)
     {
-        OnTextEditingFinished?.Invoke(text);
+        OnTextSubmit?.Invoke(text);
         XRKeyboardManager.Instance.OnKeyboardSubmit.RemoveListener(OnSubmit);
         XRKeyboardManager.Instance.DisableKeyboard();
     }

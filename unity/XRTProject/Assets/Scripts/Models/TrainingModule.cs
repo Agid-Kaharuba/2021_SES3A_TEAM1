@@ -11,7 +11,7 @@ public class TrainingModule
     public List<Task> Tasks { get; } = new List<Task>();
     
     [JsonProperty("name")]
-    public string Name { get; private set; }
+    public string Name { get; set; }
     
     [JsonProperty("description")]
     public string Description { get; set; }

@@ -68,11 +68,13 @@ public class TrainingManager : MonoBehaviour
             Debug.Log($"Could not get token : {e}");
         }
         
+        // TODO remove later
+        token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QxMjMiLCJwYXNzd29yZCI6InBhc3N3b3JkMTIzIiwiaWF0IjoxNjIxMDkyMzY5LCJleHAiOjE2MjExNzg3Njl9.IBeeev2Hkf8pQZ3djiDyqWykkBLS__KJUVjtMXRA9es";
+        
         apiService = new ApiService(token);
-        string userId = "Enter a userId from your database";
 
         // Use apiService.GetCurrentUser once the token is provided.
-        StartCoroutine(apiService.GetUser(userId, (response) =>
+        StartCoroutine(apiService.GetCurrentUser((response) =>
         {
             if (response is BackendErrorResponse errorReponse)
             {
@@ -88,25 +90,25 @@ public class TrainingManager : MonoBehaviour
             OnCustomizationSettingsChanged?.Invoke();
         }));
 
-        trainingModule = new TrainingModule("Make a Simple burger", "courseId");
-        
-        Task whooperTask = new Task("Learn to make a Whooper", TaskType.Recipe);
-        whooperTask.Recipe = new Recipe("Whooper", "top_bun", "lettuce", "cheese", "patty", "bottom_bun");
-        trainingModule.Tasks.Add(whooperTask);
-        
-        Task cheeseBurgerTask = new Task("Learn to make a Cheeseburger", TaskType.Recipe);
-        cheeseBurgerTask.Recipe = new Recipe("Cheeseburger", "top_bun", "cheese", "patty", "bottom_bun");
-        trainingModule.Tasks.Add(cheeseBurgerTask);
-        
-        trainingModule.Tasks.Add(new Task("Remembering to make a Whooper", TaskType.Testing));
-        trainingModule.Tasks.Add(new Task("Serve 5 customers", TaskType.Performance));
-        CurrentTask = whooperTask;
+        // trainingModule = new TrainingModule("Make a Simple burger", "courseId");
+        //
+        // Task whooperTask = new Task("Learn to make a Whooper", TaskType.Recipe);
+        // whooperTask.Recipe = new Recipe("Whooper", "top_bun", "lettuce", "cheese", "patty", "bottom_bun");
+        // trainingModule.Tasks.Add(whooperTask);
+        //
+        // Task cheeseBurgerTask = new Task("Learn to make a Cheeseburger", TaskType.Recipe);
+        // cheeseBurgerTask.Recipe = new Recipe("Cheeseburger", "top_bun", "cheese", "patty", "bottom_bun");
+        // trainingModule.Tasks.Add(cheeseBurgerTask);
+        //
+        // trainingModule.Tasks.Add(new Task("Remembering to make a Whooper", TaskType.Testing));
+        // trainingModule.Tasks.Add(new Task("Serve 5 customers", TaskType.Performance));
+        // CurrentTask = whooperTask;
     }
 
     private void Start()
     {
         // TODO fetch this from the command line when launching from web to unity
-        string trainingModuleId = "608eae5ab7dd3233a46916f7";
+        string trainingModuleId = "609fe55cc8b74d6c2807fac7";
         
         StartCoroutine(apiService.GetTrainingModule(trainingModuleId, (response) =>
         {
@@ -129,8 +131,26 @@ public class TrainingManager : MonoBehaviour
     {
         Task newTask = new Task(taskName, taskType);
         trainingModule.Tasks.Add(newTask);
-        
-        // TODO Update changes to backend here
+
+        apiService.CreateTask(newTask, obj =>
+        {
+            if (obj is Task t)
+            {
+                trainingModule.Tasks.Add(t);
+            }
+        });
+    }
+
+    public void UpdateTrainingName(string newName)
+    {
+        trainingModule.Name = newName;
+        StartCoroutine(apiService.UpdateTrainingModule(trainingModule));
+    }
+
+    public void UpdateTrainingDescription(string description)
+    {
+        trainingModule.Description = description;
+        StartCoroutine(apiService.UpdateTrainingModule(trainingModule));
     }
 
     public void ReorderTask(int fromIndex, int toIndex)
@@ -138,15 +158,15 @@ public class TrainingManager : MonoBehaviour
         Task tempTask = trainingModule.Tasks[fromIndex];
         trainingModule.Tasks[fromIndex] = trainingModule.Tasks[toIndex];
         trainingModule.Tasks[toIndex] = tempTask;
-        
-        // TODO Update changes to backend here
+
+        StartCoroutine(apiService.UpdateTrainingModule(trainingModule));
     }
 
     public void RemoveTask(Task task)
     {
         trainingModule.Tasks.Remove(task);
 
-        // TODO Update changes to backend here
+        StartCoroutine(apiService.UpdateTrainingModule(trainingModule));
     }
 
     public void SwitchTask(Task task)
@@ -192,10 +212,10 @@ public class TrainingManager : MonoBehaviour
         }));
     }
 
-    public void SubmitTask(Recipe recipe)
+    public void SubmitTask(Recipe recipe, int score)
     {
         // Progress progress = new Progress(trainingModule.Id, CurrentTask.Id, "userId", true, 100);
-        Progress progress = new Progress("sdfsdf", "sdf", "userId", true, 100);
+        Progress progress = new Progress("sdfsdf", "sdf", "userId", true, score);
         progress.Data = recipe;
 
         StartCoroutine(apiService.SubmitTaskProgress(progress, (obj) => { 

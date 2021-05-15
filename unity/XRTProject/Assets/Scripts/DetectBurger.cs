@@ -9,7 +9,7 @@ public class DetectBurger : MonoBehaviour
 {
     [SerializeField] private Canvas canvas;
     [SerializeField] private TMP_Text MarkText;
-    private int bugerscore;
+    private int burgerscore;
     private Coroutine coroutine;
     private GameObject plateObject;
 
@@ -58,9 +58,9 @@ public class DetectBurger : MonoBehaviour
         if (TrainingManager.Instance.HasCurrentTask)
         {
             Recipe currentRecipe = TrainingManager.Instance.CurrentTask.Recipe;
-            bugerscore = currentRecipe.CalculateScore(burger, 100);
-            MarkText.text = "Your Mark is: " + bugerscore + "/100";
-            TrainingManager.Instance.SubmitTask(burger);
+            burgerscore = currentRecipe.CalculateScore(burger, 100);
+            MarkText.text = "Your Mark is: " + burgerscore + "/100";
+            TrainingManager.Instance.SubmitTask(burger, burgerscore);
             Destroy(colliderobject);
             canvas.gameObject.SetActive(true);
         }

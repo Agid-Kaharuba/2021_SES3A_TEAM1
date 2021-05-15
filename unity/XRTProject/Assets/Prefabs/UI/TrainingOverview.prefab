@@ -1015,7 +1015,7 @@ MonoBehaviour:
   sampleItem: {fileID: 224474986648461290}
   shouldCloseOnSelect: 1
   canDrag: 0
-  taskFilter: 3
+  taskFilter: 0
   OnTaskSelected:
     m_PersistentCalls:
       m_Calls: []
@@ -1249,6 +1249,7 @@ GameObject:
   - component: {fileID: 224474986873486927}
   - component: {fileID: 224474986873486924}
   - component: {fileID: 4060364303155034785}
+  - component: {fileID: 6715517987780993468}
   m_Layer: 0
   m_Name: TrainingOverview
   m_TagString: Untagged
@@ -1355,6 +1356,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   titleText: {fileID: 224474987731039594}
   descriptionText: {fileID: 224474986695004634}
+--- !u!114 &6715517987780993468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 224474986873486925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad94cee96b034a7283608a958e433b35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &224474987680938753
 GameObject:
   m_ObjectHideFlags: 0
@@ -2606,6 +2619,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 224474986695004635}
     m_Modifications:
+    - target: {fileID: 551610978352028071, guid: e9f04c0f8b115344080b7ebaf8f94cca, type: 3}
+      propertyPath: OnTextSubmit.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 551610978352028071, guid: e9f04c0f8b115344080b7ebaf8f94cca, type: 3}
+      propertyPath: OnTextSubmit.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 551610978352028071, guid: e9f04c0f8b115344080b7ebaf8f94cca, type: 3}
+      propertyPath: OnTextSubmit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6715517987780993468}
+    - target: {fileID: 551610978352028071, guid: e9f04c0f8b115344080b7ebaf8f94cca, type: 3}
+      propertyPath: OnTextSubmit.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 551610978352028071, guid: e9f04c0f8b115344080b7ebaf8f94cca, type: 3}
+      propertyPath: OnTextSubmit.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UpdateTrainingDescription
+      objectReference: {fileID: 0}
+    - target: {fileID: 551610978352028071, guid: e9f04c0f8b115344080b7ebaf8f94cca, type: 3}
+      propertyPath: OnTextSubmit.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TrainingResponder, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 551610978352028071, guid: e9f04c0f8b115344080b7ebaf8f94cca, type: 3}
+      propertyPath: OnTextSubmit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 224474986695004634}
+    - target: {fileID: 551610978352028071, guid: e9f04c0f8b115344080b7ebaf8f94cca, type: 3}
+      propertyPath: OnTextSubmit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: TMPro.TMP_Text, Unity.TextMeshPro
+      objectReference: {fileID: 0}
     - target: {fileID: 1475714473625101229, guid: e9f04c0f8b115344080b7ebaf8f94cca, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2690,6 +2735,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2947979225812889404, guid: e9f04c0f8b115344080b7ebaf8f94cca, type: 3}
+      propertyPath: OnKeyboardDisabled.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2947979225812889404, guid: e9f04c0f8b115344080b7ebaf8f94cca, type: 3}
+      propertyPath: OnKeyboardDisabled.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2947979225812889404, guid: e9f04c0f8b115344080b7ebaf8f94cca, type: 3}
+      propertyPath: OnKeyboardDisabled.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 224474986873486925}
+    - target: {fileID: 2947979225812889404, guid: e9f04c0f8b115344080b7ebaf8f94cca, type: 3}
+      propertyPath: OnKeyboardDisabled.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2947979225812889404, guid: e9f04c0f8b115344080b7ebaf8f94cca, type: 3}
+      propertyPath: OnKeyboardDisabled.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2947979225812889404, guid: e9f04c0f8b115344080b7ebaf8f94cca, type: 3}
+      propertyPath: OnKeyboardDisabled.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UnityEngine.UI.Selectable, UnityEngine.UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 2947979225812889404, guid: e9f04c0f8b115344080b7ebaf8f94cca, type: 3}
+      propertyPath: OnKeyboardDisabled.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2947979225812889404, guid: e9f04c0f8b115344080b7ebaf8f94cca, type: 3}
+      propertyPath: OnKeyboardDisabled.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7374227268355422013, guid: e9f04c0f8b115344080b7ebaf8f94cca, type: 3}
       propertyPath: onHandClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
@@ -2712,6 +2789,50 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 224474987731039595}
     m_Modifications:
+    - target: {fileID: 551610978352028071, guid: e9f04c0f8b115344080b7ebaf8f94cca, type: 3}
+      propertyPath: OnTextSubmit.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 551610978352028071, guid: e9f04c0f8b115344080b7ebaf8f94cca, type: 3}
+      propertyPath: OnTextSubmit.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 551610978352028071, guid: e9f04c0f8b115344080b7ebaf8f94cca, type: 3}
+      propertyPath: OnTextSubmit.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 551610978352028071, guid: e9f04c0f8b115344080b7ebaf8f94cca, type: 3}
+      propertyPath: OnTextSubmit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6715517987780993468}
+    - target: {fileID: 551610978352028071, guid: e9f04c0f8b115344080b7ebaf8f94cca, type: 3}
+      propertyPath: OnTextSubmit.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 551610978352028071, guid: e9f04c0f8b115344080b7ebaf8f94cca, type: 3}
+      propertyPath: OnTextSubmit.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 551610978352028071, guid: e9f04c0f8b115344080b7ebaf8f94cca, type: 3}
+      propertyPath: OnTextSubmit.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 551610978352028071, guid: e9f04c0f8b115344080b7ebaf8f94cca, type: 3}
+      propertyPath: OnTextSubmit.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UpdateTrainingName
+      objectReference: {fileID: 0}
+    - target: {fileID: 551610978352028071, guid: e9f04c0f8b115344080b7ebaf8f94cca, type: 3}
+      propertyPath: OnTextSubmit.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TrainingResponder, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 551610978352028071, guid: e9f04c0f8b115344080b7ebaf8f94cca, type: 3}
+      propertyPath: OnTextSubmit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 224474987731039594}
+    - target: {fileID: 551610978352028071, guid: e9f04c0f8b115344080b7ebaf8f94cca, type: 3}
+      propertyPath: OnTextSubmit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: TMPro.TMP_Text, Unity.TextMeshPro
+      objectReference: {fileID: 0}
     - target: {fileID: 1475714473625101229, guid: e9f04c0f8b115344080b7ebaf8f94cca, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

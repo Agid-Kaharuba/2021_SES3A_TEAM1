@@ -16,7 +16,7 @@ public class UITaskSelector : MonoBehaviour
     [SerializeField] private bool shouldCloseOnSelect = true;
     [SerializeField] private bool canDrag = false;
     [SerializeField]
-    public TaskTypeMask taskFilter = TaskTypeMask.Performance | TaskTypeMask.Recipe | TaskTypeMask.Testing;
+    public TaskTypeMask taskFilter = TaskTypeMask.None;
     [SerializeField] public OnTaskSelectedEvent OnTaskSelected;
 
     private float itemFontSize;
