@@ -22,7 +22,7 @@ export default class PrivateRoute extends React.Component {
         return (
             this.state.authenticated !== undefined ?
                 <Route
-                    {...this}
+                    {...this.props}
                     render={(props) =>
                         this.state.authenticated ? <Component {...props} /> : <Redirect to="/login" />
                     }
