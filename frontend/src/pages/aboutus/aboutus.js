@@ -2,7 +2,7 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 
 // IMPORT COMPONENTS
-import { Box, Grid, Container, Button, Typography, Paper, Avatar } from "@material-ui/core";
+import { Box, Grid, Container, Typography, Paper, Avatar } from "@material-ui/core";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 
 // IMPORT IMAGES
@@ -20,6 +20,8 @@ import Brendon from '../../images/profile-photos/brendon-tong.png';
 import Lakshva from '../../images/profile-photos/lakshva-sharma.jpg';
 import MitchGif from '../../images/mitchellvr.gif';
 import VanishaGif from '../../images/vanishavr.gif';
+import BryanGif from '../../images/bryanvr.gif';
+import BackButton from "../../components/backbutton";
 
 // import { Link } from "react-router-dom";
 // import { AuthContext } from "../../context/auth";
@@ -112,9 +114,9 @@ export default function AboutUsPage() {
                 </Box>
               </Box>
               <Box>
-                <img src={VanishaGif}></img>
+                <img src={BryanGif}></img>
                 <Box fontStyle="italic">
-                  <WhiteTextTypography>- "Vanisha trying VR"</WhiteTextTypography>
+                  <WhiteTextTypography>- "Bryan trying VR"</WhiteTextTypography>
                 </Box>
               </Box>
             </Grid>
@@ -122,7 +124,7 @@ export default function AboutUsPage() {
           </Grid>
         </Container>
       </Grid>
-      <Box color='white' fontSize="24px">
+      <Box style={{ fontSize: '24px', fontFamily: 'Roboto', color: "white" }}>
         <h2>
           Team Structure
         </h2>

@@ -49,3 +49,10 @@ export const downloadImage = async (username) => {
   const res = await axios.get (`${API_HOST}/upload/${username}`);
   return res;
 }
+
+export const searchUser = async (token, query) => {
+	const res = await axios.get (`${API_HOST}/user/search?${query}`, {
+		headers: { Authorization: `Bearer ${token}` },
+	});
+	return res;
+  }

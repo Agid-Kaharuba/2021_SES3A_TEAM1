@@ -9,7 +9,8 @@ import {
   getUser,
   updateUser,
   uploadImage,
-  downloadImage
+  downloadImage,
+  searchUser
 } from "./user";
 import {
   getAllCourses,
@@ -21,6 +22,12 @@ import {
   getTask,
   updateTask
 } from "./task";
+import {
+  getAllRecipes,
+  createRecipe,
+  updateRecipe,
+  getRecipe
+} from "./recipe";
 
 export const API_HOST = "http://localhost:4000";
 
@@ -36,7 +43,8 @@ export default {
     get: getUser,
     update: updateUser,
     upload: uploadImage,
-    download: downloadImage
+    download: downloadImage,
+    search: searchUser
   },
   course: {
     getAll: getAllCourses,
@@ -47,5 +55,11 @@ export default {
     create: createTask,
     get: getTask,
     update: updateTask
+  },
+  recipe: {
+    getAll: getAllRecipes,
+    create: createRecipe,
+    update: updateRecipe,
+    get: getRecipe
   }
 }

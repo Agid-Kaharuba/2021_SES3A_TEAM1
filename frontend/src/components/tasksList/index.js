@@ -1,15 +1,16 @@
 import React from 'react';
-import { Button, Container, Typography, Box, Divider,Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Grid} from "@material-ui/core";
+import { Button, Typography, Box, Divider,Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Grid} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { Link} from "react-router-dom";
+import BackButton from '../backbutton';
 
 const useStyles = makeStyles({
     bold: {
       fontWeight: 600
     },
     underline: {
-      textDecorationLine: 'underline'
+      textDecoration: 'none'
     },
     italic: {
       fontStyle: 'italic'
@@ -30,8 +31,8 @@ export default function Tasks({tasksState}){
               <TableCell align="left">{task.description}</TableCell>
               <TableCell align="left">{task.type}</TableCell>
               <TableCell align="left">
-              <Link to={`/task/${task._id}`}>
-                  <Button size="small" variant="outlined" color="secondary">View Task</Button>
+              <Link className={classes.underline} to={`/task/${task._id}`}>
+                  <Button variant="outlined" color="secondary">View Task</Button>
               </Link>
               </TableCell>
           </TableRow>
@@ -42,13 +43,14 @@ export default function Tasks({tasksState}){
         <>
          <Box m={5}>
              <Grid container spacing={2} justify="space-between">
+               <BackButton/>
                 <Grid item>
                     <Typography className={classes.bold} variant='h4'>
                     Tasks
                     </Typography>
                 </Grid>
                 <Grid item align="right">
-                    <Button size="small" variant="outlined" color="secondary">Add Task</Button>
+                    <Button  variant="contained" color="primary" component={Link} to={"/taskslist/createtask"}>Create Task</Button>
                 </Grid>
               </Grid>
             <Divider variant="middle" />
@@ -59,10 +61,10 @@ export default function Tasks({tasksState}){
                 <Table className={classes.table} aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            <TableCell className={classes.bold}>Name</TableCell>
-                            <TableCell className={classes.bold}>Description</TableCell>
-                            <TableCell className={classes.bold}>Type</TableCell>
-                            <TableCell></TableCell>
+                            <TableCell className={classes.bold} align="left">Name</TableCell>
+                            <TableCell className={classes.bold} align="left">Description</TableCell>
+                            <TableCell className={classes.bold} align="left">Task Type</TableCell>
+                            <TableCell align="right"></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>

@@ -13,6 +13,8 @@ import { ImageRoute } from "./image-router";
 import ImageController from "../controllers/image";
 import { ProgressRoute } from "./progress-router";
 import ProgressController from "../controllers/progress";
+import { IngredientRoute } from "./ingredient-router";
+import IngredientController from "../controllers/ingredient";
 
 export const Routes = (init: ApiInitializer) => {
     CourseRoute(init.getApp(), new CourseController());
@@ -22,4 +24,5 @@ export const Routes = (init: ApiInitializer) => {
     AuthRoute(init.getApp(), new AuthController());
     ImageRoute(init.getApp(), new ImageController());
     ProgressRoute(init.getApp(), new ProgressController());
+    IngredientRoute(init.getApp(), new IngredientController());
 }

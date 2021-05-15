@@ -3,7 +3,7 @@ import Recipe from "../model/recipe";
 import ResponseService from "../helpers/response"
 import { MongoError } from "mongodb";
 
-export async function findRecipe(Id: string){
+export async function findRecipe(Id: string) {
     return await Recipe.findOne({
         _id: Id
     });
@@ -32,7 +32,7 @@ export default class RecipeController {
             ResponseService.mongoNotFoundResponse(res, err);
         }
     }
-    
+
     //Get all recipes in a category
     public async getAllByCategory(req: Request, res: Response) {
         try {
@@ -56,20 +56,22 @@ export default class RecipeController {
             category: body.category
         } as any);
         newRecipeRequest.save((err: MongoError) => {
-			if (err) {
-				ResponseService.mongoErrorResponse(res, err);
-			} else {
-				ResponseService.successResponse(res, newRecipeRequest);
-			}
-		});
+            if (err) {
+                console.log(err);
+                ResponseService.mongoErrorResponse(res, err);
+                console.log(err);
+            } else {
+                ResponseService.successResponse(res, newRecipeRequest);
+            }
+        });
     }
 
     //Update a recipe
-    public async update(req: Request, res: Response){
+    public async update(req: Request, res: Response) {
         try {
             const id = req.params.recipeId;
             const body = req.body;
-            const response = await Recipe.updateOne({_id: id}, body);
+            const response = await Recipe.updateOne({ _id: id }, body);
             ResponseService.successResponse(res, response);
         }
         catch (err) {

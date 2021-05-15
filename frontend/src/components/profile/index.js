@@ -1,6 +1,7 @@
 import React from "react";
-import { Button, TextField, Container, Typography, Avatar } from "@material-ui/core";
+import { Button, TextField, Container, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import BackButton from "../backbutton";
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -19,8 +20,8 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(0.5)
   },
   image: {
-    height: 160,
-    width: 160,
+    height: 200,
+    width: 200,
     borderRadius: 100,
     margin: theme.spacing(2),
   },
@@ -33,7 +34,7 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
   },
   uploadBtn: {
-    marginLeft: theme.spacing(4)
+    marginLeft: theme.spacing(4),
   }
 }));
 
@@ -42,15 +43,15 @@ function ProfilePicture(props) {
   // TODO: I dont know what these are for
   // There were declared before this component was pulled from being hardcoded in a page
   // Just propping them in for now.
-  const { uploadedImage, imageUploader, handleImageUpload } = props;
+  const { imageUploader, handleImageUpload } = props;
   
 
   return (
     <>
       {/*Accepting only files with image type*/}
       <input type="file" id="input" accept="image/*" onChange={handleImageUpload} ref={imageUploader} className={classes.imageUpload} />
-      <div>
-        <img className={classes.image} src={props.image.data} />
+      <div className={classes.container}>
+        <img className={classes.image} src={props.image.data} alt="profile image"/>
         <br />
         <Button size="small" onClick={() => imageUploader.current.click()} variant="outlined" color="secondary" className={classes.uploadBtn}>Upload Image</Button>
       </div>
@@ -64,6 +65,7 @@ export default function Profile(props) {
 
   return (
     <Container maxWidth="sm">
+        <BackButton/>
       <div className={classes.container}>
         <Typography variant="h4" className={classes.heading}>PROFILE</Typography>
         {/* TODO: implement profile picture */}
