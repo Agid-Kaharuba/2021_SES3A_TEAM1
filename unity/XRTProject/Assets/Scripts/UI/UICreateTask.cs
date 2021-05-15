@@ -45,7 +45,7 @@ public class UICreateTask : MonoBehaviour
     {
         ClearButtons();
         CreateButton(TaskType.Recipe);
-        CreateButton(TaskType.Performance);
+        //CreateButton(TaskType.Performance);
         CreateButton(TaskType.Testing);
     }
 
@@ -107,5 +107,6 @@ public class UICreateTask : MonoBehaviour
     public void CreateNewTask()
     {
         TrainingManager.Instance.CreateNewTask(taskName, taskType);
+        gameObject.SetActive(false);
     }
 }

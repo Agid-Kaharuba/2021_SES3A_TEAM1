@@ -46,6 +46,7 @@ public class XRKeyboardManager : MonoBehaviour
     public void EnableKeyboard()
     {
         keyboard.Enable();
+        keyboard.SetText(keyboard.targetText.text);
 
         Vector3 forwardVector = Player.instance.bodyDirectionGuess.normalized;
         Quaternion forwardRotation = Quaternion.LookRotation(forwardVector, Vector3.up);
