@@ -205,4 +205,11 @@ public class TrainingManager : MonoBehaviour
             }
         }));
     }
+
+    public List<Recipe> GetAllRecipes()
+    {
+        // TODO fetch from backend
+        
+        return new List<Recipe>();
+    }
 }
