@@ -3,7 +3,6 @@ import { Button, Typography, Box, Divider,Table, TableBody, TableCell, TableCont
 import { makeStyles } from "@material-ui/core/styles";
 
 import { Link} from "react-router-dom";
-import BackButton from '../backbutton';
 
 const useStyles = makeStyles({
     bold: {
@@ -43,7 +42,6 @@ export default function Tasks({tasksState}){
         <>
          <Box m={5}>
              <Grid container spacing={2} justify="space-between">
-               <BackButton/>
                 <Grid item>
                     <Typography className={classes.bold} variant='h4'>
                     Tasks

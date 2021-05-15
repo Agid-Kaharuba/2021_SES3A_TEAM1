@@ -4,35 +4,46 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 //STYLES
 import {ThemeProvider} from "@material-ui/core/styles";
 import Theme from './theme'
+// import appTheme from "./helpers/appTheme";
 
 // IMPORT COMPONENTS
 import ManageNavigation from "./components/manageNavigation";
 import PrivateRoute from "./components/PrivateRoute";
 import SignOut from "./components/signout";
 
-// IMPORT PAGES
-import HomePage from "./pages/home/home.js";
-import Dashboard from "./pages/dashboard/dashboard.js";
-import CreateNewCourse from './pages/supervisor/CreateCourse';
-import EmployeeProfile from "./pages/profile/employeeProfile";
-import LogIn from "./pages/login/login.js";
+// IMPORT HOMEPAGE PAGES
 import AboutUs from "./pages/aboutus/aboutus.js";
-import ViewTask from "./pages/viewtask/viewtask.js";
+import HomePage from "./pages/home/home.js";
+
+// IMPORT USER PAGES
+import LogIn from "./pages/login/login.js";
 import SignUp from "./pages/signup/signup.js";
-import TaskList from "./pages/taskslist/taskslist.js";
+import EmployeeProfile from "./pages/profile/employeeProfile";
 import UserList from "./pages/userslist/userslist.js";
-import CreateTaskGlobal from "./pages/createtask/createtaskglobal.js";
-import Statistics from "./pages/statistics/statistics.js";
+
+// IMPORT DASHBOARD PAGES
+import Dashboard from "./pages/dashboard/dashboard.js";
+
+// IMPORT COURSE PAGES
+import CreateNewCourse from './pages/supervisor/CreateCourse';
+import ViewTrainingPage from './pages/viewtraining/viewtraining';
+
+// IMPORT TASKS PAGES
+import TaskList from "./pages/taskslist/taskslist.js";
+import ViewTask from "./pages/viewtask/viewtask.js";
 import CreateNewTask from "./pages/createtask/createtask.js";
+import CreateTaskGlobal from "./pages/createtask/createtaskglobal.js";
+
+// IMPORT RECIPE PAGES
 import RecipesList from "./pages/recipesList/recipesList.js";
 import CreateRecipe from "./pages/createRecipe/createRecipe.js";
 import ViewRecipe from "./pages/viewRecipe/viewRecipe.js";
 
-// import appTheme from "./helpers/appTheme";
+// IMPORT STATISTICS PAGES
+import Statistics from "./pages/statistics/statistics.js";
 
 // IMPORT CONTEXTS
 import { AuthProvider } from "./context/auth";
-import TasksList from './pages/taskslist/taskslist';
 // import Signout from "./helpers/auth/signout.js";
 
 function AppProvider(props) {
@@ -48,97 +59,87 @@ function AppProvider(props) {
 function AppRouter(props) {
   return (
     <Switch>
-      <PrivateRoute path="/dashboard"
-        exact={true}
-        component={Dashboard} />
 
-      <PrivateRoute path="/dashboard/create-course"
+      // Homepage Routes
+      <Route path="/"
         exact={true}
-        component={CreateNewCourse} />
-
-      <PrivateRoute path="/profile"
-        exact={true}
-        component={EmployeeProfile} />
-
-      <PrivateRoute path="/user" 
-        exact={true}
-        component={UserList}>
-      </PrivateRoute>
-
-      <Route path="/taskslist" 
-        exact={true}
-        component={TaskList}>
+        component={HomePage}>
       </Route>
-
-      <Route path="/taskslist/createtask" 
-        exact={true}
-        component={CreateTaskGlobal}>
-      </Route>
-
-      <Route path="/statistics" 
-        exact={true}
-        component={Statistics}>
-      </Route>
-
-      <Route path="/login"
-        exact={true}
-        component={LogIn}>
-      </Route>
-
-      <Route path="/signup"
-        exact={true}
-        component={SignUp}>
-      </Route>
-
-      <Route path="/signout"
-        exact={true}
-        component={SignOut}>
-      </Route>
-
-      <Route path="/task"
-        exact={true}
-        component={TasksList}>
-      </Route>
-
-      <Route path="/task/:taskId"
-        exact={true}
-        component={ViewTask}>
-      </Route>
-
-      <Route path="/recipelist/:recipeId"
-        exact={true}
-        component={ViewRecipe}>
-      </Route>
-
       <Route path="/aboutus"
         exact={true}
         component={AboutUs}>
       </Route>
 
-      <Route path="/statistics"
+      // Login Profile User Routes
+      <Route path="/login"
         exact={true}
-        component={Statistics}>
+        component={LogIn}>
       </Route>
-    
+      <Route path="/signup"
+        exact={true}
+        component={SignUp}>
+      </Route>
+      <Route path="/signout"
+        exact={true}
+        component={SignOut}>
+      </Route>
+      <PrivateRoute path="/profile"
+        exact={true}
+        component={EmployeeProfile} />
+      <PrivateRoute path="/user" 
+        exact={true}
+        component={UserList}>
+      </PrivateRoute>
+
+      // Dashboard Routes
+      <PrivateRoute path="/dashboard"
+        exact={true}
+        component={Dashboard} />
+      <PrivateRoute path="/dashboard/create-course"
+        exact={true}
+        component={CreateNewCourse} />
+      <PrivateRoute path="/dashboard/view-training"
+        exact={true}
+        component={ViewTrainingPage} />  
+
+      // Tasks Routes
+      <Route path="/taskslist" 
+        exact={true}
+        component={TaskList}>
+      </Route>
+      <Route path="/taskslist/createtask" 
+        exact={true}
+        component={CreateTaskGlobal}>
+      </Route>
       <Route path="/createtask"
         exact={true}
         component={CreateNewTask}>
       </Route>
+      <Route path="/task/:taskId"
+        exact={true}
+        component={ViewTask}>
+      </Route>
 
+      // Recipe Routes
       <Route path="/recipeslist"
         exact={true}
         component={RecipesList}>
       </Route>
-
       <Route path="/recipeslist/createrecipe"
         exact={true}
         component={CreateRecipe}>
       </Route>
-
-      <Route path="/"
+      <Route path="/recipelist/:recipeId"
         exact={true}
-        component={HomePage}>
+        component={ViewRecipe}>
       </Route>
+
+      // Statistics Routes
+      <Route path="/statistics"
+        exact={true}
+        component={Statistics}>
+      </Route>
+
     </Switch>
   );
 }
