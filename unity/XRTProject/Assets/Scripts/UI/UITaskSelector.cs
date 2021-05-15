@@ -15,6 +15,8 @@ public class UITaskSelector : MonoBehaviour
     [SerializeField] private UIReorderableElement sampleItem;
     [SerializeField] private bool shouldCloseOnSelect = true;
     [SerializeField] private bool canDrag = false;
+    [SerializeField]
+    public TaskTypeMask taskFilter = TaskTypeMask.Performance | TaskTypeMask.Recipe | TaskTypeMask.Testing;
     [SerializeField] public OnTaskSelectedEvent OnTaskSelected;
 
     private float itemFontSize;
@@ -48,24 +50,37 @@ public class UITaskSelector : MonoBehaviour
 
         foreach (Task task in TrainingManager.Instance.Tasks)
         {
-            UIReorderableElement item = Instantiate(itemPrefab, taskList);
-            RectTransform rectTransform = item.GetComponent<RectTransform>();
-            item.canDrag = canDrag;
-            item.Text.text = task.Name;
-            item.Text.fontSize = sampleItem.Text.fontSize;
-            item.SetHighlighted(TrainingManager.Instance.CurrentTask == task);
-            rectTransform.sizeDelta = itemSizeDelta;
-            item.GetComponent<UIBoxColliderAutoScaler>()?.AutoScale();
+            bool isValidTask = (!taskFilter.HasFlag(TaskTypeMask.Recipe) || task.TaskType == TaskType.Recipe) &&
+                               (!taskFilter.HasFlag(TaskTypeMask.Testing) || task.TaskType == TaskType.Testing) &&
+                               (!taskFilter.HasFlag(TaskTypeMask.Performance) || task.TaskType == TaskType.Performance);
 
-            item.OnClick.AddListener(() =>
+            if (isValidTask)
             {
-                OnTaskClicked(item, task);
-            });
+                UIReorderableElement item = Instantiate(itemPrefab, taskList);
+                RectTransform rectTransform = item.GetComponent<RectTransform>();
+                item.canDrag = canDrag;
+                item.Text.text = task.Name;
+                item.Text.fontSize = sampleItem.Text.fontSize;
+                item.SetHighlighted(TrainingManager.Instance.CurrentTask == task);
+                rectTransform.sizeDelta = itemSizeDelta;
+                item.GetComponent<UIBoxColliderAutoScaler>()?.AutoScale();
+                UIRemoveButton removeButton = item.GetComponent<UIRemoveButton>();
+
+                item.OnClick.AddListener(() =>
+                {
+                    OnTaskClicked(item, task);
+                });
             
-            item.OnReorderEvent.AddListener((fromIndex, toIndex, otherItem) =>
-            {
-                ReorderTasks(item, fromIndex, otherItem, toIndex);
-            });
+                item.OnReorderEvent.AddListener((fromIndex, toIndex, otherItem) =>
+                {
+                    ReorderTasks(item, fromIndex, otherItem, toIndex);
+                });
+            
+                removeButton.OnRemove.AddListener(() =>
+                {
+                    TrainingManager.Instance.RemoveTask(task);
+                });
+            }
         }
     }
 

@@ -11,6 +11,7 @@ public class CustomizerListener : MonoBehaviour
     private void OnEnable()
     {
         TrainingManager.Instance.OnCustomizationSettingsChanged.AddListener(OnCustomizationSettingsChanged);
+        OnCustomizationSettingsChanged();
     }
 
     private void OnDisable()

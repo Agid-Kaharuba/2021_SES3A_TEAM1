@@ -77,4 +77,12 @@ public class BurgerBoard : MonoBehaviour
         Debug.Log($"Set current burger for task {task.Name}");
         TrainingManager.Instance.UpdateTaskWithNewRecipe(task, GetCurrentBurger());
     }
+    
+    public void SetCurrentBurgerForRecipe(Recipe recipe)
+    {
+        Debug.Log($"Set current burger for recipe {recipe.Name}");
+        
+        // TODO
+        // TrainingManager.Instance.UpdateTaskWithNewRecipe(task, GetCurrentBurger());
+    }
 }
