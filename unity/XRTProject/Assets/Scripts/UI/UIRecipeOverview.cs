@@ -13,12 +13,12 @@ public class UIRecipeOverview : MonoBehaviour
     private void OnEnable()
     {
         UpdateRecipe();
-        TrainingManager.Instance.OnCurrentTaskChanged.AddListener(UpdateRecipe);
+        TrainingManager.Instance.OnTrainingModuleChanged.AddListener(UpdateRecipe);
     }
 
     private void OnDisable()
     {
-        TrainingManager.Instance.OnCurrentTaskChanged.RemoveListener(UpdateRecipe);
+        TrainingManager.Instance.OnTrainingModuleChanged.RemoveListener(UpdateRecipe);
     }
 
     private void UpdateRecipe()

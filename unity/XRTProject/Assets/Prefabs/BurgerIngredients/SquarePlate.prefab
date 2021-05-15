@@ -1436,18 +1436,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6722700085978336152, guid: da12274eb54ab0a4184ad4676f350bc4, type: 3}
       propertyPath: onHandClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6722700085978336152, guid: da12274eb54ab0a4184ad4676f350bc4, type: 3}
       propertyPath: onHandClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6722700085978336152, guid: da12274eb54ab0a4184ad4676f350bc4, type: 3}
+      propertyPath: onHandClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6722700085978336152, guid: da12274eb54ab0a4184ad4676f350bc4, type: 3}
       propertyPath: onHandClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 5765035085251572827}
     - target: {fileID: 6722700085978336152, guid: da12274eb54ab0a4184ad4676f350bc4, type: 3}
+      propertyPath: onHandClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1240065757044322154}
+    - target: {fileID: 6722700085978336152, guid: da12274eb54ab0a4184ad4676f350bc4, type: 3}
       propertyPath: onHandClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6722700085978336152, guid: da12274eb54ab0a4184ad4676f350bc4, type: 3}
+      propertyPath: onHandClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6722700085978336152, guid: da12274eb54ab0a4184ad4676f350bc4, type: 3}
@@ -1455,15 +1467,31 @@ PrefabInstance:
       value: SetActive
       objectReference: {fileID: 0}
     - target: {fileID: 6722700085978336152, guid: da12274eb54ab0a4184ad4676f350bc4, type: 3}
+      propertyPath: onHandClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetCurrentBurgerForCurrentTask
+      objectReference: {fileID: 0}
+    - target: {fileID: 6722700085978336152, guid: da12274eb54ab0a4184ad4676f350bc4, type: 3}
       propertyPath: onHandClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6722700085978336152, guid: da12274eb54ab0a4184ad4676f350bc4, type: 3}
+      propertyPath: onHandClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: BurgerBoard, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6722700085978336152, guid: da12274eb54ab0a4184ad4676f350bc4, type: 3}
       propertyPath: onHandClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6722700085978336152, guid: da12274eb54ab0a4184ad4676f350bc4, type: 3}
+      propertyPath: onHandClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6722700085978336152, guid: da12274eb54ab0a4184ad4676f350bc4, type: 3}
       propertyPath: onHandClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6722700085978336152, guid: da12274eb54ab0a4184ad4676f350bc4, type: 3}
+      propertyPath: onHandClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8041641961314574196, guid: da12274eb54ab0a4184ad4676f350bc4, type: 3}
@@ -1495,6 +1523,10 @@ PrefabInstance:
     - target: {fileID: 1501141653834379080, guid: da12274eb54ab0a4184ad4676f350bc4, type: 3}
       propertyPath: m_Name
       value: ButtonXR SetRecipe (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1501141653834379080, guid: da12274eb54ab0a4184ad4676f350bc4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2275603070885393995, guid: da12274eb54ab0a4184ad4676f350bc4, type: 3}
       propertyPath: m_Size.x

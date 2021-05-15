@@ -132,25 +132,29 @@ public class TrainingManager : MonoBehaviour
         Task newTask = new Task(taskName, taskType);
         trainingModule.Tasks.Add(newTask);
 
-        apiService.CreateTask(newTask, obj =>
+        StartCoroutine(apiService.CreateTask(newTask, obj =>
         {
-            if (obj is Task t)
+            if (obj is BackendErrorResponse error)
+            {
+                Debug.LogError($"Error updating training module code {error.Status}: {error.Message}");
+            }
+            else if (obj is Task t)
             {
                 trainingModule.Tasks.Add(t);
             }
-        });
+        }));
     }
 
     public void UpdateTrainingName(string newName)
     {
         trainingModule.Name = newName;
-        StartCoroutine(apiService.UpdateTrainingModule(trainingModule));
+        UpdateTrainingModule();
     }
 
     public void UpdateTrainingDescription(string description)
     {
         trainingModule.Description = description;
-        StartCoroutine(apiService.UpdateTrainingModule(trainingModule));
+        UpdateTrainingModule();
     }
 
     public void ReorderTask(int fromIndex, int toIndex)
@@ -158,15 +162,13 @@ public class TrainingManager : MonoBehaviour
         Task tempTask = trainingModule.Tasks[fromIndex];
         trainingModule.Tasks[fromIndex] = trainingModule.Tasks[toIndex];
         trainingModule.Tasks[toIndex] = tempTask;
-
-        StartCoroutine(apiService.UpdateTrainingModule(trainingModule));
+        UpdateTrainingModule();
     }
 
     public void RemoveTask(Task task)
     {
         trainingModule.Tasks.Remove(task);
-
-        StartCoroutine(apiService.UpdateTrainingModule(trainingModule));
+        UpdateTrainingModule();
     }
 
     public void SwitchTask(Task task)
@@ -197,19 +199,49 @@ public class TrainingManager : MonoBehaviour
         SwitchTask(CurrentTaskIndex - 1);
     }
 
-    public void UpdateTaskWithNewRecipe(Task task, Recipe recipe)
+    public void UpdateTrainingModule()
     {
-        if (task.Recipe == null) return;
-        
-        task.Recipe.SetIngredients(recipe.Ingredients);
-
-        StartCoroutine(apiService.UpdateRecipe(task.Recipe, (obj) =>
+        StartCoroutine(apiService.UpdateTrainingModule(trainingModule, (obj) =>
         {
             if (obj is BackendErrorResponse error)
             {
-                Debug.LogError($"Error updating recipe: {error.Message}");
+                Debug.LogError($"Error updating training module code {error.Status}: {error.Message}");
             }
         }));
+    }
+
+    /// Sets a recipe for the task. If there is an existing recipe, update it. Otherwise make a new one.
+    public void UpdateTaskRecipe(Task task, Recipe recipe)
+    {
+        if (task.Recipe == null)
+        {
+            StartCoroutine(apiService.CreateRecipe(recipe, (obj) =>
+            {
+                if (obj is BackendErrorResponse error)
+                {
+                    Debug.LogError($"Error updating recipe code {error.Status}: {error.Message}");
+                }
+                else if (obj is Recipe newRecipe)
+                {
+                    task.Recipe = newRecipe;
+                }
+                
+                UpdateTrainingModule();
+            }));
+        }
+        else
+        {
+            task.Recipe.SetIngredients(recipe.Ingredients);
+
+            StartCoroutine(apiService.UpdateRecipe(task.Recipe, (obj) =>
+            {
+                if (obj is BackendErrorResponse error)
+                {
+                    Debug.LogError($"Error updating recipe code {error.Status}: {error.Message}");
+                }
+                UpdateTrainingModule();
+            }));
+        }
     }
 
     public void SubmitTask(Recipe recipe, int score)
@@ -221,7 +253,7 @@ public class TrainingManager : MonoBehaviour
         StartCoroutine(apiService.SubmitTaskProgress(progress, (obj) => { 
             if (obj is BackendErrorResponse error)
             {
-                Debug.LogError($"Error posting progress: {error.Message}");
+                Debug.LogError($"Error posting progress code {error.Status}: {error.Message}");
             }
         }));
     }
