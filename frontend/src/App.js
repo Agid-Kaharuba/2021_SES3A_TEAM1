@@ -24,10 +24,10 @@ import UserList from "./pages/userslist/userslist.js";
 import CreateTaskGlobal from "./pages/createtask/createtaskglobal.js";
 import Statistics from "./pages/statistics/statistics.js";
 import CreateNewTask from "./pages/createtask/createtask.js";
-import RecipesList from "./pages/recipesList/recipesList.js";
-import CreateRecipe from "./pages/createRecipe/createRecipe.js";
-import ViewRecipe from "./pages/viewRecipe/viewRecipe.js";
-import RecipeBuilder from "./components/RecipeBuilder";
+import RecipesList from "./pages/recipe/recipesList";
+import CreateRecipe from "./pages/recipe/createRecipe";
+import ViewRecipe from "./pages/recipe/viewRecipe";
+import RecipeBuilder from "./components/Recipe/recipeBuilder";
 
 // import appTheme from "./helpers/appTheme";
 

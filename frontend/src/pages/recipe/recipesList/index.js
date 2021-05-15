@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
-import Recipes from "../../components/recipesList/index.js";
+import Recipes from "../../../components/recipesList/index.js";
 
-import { AuthContext } from "../../context/auth";
-import api from "../../helpers/api";
+import { AuthContext } from "../../../context/auth";
+import api from "../../../helpers/api";
 
 export default function RecipesList() {
     const { authState } = useContext(AuthContext);

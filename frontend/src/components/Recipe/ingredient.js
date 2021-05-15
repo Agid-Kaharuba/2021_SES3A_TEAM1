@@ -9,7 +9,7 @@ import api from "../../helpers/api";
 
 export default function Ingredient(props) {
 	return (
-		<Draggable key={props.ingredient.id} draggableId={props.ingredient.id} index={props.index}>
+		<Draggable key={props.ingredient.id} draggableId={props.ingredient.id} index={props.index} isDragDisabled={!(props.edit == undefined || props.edit)}>
 			{(provided) => (
 				<Box my={1}
 					{...provided.dragHandleProps}
@@ -17,7 +17,7 @@ export default function Ingredient(props) {
 					ref={provided.innerRef}>
 					<Paper>
 						<Card variant="outlined"
-							style={{ width: "8vw", height: "8vw" }}
+							style={{ width: "6vw", height: "6vw" }}
 						>
 							<CardContent>
 								<Typography color="textSecondary" align="center" gutterBottom>

@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const recipeSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: false
     },
     steps: {
         type: [Object],
@@ -15,7 +15,7 @@ const recipeSchema = new mongoose.Schema({
     },
     category: {
         type: String,
-        required: true
+        required: false
     },
     archive: {
         type: Boolean,
