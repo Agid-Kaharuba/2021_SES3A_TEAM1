@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 //STYLES
-import {ThemeProvider} from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/core/styles";
 import Theme from './theme'
 // import appTheme from "./helpers/appTheme";
 
@@ -35,9 +35,9 @@ import CreateNewTask from "./pages/createtask/createtask.js";
 import CreateTaskGlobal from "./pages/createtask/createtaskglobal.js";
 
 // IMPORT RECIPE PAGES
-import RecipesList from "./pages/recipesList/recipesList.js";
-import CreateRecipe from "./pages/createRecipe/createRecipe.js";
-import ViewRecipe from "./pages/viewRecipe/viewRecipe.js";
+import RecipesList from "./pages/recipe/recipesList";
+import CreateRecipe from "./pages/recipe/createRecipe";
+import ViewRecipe from "./pages/recipe/viewRecipe";
 
 // IMPORT STATISTICS PAGES
 import Statistics from "./pages/statistics/statistics.js";
@@ -65,6 +65,7 @@ function AppRouter(props) {
         exact={true}
         component={HomePage}>
       </Route>
+    
       <Route path="/aboutus"
         exact={true}
         component={AboutUs}>
@@ -95,22 +96,23 @@ function AppRouter(props) {
       <PrivateRoute path="/dashboard"
         exact={true}
         component={Dashboard} />
-      <PrivateRoute path="/dashboard/create-course"
+      <PrivateRoute path="/dashboard/create"
         exact={true}
         component={CreateNewCourse} />
-      <PrivateRoute path="/dashboard/view-training"
+      <PrivateRoute path="/dashboard/:courseId"
         exact={true}
         component={ViewTrainingPage} />  
 
       // Tasks Routes
-      <Route path="/taskslist" 
+      <Route path="/task" 
         exact={true}
         component={TaskList}>
       </Route>
-      <Route path="/taskslist/createtask" 
+      <Route path="/task/create" 
         exact={true}
         component={CreateTaskGlobal}>
       </Route>
+    
       <Route path="/createtask"
         exact={true}
         component={CreateNewTask}>
@@ -121,15 +123,15 @@ function AppRouter(props) {
       </Route>
 
       // Recipe Routes
-      <Route path="/recipeslist"
+      <Route path="/recipe"
         exact={true}
         component={RecipesList}>
       </Route>
-      <Route path="/recipeslist/createrecipe"
+      <Route path="/recipe/create"
         exact={true}
         component={CreateRecipe}>
       </Route>
-      <Route path="/recipelist/:recipeId"
+      <Route path="/recipe/:recipeId"
         exact={true}
         component={ViewRecipe}>
       </Route>
