@@ -29,7 +29,7 @@ export default function Recipes({recipesState}){
               <TableCell align="left">{recipe.name}</TableCell>
               <TableCell align="left">{recipe.category}</TableCell>
               <TableCell align="left">
-              <Link className={classes.underline} to={`/recipelist/${recipe._id}`}>
+              <Link className={classes.underline} to={`/recipe/${recipe._id}`}>
                   <Button variant="outlined" color="secondary">View Recipe</Button>
               </Link>
               </TableCell>
@@ -47,7 +47,7 @@ export default function Recipes({recipesState}){
                     </Typography>
                 </Grid>
                 <Grid item align="right">
-                    <Button  variant="contained" color="primary" component={Link} to={"/recipeslist/createRecipe"}>Create Recipe</Button>
+                    <Button  variant="contained" color="primary" component={Link} to={"/recipe/create"}>Create Recipe</Button>
                 </Grid>
               </Grid>
             <Divider variant="middle" />

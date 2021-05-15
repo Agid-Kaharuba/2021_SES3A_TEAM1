@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 // IMPORT COMPONENTS
@@ -33,7 +33,7 @@ const useStyles = makeStyles({
 export default function CreateNewTaskPage() {
   const classes = useStyles();
 
-  const [formState, setFormState] = useState({name: "", description: "", type: ""});
+  const [formState, setFormState] = useState({ name: "", description: "", type: "" });
 
   const { authState, setAuthState } = React.useContext(AuthContext);
   let history = useHistory();
@@ -51,18 +51,23 @@ export default function CreateNewTaskPage() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(formState);
-    api.task.create(authState.token, formState);
-    history.push('/dashboard/create-course');
+    try {
+      const res = await api.task.create(authState.token, formState);
+      history.push(`/task/${res.data._id}`);
+    }
+    catch (err) {
+      console.log(err);
+    }
   }
 
   return (
     <div>
       <Box m={5}>
         <Grid
-        container
-        direction='row'
-        justify='space-between'
-        alignItems='baseline'>
+          container
+          direction='row'
+          justify='space-between'
+          alignItems='baseline'>
           <Grid item>
             <Typography className={classes.bold} variant='h4'>
               Create New Task
@@ -71,11 +76,11 @@ export default function CreateNewTaskPage() {
         </Grid>
         <Box my={1}>
           <Divider variant="middle" />
-        </Box>        
+        </Box>
       </Box>
 
       <Box m={5}>
-        <Paper style={{backgroundColor: "white"}} elevation={3}>
+        <Paper style={{ backgroundColor: "white" }} elevation={3}>
           <Box m={5} p={2}>
             <Box my={2} pb={2} fontStyle="italic">
               <Typography variant='h6'>
@@ -84,12 +89,12 @@ export default function CreateNewTaskPage() {
             </Box>
 
             <Box my={2}>
-                <Typography className={classes.bold} variant='h6'>
-                  Task Name
+              <Typography className={classes.bold} variant='h6'>
+                Task Name
                 </Typography>
               <TextField
                 id="outlined-multiline-static"
-    
+
                 fullWidth='true'
                 variant="outlined"
                 name="name"
@@ -114,33 +119,33 @@ export default function CreateNewTaskPage() {
 
             <Box my={2}>
               <FormControl className={classes.formControl}>
-              <Typography className={classes.bold} variant='h6'>
+                <Typography className={classes.bold} variant='h6'>
                   Task Type
               </Typography>
-              <Select
-                id="demo-simple-select-placeholder-label"
-                onChange={handleChange}
-                displayEmpty
-                name="type"
-                className={classes.selectEmpty}
-              >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value={"Practice"}>Practice</MenuItem>
-                <MenuItem value={"Testing"}>Testing</MenuItem>
-                <MenuItem value={"Performance"}>Performance</MenuItem>
-              </Select>
-            </FormControl>
+                <Select
+                  id="demo-simple-select-placeholder-label"
+                  onChange={handleChange}
+                  displayEmpty
+                  name="type"
+                  className={classes.selectEmpty}
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  <MenuItem value={"Practice"}>Practice</MenuItem>
+                  <MenuItem value={"Testing"}>Testing</MenuItem>
+                  <MenuItem value={"Performance"}>Performance</MenuItem>
+                </Select>
+              </FormControl>
             </Box>
-            
+
           </Box>
         </Paper>
       </Box>
 
       <Box justifyContent='center' display="flex" m={6}>
         <Box mr={6}>
-          <Button variant="contained" color="secondary" component={Link} to="/dashboard/create-course">
+          <Button variant="contained" color="secondary" component={Link} to="/dashboard/create">
             Back
           </Button>
         </Box>

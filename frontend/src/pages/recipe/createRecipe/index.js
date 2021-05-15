@@ -51,18 +51,15 @@ export default function CreateNewRecipePage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // setFormState({
-    //   ...formState, ingredients: [formState.ingredients],
-    // })
     console.log(formState);
     try {
-      api.recipe.create(authState.token, formState);
+      const res = await api.recipe.create(authState.token, formState);
+      history.push(`/recipe/${res.data._id}`);
     }
     catch (err) {
       // TODO: api call failed alert user
       console.log(err);
     }
-    history.push('/recipeslist');
   }
 
   return (
@@ -87,7 +84,7 @@ export default function CreateNewRecipePage() {
 
       <Box justifyContent='center' display="flex" m={6}>
         <Box mr={6}>
-          <Button variant="contained" color="secondary" component={Link} to="recipeslist">
+          <Button variant="contained" color="secondary" component={Link} to="/recipe">
             Back
         </Button>
         </Box>

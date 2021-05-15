@@ -96,19 +96,19 @@ function AppRouter(props) {
       <PrivateRoute path="/dashboard"
         exact={true}
         component={Dashboard} />
-      <PrivateRoute path="/dashboard/create-course"
+      <PrivateRoute path="/dashboard/create"
         exact={true}
         component={CreateNewCourse} />
-      <PrivateRoute path="/dashboard/view-training"
+      <PrivateRoute path="/dashboard/:courseId"
         exact={true}
         component={ViewTrainingPage} />  
 
       // Tasks Routes
-      <Route path="/taskslist" 
+      <Route path="/task" 
         exact={true}
         component={TaskList}>
       </Route>
-      <Route path="/taskslist/createtask" 
+      <Route path="/task/create" 
         exact={true}
         component={CreateTaskGlobal}>
       </Route>
@@ -123,15 +123,15 @@ function AppRouter(props) {
       </Route>
 
       // Recipe Routes
-      <Route path="/recipeslist"
+      <Route path="/recipe"
         exact={true}
         component={RecipesList}>
       </Route>
-      <Route path="/recipeslist/createrecipe"
+      <Route path="/recipe/create"
         exact={true}
         component={CreateRecipe}>
       </Route>
-      <Route path="/recipelist/:recipeId"
+      <Route path="/recipe/:recipeId"
         exact={true}
         component={ViewRecipe}>
       </Route>

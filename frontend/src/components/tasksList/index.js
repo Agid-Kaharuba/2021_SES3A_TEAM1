@@ -48,7 +48,7 @@ export default function Tasks({tasksState}){
                     </Typography>
                 </Grid>
                 <Grid item align="right">
-                    <Button  variant="contained" color="primary" component={Link} to={"/taskslist/createtask"}>Create Task</Button>
+                    <Button  variant="contained" color="primary" component={Link} to={"/task/create"}>Create Task</Button>
                 </Grid>
               </Grid>
             <Divider variant="middle" />

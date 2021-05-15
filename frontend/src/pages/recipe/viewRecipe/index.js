@@ -92,7 +92,7 @@ export default function ViewRecipe(props) {
 
         <Box justifyContent='center' display="flex" m={6}>
           <Box mr={6}>
-            <Button variant="contained" color="secondary" component={Link} to="/recipeslist">
+            <Button variant="contained" color="secondary" component={Link} to="/recipe">
               Back
             </Button>
           </Box>
