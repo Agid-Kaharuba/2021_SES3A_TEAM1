@@ -836,7 +836,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1475714473625101229, guid: e9f04c0f8b115344080b7ebaf8f94cca, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 396.971
+      value: 400.24
       objectReference: {fileID: 0}
     - target: {fileID: 1475714473625101229, guid: e9f04c0f8b115344080b7ebaf8f94cca, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -854,6 +854,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7374227268355422013, guid: e9f04c0f8b115344080b7ebaf8f94cca, type: 3}
+      propertyPath: onHandClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 224474986695004634}
     - target: {fileID: 7834523933344284786, guid: e9f04c0f8b115344080b7ebaf8f94cca, type: 3}
       propertyPath: m_Name
       value: StaticEditOption
@@ -938,7 +942,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1475714473625101229, guid: e9f04c0f8b115344080b7ebaf8f94cca, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 396.971
+      value: 400.24
       objectReference: {fileID: 0}
     - target: {fileID: 1475714473625101229, guid: e9f04c0f8b115344080b7ebaf8f94cca, type: 3}
       propertyPath: m_AnchoredPosition.y

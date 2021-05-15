@@ -88,19 +88,19 @@ public class TrainingManager : MonoBehaviour
             OnCustomizationSettingsChanged?.Invoke();
         }));
 
-        // trainingModule = new TrainingModule("Make a Simple burger", "courseId");
-        //
-        // Task whooperTask = new Task("Learn to make a Whooper", TaskType.Recipe);
-        // whooperTask.Recipe = new Recipe("Whooper", "top_bun", "lettuce", "cheese", "patty", "bottom_bun");
-        // trainingModule.Tasks.Add(whooperTask);
-        //
-        // Task cheeseBurgerTask = new Task("Learn to make a Cheeseburger", TaskType.Recipe);
-        // cheeseBurgerTask.Recipe = new Recipe("Cheeseburger", "top_bun", "cheese", "patty", "bottom_bun");
-        // trainingModule.Tasks.Add(cheeseBurgerTask);
-        //
-        // trainingModule.Tasks.Add(new Task("Remembering to make a Whooper", TaskType.Testing));
-        // trainingModule.Tasks.Add(new Task("Serve 5 customers", TaskType.Performance));
-        // CurrentTask = whooperTask;
+        trainingModule = new TrainingModule("Make a Simple burger", "courseId");
+        
+        Task whooperTask = new Task("Learn to make a Whooper", TaskType.Recipe);
+        whooperTask.Recipe = new Recipe("Whooper", "top_bun", "lettuce", "cheese", "patty", "bottom_bun");
+        trainingModule.Tasks.Add(whooperTask);
+        
+        Task cheeseBurgerTask = new Task("Learn to make a Cheeseburger", TaskType.Recipe);
+        cheeseBurgerTask.Recipe = new Recipe("Cheeseburger", "top_bun", "cheese", "patty", "bottom_bun");
+        trainingModule.Tasks.Add(cheeseBurgerTask);
+        
+        trainingModule.Tasks.Add(new Task("Remembering to make a Whooper", TaskType.Testing));
+        trainingModule.Tasks.Add(new Task("Serve 5 customers", TaskType.Performance));
+        CurrentTask = whooperTask;
     }
 
     private void Start()

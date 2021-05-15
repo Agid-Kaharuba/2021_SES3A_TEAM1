@@ -72,19 +72,23 @@ public class Recipe
 
         for (int i = 0; i < Ingredients.Count; i++)
         {
+            bool isFound = false;
             int targetIndex = i;
             PropData expectedIngredient = Ingredients[i];
 
-            while (targetIndex < sampleRecipe.Ingredients.Count)
+            while (!isFound && targetIndex < sampleRecipe.Ingredients.Count)
             {
-                PropData foundIngredient = sampleRecipe.Ingredients[targetIndex++];
+                PropData foundIngredient = sampleRecipe.Ingredients[targetIndex];
 
                 // If we found the correct ingredients
                 if (expectedIngredient == foundIngredient)
                 {
                     // If found in the same place as expected, it will just return the singleItemScore
                     totalScore += singleItemScore / 1f + (targetIndex - i);
+                    isFound = true;
                 }
+
+                targetIndex++;
             }
         }
 
