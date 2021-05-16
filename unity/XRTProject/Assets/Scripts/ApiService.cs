@@ -184,7 +184,7 @@ public class ApiService
     {
         string jsonString = JsonConvert.SerializeObject(task);
 
-        UnityWebRequest www = UnityWebRequest.Post($"{API_HOST}/task", jsonString);
+        UnityWebRequest www = UnityWebRequest.Put($"{API_HOST}/task", jsonString);
         www.SetRequestHeader("Authorization", $"Bearer {token}");
         www.SetRequestHeader("Content-Type", "application/json");
         yield return www.SendWebRequest();
@@ -235,7 +235,7 @@ public class ApiService
     {
         string jsonString = JsonConvert.SerializeObject(recipe);
 
-        UnityWebRequest www = UnityWebRequest.Post($"{API_HOST}/recipe", jsonString);
+        UnityWebRequest www = UnityWebRequest.Put($"{API_HOST}/recipe", jsonString);
         www.SetRequestHeader("Authorization", $"Bearer {token}");
         www.SetRequestHeader("Content-Type", "application/json");
         yield return www.SendWebRequest();

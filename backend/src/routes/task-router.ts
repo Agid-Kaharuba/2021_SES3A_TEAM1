@@ -45,6 +45,7 @@ export const TaskRoute = (app: Express, controller: TaskController) => {
      *     description: Success
      */
     app.post("/task", controller.create);
+    app.put("/task", controller.create);
 
     /**
      * @swagger
