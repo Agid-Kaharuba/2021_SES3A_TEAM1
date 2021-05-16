@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import Recipes from "../../../components/recipesList/index.js";
+import Recipes from "../../../components/Recipe/list.js";
 
 import { AuthContext } from "../../../context/auth";
 import api from "../../../helpers/api";
