@@ -169,12 +169,9 @@ export default function CreateNewTrainingPage() {
         <TableCell align="left">{task.description}</TableCell>
         <TableCell align="left">{task.type}</TableCell>
         <TableCell align="right">
-<<<<<<< HEAD
-=======
           <Link to={`/task/${task._id}`}>
             <Button variant="outlined" color="secondary">View Task</Button>
           </Link>
->>>>>>> 94de1690c30ff6e87c02b4b95a2375fff8bbf18b
         </TableCell>
       </TableRow>
     )
