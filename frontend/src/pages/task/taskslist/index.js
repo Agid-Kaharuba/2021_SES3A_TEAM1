@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
-import Tasks from "../../components/tasksList/index.js";
-import { AuthContext } from "../../context/auth";
-import api from "../../helpers/api";
+import Tasks from "../../../components/tasksList/index.js";
+import { AuthContext } from "../../../context/auth";
+import api from "../../../helpers/api";
 
 // const useStyles = makeStyles({
 //     bold: {

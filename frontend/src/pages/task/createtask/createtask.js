@@ -5,8 +5,8 @@ import { Link, useHistory } from "react-router-dom";
 import { Box, Button, Typography, Divider, TextField, Grid, FormControl, Select, MenuItem, Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { AuthContext } from "../../context/auth";
-import api from "../../helpers/api";
+import { AuthContext } from "../../../context/auth";
+import api from "../../../helpers/api";
 
 const useStyles = makeStyles({
   bold: {

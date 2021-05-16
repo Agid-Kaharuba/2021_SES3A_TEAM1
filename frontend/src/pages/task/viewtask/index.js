@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Button, Typography, Divider, Box, FormControl, Select, MenuItem, Grid, TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import LoadingSpinner from "../../components/loadingSpinner/index.js"
+import LoadingSpinner from "../../../components/loadingSpinner/index.js"
 import { Link, useHistory } from "react-router-dom";
-import { AuthContext } from "../../context/auth";
-import api from "../../helpers/api";
-import BackButton from "../../components/backbutton/index.js";
+import { AuthContext } from "../../../context/auth";
+import api from "../../../helpers/api";
+import BackButton from "../../../components/backbutton/index.js";
 
 const useStyles = makeStyles({
     bold: {
@@ -29,6 +29,7 @@ export default function ViewTask(props) {
     const { authState } = useContext(AuthContext);
     const [taskState, setTaskState] = useState(undefined);
     const [editState, setEditState] = useState(true);
+    const history = useHistory();
 
     const handleChange = (e) => {
         const { id, value } = e.target;
@@ -67,7 +68,7 @@ export default function ViewTask(props) {
             <>
                 <Box m={5}>
                     <Grid container spacing={2} justify="flex-start" direction='row'>
-                            <BackButton></BackButton>
+                        <BackButton handleBack={() => history.push("/task")} />
                         <Grid item>
                             <Typography className={classes.bold} variant='h4'>
                                 Task

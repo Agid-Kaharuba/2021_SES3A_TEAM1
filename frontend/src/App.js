@@ -29,10 +29,10 @@ import CreateNewCourse from './pages/supervisor/CreateCourse';
 import ViewTrainingPage from './pages/viewtraining/viewtraining';
 
 // IMPORT TASKS PAGES
-import TaskList from "./pages/taskslist/taskslist.js";
-import ViewTask from "./pages/viewtask/viewtask.js";
-import CreateNewTask from "./pages/createtask/createtask.js";
-import CreateTaskGlobal from "./pages/createtask/createtaskglobal.js";
+import TaskList from "./pages/task/taskslist";
+import ViewTask from "./pages/task/viewtask";
+import CreateNewTask from "./pages/task/createtask/createtask.js";
+import CreateTaskGlobal from "./pages/task/createtask/createtaskglobal.js";
 
 // IMPORT RECIPE PAGES
 import RecipesList from "./pages/recipe/recipesList";
