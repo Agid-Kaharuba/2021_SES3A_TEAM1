@@ -113,11 +113,6 @@ export default function ViewTask(props) {
                                     {editState ? "Edit" : "Save"}
                                 </Button>
                             </Box>
-                            <Box>
-                                <Button variant="contained" color='primary' size="large" component={Link} to="/taskslist">
-                                    Back
-                            </Button>
-                            </Box>
                         </Grid>
                     </Grid>
                 </Box>

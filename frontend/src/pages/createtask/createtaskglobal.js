@@ -50,8 +50,13 @@ export default function CreateNewTaskGlobalPage() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(formState);
-    api.task.create(authState.token, formState);
-    history.push('/taskslist');
+    try {
+      const res = await api.task.create(authState.token, formState);
+      history.push(`/task/${res.data._id}`);
+    }
+    catch (err) {
+      console.log(err);
+    }
   }
 
   return (
@@ -139,7 +144,7 @@ export default function CreateNewTaskGlobalPage() {
 
       <Box justifyContent='center' display="flex" m={6}>
         <Box mr={6}>
-          <Button variant="contained" color="secondary" component={Link} to="/taskslist">
+          <Button variant="contained" color="secondary" component={Link} to="/task">
             Back
           </Button>
         </Box>

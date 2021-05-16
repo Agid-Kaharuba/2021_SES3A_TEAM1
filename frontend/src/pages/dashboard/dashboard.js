@@ -75,8 +75,9 @@ export default function CreateNewTrainingPage() {
               </Typography>
             
             </CardContent>
-            <CardActions>
-              <Button size="small">View Training</Button>
+            <CardActions><Link className={classes.underline} to={`/dashboard/${course._id}`}>
+                  <Button variant="outlined" color="secondary">View Training</Button>
+              </Link>
               <Button size="small" onClick={() => handleLaunchXR(course._id)}>Launch XR</Button>
             </CardActions>
           </Card>
@@ -102,7 +103,7 @@ export default function CreateNewTrainingPage() {
           </Grid>
           <Grid item>
           {authState.user.isSupervisor && (
-            <Button component={Link} color="primary" variant="contained" to={"/dashboard/create-course"}>
+            <Button component={Link} color="primary" variant="contained" to={"/dashboard/create"}>
               Create Training
             </Button>)}
           </Grid>
