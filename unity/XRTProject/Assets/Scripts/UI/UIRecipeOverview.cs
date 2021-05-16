@@ -31,7 +31,7 @@ public class UIRecipeOverview : MonoBehaviour
             Recipe recipe = trainingManager.CurrentTask.Recipe;
             
             if (titleText)
-                titleText.text = $"{recipe.Name} Recipe";
+                titleText.text = $"{recipe.Name}";
             
             WriteIngredientList(recipe);
         }

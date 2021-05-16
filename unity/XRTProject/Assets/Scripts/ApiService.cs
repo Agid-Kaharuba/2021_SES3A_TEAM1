@@ -159,7 +159,7 @@ public class ApiService
         string jsonString = JsonConvert.SerializeObject(course);
 
         UnityWebRequest www = UnityWebRequest.Put($"{API_HOST}/course/{course.Id}", jsonString);
-        www.SetRequestHeader("Authorization", $"Bearer {token}");
+        //www.SetRequestHeader("Authorization", $"Bearer {token}");
         www.SetRequestHeader("Content-Type", "application/json");
         yield return www.SendWebRequest();
 

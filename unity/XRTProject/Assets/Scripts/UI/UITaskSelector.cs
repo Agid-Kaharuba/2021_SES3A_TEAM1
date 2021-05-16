@@ -75,11 +75,14 @@ public class UITaskSelector : MonoBehaviour
                 {
                     ReorderTasks(item, fromIndex, otherItem, toIndex);
                 });
-            
-                removeButton.OnRemove.AddListener(() =>
+
+                if (removeButton != null)
                 {
-                    TrainingManager.Instance.RemoveTask(task);
-                });
+                    removeButton.OnRemove.AddListener(() =>
+                    {
+                        TrainingManager.Instance.RemoveTask(task);
+                    });
+                }
             }
         }
     }

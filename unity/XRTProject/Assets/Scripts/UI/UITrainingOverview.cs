@@ -21,7 +21,7 @@ public class UITrainingOverview : MonoBehaviour
     private void UpdateTraining()
     {
         TrainingModule trainingModule = TrainingManager.Instance.TrainingModule;
-        titleText.text = $"{trainingModule.Name} Training";
+        titleText.text = $"{trainingModule.Name}";
         descriptionText.text = trainingModule.Description;
     }
 }

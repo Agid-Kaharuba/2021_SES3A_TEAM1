@@ -70,6 +70,7 @@ public class TrainingManager : MonoBehaviour
         
         // TODO remove later
         token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QxMjMiLCJwYXNzd29yZCI6InBhc3N3b3JkMTIzIiwiaWF0IjoxNjIxMDkyMzY5LCJleHAiOjE2MjExNzg3Njl9.IBeeev2Hkf8pQZ3djiDyqWykkBLS__KJUVjtMXRA9es";
+        //token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImUiLCJwYXNzd29yZCI6InBhc3N3b3JkMTIzIiwiaWF0IjoxNjIxMTcwNjYwLCJleHAiOjE2MjEyNTcwNjB9.ZI41JKjxrwY5Te-09CNPbG6SXLOpsgOCxnW71M5kU2o";
         
         apiService = new ApiService(token);
 
@@ -108,7 +109,7 @@ public class TrainingManager : MonoBehaviour
     private void Start()
     {
         // TODO fetch this from the command line when launching from web to unity
-        string trainingModuleId = "609fe55cc8b74d6c2807fac7";
+        string trainingModuleId = "60a1059cc5b33b3e7cc6dfc3";
         
         StartCoroutine(apiService.GetTrainingModule(trainingModuleId, (response) =>
         {
@@ -130,7 +131,6 @@ public class TrainingManager : MonoBehaviour
     public void CreateNewTask(string taskName, TaskType taskType)
     {
         Task newTask = new Task(taskName, taskType);
-        trainingModule.Tasks.Add(newTask);
 
         StartCoroutine(apiService.CreateTask(newTask, obj =>
         {
@@ -141,6 +141,7 @@ public class TrainingManager : MonoBehaviour
             else if (obj is Task t)
             {
                 trainingModule.Tasks.Add(t);
+                UpdateTrainingModule();
             }
         }));
     }
@@ -207,6 +208,8 @@ public class TrainingManager : MonoBehaviour
             {
                 Debug.LogError($"Error updating training module code {error.Status}: {error.Message}");
             }
+            
+            OnTrainingModuleChanged?.Invoke();
         }));
     }
 
