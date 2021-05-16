@@ -14,7 +14,7 @@ const useStyles = makeStyles({
     fontWeight: 600
   },
   underline: {
-    textDecorationLine: 'underline'
+    textDecorationLine: 'none'
   },
   italic: {
     fontStyle: 'italic'
@@ -61,7 +61,7 @@ export default function CreateNewTrainingPage() {
   //Passes courseID and authState token to launch XR training module
   const handleLaunchXR = (courseID) => {
     const token = authState.token
-    window.open('xrt-training://?courseID=' + courseID + '&token=' + token)
+    window.open('xrt-training://?courseId=' + courseID + '&token=' + token)
   }
 
   const buildCourse = (course) => {
@@ -73,10 +73,11 @@ export default function CreateNewTrainingPage() {
               <Typography className={classes.title} color="textSecondary" gutterBottom>
                 {course.name} - {course.description}
               </Typography>
-            
+
             </CardContent>
-            <CardActions><Link className={classes.underline} to={`/dashboard/${course._id}`}>
-                  <Button variant="outlined" color="secondary">View Training</Button>
+            <CardActions>
+              <Link className={classes.underline} to={`/dashboard/${course._id}`}>
+                <Button size="small">View Training</Button>
               </Link>
               <Button size="small" onClick={() => handleLaunchXR(course._id)}>Launch XR</Button>
             </CardActions>
@@ -92,25 +93,25 @@ export default function CreateNewTrainingPage() {
 
       <Box m={5}>
         <Grid
-        container
-        direction='row'
-        justify='space-between'
-        alignItems='baseline'>
+          container
+          direction='row'
+          justify='space-between'
+          alignItems='baseline'>
           <Grid item>
             <Typography className={classes.bold} variant='h4'>
               Dashboard
             </Typography>
           </Grid>
           <Grid item>
-          {authState.user.isSupervisor && (
-            <Button component={Link} color="primary" variant="contained" to={"/dashboard/create"}>
-              Create Training
-            </Button>)}
+            {authState.user.isSupervisor && (
+              <Button component={Link} color="primary" variant="contained" to={"/dashboard/create"}>
+                Create Training
+              </Button>)}
           </Grid>
         </Grid>
         <Box my={1}>
           <Divider variant="middle" />
-        </Box>        
+        </Box>
       </Box>
 
       <Box m={5}>

@@ -18,8 +18,8 @@ const insertIntoArray = (list, value, index) => {
 
 export default function RecipeBuilder(props) {
   const ingredients = [
-    { id: "top-bun", value: "Top Bun", src: "https://www.metro.ca/userfiles/image/infographics/images/burgers/5-COWBOY/5-Cowboy-Bun-Top.png" },
-    { id: "bottom-bun", value: "Bottom Bun", src: "https://png.pngitem.com/pimgs/s/344-3449103_bun-bread-bottom-hd-png-download.png" },
+    { id: "top_bun", value: "Top Bun", src: "https://www.metro.ca/userfiles/image/infographics/images/burgers/5-COWBOY/5-Cowboy-Bun-Top.png" },
+    { id: "bottom_bun", value: "Bottom Bun", src: "https://png.pngitem.com/pimgs/s/344-3449103_bun-bread-bottom-hd-png-download.png" },
     { id: "patty", value: "Patty", src: "https://image.shutterstock.com/image-photo/single-grilled-hamburger-patty-isolated-260nw-534672568.jpg" },
     { id: "lettuce", value: "Lettuce", src: "https://cdn.britannica.com/77/170677-050-F7333D51/lettuce.jpg" },
     { id: "cheese", value: "Cheese", src: "https://qph.fs.quoracdn.net/main-qimg-fa4e8f9efa8f3ca480f03b93bb3e9b58" },
@@ -29,7 +29,7 @@ export default function RecipeBuilder(props) {
 
 
   const [state, setState] = useState([]);
-  const [itemCount, setItemCount] = useState(props.ingredients.length + 1);
+  const [itemCount, setItemCount] = useState(props.ingredients ? props.ingredients.length + 1 : 1);
 
   useEffect(() => {
     var counter = 0;
