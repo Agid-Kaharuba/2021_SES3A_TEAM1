@@ -85,6 +85,7 @@ export const RecipeRoute = (app: Express, controller: RecipeController) => {
      *     description: Success
      */
     app.post("/recipe", controller.create);
+    app.put("/recipe", controller.create);
 
     /**
      * @swagger
