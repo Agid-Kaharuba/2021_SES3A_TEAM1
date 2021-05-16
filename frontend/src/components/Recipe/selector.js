@@ -57,7 +57,7 @@ export default function RecipeSelector(props) {
   if (recipeState) {
     return (
       <>
-        <Recipe recipeState={recipeState} handleChange={onChangeRecipe} editState={editState} />
+        <Recipe recipeState={recipeState} handleChange={onChangeRecipe} editState={recipeState._id === undefined} />
         <Button variant="contained" color="primary" onClick={() => onSetRecipe(true)}>Set Another Recipe</Button>
       </>
     )
