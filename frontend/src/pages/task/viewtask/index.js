@@ -6,6 +6,7 @@ import { Link, useHistory } from "react-router-dom";
 import { AuthContext } from "../../../context/auth";
 import api from "../../../helpers/api";
 import BackButton from "../../../components/backbutton/index.js";
+import Task from "../../../components/Task";
 
 const useStyles = makeStyles({
   bold: {
@@ -28,7 +29,7 @@ export default function ViewTask(props) {
   const classes = useStyles();
   const { authState } = useContext(AuthContext);
   const [taskState, setTaskState] = useState(undefined);
-  const [editState, setEditState] = useState(true);
+  const [editState, setEditState] = useState(false);
   const history = useHistory();
 
   const handleChange = (e) => {
@@ -41,10 +42,22 @@ export default function ViewTask(props) {
     setTaskState({ ...taskState, type: value })
   }
 
+  const handleRecipe = (recipe) => {
+    setTaskState({
+      ...taskState, recipe: recipe,
+    });
+  }
+
   const handleEdit = async (e) => {
-    if (!editState) {
+    if (editState) {
       console.log(taskState)
-      const res = await api.task.update(authState.token, taskId, taskState);
+      try {
+        const res = await api.task.update(authState.token, taskId, taskState);
+        console.log(res);
+      }
+      catch (err) {
+        console.log(err);
+      }
     }
     setEditState(!editState);
   }
@@ -72,7 +85,7 @@ export default function ViewTask(props) {
             <Grid item>
               <Typography className={classes.bold} variant='h4'>
                 Task
-                       </Typography>
+              </Typography>
             </Grid>
           </Grid>
           <Divider variant="middle" />
@@ -80,30 +93,9 @@ export default function ViewTask(props) {
         <Box m={5}>
 
           <Grid container spacing={2} direction="column" justify="space-between">
-            <Grid>
-              <Typography className={classes.bold} variant='h6'>
-                Task Name
-                </Typography>
-              <TextField value={taskState.name} id="name" disabled={editState} variant="outlined" fullWidth margin='normal' onChange={handleChange} />
-            </Grid>
-            <Grid>
-              <Typography className={classes.bold} variant='h6'>
-                Task Description
-                </Typography>
-              <TextField value={taskState.description} id="description" disabled={editState} variant="outlined" fullWidth margin='normal' multiline rows={10} onChange={handleChange} />
-            </Grid>
-            <Grid>
-              <Typography className={classes.bold} variant='h6'>
-                Task Type
-                </Typography>
-              <FormControl disabled={editState} className={classes.formControl}>
-                <Select value={taskState.type} onChange={handleDropdown}>
-                  <MenuItem value="Practice">Practice </MenuItem>
-                  <MenuItem value="Testing">Testing</MenuItem>
-                  <MenuItem value="Performance" >Performance</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
+
+            <Task handleChange={handleChange} taskState={taskState} editState={editState} handleRecipe={handleRecipe} />
+
             <Grid container
               direction="row"
               justify="center"
@@ -111,7 +103,7 @@ export default function ViewTask(props) {
               margin="normal">
               <Box>
                 <Button variant="contained" style={{ width: 80 }} color={editState ? "secondary" : "primary"} size="large" onClick={handleEdit}>
-                  {editState ? "Edit" : "Save"}
+                  {editState ? "Save" : "Edit"}
                 </Button>
               </Box>
             </Grid>

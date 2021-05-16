@@ -43,6 +43,10 @@ export default function RecipeSelector(props) {
     }
   }
 
+  const setRecipeButton = (props) => {
+    return (<Button variant="outlined" color="secondary" onClick={() => handleRecipe(props.recipe)}>Set Recipe</Button>)
+  }
+
 
   const onChangeRecipe = (event) => {
     const target = event.target;
@@ -58,7 +62,7 @@ export default function RecipeSelector(props) {
     return (
       <>
         <Recipe recipeState={recipeState} handleChange={onChangeRecipe} editState={recipeState._id === undefined} />
-        <Button variant="contained" color="primary" onClick={() => onSetRecipe(true)}>Set Another Recipe</Button>
+        {editState && (<Button variant="contained" color="primary" onClick={() => onSetRecipe(true)}>Set Another Recipe</Button>)}
       </>
     )
   }
@@ -66,17 +70,21 @@ export default function RecipeSelector(props) {
     return (
       <>
         <Recipe recipeState={recipeState} handleChange={onChangeRecipe} editState={editState} />
-        <Button variant="contained" color="primary" onClick={onSetRecipe}>Set Existing Recipe</Button>
+        {editState && (<Button variant="contained" color="primary" onClick={onSetRecipe}>Set Existing Recipe</Button>)}
       </>
     )
 
   }
   else {
     return (
-      <>
-        <Recipes recipesState={recipesState} ActionButton={(props) => (<Button variant="outlined" color="secondary" onClick={() => handleRecipe(props.recipe)}>Set Recipe</Button>)} />
+      (editState ? (<>
+        <Recipes recipesState={recipesState} ActionButton={(props) => (editState && setRecipeButton(props))} />
         <Button variant="contained" color="primary" onClick={onSetRecipe}>Create New Recipe</Button>
-      </>
+      </>) : (
+        <h1>No recipe set</h1>
+      )
+      )
+
     )
   }
 }
