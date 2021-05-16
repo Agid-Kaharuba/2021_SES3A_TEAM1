@@ -38,21 +38,7 @@ export default function Recipes({recipesState}){
         }
 
     return(
-        <>
-         <Box m={5}>
-             <Grid container spacing={2} justify="space-between">
-                <Grid item>
-                    <Typography className={classes.bold} variant='h4'>
-                    Recipes
-                    </Typography>
-                </Grid>
-                <Grid item align="right">
-                    <Button  variant="contained" color="primary" component={Link} to={"/recipe/create"}>Create Recipe</Button>
-                </Grid>
-              </Grid>
-            <Divider variant="middle" />
-          </Box>
-    
+        <>    
           <Box m={5}>
               <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="simple table">
