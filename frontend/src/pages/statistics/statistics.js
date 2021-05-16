@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Typography, Box, Divider,Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Chart from '../../components/Chart';
-import Tasks from "../../components/tasksList/index.js"
+import Tasks from "../../components/Task/list.js"
 
 import { AuthContext } from "../../context/auth";
 import api from "../../helpers/api";

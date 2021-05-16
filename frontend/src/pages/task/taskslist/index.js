@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import Tasks from "../../../components/tasksList/index.js";
+import Tasks from "../../../components/Task/list.js";
 import { Button, Typography, Box, Divider, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Grid } from "@material-ui/core";
 import { AuthContext } from "../../../context/auth";
 import api from "../../../helpers/api";
