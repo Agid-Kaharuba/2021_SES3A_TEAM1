@@ -1,12 +1,18 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 // IMPORT COMPONENTS
-import { Box, Button, Typography, Divider, TextField, Grid, FormControl, Select, MenuItem, Paper } from "@material-ui/core";
+import {
+  Box, Button, Typography, Divider, TextField, Grid, FormControl, Select, MenuItem, Paper,
+  ExpansionPanel, ExpansionPanelDetails, ExpansionPanelSummary
+} from "@material-ui/core";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { AuthContext } from "../../../context/auth";
 import api from "../../../helpers/api";
+
+import RecipeSelector from "../../../components/Recipe/selector";
 
 const useStyles = makeStyles({
   bold: {
@@ -31,10 +37,11 @@ const useStyles = makeStyles({
 })
 
 export default function CreateNewTaskGlobalPage() {
+  const { authState, setAuthState } = React.useContext(AuthContext);
   const classes = useStyles();
 
-  const [formState, setFormState] = useState({name: "", description: "", recipe: ""});
-  const { authState, setAuthState } = React.useContext(AuthContext);
+  const [formState, setFormState] = useState({ name: "", description: "", recipe: undefined });
+  const [editState, setEditState] = useState(true);
   let history = useHistory();
 
   const handleChange = async (event) => {
@@ -47,10 +54,25 @@ export default function CreateNewTaskGlobalPage() {
     });
   }
 
+  const handleRecipe = (recipe) => {
+    setFormState({
+      ...formState, recipe: recipe,
+    });
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(formState);
     try {
+      if (formState.recipe && formState.recipe._id == undefined) {
+        try {
+          const res = await api.recipe.create(authState.token, formState.recipe);
+          formState.recipe._id = res.data._id;
+        }
+        catch (err) {
+          console.log(err);
+        }
+      }
       const res = await api.task.create(authState.token, formState);
       history.push(`/task/${res.data._id}`);
     }
@@ -63,10 +85,10 @@ export default function CreateNewTaskGlobalPage() {
     <div>
       <Box m={5}>
         <Grid
-        container
-        direction='row'
-        justify='space-between'
-        alignItems='baseline'>
+          container
+          direction='row'
+          justify='space-between'
+          alignItems='baseline'>
           <Grid item>
             <Typography className={classes.bold} variant='h4'>
               Create New Task
@@ -75,11 +97,11 @@ export default function CreateNewTaskGlobalPage() {
         </Grid>
         <Box my={1}>
           <Divider variant="middle" />
-        </Box>        
+        </Box>
       </Box>
 
       <Box m={5}>
-        <Paper style={{backgroundColor: "white"}} elevation={3}>
+        <Paper style={{ backgroundColor: "white" }} elevation={3}>
           <Box m={5} p={2}>
             <Box my={2} pb={2} fontStyle="italic">
               <Typography variant='h6'>
@@ -88,12 +110,12 @@ export default function CreateNewTaskGlobalPage() {
             </Box>
 
             <Box my={2}>
-                <Typography className={classes.bold} variant='h6'>
-                  Task Name
+              <Typography className={classes.bold} variant='h6'>
+                Task Name
                 </Typography>
               <TextField
                 id="outlined-multiline-static"
-    
+
                 fullWidth='true'
                 variant="outlined"
                 name="name"
@@ -118,26 +140,38 @@ export default function CreateNewTaskGlobalPage() {
 
             <Box my={2}>
               <FormControl className={classes.formControl}>
-              <Typography className={classes.bold} variant='h6'>
+                <Typography className={classes.bold} variant='h6'>
                   Task Type
               </Typography>
-              <Select
-                id="demo-simple-select-placeholder-label"
-                onChange={handleChange}
-                displayEmpty
-                name="type"
-                className={classes.selectEmpty}
-              >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value={"Practice"}>Practice</MenuItem>
-                <MenuItem value={"Testing"}>Testing</MenuItem>
-                <MenuItem value={"Performance"}>Performance</MenuItem>
-              </Select>
-            </FormControl>
+                <Select
+                  id="demo-simple-select-placeholder-label"
+                  onChange={handleChange}
+                  displayEmpty
+                  name="type"
+                  className={classes.selectEmpty}
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  <MenuItem value={"Practice"}>Practice</MenuItem>
+                  <MenuItem value={"Testing"}>Testing</MenuItem>
+                  <MenuItem value={"Performance"}>Performance</MenuItem>
+                </Select>
+              </FormControl>
             </Box>
-            
+
+
+            <ExpansionPanel>
+              <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                <Typography className={classes.bold} variant='h6'>
+                  Recipe
+                </Typography>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails style={{ "flex-direction": "column" }}>
+                <RecipeSelector recipeState={formState.recipe} editState={editState} handleRecipe={handleRecipe} />
+              </ExpansionPanelDetails>
+            </ExpansionPanel>
+
           </Box>
         </Paper>
       </Box>
@@ -149,13 +183,13 @@ export default function CreateNewTaskGlobalPage() {
           </Button>
         </Box>
         <Box>
-          <Button variant="contained" color="primary"onClick={handleSubmit}>
+          <Button variant="contained" color="primary" onClick={handleSubmit}>
             Save
           </Button>
         </Box>
       </Box>
 
-      
+
     </div>
   )
 }

@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 // IMPORT COMPONENTS
-import { Box, Button, Typography, Divider, TextField, Grid, FormControl, Select, MenuItem, Paper } from "@material-ui/core";
+import {
+  Box, Button, Typography, Divider, TextField, Grid, FormControl, Select, MenuItem, Paper,
+  ExpansionPanel, ExpansionPanelDetails, ExpansionPanelSummary
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { AuthContext } from "../../../context/auth";
 import api from "../../../helpers/api";
 
@@ -138,6 +141,17 @@ export default function CreateNewTaskPage() {
                 </Select>
               </FormControl>
             </Box>
+
+
+            <ExpansionPanel defaultExpanded={true}>
+              <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                <Typography variant="h3" className={classes.sectionHeading}>
+                  test
+                </Typography>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+              </ExpansionPanelDetails>
+            </ExpansionPanel>
 
           </Box>
         </Paper>

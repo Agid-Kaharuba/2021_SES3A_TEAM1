@@ -34,7 +34,7 @@ const useStyles = makeStyles({
 export default function CreateNewRecipePage() {
   const classes = useStyles();
 
-  const [formState, setFormState] = useState({ category: "", name: "", ingredients: ["top-bun", "bottom-bun"] });
+  const [formState, setFormState] = useState({ category: "", name: "", ingredients: ["top_bun", "bottom_bun"] });
 
   const { authState, setAuthState } = React.useContext(AuthContext);
   let history = useHistory();
