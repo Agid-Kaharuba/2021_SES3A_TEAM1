@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 // IMPORT COMPONENTS
-import { Box, Button, Typography, Divider, TextField, Grid, FormControl, Select, MenuItem, Paper } from "@material-ui/core";
+import {
+  Box, Button, Typography, Divider, TextField, Grid, FormControl, Select, MenuItem, Paper,
+  ExpansionPanel, ExpansionPanelDetails, ExpansionPanelSummary
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-
-import { AuthContext } from "../../context/auth";
-import api from "../../helpers/api";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { AuthContext } from "../../../context/auth";
+import api from "../../../helpers/api";
 
 const useStyles = makeStyles({
   bold: {
@@ -88,56 +91,7 @@ export default function CreateNewTaskPage() {
               </Typography>
             </Box>
 
-            <Box my={2}>
-              <Typography className={classes.bold} variant='h6'>
-                Task Name
-                </Typography>
-              <TextField
-                id="outlined-multiline-static"
-
-                fullWidth='true'
-                variant="outlined"
-                name="name"
-                onChange={handleChange}
-              />
-            </Box>
-
-            <Box my={2}>
-              <Typography className={classes.bold} variant='h6'>
-                Task Description
-              </Typography>
-              <TextField
-                id="outlined-multiline-static"
-                multiline
-                rows={4}
-                fullWidth='true'
-                variant="outlined"
-                name="description"
-                onChange={handleChange}
-              />
-            </Box>
-
-            <Box my={2}>
-              <FormControl className={classes.formControl}>
-                <Typography className={classes.bold} variant='h6'>
-                  Task Type
-              </Typography>
-                <Select
-                  id="demo-simple-select-placeholder-label"
-                  onChange={handleChange}
-                  displayEmpty
-                  name="type"
-                  className={classes.selectEmpty}
-                >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  <MenuItem value={"Practice"}>Practice</MenuItem>
-                  <MenuItem value={"Testing"}>Testing</MenuItem>
-                  <MenuItem value={"Performance"}>Performance</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
+            {/* <Task /> */}
 
           </Box>
         </Paper>

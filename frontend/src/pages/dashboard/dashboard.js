@@ -61,7 +61,7 @@ export default function CreateNewTrainingPage() {
   //Passes courseID and authState token to launch XR training module
   const handleLaunchXR = (courseID) => {
     const token = authState.token
-    window.open('xrt-training://?courseID=' + courseID + '&token=' + token)
+    window.open('xrt-training://?courseId=' + courseID + '&token=' + token)
   }
 
   const buildCourse = (course) => {
