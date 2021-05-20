@@ -19,11 +19,10 @@ public class ApiHandler : MonoBehaviour
 
     public void OnClick()
     {
-        Progress p = new Progress("asdfasdf", "tester", "sadfdsf", false, 22);
-        User user = new User("My", "Guy");
-        p.Data = user;
+        Task p = new Task("Test", TaskType.Testing);
 
-        StartCoroutine(apiService.SubmitTaskProgress(p, (response) =>
+
+        StartCoroutine(apiService.CreateTask(p, (response) =>
         {
             if (response is BackendErrorResponse errorReponse)
             {

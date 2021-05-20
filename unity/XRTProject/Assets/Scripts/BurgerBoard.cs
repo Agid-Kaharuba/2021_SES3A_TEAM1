@@ -41,7 +41,7 @@ public class BurgerBoard : MonoBehaviour
         {
             StringBuilder stringBuilder = new StringBuilder();
 
-            foreach (BurgerItem item in burgerItems.AsEnumerable().Reverse())
+            foreach (BurgerItem item in burgerItems)
             {
                 stringBuilder.Append($"- {item.name}\n");
             }
@@ -57,7 +57,7 @@ public class BurgerBoard : MonoBehaviour
 
         while (aboveItem != null)
         {
-            burgerItems.Add(aboveItem);
+            burgerItems.Insert(0, aboveItem);
             aboveItem = aboveItem.GluedAboveItem;
         }
 
@@ -75,6 +75,19 @@ public class BurgerBoard : MonoBehaviour
     public void SetCurrentBurgerForTask(Task task)
     {
         Debug.Log($"Set current burger for task {task.Name}");
-        //TODO
+        TrainingManager.Instance.UpdateTaskRecipe(task, GetCurrentBurger());
+    }
+    
+    public void SetCurrentBurgerForRecipe(Recipe recipe)
+    {
+        Debug.Log($"Set current burger for recipe {recipe.Name}");
+        
+        // TODO
+        // TrainingManager.Instance.UpdateTaskWithNewRecipe(task, GetCurrentBurger());
+    }
+
+    public void SetCurrentBurgerForCurrentTask()
+    {
+        TrainingManager.Instance.UpdateTaskRecipe(TrainingManager.Instance.CurrentTask, GetCurrentBurger());
     }
 }

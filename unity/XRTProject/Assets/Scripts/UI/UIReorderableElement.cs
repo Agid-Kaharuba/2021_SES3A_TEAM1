@@ -5,6 +5,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 using Valve.VR.InteractionSystem;
 
 [Serializable]
@@ -16,6 +17,8 @@ public class UIReorderableElement : MonoBehaviour
     [SerializeField] private TMP_Text text;
     [SerializeField] private Color hoverTextColor = Color.black;
     [SerializeField] private Color swapToTextColor = Color.black;
+    [SerializeField] private Image iconImage;
+    [SerializeField] private Color highlightedIconColor = Color.green;
     [SerializeField] public bool canDrag = true;
     [SerializeField] public UnityEvent OnClick;
     [SerializeField] public UnityEvent OnStartDragging;
@@ -23,11 +26,13 @@ public class UIReorderableElement : MonoBehaviour
     [SerializeField] public OnReorderEvent OnReorderEvent;
 
     private Interactable interactable;
+    private bool isHighlighted;
     private bool isDragging;
     private bool isHoldingGrab;
     private GrabTypes draggingGrabType = GrabTypes.None;
     private Collider[] colliderCache = new Collider[5];
     private Color originalTextColor;
+    private Color originalIconColor;
     private UIReorderableElement lastOtherElement;
     private Coroutine dragCoroutine;
 
@@ -37,6 +42,7 @@ public class UIReorderableElement : MonoBehaviour
     {
         interactable = GetComponent<Interactable>();
         originalTextColor = text.color;
+        originalIconColor = iconImage.color;
     }
 
     private void OnHandHoverBegin(Hand hand)
@@ -170,5 +176,11 @@ public class UIReorderableElement : MonoBehaviour
         }
 
         return null;
+    }
+
+    public void SetHighlighted(bool isHighlighted)
+    {
+        this.isHighlighted = isHighlighted;
+        iconImage.color = isHighlighted ? highlightedIconColor : originalIconColor;
     }
 }
