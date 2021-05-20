@@ -28,3 +28,13 @@ export const getCourse = async (token, courseId) => {
 	);
 	return res;
 }
+
+export const updateCourse = async (token, courseId, data) => {
+	const res = await axios.put(`${API_HOST}/course/${courseId}`,
+		data,
+		{
+			headers: { Authorization: `Bearer ${token}` },
+		}
+	);
+	return res;
+}
