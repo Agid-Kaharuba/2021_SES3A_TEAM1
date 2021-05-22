@@ -60,16 +60,20 @@ function AppRouter(props) {
   return (
     <Switch>
 
-      // Homepage Routes
-      <Route path="/"
+      <Route path="/taskslist"
+        exact={true}
+        component={TaskList}>
+      </Route>
+
+      <Route path="/taskslist/createtask"
         exact={true}
         component={HomePage}>
       </Route>
-    
-      <Route path="/aboutus"
+
+
+      <PrivateRoute path="/dashboard/:courseId/statistics"
         exact={true}
-        component={AboutUs}>
-      </Route>
+        component={Statistics} />
 
       // Login Profile User Routes
       <Route path="/login"
@@ -131,7 +135,8 @@ function AppRouter(props) {
         exact={true}
         component={CreateRecipe}>
       </Route>
-      <Route path="/recipe/:recipeId"
+
+      <Route path="/createtask"
         exact={true}
         component={ViewRecipe}>
       </Route>

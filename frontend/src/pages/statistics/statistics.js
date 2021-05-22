@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Typography, Box, Divider,Grid } from "@material-ui/core";
+import { Button, Container, Typography, Box, Divider, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import Chart from '../../components/Chart';
-import Tasks from "../../components/Task/list.js"
+import StatisticsComponent from '../../components/statistics';
 
 import { AuthContext } from "../../context/auth";
 import api from "../../helpers/api";
@@ -33,38 +32,42 @@ const useStyles = makeStyles({
 //     createData('Task 3', 'Learn the safety terminology', 5,0)
 // ];
 
-export default function Statistics() {
+export default function Statistics(props) {
+  const courseId = props.match.params.courseId;
   const classes = useStyles();
   const { authState } = useContext(AuthContext);
-    const [tasksState, setTasksState] = useState(undefined);
+  const [courseState, setCourseState] = useState(undefined);
 
-    const fetchData = async () => {
-      const res = await api.task.getAll(authState.token);
-      setTasksState(res.data);
-    };
-  
-    useEffect(() => {
-      if (tasksState === undefined) {
-        fetchData();
-      }
-    });
+  const fetchData = async () => {
+    try {
+      console.log(courseId)
+      const res = await api.course.get(authState.token, courseId);
+      setCourseState(res.data);
+    }
+    catch (err) {
+      console.log(err)
+      setCourseState({ description: "Cannot find module" });
+    }
+  };
 
-  return(
-  <>
-   <Box m={5}>
-       <Grid container spacing={2} justify="space-between">
-          <Grid item>
-              <Typography className={classes.bold} variant='h4'>
-              Statistics
-              </Typography>
-          </Grid>
-         
-        </Grid>
-      <Divider variant="middle" />
-    </Box>
-    <Chart/>
-    <Tasks tasksState = {tasksState}/>
-  </>
+  useEffect(() => {
+    if (courseState === undefined) {
+      fetchData();
+    }
+  });
+
+  return (
+    <StatisticsComponent>
+      {courseState && (
+        <>
+          <Typography className={classes.bold} variant='h4'>
+            Module: {courseState.name}
+          </Typography>
+          <Typography className={classes} variant="p">
+            {courseState.description}
+          </Typography>
+        </>)}
+    </StatisticsComponent>
   );
 
 }

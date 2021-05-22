@@ -7,12 +7,7 @@ import { MongoError } from "mongodb";
 export async function findTask(Id: string) {
     const task = await Task.findOne({
         _id: Id
-    });
-    if (task.recipe) {
-        const recipe = await findRecipe(task.recipe);
-        task.recipe = undefined;
-        return { ...task._doc, recipe }
-    }
+    }).populate('recipe');
     return task
 }
 
