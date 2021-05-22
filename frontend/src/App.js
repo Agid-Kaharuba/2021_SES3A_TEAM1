@@ -65,7 +65,7 @@ function AppRouter(props) {
         exact={true}
         component={HomePage}>
       </Route>
-    
+
       <Route path="/aboutus"
         exact={true}
         component={AboutUs}>
@@ -87,7 +87,7 @@ function AppRouter(props) {
       <PrivateRoute path="/profile"
         exact={true}
         component={EmployeeProfile} />
-      <PrivateRoute path="/user" 
+      <PrivateRoute path="/user"
         exact={true}
         component={UserList}>
       </PrivateRoute>
@@ -99,20 +99,24 @@ function AppRouter(props) {
       <PrivateRoute path="/dashboard/create"
         exact={true}
         component={CreateNewCourse} />
+      <Route path="/dashboard/:courseId/statistics/:userId"
+        exact={true}
+        component={Statistics}>
+      </Route>
       <PrivateRoute path="/dashboard/:courseId"
         exact={true}
-        component={ViewTrainingPage} />  
+        component={ViewTrainingPage} />
 
       // Tasks Routes
-      <Route path="/task" 
+      <Route path="/task"
         exact={true}
         component={TaskList}>
       </Route>
-      <Route path="/task/create" 
+      <Route path="/task/create"
         exact={true}
         component={CreateTaskGlobal}>
       </Route>
-    
+
       <Route path="/createtask"
         exact={true}
         component={CreateNewTask}>
@@ -134,12 +138,6 @@ function AppRouter(props) {
       <Route path="/recipe/:recipeId"
         exact={true}
         component={ViewRecipe}>
-      </Route>
-
-      // Statistics Routes
-      <Route path="/statistics"
-        exact={true}
-        component={Statistics}>
       </Route>
 
     </Switch>
