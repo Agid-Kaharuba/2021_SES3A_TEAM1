@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Button, Container, Typography, Box, Divider, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Grid } from "@material-ui/core";
+import { Button, Container, Typography, Box, Divider, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Grid, getContrastRatio } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import StatisticsComponent from '../../components/statistics';
 
@@ -21,28 +21,26 @@ const useStyles = makeStyles({
   },
 })
 
-// function createData(name, description, duration, view) {
-//   return {name,description, duration, view};
-// }
-
-//0 is a placeholder for the view button
-// const rows = [
-//     createData('Task 1', 'Learn the essentials of CPR through an interactive simulation', 10,0),
-//     createData('Task 2', 'Learn how to mitigate safety hazards in the workplace', 20,0),
-//     createData('Task 3', 'Learn the safety terminology', 5,0)
-// ];
-
 export default function Statistics(props) {
   const courseId = props.match.params.courseId;
+  const userId = props.match.params.userId;
   const classes = useStyles();
   const { authState } = useContext(AuthContext);
   const [courseState, setCourseState] = useState(undefined);
+  const [statsState, setStatsState] = useState(undefined);
+  const [userState, setUserState] = useState(undefined);
+  const [img, setImg] = useState(undefined);
 
   const fetchData = async () => {
     try {
       console.log(courseId)
-      const res = await api.course.get(authState.token, courseId);
+      var res = await api.course.get(authState.token, courseId);
       setCourseState(res.data);
+      res = (await api.stats.course(authState.token, courseId, userId)).data;
+      setStatsState(res)
+      res = (await api.user.get(authState.token, userId)).data;
+      setUserState(res)
+      setImg(await api.user.download(authState.user.username))
     }
     catch (err) {
       console.log(err)
@@ -57,16 +55,36 @@ export default function Statistics(props) {
   });
 
   return (
-    <StatisticsComponent>
-      {courseState && (
-        <>
-          <Typography className={classes.bold} variant='h4'>
-            Module: {courseState.name}
+    <StatisticsComponent tasksState={statsState?.tasks} dataState={statsState?.counts}>
+      <Box>
+        {courseState && (
+          <>
+            <Typography className={classes.bold} variant='h4'>
+              Module
+            </Typography>
+            <Divider variant="middle" />
+            <Typography className={classes.bold} variant='h6'>
+              {courseState.name}
+            </Typography>
+            <Typography className={classes} variant="p">
+              {courseState.description}
+            </Typography>
+          </>)}
+      </Box>
+      <Box my={5}>
+        {userState && img && (
+          <>
+            <Typography className={classes.bold} variant='h4'>
+              Employee
           </Typography>
-          <Typography className={classes} variant="p">
-            {courseState.description}
-          </Typography>
-        </>)}
+            <Divider variant="middle" />
+            <Typography className={classes.bold} variant='h6'>
+            {userState.staffid} - {userState.firstname} {userState.lastname}
+            </Typography>
+            <br/>
+            <img src={img.data} alt="profile image" />
+          </>)}
+      </Box>
     </StatisticsComponent>
   );
 

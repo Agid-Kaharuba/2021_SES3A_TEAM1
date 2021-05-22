@@ -38,3 +38,12 @@ export const updateCourse = async (token, courseId, data) => {
 	);
 	return res;
 }
+
+export const getCourseStats = async (token, courseId, userId) => {
+	const res = await axios.get(`${API_HOST}/progress/statistics?courseId=${courseId}&userId=${userId}`,
+		{
+			headers: { Authorization: `Bearer ${token}` },
+		}
+	);
+	return res;
+}

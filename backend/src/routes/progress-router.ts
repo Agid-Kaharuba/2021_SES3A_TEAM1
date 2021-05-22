@@ -65,4 +65,29 @@ export const ProgressRoute = (app: Express, controller: ProgressController) => {
      *     description: Success
      */
     app.get("/progress", controller.searchProgress);
+
+    /**
+     * @swagger
+     * /progress/statistics:
+     *  get:
+     *   description: Get a progress by userId, taskId, courseId or all of them
+     *   tags: [Progress]
+     *   parameters:
+     *    - in: query
+     *      name: userId
+     *      required: false
+     *      type: string
+     *    - in: query
+     *      name: taskId
+     *      required: false
+     *      type: string
+     *    - in: query
+     *      name: courseId
+     *      required: false
+     *      type: string
+     *   responses:
+     *    200:
+     *     description: Success
+     */
+    app.get("/progress/statistics", controller.userCourseStatistics);
 }

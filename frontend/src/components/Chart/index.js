@@ -10,11 +10,7 @@ class Chart extends Component {
                 datasets: [
                     {
                         label: 'Completion (%)',
-                        data: [
-                            80,
-                            30,
-                            70
-                        ],
+                        data: props.data,
                     }
                 ]
             },
