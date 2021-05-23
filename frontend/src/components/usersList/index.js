@@ -1,5 +1,6 @@
 import React from 'react';
-import { Typography, Box, Divider,Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Grid} from "@material-ui/core";
+import { Link, useHistory } from "react-router-dom";
+import { Button, Typography, Box, Divider,Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Grid} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
@@ -28,9 +29,9 @@ export default function Users({usersState}){
               <TableCell align="left">{user.lastname}</TableCell>
               <TableCell align="left">{user.staffid}</TableCell>
               <TableCell align="left">
-              {/* <Link className={classes.underline} to={`/user/${user._id}`}>
+              <Link className={classes.underline} to={`/statistics`}>
                   <Button variant="outlined" color="secondary">View User</Button>
-              </Link> */}
+              </Link> 
               </TableCell>
           </TableRow>
         )

@@ -74,7 +74,7 @@ export default function CreateNewTrainingPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();;
-    await api.course.create(authState.token, { ...formState, tasks: rowsTasks, assignedEmployees: rowsTasks });
+    await api.course.create(authState.token, { ...formState, tasks: rowsTasks, assignedEmployees: rowsEmployees });
     history.push('/dashboard');
   }
 
