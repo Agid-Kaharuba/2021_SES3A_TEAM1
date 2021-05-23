@@ -68,10 +68,9 @@ public class TrainingManager : MonoBehaviour
             Debug.Log($"Could not get token : {e}");
         }
         
-        // TODO remove later
-        // token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QxMjMiLCJwYXNzd29yZCI6InBhc3N3b3JkMTIzIiwiaWF0IjoxNjIxMDkyMzY5LCJleHAiOjE2MjExNzg3Njl9.IBeeev2Hkf8pQZ3djiDyqWykkBLS__KJUVjtMXRA9es";
+        //token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QxMjMiLCJwYXNzd29yZCI6InBhc3N3b3JkMTIzIiwiaWF0IjoxNjIxMDkyMzY5LCJleHAiOjE2MjExNzg3Njl9.IBeeev2Hkf8pQZ3djiDyqWykkBLS__KJUVjtMXRA9es";
         //token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImUiLCJwYXNzd29yZCI6InBhc3N3b3JkMTIzIiwiaWF0IjoxNjIxMTcwNjYwLCJleHAiOjE2MjEyNTcwNjB9.ZI41JKjxrwY5Te-09CNPbG6SXLOpsgOCxnW71M5kU2o";
-        token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QxMjMiLCJwYXNzd29yZCI6InBhc3N3b3JkMTIzIiwiaWF0IjoxNjIxNzk5MTI1LCJleHAiOjE2MjE4ODU1MjV9.q9fmkpCuOjJBYmXT3GFRr8zHQ5NFJmnyF1Yu4wCmmmI";
+        //token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QxMjMiLCJwYXNzd29yZCI6InBhc3N3b3JkMTIzIiwiaWF0IjoxNjIxNzk5MTI1LCJleHAiOjE2MjE4ODU1MjV9.q9fmkpCuOjJBYmXT3GFRr8zHQ5NFJmnyF1Yu4wCmmmI";
         
         apiService = new ApiService(token);
 
@@ -109,8 +108,8 @@ public class TrainingManager : MonoBehaviour
 
     private void Start()
     {
-        // TODO fetch this from the command line when launching from web to unity
-        string trainingModuleId = "60a8a0b2263bf7108854305e";
+        //string trainingModuleId = "60a8a0b2263bf7108854305e";
+        string trainingModuleId = LaunchArgsService.GetModuleId();
         
         StartCoroutine(apiService.GetTrainingModule(trainingModuleId, (response) =>
         {
