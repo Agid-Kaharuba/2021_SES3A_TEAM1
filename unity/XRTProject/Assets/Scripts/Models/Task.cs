@@ -8,11 +8,11 @@ public class Task
     public string Id { get; private set; }
 
     [JsonProperty("name")]
-    public string Name { get; private set; }
+    public string Name { get; set; }
     
     [JsonProperty("type")]
     [JsonConverter(typeof(StringEnumConverter))]
-    public TaskType TaskType { get; private set; }
+    public TaskType TaskType { get; set; }
 
     /// This may be null if it does not have a recipe
     [JsonProperty("recipe")]

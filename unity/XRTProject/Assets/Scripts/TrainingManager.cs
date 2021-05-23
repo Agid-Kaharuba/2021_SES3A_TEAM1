@@ -69,8 +69,9 @@ public class TrainingManager : MonoBehaviour
         }
         
         // TODO remove later
-        token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QxMjMiLCJwYXNzd29yZCI6InBhc3N3b3JkMTIzIiwiaWF0IjoxNjIxMDkyMzY5LCJleHAiOjE2MjExNzg3Njl9.IBeeev2Hkf8pQZ3djiDyqWykkBLS__KJUVjtMXRA9es";
+        // token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QxMjMiLCJwYXNzd29yZCI6InBhc3N3b3JkMTIzIiwiaWF0IjoxNjIxMDkyMzY5LCJleHAiOjE2MjExNzg3Njl9.IBeeev2Hkf8pQZ3djiDyqWykkBLS__KJUVjtMXRA9es";
         //token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImUiLCJwYXNzd29yZCI6InBhc3N3b3JkMTIzIiwiaWF0IjoxNjIxMTcwNjYwLCJleHAiOjE2MjEyNTcwNjB9.ZI41JKjxrwY5Te-09CNPbG6SXLOpsgOCxnW71M5kU2o";
+        token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QxMjMiLCJwYXNzd29yZCI6InBhc3N3b3JkMTIzIiwiaWF0IjoxNjIxNzk5MTI1LCJleHAiOjE2MjE4ODU1MjV9.q9fmkpCuOjJBYmXT3GFRr8zHQ5NFJmnyF1Yu4wCmmmI";
         
         apiService = new ApiService(token);
 
@@ -109,7 +110,7 @@ public class TrainingManager : MonoBehaviour
     private void Start()
     {
         // TODO fetch this from the command line when launching from web to unity
-        string trainingModuleId = "60a1059cc5b33b3e7cc6dfc3";
+        string trainingModuleId = "60a8a0b2263bf7108854305e";
         
         StartCoroutine(apiService.GetTrainingModule(trainingModuleId, (response) =>
         {
@@ -164,6 +165,19 @@ public class TrainingManager : MonoBehaviour
         trainingModule.Tasks[fromIndex] = trainingModule.Tasks[toIndex];
         trainingModule.Tasks[toIndex] = tempTask;
         UpdateTrainingModule();
+    }
+
+    public void UpdateTask(Task task)
+    {
+        StartCoroutine(apiService.UpdateTask(task, (obj) =>
+        {
+            if (obj is BackendErrorResponse error)
+            {
+                Debug.LogError($"Error updating task code {error.Status}: {error.Message}");
+            }
+            
+            OnTrainingModuleChanged?.Invoke();
+        }));
     }
 
     public void RemoveTask(Task task)

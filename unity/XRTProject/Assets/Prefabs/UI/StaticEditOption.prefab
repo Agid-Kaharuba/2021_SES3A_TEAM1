@@ -110,6 +110,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f36f6b9cc9f4920811ed4d3690ab52c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnTextSubmit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &2892071292028263365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,7 +224,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2275603070885393995, guid: da12274eb54ab0a4184ad4676f350bc4, type: 3}
       propertyPath: m_Size.x
-      value: 0.13526
+      value: 0.10925999
       objectReference: {fileID: 0}
     - target: {fileID: 5445300646298381989, guid: da12274eb54ab0a4184ad4676f350bc4, type: 3}
       propertyPath: m_Pivot.x
