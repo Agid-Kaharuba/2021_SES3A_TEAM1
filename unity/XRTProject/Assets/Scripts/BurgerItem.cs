@@ -55,7 +55,7 @@ public class BurgerItem : MonoBehaviour
     [SerializeField] private bool isBoard;
     [SerializeField] public UnityEvent OnAboveStackChanged;
     
-    private const float SnapDistance = 0.07f;
+    private const float SnapDistance = 0.1f;
     private Interactable interactable;
     private Rigidbody rb;
     private RigidbodyConfig rigidbodyConfig;
@@ -127,21 +127,31 @@ public class BurgerItem : MonoBehaviour
 
         if (handToAttachNextFrame == null && interactable.attachedToHand == null && startingGrabType != GrabTypes.None)
         {
-            isHandHolding = true;
-            Debug.Log($"Hand attaching {name}");
-            UnGlueBurger();
-            
-            handToAttachNextFrame = hand;
-            grabTypeNextFrame = startingGrabType;
+            AttachToHand(hand, startingGrabType);
         }
         else if (isGrabEnding)
         {
-            Debug.Log($"Hand detaching {name}");
-            
-            hand.DetachObject(gameObject);
-            hand.HoverUnlock(interactable);
-            isHandHolding = false;
+            DetachFromHand(hand);
         }
+    }
+    
+    public void AttachToHand(Hand hand, GrabTypes startingGrabType)
+    {
+        isHandHolding = true;
+        Debug.Log($"Hand attaching {name}");
+        UnGlueBurger();
+            
+        handToAttachNextFrame = hand;
+        grabTypeNextFrame = startingGrabType;
+    }
+
+    public void DetachFromHand(Hand hand)
+    {
+        Debug.Log($"Hand detaching {name}");
+            
+        hand.DetachObject(gameObject);
+        hand.HoverUnlock(interactable);
+        isHandHolding = false;
     }
 
     private BurgerItem GetTopItem()

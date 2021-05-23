@@ -19,6 +19,7 @@ public class XRKeyboardManager : MonoBehaviour
     public static XRKeyboardManager Instance { get; private set; }
 
     public Keyboard.KeyboardSubmitEvent OnKeyboardSubmit => keyboard.OnSubmit;
+    public UnityEvent OnKeyboardCancel => keyboard.OnCancel;
 
     private void Awake()
     {

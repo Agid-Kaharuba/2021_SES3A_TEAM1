@@ -4,6 +4,8 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using Valve.VR.InteractionSystem;
+using VRKeys;
 
 [Serializable]
 public class OnTaskSelectedEvent : UnityEvent<Task> {}
@@ -65,6 +67,7 @@ public class UITaskSelector : MonoBehaviour
                 rectTransform.sizeDelta = itemSizeDelta;
                 item.GetComponent<UIBoxColliderAutoScaler>()?.AutoScale();
                 UIRemoveButton removeButton = item.GetComponentInChildren<UIRemoveButton>();
+                KeyboardResponder keyboardResponder = item.GetComponentInChildren<KeyboardResponder>();
 
                 item.OnClick.AddListener(() =>
                 {
@@ -75,6 +78,15 @@ public class UITaskSelector : MonoBehaviour
                 {
                     ReorderTasks(item, fromIndex, otherItem, toIndex);
                 });
+
+                if (keyboardResponder != null)
+                {
+                    keyboardResponder.OnTextSubmit.AddListener((text) =>
+                    {
+                        task.Name = text;
+                        TrainingManager.Instance.UpdateTask(task);
+                    });
+                }
 
                 if (removeButton != null)
                 {
