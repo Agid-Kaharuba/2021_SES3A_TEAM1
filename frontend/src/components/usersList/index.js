@@ -1,22 +1,23 @@
 import React from 'react';
-import { Link, useHistory } from "react-router-dom";
-import { Button, Typography, Box, Divider,Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Grid} from "@material-ui/core";
+import { Button, Container, Typography, Box, Divider, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
+import { Link } from "react-router-dom";
+
 const useStyles = makeStyles({
-    bold: {
-      fontWeight: 600
-    },
-    underline: {
-      textDecoration: 'none'
-    },
-    italic: {
-      fontStyle: 'italic'
-    },
-    table: {
-      minWidth: 650,
-    },
-  })
+  bold: {
+    fontWeight: 600
+  },
+  underline: {
+    textDecoration: 'none'
+  },
+  italic: {
+    fontStyle: 'italic'
+  },
+  table: {
+    minWidth: 650,
+  },
+})
 
 
 export default function Users({usersState}){
