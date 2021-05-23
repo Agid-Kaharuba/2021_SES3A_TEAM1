@@ -17,12 +17,24 @@ public class KeyboardResponder : MonoBehaviour
         keyboardManager.TargetText(text);
         keyboardManager.EnableKeyboard();
         keyboardManager.OnKeyboardSubmit.AddListener(OnSubmit);
+        keyboardManager.OnKeyboardCancel.AddListener(OnCancel);
+    }
+
+    private void OnCancel()
+    {
+        RemoveListenersAndDisable();
     }
 
     private void OnSubmit(string text)
     {
         OnTextSubmit?.Invoke(text);
+        RemoveListenersAndDisable();
+    }
+
+    private void RemoveListenersAndDisable()
+    {
         XRKeyboardManager.Instance.OnKeyboardSubmit.RemoveListener(OnSubmit);
+        XRKeyboardManager.Instance.OnKeyboardCancel.RemoveListener(OnCancel);
         XRKeyboardManager.Instance.DisableKeyboard();
     }
 }
