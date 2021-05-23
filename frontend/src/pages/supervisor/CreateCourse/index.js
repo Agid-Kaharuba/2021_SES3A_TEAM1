@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 // IMPORT COMPONENTS
@@ -58,7 +58,7 @@ export default function CreateNewTrainingPage() {
   const classes = useStyles();
 
   //SAVE COURSE
-  const [formState, setFormState] = useState({name: "", description: ""});
+  const [formState, setFormState] = useState({ name: "", description: "" });
   const { authState, setAuthState } = React.useContext(AuthContext);
   let history = useHistory();
 
@@ -73,9 +73,8 @@ export default function CreateNewTrainingPage() {
   }
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    console.log(formState);
-    api.course.create(authState.token, formState);
+    event.preventDefault();;
+    await api.course.create(authState.token, { ...formState, tasks: rowsTasks, assignedEmployees: rowsTasks });
     history.push('/dashboard');
   }
 
@@ -105,22 +104,23 @@ export default function CreateNewTrainingPage() {
   });
 
 
-  const [rowTasks, setRowsTasks] = React.useState([]);
-  
+  const [rowsTasks, setRowsTasks] = React.useState([]);
+
   const [checkedTask, setCheckedTask] = React.useState([1]);
 
 
   const handleToggleTask = (value) => () => {
     const currentIndex = checkedTask.indexOf(value);
+    const currentIndexRow = rowsTasks.indexOf(value);
     const newChecked = [...checkedTask];
-    const newrows = [...rowTasks];
+    const newrows = [...rowsTasks];
 
     if (currentIndex === -1) {
       newChecked.push(value);
-      newrows.push(createData(value.name, value.description, value.type),);
+      newrows.push(value);
     } else {
       newChecked.splice(currentIndex, 1);
-      newrows.push(createData(value.name, value.description, value.type),);
+      newrows.splice(currentIndexRow, 1);
     }
 
     setCheckedTask(newChecked);
@@ -131,29 +131,29 @@ export default function CreateNewTrainingPage() {
     return (
       <div>
         {[0].map((value) => {
-        const labelId = `checkbox-list-secondary-label-${task}`;
-        return (
-          <ListItem key={task} button>
-            <ListItemAvatar>
-              <Avatar
+          const labelId = `checkbox-list-secondary-label-${task}`;
+          return (
+            <ListItem key={task} button>
+              <ListItemAvatar>
+                <Avatar
                 // alt={`Avatar n°${user + 1}`}
                 // src={`/static/images/avatar/${user + 1}.jpg`}
-              />
-            </ListItemAvatar>
-            <ListItemText id={labelId} primary={task.name} alignItems="flex-start"
-            secondary={task.description}/>
-            
-            <ListItemSecondaryAction>
-              <Checkbox
-                edge="end"
-                onChange={handleToggleTask(task)}
-                checked={checkedTask.indexOf(task) !== -1}
-                inputProps={{ 'aria-labelledby': labelId }}
-              />
-            </ListItemSecondaryAction>
-          </ListItem>
-        );
-      })}
+                />
+              </ListItemAvatar>
+              <ListItemText id={labelId} primary={task.name} alignItems="flex-start"
+                secondary={task.description} />
+
+              <ListItemSecondaryAction>
+                <Checkbox
+                  edge="end"
+                  onChange={handleToggleTask(task)}
+                  checked={checkedTask.indexOf(task) !== -1}
+                  inputProps={{ 'aria-labelledby': labelId }}
+                />
+              </ListItemSecondaryAction>
+            </ListItem>
+          );
+        })}
       </div>
     )
   }
@@ -168,9 +168,9 @@ export default function CreateNewTrainingPage() {
         <TableCell align="left">{task.description}</TableCell>
         <TableCell align="left">{task.type}</TableCell>
         <TableCell align="right">
-        <Link to={`/task/${task._id}`}>
-          <Button variant="outlined" color="secondary">View Task</Button>
-        </Link>
+          <Link to={`/task/${task._id}`}>
+            <Button variant="outlined" color="secondary">View Task</Button>
+          </Link>
         </TableCell>
       </TableRow>
     )
@@ -202,59 +202,60 @@ export default function CreateNewTrainingPage() {
     }
   });
 
-  function createDataTask(firstname, lastname, staffid) {
-    return { firstname, lastname, staffid};
-  }
 
-  const [rows, setRows] = React.useState([]);
-  
-  const [checked, setChecked] = React.useState([1]);
+
+  const [rowsEmployees, setRowsEmployees] = React.useState([]);
+
+  const [checkedEmployees, setCheckedEmployees] = React.useState([1]);
 
 
   const handleToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
-    const newrows = [...rows];
+    const currentIndex = checkedEmployees.indexOf(value);
+    const currentIndexRow = rowsEmployees.indexOf(value);
+    const newChecked = [...checkedEmployees];
+    const newrows = [...rowsEmployees];
 
     if (currentIndex === -1) {
       newChecked.push(value);
-      newrows.push(createDataTask(value.firstname, value.lastname, value.staffid),);
+      // newrows.push(createDataTask(value.firstname, value.lastname, value.staffid),);
+      newrows.push(value);
     } else {
       newChecked.splice(currentIndex, 1);
-      newrows.push(createDataTask(value.firstname, value.lastname, value.staffid),);
+      // newrows.push(createDataTask(value.firstname, value.lastname, value.staffid),);
+      newrows.splice(currentIndexRow, 1);
     }
 
-    setChecked(newChecked);
-    setRows(newrows);
+    setCheckedEmployees(newChecked);
+    setRowsEmployees(newrows);
   };
 
   const buildUser = (user) => {
     return (
       <div>
         {[0].map((value) => {
-        const labelId = `checkbox-list-secondary-label-${user}`;
-        return (
-          <ListItem key={user} button>
-            <ListItemAvatar>
-              <Avatar
+          const labelId = `checkbox-list-secondary-label-${user}`;
+          return (
+            <ListItem key={user} button>
+              <ListItemAvatar>
+                <Avatar
                 // alt={`Avatar n°${user + 1}`}
                 // src={`/static/images/avatar/${user + 1}.jpg`}
-              />
-            </ListItemAvatar>
-            <ListItemText id={labelId} primary={user.firstname + " " + user.lastname} alignItems="flex-start"
-            secondary={user.staffid}/>
-            
-            <ListItemSecondaryAction>
-              <Checkbox
-                edge="end"
-                onChange={handleToggle(user)}
-                checked={checked.indexOf(user) !== -1}
-                inputProps={{ 'aria-labelledby': labelId }}
-              />
-            </ListItemSecondaryAction>
-          </ListItem>
-        );
-      })}
+                />
+              </ListItemAvatar>
+              <ListItemText id={labelId} primary={user.firstname + " " + user.lastname} alignItems="flex-start"
+                secondary={user.staffid} />
+
+              <ListItemSecondaryAction>
+                <Checkbox
+                  edge="end"
+                  onChange={handleToggle(user)}
+                  checked={checkedEmployees.indexOf(user) !== -1}
+                  inputProps={{ 'aria-labelledby': labelId }}
+                />
+              </ListItemSecondaryAction>
+            </ListItem>
+          );
+        })}
       </div>
     )
   }
@@ -272,7 +273,7 @@ export default function CreateNewTrainingPage() {
   });
 
   function createData(name, description, type) {
-    return { name, description, type};
+    return { name, description, type };
   }
 
   const buildRowTable = (row) => {
@@ -332,10 +333,10 @@ export default function CreateNewTrainingPage() {
 
       <Box m={5}>
         <Grid
-        container
-        direction='row'
-        justify='space-between'
-        alignItems='baseline'>
+          container
+          direction='row'
+          justify='space-between'
+          alignItems='baseline'>
           <Grid item xs={9}>
             <Typography variant='h5'>
               Tasks
@@ -374,7 +375,7 @@ export default function CreateNewTrainingPage() {
                   <ListSubheader component="div" id="nested-list-subheader">
                     Select the tasks to add to this course.
                   </ListSubheader>
-                    {/* {usersState ?
+                  {/* {usersState ?
                     usersState.map((task) => {
                       return buildTask(task);
                     })
@@ -392,12 +393,12 @@ export default function CreateNewTrainingPage() {
               </Dialog>
             </div>
           </Grid>
-          
- 
+
+
         </Grid>
         <Box my={1}>
           <Divider variant="middle" />
-        </Box>        
+        </Box>
       </Box>
 
       <Box m={5}>
@@ -412,13 +413,13 @@ export default function CreateNewTrainingPage() {
               </TableRow>
             </TableHead>
             <TableBody>
-                {rowTasks ?
-                  rowTasks.map((task) => {
-                    return buildTaskTable(task);
-                  })
-                  :
-                  <h1>LOADING</h1>
-                }
+              {rowsTasks ?
+                rowsTasks.map((task) => {
+                  return buildTaskTable(task);
+                })
+                :
+                <h1>LOADING</h1>
+              }
             </TableBody>
           </Table>
         </TableContainer>
@@ -426,10 +427,10 @@ export default function CreateNewTrainingPage() {
 
       <Box m={5}>
         <Grid
-        container
-        direction='row'
-        justify='space-between'
-        alignItems='baseline'>
+          container
+          direction='row'
+          justify='space-between'
+          alignItems='baseline'>
           <Grid item>
             <Typography variant='h5'>
               Assigned Employees
@@ -458,7 +459,7 @@ export default function CreateNewTrainingPage() {
                   <ListSubheader component="div" id="nested-list-subheader">
                     Select the employees to add to this course.
                   </ListSubheader>
-                    {usersState ?
+                  {usersState ?
                     usersState.map((user) => {
                       return buildUser(user);
                     })
@@ -472,9 +473,9 @@ export default function CreateNewTrainingPage() {
         </Grid>
         <Box my={1}>
           <Divider variant="middle" />
-        </Box>        
+        </Box>
       </Box>
-      
+
 
       <Box m={5}>
         <TableContainer component={Paper}>
@@ -496,17 +497,17 @@ export default function CreateNewTrainingPage() {
                 }
             </TableBody> */}
             <TableBody>
-              {rows ?
-                  rows.map((row) => {
-                    return buildRowTable(row);
-                  })
-                  :
-                  <h1>LOADING</h1>
-                }
+              {rowsEmployees ?
+                rowsEmployees.map((row) => {
+                  return buildRowTable(row);
+                })
+                :
+                <h1>LOADING</h1>
+              }
             </TableBody>
           </Table>
         </TableContainer>
-      </Box> 
+      </Box>
 
       <Box justifyContent='center' display="flex" m={6}>
         <Box mr={6}>

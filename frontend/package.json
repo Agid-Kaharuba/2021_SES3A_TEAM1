@@ -25,6 +25,7 @@
     "moment": "^2.28.0",
     "particles-bg": "^2.5.5",
     "react": "^16.14.0",
+    "react-beautiful-dnd": "^13.1.0",
     "react-chartjs-2": "^3.0.3",
     "react-device-detect": "^1.14.0",
     "react-dom": "^16.13.1",

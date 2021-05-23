@@ -27,21 +27,12 @@ export default class CourseController {
 
     public async get(req: Request, res: Response) {
         try {
-            var course = await Course.findOne({ _id: req.params.courseId });
+            var course = await Course.findOne({ _id: req.params.courseId }).populate({
+                path: "tasks",
+                populate: { path: "recipe" }
+            }).populate("assignedEmployees");
 
-            var taskObjects: Array<any> = new Array();
-            for (var taskId of course.tasks) {
-                taskObjects.push(await findTask(taskId));
-            }
-            course.tasks = undefined;
-
-            var userObjects: Array<any> = new Array();
-            for (var userId of course.assignedEmployees) {
-                userObjects.push(await findUser(userId));
-            }
-            course.assignedEmployees = undefined;
-
-            ResponseService.successResponse(res, { ...course._doc, tasks: taskObjects, assignedEmployees: userObjects });
+            ResponseService.successResponse(res, course);
         }
         catch (err) {
             ResponseService.mongoNotFoundResponse(res, err);

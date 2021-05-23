@@ -9,14 +9,16 @@ const courseSchema = new mongoose.Schema({
         type: String,
         required: false
     },
-    tasks: {
-        type: [String],
+    tasks: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Task',
         required: false
-    },
-    assignedEmployees: {
-        type: [String],
+    }],
+    assignedEmployees: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
         required: false
-    },
+    }],
     archive: {
         type: Boolean,
         required: false

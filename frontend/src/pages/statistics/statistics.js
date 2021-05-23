@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Typography, Box, Divider,Grid } from "@material-ui/core";
+import { Button, Container, Typography, Box, Divider, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Grid, getContrastRatio } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import Chart from '../../components/Chart';
-import Tasks from "../../components/tasksList/index.js"
+import StatisticsComponent from '../../components/statistics';
 
 import { AuthContext } from "../../context/auth";
 import api from "../../helpers/api";
@@ -22,49 +21,71 @@ const useStyles = makeStyles({
   },
 })
 
-// function createData(name, description, duration, view) {
-//   return {name,description, duration, view};
-// }
-
-//0 is a placeholder for the view button
-// const rows = [
-//     createData('Task 1', 'Learn the essentials of CPR through an interactive simulation', 10,0),
-//     createData('Task 2', 'Learn how to mitigate safety hazards in the workplace', 20,0),
-//     createData('Task 3', 'Learn the safety terminology', 5,0)
-// ];
-
-export default function Statistics() {
+export default function Statistics(props) {
+  const courseId = props.match.params.courseId;
+  const userId = props.match.params.userId;
   const classes = useStyles();
   const { authState } = useContext(AuthContext);
-    const [tasksState, setTasksState] = useState(undefined);
+  const [courseState, setCourseState] = useState(undefined);
+  const [statsState, setStatsState] = useState(undefined);
+  const [userState, setUserState] = useState(undefined);
+  const [img, setImg] = useState(undefined);
 
-    const fetchData = async () => {
-      const res = await api.task.getAll(authState.token);
-      setTasksState(res.data);
-    };
-  
-    useEffect(() => {
-      if (tasksState === undefined) {
-        fetchData();
-      }
-    });
+  const fetchData = async () => {
+    try {
+      console.log(courseId)
+      var res = await api.course.get(authState.token, courseId);
+      setCourseState(res.data);
+      res = (await api.stats.course(authState.token, courseId, userId)).data;
+      setStatsState(res)
+      res = (await api.user.get(authState.token, userId)).data;
+      setUserState(res)
+      setImg(await api.user.download(authState.user.username))
+    }
+    catch (err) {
+      console.log(err)
+      setCourseState({ description: "Cannot find module" });
+    }
+  };
 
-  return(
-  <>
-   <Box m={5}>
-       <Grid container spacing={2} justify="space-between">
-          <Grid item>
-              <Typography className={classes.bold} variant='h4'>
-              Statistics
-              </Typography>
-          </Grid>
-         
-        </Grid>
-      <Divider variant="middle" />
-    </Box>
-    <Chart/>
-    <Tasks tasksState = {tasksState}/>
-  </>
+  useEffect(() => {
+    if (courseState === undefined) {
+      fetchData();
+    }
+  });
+
+  return (
+    <StatisticsComponent tasksState={statsState?.tasks} dataState={statsState?.counts}>
+      <Box>
+        {courseState && (
+          <>
+            <Typography className={classes.bold} variant='h4'>
+              Module
+            </Typography>
+            <Divider variant="middle" />
+            <Typography className={classes.bold} variant='h6'>
+              {courseState.name}
+            </Typography>
+            <Typography className={classes} variant="p">
+              {courseState.description}
+            </Typography>
+          </>)}
+      </Box>
+      <Box my={5}>
+        {userState && img && (
+          <>
+            <Typography className={classes.bold} variant='h4'>
+              Employee
+          </Typography>
+            <Divider variant="middle" />
+            <Typography className={classes.bold} variant='h6'>
+            {userState.staffid} - {userState.firstname} {userState.lastname}
+            </Typography>
+            <br/>
+            <img src={img.data} alt="profile image" />
+          </>)}
+      </Box>
+    </StatisticsComponent>
   );
 
 }
