@@ -55,7 +55,7 @@ public class BurgerItem : MonoBehaviour
     [SerializeField] private bool isBoard;
     [SerializeField] public UnityEvent OnAboveStackChanged;
     
-    private const float SnapDistance = 0.07f;
+    private const float SnapDistance = 0.1f;
     private Interactable interactable;
     private Rigidbody rb;
     private RigidbodyConfig rigidbodyConfig;
