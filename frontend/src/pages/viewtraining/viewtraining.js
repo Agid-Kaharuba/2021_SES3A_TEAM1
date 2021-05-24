@@ -25,6 +25,7 @@ export default function ViewCourse(props) {
     const courseId = props.match.params.courseId;
     const classes = useStyles();
     const { authState } = useContext(AuthContext);
+    const [tasksState, setTasksState] = useState(undefined);
     const [usersState, setUsersState] = useState(undefined);
     const [courseState, setCourseState] = useState(undefined);
     const [editState, setEditState] = useState(true);
@@ -38,6 +39,18 @@ export default function ViewCourse(props) {
     useEffect(() => {
       if (usersState === undefined) {
         fetchUserData();
+      }
+    });
+
+    //Get Tasks Data
+    const fetchTasksData = async () => {
+      const res = await api.task.getAll(authState.token);
+      setTasksState(res.data);
+    };
+  
+    useEffect(() => {
+      if (tasksState === undefined) {
+        fetchTasksData();
       }
     });
 
@@ -115,6 +128,14 @@ export default function ViewCourse(props) {
                     </Typography>
                     <Grid>
                         <Users usersState = {usersState}/>
+                    </Grid>
+                </Box>
+                <Box m={5}>
+                    <Typography className={classes.bold} variant='h6'>
+                                Assigned Tasks
+                    </Typography>
+                    <Grid>
+                        <Users tasksState = {tasksState}/>
                     </Grid>
                 </Box>
             </>
