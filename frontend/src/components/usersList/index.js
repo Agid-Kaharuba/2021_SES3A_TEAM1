@@ -30,7 +30,7 @@ export default function Users({usersState}){
               <TableCell align="left">{user.lastname}</TableCell>
               <TableCell align="left">{user.staffid}</TableCell>
               <TableCell align="left">
-              <Link className={classes.underline} to={`/statistics/${user._id}`}>
+              <Link className={classes.underline} to={`dashboard/${course._id}/statistics/${user._id}`}>
                   <Button variant="outlined" color="secondary">View Statistics</Button>
               </Link> 
               </TableCell>
