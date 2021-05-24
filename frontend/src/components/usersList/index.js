@@ -20,7 +20,7 @@ const useStyles = makeStyles({
 })
 
 
-export default function Users({usersState}){
+export default function Users({usersState, course}){
     const classes = useStyles();
 
     function buildUser(user) {
@@ -30,9 +30,10 @@ export default function Users({usersState}){
               <TableCell align="left">{user.lastname}</TableCell>
               <TableCell align="left">{user.staffid}</TableCell>
               <TableCell align="left">
-              {/* <Link className={classes.underline} to={`/user/${user._id}`}>
-                  <Button variant="outlined" color="secondary">View User</Button>
-              </Link> */}
+              {course && (<Link className={classes.underline} to={`/dashboard/${course._id}/statistics/${user._id}`}>
+                  <Button variant="outlined" color="secondary">View Statistics</Button>
+              </Link>)}
+               
               </TableCell>
           </TableRow>
         )
