@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Button, Typography, Divider, Box, Grid, TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Users from "../../components/usersList/index.js";
+import Tasks from "../../components/Task/list.js";
 import { AuthContext } from "../../context/auth";
 import api from "../../helpers/api";
 
@@ -127,7 +128,7 @@ export default function ViewCourse(props) {
                                 Assigned Users
                     </Typography>
                     <Grid>
-                        <Users usersState = {usersState}/>
+                        <Users usersState = {courseState.assignedEmployees} course={courseState}/>
                     </Grid>
                 </Box>
                 <Box m={5}>
@@ -135,7 +136,7 @@ export default function ViewCourse(props) {
                                 Assigned Tasks
                     </Typography>
                     <Grid>
-                        <Users tasksState = {tasksState}/>
+                        <Tasks tasksState = {tasksState}/>
                     </Grid>
                 </Box>
             </>

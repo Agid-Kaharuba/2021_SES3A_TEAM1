@@ -343,11 +343,11 @@ export default function CreateNewTrainingPage() {
             </Typography>
           </Grid>
 
-          <Grid item >
+          {/* <Grid item >
             <Button component={Link} color="secondary" variant="contained" to={"/createtask"}>
               Create Task
             </Button>
-          </Grid>
+          </Grid> */}
 
           <Grid item>
             {/* <Button component={Link} color="secondary" variant="contained" onClick={handleClickOpenTask}>
