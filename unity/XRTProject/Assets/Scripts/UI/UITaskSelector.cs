@@ -4,6 +4,8 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using Valve.VR.InteractionSystem;
+using VRKeys;
 
 [Serializable]
 public class OnTaskSelectedEvent : UnityEvent<Task> {}
@@ -14,29 +16,32 @@ public class UITaskSelector : MonoBehaviour
     [SerializeField] private UIReorderableElement itemPrefab;
     [SerializeField] private UIReorderableElement sampleItem;
     [SerializeField] private bool shouldCloseOnSelect = true;
+    [SerializeField] private bool canDrag = false;
+    [SerializeField]
+    public TaskTypeMask taskFilter = TaskTypeMask.None;
     [SerializeField] public OnTaskSelectedEvent OnTaskSelected;
 
     private float itemFontSize;
     private Vector2 itemSizeDelta;
-    private bool isReorderable;
 
     private void Awake()
     {
         itemFontSize = sampleItem.Text.fontSize;
         RectTransform sampleRectTransform = sampleItem.GetComponent<RectTransform>();
         itemSizeDelta = sampleRectTransform.sizeDelta;
-        isReorderable = sampleItem.canDrag;
     }
 
     private void OnEnable()
     {
         UpdateTaskList();
         TrainingManager.Instance.OnTrainingModuleChanged.AddListener(UpdateTaskList);
+        TrainingManager.Instance.OnCurrentTaskChanged.AddListener(UpdateTaskList);
     }
 
     private void OnDisable()
     {
         TrainingManager.Instance.OnTrainingModuleChanged.RemoveListener(UpdateTaskList);
+        TrainingManager.Instance.OnCurrentTaskChanged.RemoveListener(UpdateTaskList);
     }
 
     private void UpdateTaskList()
@@ -47,23 +52,50 @@ public class UITaskSelector : MonoBehaviour
 
         foreach (Task task in TrainingManager.Instance.Tasks)
         {
-            UIReorderableElement item = Instantiate(itemPrefab, taskList);
-            RectTransform rectTransform = item.GetComponent<RectTransform>();
-            item.canDrag = isReorderable;
-            item.Text.text = task.Name;
-            item.Text.fontSize = sampleItem.Text.fontSize;
-            rectTransform.sizeDelta = itemSizeDelta;
-            item.GetComponent<UIBoxColliderAutoScaler>()?.AutoScale();
+            bool isValidTask = (!taskFilter.HasFlag(TaskTypeMask.Recipe) || task.TaskType == TaskType.Recipe) &&
+                               (!taskFilter.HasFlag(TaskTypeMask.Testing) || task.TaskType == TaskType.Testing) &&
+                               (!taskFilter.HasFlag(TaskTypeMask.Performance) || task.TaskType == TaskType.Performance);
 
-            item.OnClick.AddListener(() =>
+            if (isValidTask)
             {
-                OnTaskClicked(item, task);
-            });
+                UIReorderableElement item = Instantiate(itemPrefab, taskList);
+                RectTransform rectTransform = item.GetComponent<RectTransform>();
+                item.canDrag = canDrag;
+                item.Text.text = task.Name;
+                item.Text.fontSize = sampleItem.Text.fontSize;
+                item.SetHighlighted(TrainingManager.Instance.CurrentTask == task);
+                rectTransform.sizeDelta = itemSizeDelta;
+                item.GetComponent<UIBoxColliderAutoScaler>()?.AutoScale();
+                UIRemoveButton removeButton = item.GetComponentInChildren<UIRemoveButton>();
+                KeyboardResponder keyboardResponder = item.GetComponentInChildren<KeyboardResponder>();
+
+                item.OnClick.AddListener(() =>
+                {
+                    OnTaskClicked(item, task);
+                });
             
-            item.OnReorderEvent.AddListener((fromIndex, toIndex, otherItem) =>
-            {
-                ReorderTasks(item, fromIndex, otherItem, toIndex);
-            });
+                item.OnReorderEvent.AddListener((fromIndex, toIndex, otherItem) =>
+                {
+                    ReorderTasks(item, fromIndex, otherItem, toIndex);
+                });
+
+                if (keyboardResponder != null)
+                {
+                    keyboardResponder.OnTextSubmit.AddListener((text) =>
+                    {
+                        task.Name = text;
+                        TrainingManager.Instance.UpdateTask(task);
+                    });
+                }
+
+                if (removeButton != null)
+                {
+                    removeButton.OnRemove.AddListener(() =>
+                    {
+                        TrainingManager.Instance.RemoveTask(task);
+                    });
+                }
+            }
         }
     }
 
@@ -88,6 +120,12 @@ public class UITaskSelector : MonoBehaviour
         {
             Destroy(taskList.GetChild(i).gameObject);
         }
+    }
+
+    public void SetCanDrag(bool canDrag)
+    {
+        this.canDrag = canDrag;
+        UpdateTaskList();
     }
 
     public void OnCancel()

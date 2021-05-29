@@ -6,15 +6,18 @@ const progressSchema = new mongoose.Schema({
     required: false
   },
   userId: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
     required: true
   },
   taskId: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Task',
     required: true
   },
   courseId: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Course',
     required: true
   },
   completed: {

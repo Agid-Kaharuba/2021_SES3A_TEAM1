@@ -1,4 +1,5 @@
 using Valve.Newtonsoft.Json;
+using Valve.Newtonsoft.Json.Converters;
 
 [JsonObject(MemberSerialization.OptIn)]
 public class Task
@@ -7,10 +8,11 @@ public class Task
     public string Id { get; private set; }
 
     [JsonProperty("name")]
-    public string Name { get; private set; }
+    public string Name { get; set; }
     
     [JsonProperty("type")]
-    public TaskType TaskType { get; private set; }
+    [JsonConverter(typeof(StringEnumConverter))]
+    public TaskType TaskType { get; set; }
 
     /// This may be null if it does not have a recipe
     [JsonProperty("recipe")]

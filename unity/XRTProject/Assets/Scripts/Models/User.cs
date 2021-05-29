@@ -26,7 +26,7 @@ public class User
     public string StaffId { get; private set; }
 
     [JsonProperty("isSupervisor")]
-    public string IsSupervisor { get; private set; }
+    public bool IsSupervisor { get; private set; }
 
     [JsonProperty("token")]
     public string Token { get; private set; }

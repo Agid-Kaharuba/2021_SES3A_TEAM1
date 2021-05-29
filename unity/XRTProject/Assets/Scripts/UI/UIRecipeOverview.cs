@@ -10,15 +10,15 @@ public class UIRecipeOverview : MonoBehaviour
     [SerializeField] private GameObject content;
     [SerializeField] private TMP_Text ingredientList;
 
-    private void Start()
+    private void OnEnable()
     {
         UpdateRecipe();
-        TrainingManager.Instance.OnCurrentTaskChanged.AddListener(UpdateRecipe);
+        TrainingManager.Instance.OnTrainingModuleChanged.AddListener(UpdateRecipe);
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
-        TrainingManager.Instance.OnCurrentTaskChanged.RemoveListener(UpdateRecipe);
+        TrainingManager.Instance.OnTrainingModuleChanged.RemoveListener(UpdateRecipe);
     }
 
     private void UpdateRecipe()
@@ -29,7 +29,10 @@ public class UIRecipeOverview : MonoBehaviour
         {
             content.SetActive(true);
             Recipe recipe = trainingManager.CurrentTask.Recipe;
-            titleText.text = $"{recipe.Name} Recipe";
+            
+            if (titleText)
+                titleText.text = $"{recipe.Name}";
+            
             WriteIngredientList(recipe);
         }
         else

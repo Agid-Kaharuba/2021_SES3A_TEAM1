@@ -15,7 +15,9 @@ import {
 import {
   getAllCourses,
   createCourse,
-  getCourse
+  getCourse,
+  updateCourse,
+  getCourseStats
 } from "./course";
 import {
   getAllTasks,
@@ -50,7 +52,8 @@ export default {
   course: {
     getAll: getAllCourses,
     create: createCourse,
-    get: getCourse
+    get: getCourse,
+    update: updateCourse
   },
   task: {
     getAll: getAllTasks,
@@ -63,5 +66,8 @@ export default {
     create: createRecipe,
     update: updateRecipe,
     get: getRecipe
+  },
+  stats: {
+    course: getCourseStats
   }
 }

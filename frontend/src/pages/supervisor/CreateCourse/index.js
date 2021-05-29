@@ -74,7 +74,7 @@ export default function CreateNewTrainingPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();;
-    await api.course.create(authState.token, { ...formState, tasks: rowTasks, assignedEmployees: rows });
+    await api.course.create(authState.token, { ...formState, tasks: rowsTasks, assignedEmployees: rowsTasks });
     history.push('/dashboard');
   }
 
@@ -104,24 +104,23 @@ export default function CreateNewTrainingPage() {
   });
 
 
-  const [rowTasks, setRowsTasks] = React.useState([]);
+  const [rowsTasks, setRowsTasks] = React.useState([]);
 
   const [checkedTask, setCheckedTask] = React.useState([1]);
 
 
   const handleToggleTask = (value) => () => {
     const currentIndex = checkedTask.indexOf(value);
+    const currentIndexRow = rowsTasks.indexOf(value);
     const newChecked = [...checkedTask];
-    const newrows = [...rowTasks];
+    const newrows = [...rowsTasks];
 
     if (currentIndex === -1) {
       newChecked.push(value);
-      // newrows.push(createData(value.name, value.description, value.type),);
       newrows.push(value);
     } else {
       newChecked.splice(currentIndex, 1);
-      // newrows.push(createData(value.name, value.description, value.type),);
-      newrows.push(value);
+      newrows.splice(currentIndexRow, 1);
     }
 
     setCheckedTask(newChecked);
@@ -203,19 +202,18 @@ export default function CreateNewTrainingPage() {
     }
   });
 
-  function createDataTask(firstname, lastname, staffid) {
-    return { firstname, lastname, staffid };
-  }
 
-  const [rows, setRows] = React.useState([]);
 
-  const [checked, setChecked] = React.useState([1]);
+  const [rowsEmployees, setRowsEmployees] = React.useState([]);
+
+  const [checkedEmployees, setCheckedEmployees] = React.useState([1]);
 
 
   const handleToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
-    const newrows = [...rows];
+    const currentIndex = checkedEmployees.indexOf(value);
+    const currentIndexRow = rowsEmployees.indexOf(value);
+    const newChecked = [...checkedEmployees];
+    const newrows = [...rowsEmployees];
 
     if (currentIndex === -1) {
       newChecked.push(value);
@@ -224,11 +222,11 @@ export default function CreateNewTrainingPage() {
     } else {
       newChecked.splice(currentIndex, 1);
       // newrows.push(createDataTask(value.firstname, value.lastname, value.staffid),);
-      newrows.push(value);
+      newrows.splice(currentIndexRow, 1);
     }
 
-    setChecked(newChecked);
-    setRows(newrows);
+    setCheckedEmployees(newChecked);
+    setRowsEmployees(newrows);
   };
 
   const buildUser = (user) => {
@@ -251,7 +249,7 @@ export default function CreateNewTrainingPage() {
                 <Checkbox
                   edge="end"
                   onChange={handleToggle(user)}
-                  checked={checked.indexOf(user) !== -1}
+                  checked={checkedEmployees.indexOf(user) !== -1}
                   inputProps={{ 'aria-labelledby': labelId }}
                 />
               </ListItemSecondaryAction>
@@ -415,8 +413,8 @@ export default function CreateNewTrainingPage() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rowTasks ?
-                rowTasks.map((task) => {
+              {rowsTasks ?
+                rowsTasks.map((task) => {
                   return buildTaskTable(task);
                 })
                 :
@@ -499,8 +497,8 @@ export default function CreateNewTrainingPage() {
                 }
             </TableBody> */}
             <TableBody>
-              {rows ?
-                rows.map((row) => {
+              {rowsEmployees ?
+                rowsEmployees.map((row) => {
                   return buildRowTable(row);
                 })
                 :
