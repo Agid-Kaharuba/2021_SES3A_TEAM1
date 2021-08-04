@@ -74,7 +74,7 @@ export default function CreateNewTrainingPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();;
-    await api.course.create(authState.token, { ...formState, tasks: rowsTasks, assignedEmployees: rowsTasks });
+    await api.course.create(authState.token, { ...formState, tasks: rowsTasks, assignedEmployees: rowsEmployees });
     history.push('/dashboard');
   }
 
@@ -343,11 +343,11 @@ export default function CreateNewTrainingPage() {
             </Typography>
           </Grid>
 
-          <Grid item >
+          {/* <Grid item >
             <Button component={Link} color="secondary" variant="contained" to={"/createtask"}>
               Create Task
             </Button>
-          </Grid>
+          </Grid> */}
 
           <Grid item>
             {/* <Button component={Link} color="secondary" variant="contained" onClick={handleClickOpenTask}>
