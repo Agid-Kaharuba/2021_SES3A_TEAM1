@@ -1,0 +1,47 @@
+[
+    {
+        "username": "emp1",
+        "password": "test123",
+        "firstname": "Avery",
+        "lastname": "Fields",
+        "email": "Avery.Fields@example.com",
+        "staffid": "101",
+        "isSupervisor": false 
+    },
+    {
+        "username": "emp2",
+        "password": "test123",
+        "firstname": "Jared",
+        "lastname": "Bates",
+        "email": "Jared.Bates@example.com",
+        "staffid": "102",
+        "isSupervisor": false 
+    },
+    {
+        "username": "emp3",
+        "password": "test123",
+        "firstname": "Peter",
+        "lastname": "Jones",
+        "email": "Peter.Jones@example.com",
+        "staffid": "103",
+        "isSupervisor": false 
+    },
+    {
+        "username": "emp4",
+        "password": "test123",
+        "firstname": "Jeanne",
+        "lastname": "Duncan",
+        "email": "Jeanne.Duncan@example.com",
+        "staffid": "104",
+        "isSupervisor": false 
+    },
+    {
+        "username": "emp5",
+        "password": "test123",
+        "firstname": "Jason",
+        "lastname": "Woods",
+        "email": "Jason.Woods@example.com",
+        "staffid": "105",
+        "isSupervisor": false 
+    }
+]
