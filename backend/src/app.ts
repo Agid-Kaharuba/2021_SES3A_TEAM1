@@ -1,12 +1,13 @@
-import express from 'express';
-import dotenv from 'dotenv';
-import mongoose from 'mongoose';
+import { Server } from 'http';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import dotenv from 'dotenv';
+import express from 'express';
+import fs from 'fs';
+import mongoose from 'mongoose';
 import morgan from 'morgan';
 import swaggerJsDoc from 'swagger-jsdoc';
 import swaggerUI from 'swagger-ui-express';
-import fs from 'fs';
 import ApiInitializer from './initializer';
 import { Routes } from './routes';
 
@@ -22,7 +23,7 @@ mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true }, 
 });
 
 const app = express();
-app.use(morgan("tiny"));
+app.use(morgan('tiny'));
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -77,7 +78,7 @@ app.get('/', (req, res) => {
 });
 
 // Startup complete
-const server = app.listen(process.env.API_PORT, () => {
+const server: Server = app.listen(process.env.API_PORT, () => {
   console.log(`Server is now running at:  http://localhost:${process.env.API_PORT}`);
   console.log(`Swagger Docs            :  http://localhost:${process.env.API_PORT}/swagger`);
 });

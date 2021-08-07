@@ -17,7 +17,7 @@ import Course from './model/course';
 dotenv.config();
 
 async function save(models: Document[][]) {
-  await Promise.all(models.map(async (model) => await Promise.all(model.map(async (obj) => obj.save()))));
+  await Promise.all(models.map(async (model) => Promise.all(model.map(async (obj) => obj.save()))));
 }
 
 async function wipe() {

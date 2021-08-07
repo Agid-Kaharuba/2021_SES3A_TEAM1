@@ -1,5 +1,7 @@
 import { Express } from 'express';
 import ProgressController from '../controllers/progress';
+// use checkToken when auth needed
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { checkToken } from '../middleware/auth';
 
 export const ProgressRoute = (app: Express, controller: ProgressController) => {
