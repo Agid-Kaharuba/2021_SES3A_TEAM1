@@ -1,9 +1,10 @@
-import mongoose from "mongoose";
-import bcrypt from "bcrypt";
-const uniqueValidator = require("mongoose-unique-validator");
+import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
+
+const uniqueValidator = require('mongoose-unique-validator');
 
 export interface IUser {
-	_id: string;
+  _id: string;
   username: string;
   password: string;
 }
@@ -12,34 +13,34 @@ const UserSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   password: {
     type: String,
-    required: true
+    required: true,
   },
   firstname: {
     type: String,
-    required: false
+    required: false,
   },
   lastname: {
     type: String,
-    required: false
+    required: false,
   },
   email: {
     type: String,
-    required: false
+    required: false,
   },
   staffid: {
     type: String,
-    required: false
+    required: false,
   },
   isSupervisor: {
     type: Boolean,
-    required: true
-  }
+    required: true,
+  },
 },
-{collection: 'users'})
+{ collection: 'users' });
 
 UserSchema.methods.checkPassword = async function (plainPass) {
   // @ts-ignore
@@ -47,10 +48,10 @@ UserSchema.methods.checkPassword = async function (plainPass) {
   return await bcrypt.compare(plainPass, user.password);
 };
 
-UserSchema.pre("save", function(next) {
+UserSchema.pre('save', function (next) {
   // @ts-ignore
   const user: IUser = this;
-  bcrypt.hash(user.password, 10, function(err, hash) {
+  bcrypt.hash(user.password, 10, (err, hash) => {
     user.password = hash;
     next();
   });

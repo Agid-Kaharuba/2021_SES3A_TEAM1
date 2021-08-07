@@ -1,9 +1,9 @@
-import { Express } from "express";
-import ProgressController from "../controllers/progress";
-import { checkToken } from "../middleware/auth";
+import { Express } from 'express';
+import ProgressController from '../controllers/progress';
+import { checkToken } from '../middleware/auth';
 
 export const ProgressRoute = (app: Express, controller: ProgressController) => {
-    /**
+  /**
      * @swagger
      * /progress:
      *  put:
@@ -22,10 +22,10 @@ export const ProgressRoute = (app: Express, controller: ProgressController) => {
      *        userId:
      *         type: string
      *         example: John
-     *        taskId: 
+     *        taskId:
      *         type: string
      *         example: Task
-     *        courseId: 
+     *        courseId:
      *         type: string
      *         example: Course
      *        completed:
@@ -34,14 +34,14 @@ export const ProgressRoute = (app: Express, controller: ProgressController) => {
      *        score:
      *         type: Number
      *         example: 22
-     *       
+     *
      *   responses:
      *    200:
      *     description: Success
      */
-    app.put("/progress", controller.put);
+  app.put('/progress', controller.put);
 
-    /**
+  /**
      * @swagger
      * /progress:
      *  get:
@@ -64,9 +64,9 @@ export const ProgressRoute = (app: Express, controller: ProgressController) => {
      *    200:
      *     description: Success
      */
-    app.get("/progress", controller.searchProgress);
+  app.get('/progress', controller.searchProgress);
 
-    /**
+  /**
      * @swagger
      * /progress/statistics:
      *  get:
@@ -89,5 +89,5 @@ export const ProgressRoute = (app: Express, controller: ProgressController) => {
      *    200:
      *     description: Success
      */
-    app.get("/progress/statistics", controller.userCourseStatistics);
-}
+  app.get('/progress/statistics', controller.userCourseStatistics);
+};

@@ -9,7 +9,7 @@
     "build": "tsc -p .",
     "test": "mocha -r ts-node/register -r dotenv/config 'src/tests/app.unit.ts' 'src/controllers/**/tests/*.unit.ts'",
     "seed": "tsc -p . && node dist/seeder.js",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx --fix"
   },
   "keywords": [],
   "author": "",
