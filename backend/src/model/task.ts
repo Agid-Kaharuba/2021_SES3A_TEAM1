@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import Recipe from "./recipe";
 
 const taskSchema = new mongoose.Schema({
     name: {
@@ -10,8 +11,7 @@ const taskSchema = new mongoose.Schema({
         required: false
     },
     recipe: {
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Recipe',
+        type: Recipe.schema, 
         required: false
     },
     type: {

@@ -1,0 +1,22 @@
+[
+    {
+        "tasks": [
+            0
+        ],
+        "assignedEmployees": [
+            0,1,2
+        ],
+        "name": "Build a Burger",
+        "description": "Build a first initial burger for our first day."
+    },
+    {
+        "tasks": [
+            0
+        ],
+        "assignedEmployees": [
+            0,1,2
+        ],
+        "name": "Build a Burger",
+        "description": "Build a first initial burger for our first day."
+    }
+]

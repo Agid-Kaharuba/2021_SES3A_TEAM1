@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import User from "./user"
+import Task from "./task"
 
 const courseSchema = new mongoose.Schema({
     name: {
@@ -10,11 +12,11 @@ const courseSchema = new mongoose.Schema({
         required: false
     },
     tasks: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Task',
+        type: Task.schema,
         required: false
     }],
     assignedEmployees: [{
+        // TODO: When type is User.schema it is causing primary key collision in the seeder
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: false

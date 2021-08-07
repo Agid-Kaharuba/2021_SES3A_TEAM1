@@ -44,7 +44,7 @@ PUT http://localhost:4000/recipe/607182cb7cac42f7d50da7ee
 Content-Type: application/json
 
 {
-    "name": "MotherFUcker ",
+    "name": "MotherFUcker ", // noice
     "steps": [{"actionId": "234", "depends": [1,2,3]}],
     "ingredients": ["B1213"],
     "category": "Milk Tea",

@@ -1,0 +1,27 @@
+[
+    {
+        "ref": 1,
+        "name": "Empty Burger",
+        "steps": [],
+        "ingredients": [
+            "top_bun",
+            "bottom_bun"
+        ],
+        "category": ""
+    },
+    {
+        "ref": 2,
+        "name": "Super Burger",
+        "steps": [],
+        "ingredients": [
+            "top_bun",
+            "lettuce",
+            "sauce",
+            "tomato",
+            "cheese",
+            "patty",
+            "bottom_bun"
+        ],
+        "category": "Burger"
+    }
+]
