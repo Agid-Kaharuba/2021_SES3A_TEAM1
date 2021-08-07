@@ -1,6 +1,4 @@
-import express, {
-  Application, Request, Response, NextFunction,
-} from 'express';
+import express from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
@@ -14,8 +12,8 @@ import { Routes } from './routes';
 
 dotenv.config();
 
-const mongo_uri = `${process.env.DATABASE_URL}/${process.env.DATABASE_NAME}` as string;
-mongoose.connect(mongo_uri, { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
+const mongoUri = `${process.env.DATABASE_URL}/${process.env.DATABASE_NAME}` as string;
+mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
   if (err) {
     throw err;
   } else {
@@ -24,6 +22,7 @@ mongoose.connect(mongo_uri, { useNewUrlParser: true, useUnifiedTopology: true },
 });
 
 const app = express();
+app.use(morgan("tiny"));
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -38,16 +37,16 @@ const swaggerOptions = {
     },
     basePath: '/',
     components: {
-		  securitySchemes: {
+      securitySchemes: {
         bearerAuth: {
-			  type: 'http',
-			  scheme: 'bearer',
-			  bearerFormat: 'JWT',
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
         },
-		  },
+      },
     },
     security: [{
-		  bearerAuth: [],
+      bearerAuth: [],
     }],
   },
   apis: ['src/app.ts', 'src/routes/*'],
