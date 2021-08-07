@@ -4,7 +4,7 @@ import User from '../model/user';
 import ResponseService from '../helpers/response';
 
 export async function findUser(Id: string) {
-  return await User.findOne({ _id: Id });
+  return User.findOne({ _id: Id });
 }
 
 export default class UserController {

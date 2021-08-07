@@ -9,19 +9,30 @@ module.exports = {
     'import/resolver': {
       typescript: {},
     },
+    "react": {
+      "version": "999.999.999"
+    }
   },
   rules: {
-    'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
-    'import/no-extraneous-dependencies': [2, { devDependencies: ['**/test.tsx', '**/test.ts'] }],
-    '@typescript-eslint/indent': [2, 2],
-    'import/extensions': 'off',
-    'func-names': 'off',
-    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
-    "global-require": 'off',
-    "max-len": ["error", { "code": 180 }],
-    "import/prefer-default-export": 'off',
-    "@typescript-eslint/no-explicit-any": 'off',
+    "@typescript-eslint/ban-ts-comment": 'off',
     "@typescript-eslint/explicit-module-boundary-types": 'off',
-    "no-underscore-dangle": 'off'
-  },
+    "@typescript-eslint/indent": [2, 2],
+    "@typescript-eslint/no-explicit-any": 'off',
+    "@typescript-eslint/no-this-alias": 'off',
+    "class-methods-use-this": 'off',
+    "func-names": 'off',
+    "global-require": 'off',
+    "guard-for-in": 'off',
+    "import/extensions": 'off',
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "import/no-extraneous-dependencies": [2, { devDependencies: ['**/*.unit.ts', '**/test.ts'] }],
+    "import/prefer-default-export": 'off',
+    "max-len": ["error", { "code": 180 }],
+    "no-await-in-loop": 'off',
+    "no-param-reassign": 'off',
+    "no-plusplus": 'off',
+    "no-restricted-syntax": 'off',
+    "no-underscore-dangle": 'off',
+    "react": 'off'
+  }
 };

@@ -6,10 +6,6 @@ import ResponseService from '../helpers/response';
 
 dotenv.config();
 
-export const checkToken = async (req: Request, res: Response, next: any) => {
-  await verifyUser(req, res, next);
-};
-
 const getAuthToken = (req: Request): string|null => {
   if (
     req.headers.authorization
@@ -30,7 +26,7 @@ const getUser = async (token: any) => {
   }
 };
 
-const verifyUser = async (req: Request,	res: Response,	next: any) => {
+const verifyUser = async (req: Request, res: Response, next: any) => {
   const token = getAuthToken(req);
   if (!token) {
     ResponseService.unauthorizedResponse(res, 'Unauthorized - no token found');
@@ -46,4 +42,8 @@ const verifyUser = async (req: Request,	res: Response,	next: any) => {
       ResponseService.unauthorizedResponse(res);
     }
   }
+};
+
+export const checkToken = async (req: Request, res: Response, next: any) => {
+  await verifyUser(req, res, next);
 };

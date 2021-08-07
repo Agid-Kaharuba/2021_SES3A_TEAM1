@@ -3,6 +3,18 @@ import { MongoError } from 'mongodb';
 import ProfileImage from '../model/image';
 import ResponseService from '../helpers/response';
 
+function checkMime(mime: string) {
+  if (mime === 'image/jpeg'
+    || mime === 'image/bmp'
+    || mime === 'image/png'
+    || mime === 'image/tiff'
+    || mime === 'image/webp') {
+    return true;
+  }
+
+  return false;
+}
+
 export default class ImageController {
   public async uploadProfileImage(req: Request, res: Response) {
     const originalName = req.file.originalname;
@@ -20,6 +32,7 @@ export default class ImageController {
       return;
     }
 
+    // eslint-disable-next-line no-shadow
     await ProfileImage.findOne({ name }, async (err: Error, img: typeof ProfileImage) => {
       if (err) {
         throw err;
@@ -66,16 +79,4 @@ export default class ImageController {
       return res.status(200).send('https://i.pinimg.com/236x/1f/25/5d/1f255d7f9cf3afe7cd9cd97626d08fbf.jpg');
     });
   }
-}
-
-function checkMime(mime: string) {
-  if (mime === 'image/jpeg'
-    || mime === 'image/bmp'
-    || mime === 'image/png'
-    || mime === 'image/tiff'
-    || mime === 'image/webp') {
-    return true;
-  }
-
-  return false;
 }

@@ -46,7 +46,6 @@ describe('User/auth controller', () => {
     };
     const { body } = await request(server).post('/auth/login').send(user);
     expect(body.user._id).to.equal(userId);
-    authToken = body.token;
   });
 
   /*

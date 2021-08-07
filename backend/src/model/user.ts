@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const uniqueValidator = require('mongoose-unique-validator');
 
 export interface IUser {
@@ -45,7 +46,7 @@ const UserSchema = new mongoose.Schema({
 UserSchema.methods.checkPassword = async function (plainPass) {
   // @ts-ignore
   const user: IUser = this;
-  return await bcrypt.compare(plainPass, user.password);
+  return bcrypt.compare(plainPass, user.password);
 };
 
 UserSchema.pre('save', function (next) {

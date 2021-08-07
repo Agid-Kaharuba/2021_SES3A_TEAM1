@@ -4,7 +4,7 @@ import Recipe from '../model/recipe';
 import ResponseService from '../helpers/response';
 
 export async function findRecipe(Id: string) {
-  return await Recipe.findOne({
+  return Recipe.findOne({
     _id: Id,
   });
 }
