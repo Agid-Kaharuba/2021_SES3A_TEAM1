@@ -2,8 +2,6 @@ import { Request, Response } from 'express';
 import { MongoError } from 'mongodb';
 import Course from '../model/course';
 import Progress from '../model/progress';
-import { findTask } from './task';
-import { findUser } from './user';
 import ResponseService from '../helpers/response';
 
 export default class CourseController {

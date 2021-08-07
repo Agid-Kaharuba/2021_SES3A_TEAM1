@@ -4,7 +4,6 @@ import request from 'supertest';
 describe('User/auth controller', () => {
   let server: any;
   let userId: any;
-  let authToken: any;
 
   beforeEach(() => {
     server = require('../../app');

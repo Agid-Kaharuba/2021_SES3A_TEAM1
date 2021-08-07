@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import { MongoError } from 'mongodb';
-import mongoose from 'mongoose';
 import Progress from '../model/progress';
 import Course from '../model/course';
 import Task from '../model/task';
@@ -95,7 +94,6 @@ export default class ProgressController {
 
       ResponseService.successResponse(res, { counts, tasks });
     } catch (err) {
-      console.log(err);
       ResponseService.mongoErrorResponse(res, err);
     }
   }

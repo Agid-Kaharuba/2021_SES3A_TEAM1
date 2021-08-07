@@ -10,7 +10,6 @@ export default class ImageController {
     const img = req.file.buffer;
     // const name = originalName.substring(0, originalName.lastIndexOf('.'));
     const name = req.file.originalname;
-    console.log(name);
     let delet = false;
 
     if (!checkMime(mimetype)) {
@@ -23,7 +22,7 @@ export default class ImageController {
 
     await ProfileImage.findOne({ name }, async (err: Error, img: typeof ProfileImage) => {
       if (err) {
-        console.log(err);
+        throw err;
       }
       if (img) {
         delet = true;
@@ -31,10 +30,9 @@ export default class ImageController {
     });
 
     if (delet) {
-      console.log('deleting');
       ProfileImage.deleteOne({ name }, undefined, (err) => {
         if (err) {
-          console.log(err);
+          throw err;
         }
       });
     }

@@ -2,7 +2,6 @@ import { Request, Response } from 'express';
 import { MongoError } from 'mongodb';
 import Task from '../model/task';
 import ResponseService from '../helpers/response';
-import { findRecipe } from './recipe';
 
 export async function findTask(Id: string) {
   const task = await Task.findOne({

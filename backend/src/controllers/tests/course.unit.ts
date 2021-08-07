@@ -1,8 +1,5 @@
 import { expect } from 'chai';
-import httpMocks from 'node-mocks-http';
-import sinon from 'sinon';
 import request from 'supertest';
-import CourseController from '../course';
 
 describe('Course controller', () => {
   let server: any;
@@ -57,11 +54,6 @@ describe('Course controller', () => {
   });
 
   it('should delete a course', async () => {
-    const course = {
-      name: 'Another test',
-      description: 'this is some text',
-    };
-
     const response = await request(server).delete(`/course/${courseId}`).send();
     expect(response.status).to.equal(200);
     const { body } = await request(server).get('/course').send();

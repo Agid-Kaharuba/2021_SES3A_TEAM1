@@ -18,6 +18,7 @@ mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true }, 
   if (err) {
     throw err;
   } else {
+    // eslint-disable-next-line no-console
     console.log(`Successfully connected to ${process.env.DATABASE_NAME}`);
   }
 });
@@ -79,8 +80,10 @@ app.get('/', (req, res) => {
 
 // Startup complete
 const server: Server = app.listen(process.env.API_PORT, () => {
+  // eslint-disable-next-line no-console
   console.log(`Server is now running at:  http://localhost:${process.env.API_PORT}`);
-  console.log(`Swagger Docs            :  http://localhost:${process.env.API_PORT}/swagger`);
+  // eslint-disable-next-line no-console
+  console.log(`Swagger Docs:              http://localhost:${process.env.API_PORT}/swagger`);
 });
 
 module.exports = server;

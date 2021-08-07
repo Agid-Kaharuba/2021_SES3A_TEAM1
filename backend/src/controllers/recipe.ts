@@ -53,9 +53,7 @@ export default class RecipeController {
     } as any);
     newRecipeRequest.save((err: MongoError) => {
       if (err) {
-        console.log(err);
         ResponseService.mongoErrorResponse(res, err);
-        console.log(err);
       } else {
         ResponseService.successResponse(res, newRecipeRequest);
       }

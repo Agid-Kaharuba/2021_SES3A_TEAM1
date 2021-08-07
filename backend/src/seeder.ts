@@ -41,6 +41,7 @@ async function seed() {
 
     await save([Employees, Supervisors, Recipes, Tasks, Courses]);
   } catch (e) {
+    // eslint-disable-next-line no-console
     console.log(`Error ${e}`);
   }
 }
@@ -51,6 +52,7 @@ async function main() {
     if (err) {
       throw err;
     } else {
+      // eslint-disable-next-line no-console
       console.log(`Successfully connected to ${process.env.DATABASE_NAME}`);
     }
   });

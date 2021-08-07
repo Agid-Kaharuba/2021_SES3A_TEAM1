@@ -19,6 +19,9 @@ module.exports = {
     "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
     "global-require": 'off',
     "max-len": ["error", { "code": 180 }],
-    "import/prefer-default-export": 'off'
+    "import/prefer-default-export": 'off',
+    "@typescript-eslint/no-explicit-any": 'off',
+    "@typescript-eslint/explicit-module-boundary-types": 'off',
+    "no-underscore-dangle": 'off'
   },
 };

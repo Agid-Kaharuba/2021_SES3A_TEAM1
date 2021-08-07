@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import { MongoError } from 'mongodb';
 import bcrypt from 'bcrypt';
 import User from '../model/user';
 import ResponseService from '../helpers/response';
@@ -50,13 +49,12 @@ export default class UserController {
         if (user) {
           // @ts-ignore
           if (await user.checkPassword(body.password)) {
-            console.log('password is correct');
             delete body.password;
             if (body.newPassword) {
               body.password = await bcrypt.hash(body.newPassword, 10);
             }
 
-            const response = await User.updateOne({ _id: id }, { $set: { ...body } });
+            await User.updateOne({ _id: id }, { $set: { ...body } });
 
             ResponseService.successResponse(res, 'User updated');
           } else {
