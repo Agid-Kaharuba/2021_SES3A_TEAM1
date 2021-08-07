@@ -1,7 +1,5 @@
-import mongoose, { Model, Document } from 'mongoose';
+import mongoose, { Document } from 'mongoose';
 import dotenv from 'dotenv';
-import { callbackify } from 'node:util';
-import { RecipeRoute } from './routes/recipe-router';
 
 // Seed data
 import EmployeesData from './seed-data/employees.json';
@@ -15,24 +13,11 @@ import User from './model/user';
 import Recipe from './model/recipe';
 import Task from './model/task';
 import Course from './model/course';
-import course from './model/course';
 
 dotenv.config();
 
-async function main() {
-  const mongo_uri = `${process.env.DATABASE_URL}/${process.env.DATABASE_NAME}` as string;
-  await mongoose.connect(mongo_uri, { useNewUrlParser: true, useUnifiedTopology: true }, (err: any) => {
-    if (err) {
-      throw err;
-    } else {
-      console.log(`Successfully connected to ${process.env.DATABASE_NAME}`);
-    }
-  });
-
-  await wipe();
-  await seed();
-
-  mongoose.disconnect();
+async function save(models: Document[][]) {
+  await Promise.all(models.map(async (model) => await Promise.all(model.map(async (obj) => obj.save()))));
 }
 
 async function wipe() {
@@ -60,8 +45,20 @@ async function seed() {
   }
 }
 
-async function save(models: Document[][]) {
-  await Promise.all(models.map(async (model) => await Promise.all(model.map(async (obj) => obj.save()))));
+async function main() {
+  const mongoUri = `${process.env.DATABASE_URL}/${process.env.DATABASE_NAME}` as string;
+  await mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true }, (err: any) => {
+    if (err) {
+      throw err;
+    } else {
+      console.log(`Successfully connected to ${process.env.DATABASE_NAME}`);
+    }
+  });
+
+  await wipe();
+  await seed();
+
+  mongoose.disconnect();
 }
 
 main();
