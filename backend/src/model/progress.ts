@@ -1,4 +1,7 @@
 import mongoose from "mongoose";
+import User from "./user"
+import Task from "./task"
+import Course from "./course"
 
 const progressSchema = new mongoose.Schema({
   data: {
@@ -6,18 +9,15 @@ const progressSchema = new mongoose.Schema({
     required: false
   },
   userId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    type: User.schema,
     required: true
   },
   taskId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Task',
+    type: Task.schema,
     required: true
   },
   courseId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Course',
+    type: Course.schema,
     required: true
   },
   completed: {

@@ -5,7 +5,6 @@ import Task from "../model/task";
 import ResponseService from "../helpers/response"
 import { MongoError } from "mongodb";
 import mongoose from "mongoose";
-import { AnyARecord } from "node:dns";
 
 export default class ProgressController {
     public async put(req: Request, res: Response) {

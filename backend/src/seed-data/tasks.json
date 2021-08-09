@@ -1,0 +1,8 @@
+[
+    {
+        "name": "Burger Task 1.0",
+        "description": "The user will need to make the recipe attached.",
+        "recipe": 1,
+        "type": "Practice"
+    }
+]
