@@ -44,14 +44,14 @@ function ProfilePicture(props) {
   // There were declared before this component was pulled from being hardcoded in a page
   // Just propping them in for now.
   const { imageUploader, handleImageUpload } = props;
-  
+
 
   return (
     <>
       {/*Accepting only files with image type*/}
       <input type="file" id="input" accept="image/*" onChange={handleImageUpload} ref={imageUploader} className={classes.imageUpload} />
       <div className={classes.container}>
-        <img className={classes.image} src={props.image.data} alt="profile image"/>
+        <img className={classes.image} src={props.image.data} alt="profile image" />
         <br />
         <Button size="small" onClick={() => imageUploader.current.click()} variant="outlined" color="secondary" className={classes.uploadBtn}>Upload Image</Button>
       </div>
@@ -64,12 +64,11 @@ export default function Profile(props) {
   const { employee, handleChange, saveChanges } = props;
 
   return (
-    <Container maxWidth="sm">
-        <BackButton/>
+    <Container maxWidth="md">
       <div className={classes.container}>
         <Typography variant="h4" className={classes.heading}>PROFILE</Typography>
         {/* TODO: implement profile picture */}
-        {<ProfilePicture {...props}/>}
+        {<ProfilePicture {...props} />}
 
       </div>
 
