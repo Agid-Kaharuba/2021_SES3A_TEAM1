@@ -1,4 +1,5 @@
 import { Server } from 'http';
+import config from '../helpers/config';
 
 // Models
 import Course from '../model/course';
@@ -7,7 +8,7 @@ import Task from '../model/task';
 import User from '../model/user';
 
 // Override database name
-process.env.DATABASE_NAME = 'unit-test';
+config.DATABASE_NAME = config.TEST_DATABASE_NAME;
 
 describe('Prepare Unit Test', () => {
   let server: Server;

@@ -1,5 +1,5 @@
+import config from './helpers/config';
 import mongoose, { Document } from 'mongoose';
-import dotenv from 'dotenv';
 
 // Seed data
 import EmployeesData from './seed-data/employees.json';
@@ -13,8 +13,6 @@ import User from './model/user';
 import Recipe from './model/recipe';
 import Task from './model/task';
 import Course from './model/course';
-
-dotenv.config();
 
 async function save(models: Document[][]) {
   await Promise.all(models.map(async (model) => Promise.all(model.map(async (obj) => obj.save()))));
@@ -47,13 +45,13 @@ async function seed() {
 }
 
 async function main() {
-  const mongoUri = `${process.env.DATABASE_URL}/${process.env.DATABASE_NAME}` as string;
+  const mongoUri = `${config.DATABASE_URL}/${config.DATABASE_NAME}` as string;
   await mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true }, (err: any) => {
     if (err) {
       throw err;
     } else {
       // eslint-disable-next-line no-console
-      console.log(`Successfully connected to ${process.env.DATABASE_NAME}`);
+      console.log(`Successfully connected to ${config.DATABASE_NAME}`);
     }
   });
 

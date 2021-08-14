@@ -1,10 +1,8 @@
 import jwt from 'jsonwebtoken';
 import { Request, Response } from 'express';
-import dotenv from 'dotenv';
+import config from '../helpers/config';
 import User from '../model/user';
 import ResponseService from '../helpers/response';
-
-dotenv.config();
 
 const getAuthToken = (req: Request): string|null => {
   if (
@@ -18,7 +16,7 @@ const getAuthToken = (req: Request): string|null => {
 
 const getUser = async (token: any) => {
   try {
-    const payload = jwt.verify(token, `${process.env.TOKEN_SECRET}`);
+    const payload = jwt.verify(token, `${config.TOKEN_SECRET}`);
     // @ts-ignore
     return await User.findOne({ username: payload.username });
   } catch (err) {
