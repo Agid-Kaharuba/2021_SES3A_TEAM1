@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node dist/app.js",
+    "start": "tsc -p . && node dist/app.js",
     "dev": "nodemon src/app.ts",
     "build": "tsc -p .",
     "test": "mocha -r ts-node/register -r dotenv/config 'src/tests/app.unit.ts' 'src/controllers/**/tests/*.unit.ts'",
-    "seed": "tsc -p . && node dist/seeder.js"
+    "seed": "tsc -p . && node dist/seeder.js",
+    "clean": "rm -r -f dist node_modules"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +21,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
+    "mongodb": "^4.1.0",
     "mongoose": "^5.12.2",
     "mongoose-unique-validator": "^2.0.3",
     "morgan": "^1.10.0",
