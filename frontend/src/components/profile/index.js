@@ -89,6 +89,10 @@ function ChangePasswordDialog(props) {
   const { onClose, open, employee, handleChange, saveChanges } = props;
 
   const handleClose = () => {
+    employee.password = null;
+    employee.newPassword = null;
+    employee.confirmPassword = null;
+    console.log(employee);
     onClose();
   };
 
