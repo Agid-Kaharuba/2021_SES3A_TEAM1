@@ -64,6 +64,7 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(3),
   },
   saveBtn: {
+    marginTop: "32px",
     textAlign: "center"
   }
 }));
@@ -97,7 +98,7 @@ function ChangePasswordDialog(props) {
   };
 
   return (
-    <Dialog onClose={handleClose} open={open} disableBackdropClick disableEscapeKeyDown fullWidth="true" maxWidth="sm">
+    <Dialog onClose={handleClose} open={open} disableBackdropClick disableEscapeKeyDown fullWidth="true" maxWidth="xs">
       <DialogTitle onClose={handleClose}>Change Password</DialogTitle>
       <form onSubmit={saveChanges} className={classes.changePswForm}>
         <Typography variant="subtitle1" className={classes.typography}>Current Password*</Typography>
@@ -168,7 +169,6 @@ function ProfilePicture(props) {
   const handleClose = (value) => {
     setOpen(false);
   };
-
 
   return (
     <div>

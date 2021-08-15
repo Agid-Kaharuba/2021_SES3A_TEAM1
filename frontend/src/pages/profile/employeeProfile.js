@@ -9,7 +9,6 @@ export default function EmployeeProfile(props) {
   const { authState } = useContext(AuthContext);
   const [employee, setEmployeeDetails] = useState(undefined);
   const [resultState, setResultState] = useState(undefined);
-  const [resultMsg, setResultMsg] = useState(undefined);
   const [img, setImg] = useState(undefined);
   const uploadedImage = useRef(null);
   const [open, setOpen] = React.useState(false);
