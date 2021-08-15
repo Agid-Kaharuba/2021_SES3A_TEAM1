@@ -50,16 +50,17 @@ export default class UserController {
           if (body.newPassword) {
             // @ts-ignore
             if (await user.checkPassword(body.password)) {
-              delete body.password;
+              // delete body.password;
               body.password = await bcrypt.hash(body.newPassword, 10);
+              await User.updateOne({ _id: id }, { $set: { ...body } });
+              ResponseService.successResponse(res, 'User updated');
             } else {
               ResponseService.mongoNotFoundResponse(res, 'Password is incorrect');
             }
+          } else {
+            await User.updateOne({ _id: id }, { $set: { ...body } });
+            ResponseService.successResponse(res, 'User updated');
           }
-
-          await User.updateOne({ _id: id }, { $set: { ...body } });
-
-          ResponseService.successResponse(res, 'User updated');
         } else {
           ResponseService.mongoNotFoundResponse(res, 'Username or password is incorrect');
         }
