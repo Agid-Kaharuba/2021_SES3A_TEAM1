@@ -35,4 +35,16 @@ describe('Prepare Unit Test', () => {
   it('should empty User', async () => {
     await User.deleteMany({});
   });
+  it('should create a test user', async () => {
+    const user = new User({
+      "username": "supervisor",
+      "password": "test123",
+      "firstname": "supervisor",
+      "lastname": "unit-test",
+      "email": "supervisor.unit-test@example.com",
+      "staffid": "901",
+      "isSupervisor": true
+    });
+    await user.save();
+  });
 });
