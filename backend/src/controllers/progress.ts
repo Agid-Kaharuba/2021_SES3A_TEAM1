@@ -3,8 +3,7 @@ import Progress from "../model/progress";
 import Course from "../model/course";
 import Task from "../model/task";
 import ResponseService from "../helpers/response"
-import { MongoError } from "mongodb";
-import mongoose from "mongoose";
+import { MongoError, ObjectId } from "mongodb";
 
 export default class ProgressController {
     public async put(req: Request, res: Response) {
@@ -81,9 +80,9 @@ export default class ProgressController {
                 totals[task.type]++;
                 const progress = await Progress.findOne({
                     $and: [
-                        { userId: req.query.userId },
+                        { userId: new ObjectId(req.query.userId as string) },
                         { taskId: task._id },
-                        { courseId: req.query.courseId }
+                        { courseId: new ObjectId(req.query.courseId as string) }
                     ]
                 });
                 if (progress){
