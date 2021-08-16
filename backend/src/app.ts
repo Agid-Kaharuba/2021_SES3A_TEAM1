@@ -8,12 +8,12 @@ import ApiInitializer from "./initializer";
 import morgan from "morgan";
 import swaggerJsDoc from 'swagger-jsdoc';
 import swaggerUI from 'swagger-ui-express';
-import fs  from 'fs';
+import fs from 'fs';
 
 dotenv.config();
 
-const mongo_uri = `${process.env.DATABASE_URL}/${process.env.DATABASE_NAME}`  as string;
-mongoose.connect(mongo_uri, { useNewUrlParser: true, useUnifiedTopology: true }, function(err) {
+const mongo_uri = `${process.env.DATABASE_URL}/${process.env.DATABASE_NAME}` as string;
+mongoose.connect(mongo_uri, { useNewUrlParser: true, useUnifiedTopology: true }, function (err) {
 	if (err) {
 		throw err;
 	} else {
@@ -37,22 +37,24 @@ const swaggerOptions = {
 		},
 		basePath: '/',
 		components: {
-		  securitySchemes: {
-			bearerAuth: {
-			  type: 'http',
-			  scheme: 'bearer',
-			  bearerFormat: 'JWT',
+			securitySchemes: {
+				bearerAuth: {
+					type: 'http',
+					scheme: 'bearer',
+					bearerFormat: 'JWT',
+				}
 			}
-		  }
 		},
 		security: [{
-		  bearerAuth: []
+			bearerAuth: []
 		}]
 	},
 	apis: ['src/app.ts', 'src/routes/*']
 };
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
-fs.writeFileSync('../docs/swagger/swagger.json', JSON.stringify(swaggerDocs));
+if (process.env.STAGE !== 'prod') {
+	fs.writeFileSync('../docs/swagger/swagger.json', JSON.stringify(swaggerDocs));
+}
 app.use('/swagger', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
 
@@ -76,11 +78,11 @@ app.get("/", (req, res) => {
 		msg: "Hello world from XRT Training API 🚀🚀🚀🚀!"
 	});
 });
-  
+
 // Startup complete
 const server = app.listen(process.env.API_PORT, () => {
-    console.log(`Server is now running at:  http://localhost:${process.env.API_PORT}`);
-    console.log(`Swagger Docs            :  http://localhost:${process.env.API_PORT}/swagger`);
+	console.log(`Server is now running at:  http://localhost:${process.env.API_PORT}`);
+	console.log(`Swagger Docs            :  http://localhost:${process.env.API_PORT}/swagger`);
 });
 
 module.exports = server;
