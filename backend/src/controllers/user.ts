@@ -47,18 +47,19 @@ export default class UserController {
 
       User.findOne({ _id: id }, async (err: Error, user: typeof User) => {
         if (user) {
-          // @ts-ignore
-          if (await user.checkPassword(body.password)) {
-            delete body.password;
-            if (body.newPassword) {
+          if (body.newPassword) {
+            // @ts-ignore
+            if (await user.checkPassword(body.password)) {
+              // delete body.password;
               body.password = await bcrypt.hash(body.newPassword, 10);
+              await User.updateOne({ _id: id }, { $set: { ...body } });
+              ResponseService.successResponse(res, 'User updated');
+            } else {
+              ResponseService.mongoNotFoundResponse(res, 'Password is incorrect');
             }
-
-            await User.updateOne({ _id: id }, { $set: { ...body } });
-
-            ResponseService.successResponse(res, 'User updated');
           } else {
-            ResponseService.mongoNotFoundResponse(res, 'Password is incorrect');
+            await User.updateOne({ _id: id }, { $set: { ...body } });
+            ResponseService.successResponse(res, 'User updated');
           }
         } else {
           ResponseService.mongoNotFoundResponse(res, 'Username or password is incorrect');
