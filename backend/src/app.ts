@@ -51,10 +51,12 @@ const swaggerOptions = {
       bearerAuth: [],
     }],
   },
-  apis: ['src/app.ts', 'src/routes/*'],
+  apis: ['src/app.ts', 'src/routes/*']
 };
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
-fs.writeFileSync('../docs/swagger/swagger.json', JSON.stringify(swaggerDocs));
+if (process.env.STAGE !== 'prod') {
+	fs.writeFileSync('../docs/swagger/swagger.json', JSON.stringify(swaggerDocs));
+}
 app.use('/swagger', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
 // Routes

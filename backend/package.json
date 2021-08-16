@@ -4,12 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node dist/app.js",
+    "start": "tsc -p . && node dist/app.js",
     "dev": "nodemon src/app.ts",
     "build": "tsc -p .",
     "test": "mocha -r ts-node/register -r dotenv/config 'src/tests/app.unit.ts' 'src/controllers/**/tests/*.unit.ts'",
     "seed": "tsc -p . && node dist/seeder.js",
-    "lint": "eslint src/**/*.{js,jsx,ts,tsx} --fix"
+    "lint": "eslint src/**/*.{js,jsx,ts,tsx} --fix",
+    "clean": "rm -r -f dist node_modules"
   },
   "keywords": [],
   "author": "",
