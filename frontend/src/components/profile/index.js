@@ -114,7 +114,6 @@ function ChangePasswordDialog(props) {
           fullWidth
           className={classes.password}
         />
-        <Typography variant="subtitle1" className={classes.typography}>{employee.password}</Typography>
         <Typography variant="subtitle1" className={classes.typography}>New Password*</Typography>
         <TextField
           id="outlined-password-input"
