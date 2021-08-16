@@ -1,5 +1,6 @@
 import { Server } from 'http';
 import bodyParser from 'body-parser';
+import config from './helpers/config';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import express from 'express';
@@ -11,15 +12,13 @@ import swaggerUI from 'swagger-ui-express';
 import ApiInitializer from './initializer';
 import { Routes } from './routes';
 
-dotenv.config();
-
-const mongoUri = `${process.env.DATABASE_URL}/${process.env.DATABASE_NAME}` as string;
+const mongoUri = `${config.DATABASE_URL}/${config.DATABASE_NAME}` as string;
 mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
   if (err) {
     throw err;
   } else {
     // eslint-disable-next-line no-console
-    console.log(`Successfully connected to ${process.env.DATABASE_NAME}`);
+    console.log(`Successfully connected to ${config.DATABASE_NAME}`);
   }
 });
 
@@ -75,17 +74,17 @@ Routes(apiInit);
  */
 app.get('/', (req, res) => {
   res.json({
-    stage: process.env.stage,
+    stage: config.STAGE,
     msg: 'Hello world from XRT Training API 🚀🚀🚀🚀!',
   });
 });
 
 // Startup complete
-const server: Server = app.listen(process.env.API_PORT, () => {
+const server: Server = app.listen(config.API_PORT, () => {
   // eslint-disable-next-line no-console
-  console.log(`Server is now running at:  http://localhost:${process.env.API_PORT}`);
+  console.log(`Server is now running at:  http://localhost:${config.API_PORT}`);
   // eslint-disable-next-line no-console
-  console.log(`Swagger Docs:              http://localhost:${process.env.API_PORT}/swagger`);
+  console.log(`Swagger Docs:              http://localhost:${config.API_PORT}/swagger`);
 });
 
 module.exports = server;

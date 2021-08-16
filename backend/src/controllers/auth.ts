@@ -1,11 +1,9 @@
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import { MongoError } from 'mongodb';
-import dotenv from 'dotenv';
+import config from '../helpers/config';
 import ResponseService from '../helpers/response';
 import User from '../model/user';
-
-dotenv.config();
 
 export default class AuthController {
   public async login(req: Request, res: Response) {
@@ -22,7 +20,7 @@ export default class AuthController {
             username,
             password,
           };
-          const token = jwt.sign(jwtPayload, `${process.env.TOKEN_SECRET}`, {
+          const token = jwt.sign(jwtPayload, `${config.TOKEN_SECRET}`, {
             expiresIn: '24h',
           });
           // @ts-ignore
