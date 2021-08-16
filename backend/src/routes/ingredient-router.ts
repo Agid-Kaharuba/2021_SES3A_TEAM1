@@ -1,9 +1,8 @@
-import { Express } from "express";
-import IngredientController from "../controllers/ingredient";
+import { Express } from 'express';
+import IngredientController from '../controllers/ingredient';
 
 export const IngredientRoute = (app: Express, controller: IngredientController) => {
-
-    /**
+  /**
      * @swagger
      * /ingredient:
      *  get:
@@ -13,9 +12,9 @@ export const IngredientRoute = (app: Express, controller: IngredientController) 
      *    200:
      *     description: Success
      */
-    app.get("/ingredient", controller.getAll);
+  app.get('/ingredient', controller.getAll);
 
-    /**
+  /**
      * @swagger
      * /ingredient:
      *  post:
@@ -38,9 +37,9 @@ export const IngredientRoute = (app: Express, controller: IngredientController) 
      *    200:
      *     description: Success
      */
-    app.post("/ingredient", controller.create);
+  app.post('/ingredient', controller.create);
 
-    /**
+  /**
      * @swagger
      * /ingredient/search:
      *  get:
@@ -55,5 +54,5 @@ export const IngredientRoute = (app: Express, controller: IngredientController) 
      *    200:
      *     description: Success
      */
-    app.get("/ingredient/search", controller.search);
- }
+  app.get('/ingredient/search', controller.search);
+};

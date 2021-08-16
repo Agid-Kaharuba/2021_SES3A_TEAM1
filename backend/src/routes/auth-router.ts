@@ -1,9 +1,9 @@
-import { Express } from "express";
-import AuthController from "../controllers/auth";
-import { checkToken } from "../middleware/auth";
+import { Express } from 'express';
+import AuthController from '../controllers/auth';
+import { checkToken } from '../middleware/auth';
 
 export const AuthRoute = (app: Express, controller: AuthController) => {
-    /**
+  /**
      * @swagger
      * /auth:
      *  get:
@@ -13,8 +13,8 @@ export const AuthRoute = (app: Express, controller: AuthController) => {
      *    200:
      *     description: Success
      */
-    app.get('/auth', checkToken, (req, res) => res.status(200).send("you have auth"));
-    /**
+  app.get('/auth', checkToken, (req, res) => res.status(200).send('you have auth'));
+  /**
      * @swagger
      * /auth/register:
      *  post:
@@ -52,8 +52,8 @@ export const AuthRoute = (app: Express, controller: AuthController) => {
      *    200:
      *     description: Success
      */
-    app.post('/auth/register', controller.create);
-    /**
+  app.post('/auth/register', controller.create);
+  /**
      * @swagger
      * /auth/login:
      *  post:
@@ -76,5 +76,5 @@ export const AuthRoute = (app: Express, controller: AuthController) => {
      *    200:
      *     description: Success
      */
-    app.post('/auth/login', controller.login);
-}
+  app.post('/auth/login', controller.login);
+};

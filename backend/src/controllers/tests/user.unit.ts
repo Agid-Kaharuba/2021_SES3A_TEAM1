@@ -1,54 +1,51 @@
-import { expect } from "chai";
-import request from "supertest";
+import { expect } from 'chai';
+import request from 'supertest';
 
-describe("User/auth controller", () => {
+describe('User/auth controller', () => {
   let server: any;
   let userId: any;
-  let authToken: any;
 
   beforeEach(() => {
-    server = require("../../app");
+    server = require('../../app');
   });
 
   afterEach(() => {
     server.close();
   });
 
-
-  it("should create a new user", async function () {
+  it('should create a new user', async () => {
     const user = {
-      username: "testing12321",
-      password: "qwerty"
-    }
-    const { body } = await request(server).post("/auth/register").send(user);
+      username: 'testing12321',
+      password: 'qwerty',
+    };
+    const { body } = await request(server).post('/auth/register').send(user);
     userId = body._id;
   });
 
-  it("should say user already exists", async function (){
+  it('should say user already exists', async () => {
     const user = {
-      username: "testing12321",
-      password: "qwerty"
-    }
-    const { body } = await request(server).post("/auth/register").send(user);
-    expect(body.msg).to.equal("Duplicate key")
+      username: 'testing12321',
+      password: 'qwerty',
+    };
+    const { body } = await request(server).post('/auth/register').send(user);
+    expect(body.msg).to.equal('Duplicate key');
   });
 
-  it("should get all users", async function () {
-    await request(server).post("/user");
+  it('should get all users', async () => {
+    await request(server).post('/user');
 
-    const { body } = await request(server).get("/user");
+    const { body } = await request(server).get('/user');
     expect(body.length).to.equal(1);
     expect(body[0]._id).to.equal(userId);
   });
 
-  it("should login a user", async function () {
+  it('should login a user', async () => {
     const user = {
-      username: "testing12321",
-      password: "qwerty"
-    }
-    const { body } = await request(server).post(`/auth/login`).send(user);
+      username: 'testing12321',
+      password: 'qwerty',
+    };
+    const { body } = await request(server).post('/auth/login').send(user);
     expect(body.user._id).to.equal(userId);
-    authToken = body.token;
   });
 
   /*
@@ -62,23 +59,23 @@ describe("User/auth controller", () => {
     console.log(authToken)
     console.log(body.msg)
     expect(body.msg).to.equals("you have auth");
-  })*/
+  }) */
 
-  it("should NOT login a user (wrong username)", async function () {
+  it('should NOT login a user (wrong username)', async () => {
     const user = {
-      username: "testing1232111",
-      password: "qwerty"
-    }
-    const { body } = await request(server).post(`/auth/login`).send(user);
-    expect(body.err).to.equal("Username or password is incorrect");
+      username: 'testing1232111',
+      password: 'qwerty',
+    };
+    const { body } = await request(server).post('/auth/login').send(user);
+    expect(body.err).to.equal('Username or password is incorrect');
   });
 
-  it("should NOT login a user (wrong password)", async function () {
+  it('should NOT login a user (wrong password)', async () => {
     const user = {
-      username: "testing12321",
-      password: "qwerty1"
-    }
-    const { body } = await request(server).post(`/auth/login`).send(user);
-    expect(body.err).to.equal("Username or password is incorrect");
+      username: 'testing12321',
+      password: 'qwerty1',
+    };
+    const { body } = await request(server).post('/auth/login').send(user);
+    expect(body.err).to.equal('Username or password is incorrect');
   });
 });

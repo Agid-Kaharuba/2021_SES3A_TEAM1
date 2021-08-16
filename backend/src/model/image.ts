@@ -1,19 +1,19 @@
-import mongoose from "mongoose"
+import mongoose from 'mongoose';
 
 const ProfileImageSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
-  mimetype:{
+  mimetype: {
     type: String,
-    required: true
+    required: true,
   },
   img: {
     type: Buffer,
-    required: true
-  }
+    required: true,
+  },
 },
-{collection: 'ProfilePics'})
+{ collection: 'ProfilePics' });
 export default mongoose.model('ProfileImage', ProfileImageSchema);

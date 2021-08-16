@@ -1,6 +1,6 @@
-import { Express } from "express";
-import multer from "multer";
-import ImageController from "../controllers/image";
+import { Express } from 'express';
+import multer from 'multer';
+import ImageController from '../controllers/image';
 
 export const ImageRoute = (app: Express, controller: ImageController) => {
   const uploader = multer({
@@ -9,7 +9,7 @@ export const ImageRoute = (app: Express, controller: ImageController) => {
       fileSize: 10 * 1024 * 1024, // keep images size < 10 MB
     },
   });
-  
+
   /**
      * @swagger
      * /upload:
@@ -30,7 +30,7 @@ export const ImageRoute = (app: Express, controller: ImageController) => {
      *    200:
      *     description: Success
      */
-  app.post("/upload", uploader.single('file'), controller.uploadProfileImage)
+  app.post('/upload', uploader.single('file'), controller.uploadProfileImage);
 
   /**
      * @swagger
@@ -47,5 +47,5 @@ export const ImageRoute = (app: Express, controller: ImageController) => {
      *    200:
      *     description: Success
      */
-  app.get("/upload/:username", controller.downloadProfileImage)
-}
+  app.get('/upload/:username', controller.downloadProfileImage);
+};
