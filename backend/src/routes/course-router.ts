@@ -1,9 +1,9 @@
-import { Express } from "express";
-import CourseController from "../controllers/course";
-import { checkToken } from "../middleware/auth";
+import { Express } from 'express';
+import CourseController from '../controllers/course';
+import { checkToken } from '../middleware/auth';
 
 export const CourseRoute = (app: Express, controller: CourseController) => {
-    /**
+  /**
      * @swagger
      * /course/progress:
      *  post:
@@ -23,8 +23,8 @@ export const CourseRoute = (app: Express, controller: CourseController) => {
      *    200:
      *     description: Success
      */
-    app.post("/course/progress", controller.submitProgress);
-    /**
+  app.post('/course/progress', controller.submitProgress);
+  /**
      * @swagger
      * /course/progress:
      *  get:
@@ -34,8 +34,8 @@ export const CourseRoute = (app: Express, controller: CourseController) => {
      *    200:
      *     description: Success
      */
-    app.get("/course/progress", controller.getAllProgress);
-    /**
+  app.get('/course/progress', controller.getAllProgress);
+  /**
      * @swagger
      * /course:
      *  get:
@@ -45,8 +45,8 @@ export const CourseRoute = (app: Express, controller: CourseController) => {
      *    200:
      *     description: Success
      */
-    app.get("/course", checkToken, controller.getAll);
-    /**
+  app.get('/course', checkToken, controller.getAll);
+  /**
      * @swagger
      * /course/{courseId}:
      *  get:
@@ -61,8 +61,8 @@ export const CourseRoute = (app: Express, controller: CourseController) => {
      *    200:
      *     description: Success
      */
-    app.get("/course/:courseId", controller.get);
-    /**
+  app.get('/course/:courseId', controller.get);
+  /**
      * @swagger
      * /course:
      *  post:
@@ -97,8 +97,8 @@ export const CourseRoute = (app: Express, controller: CourseController) => {
      *    200:
      *     description: Success
      */
-    app.post("/course", controller.create);
-    /**
+  app.post('/course', controller.create);
+  /**
      * @swagger
      * /course/{courseId}:
      *  put:
@@ -138,8 +138,8 @@ export const CourseRoute = (app: Express, controller: CourseController) => {
      *    200:
      *     description: Success
      */
-    app.put("/course/:courseId", controller.update);
-    /**
+  app.put('/course/:courseId', controller.update);
+  /**
      * @swagger
      * /course/{courseId}:
      *  delete:
@@ -154,5 +154,5 @@ export const CourseRoute = (app: Express, controller: CourseController) => {
      *    200:
      *     description: Success
      */
-    app.delete("/course/:courseId", controller.delete);
-}
+  app.delete('/course/:courseId', controller.delete);
+};

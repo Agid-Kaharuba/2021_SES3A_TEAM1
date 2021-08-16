@@ -1,9 +1,8 @@
-import { Express } from "express";
-import RecipeController from "../controllers/recipe";
+import { Express } from 'express';
+import RecipeController from '../controllers/recipe';
 
 export const RecipeRoute = (app: Express, controller: RecipeController) => {
-
-    /**
+  /**
      * @swagger
      * /recipe:
      *  get:
@@ -13,9 +12,9 @@ export const RecipeRoute = (app: Express, controller: RecipeController) => {
      *    200:
      *     description: Success
      */
-    app.get("/recipe", controller.getAll);
+  app.get('/recipe', controller.getAll);
 
-    /**
+  /**
      * @swagger
      * /recipe/search:
      *  get:
@@ -30,9 +29,9 @@ export const RecipeRoute = (app: Express, controller: RecipeController) => {
      *    200:
      *     description: Success
      */
-    app.get("/recipe/search", controller.getAllByCategory);
+  app.get('/recipe/search', controller.getAllByCategory);
 
-    /**
+  /**
      * @swagger
      * /recipe/{recipeId}:
      *  get:
@@ -47,9 +46,9 @@ export const RecipeRoute = (app: Express, controller: RecipeController) => {
      *    200:
      *     description: Success
      */
-    app.get("/recipe/:recipeId", controller.getById);
+  app.get('/recipe/:recipeId', controller.getById);
 
-    /**
+  /**
      * @swagger
      * /recipe:
      *  post:
@@ -84,10 +83,10 @@ export const RecipeRoute = (app: Express, controller: RecipeController) => {
      *    200:
      *     description: Success
      */
-    app.post("/recipe", controller.create);
-    app.put("/recipe", controller.create);
+  app.post('/recipe', controller.create);
+  app.put('/recipe', controller.create);
 
-    /**
+  /**
      * @swagger
      * /recipe/{recipeId}:
      *  put:
@@ -127,9 +126,9 @@ export const RecipeRoute = (app: Express, controller: RecipeController) => {
      *    200:
      *     description: Success
      */
-    app.put("/recipe/:recipeId", controller.update);
+  app.put('/recipe/:recipeId', controller.update);
 
-    /**
+  /**
      * @swagger
      * /recipe/{recipeId}:
      *  delete:
@@ -144,5 +143,5 @@ export const RecipeRoute = (app: Express, controller: RecipeController) => {
      *    200:
      *     description: Success
      */
-    app.delete("/recipe/:recipeId", controller.delete);
-}
+  app.delete('/recipe/:recipeId', controller.delete);
+};

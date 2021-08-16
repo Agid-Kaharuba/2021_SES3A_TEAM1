@@ -1,35 +1,35 @@
-import mongoose from "mongoose";
-import User from "./user"
-import Task from "./task"
-import Course from "./course"
+import mongoose from 'mongoose';
+import User from './user';
+import Task from './task';
+import Course from './course';
 
 const progressSchema = new mongoose.Schema({
   data: {
     type: Object,
-    required: false
+    required: false,
   },
   userId: {
     type: User.schema,
-    required: true
+    required: true,
   },
   taskId: {
     type: Task.schema,
-    required: true
+    required: true,
   },
   courseId: {
     type: Course.schema,
-    required: true
+    required: true,
   },
   completed: {
     type: Boolean,
     required: false,
-    default: false
+    default: false,
   },
   score: {
     type: Number,
     required: false,
-    default: 0
-  }
+    default: 0,
+  },
 
 });
 

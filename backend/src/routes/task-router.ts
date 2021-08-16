@@ -1,9 +1,8 @@
-import { Express } from "express";
-import TaskController from "../controllers/task";
+import { Express } from 'express';
+import TaskController from '../controllers/task';
 
 export const TaskRoute = (app: Express, controller: TaskController) => {
-
-    /**
+  /**
      * @swagger
      * /task:
      *  get:
@@ -13,9 +12,9 @@ export const TaskRoute = (app: Express, controller: TaskController) => {
      *    200:
      *     description: Success
      */
-    app.get("/task", controller.getAll);
+  app.get('/task', controller.getAll);
 
-    /**
+  /**
      * @swagger
      * /task:
      *  post:
@@ -44,10 +43,10 @@ export const TaskRoute = (app: Express, controller: TaskController) => {
      *    200:
      *     description: Success
      */
-    app.post("/task", controller.create);
-    app.put("/task", controller.create);
+  app.post('/task', controller.create);
+  app.put('/task', controller.create);
 
-    /**
+  /**
      * @swagger
      * /task/{taskId}:
      *  get:
@@ -62,9 +61,9 @@ export const TaskRoute = (app: Express, controller: TaskController) => {
      *    200:
      *     description: Success
      */
-    app.get("/task/:taskId", controller.get);
+  app.get('/task/:taskId', controller.get);
 
-    /**
+  /**
      * @swagger
      * /task/{taskId}:
      *  put:
@@ -98,9 +97,9 @@ export const TaskRoute = (app: Express, controller: TaskController) => {
      *    200:
      *     description: Success
      */
-    app.put("/task/:taskId", controller.update);
+  app.put('/task/:taskId', controller.update);
 
-    /**
+  /**
      * @swagger
      * /task/{taskId}:
      *  delete:
@@ -115,5 +114,5 @@ export const TaskRoute = (app: Express, controller: TaskController) => {
      *    200:
      *     description: Success
      */
-    app.delete("/task/:taskId", controller.delete);
-}
+  app.delete('/task/:taskId', controller.delete);
+};
