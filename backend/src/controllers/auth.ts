@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
-import { MongoError } from 'mongodb';
+// import { MongoError } from 'mongodb';
 import config from '../helpers/config';
 import ResponseService from '../helpers/response';
 import User from '../model/user';
@@ -55,7 +55,7 @@ export default class AuthController {
       staffid,
       isSupervisor,
     } as any);
-    newUserRequest.save((err: MongoError) => {
+    newUserRequest.save((err: any) => {
       if (err) {
         err.code = 11000;
         ResponseService.mongoErrorResponse(res, err, 'Username already exists in the database');

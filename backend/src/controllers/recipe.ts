@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { MongoError } from 'mongodb';
+// import { MongoError } from 'mongodb';
 import Recipe from '../model/recipe';
 import ResponseService from '../helpers/response';
 
@@ -51,7 +51,7 @@ export default class RecipeController {
       ingredients: body.ingredients,
       category: body.category,
     } as any);
-    newRecipeRequest.save((err: MongoError) => {
+    newRecipeRequest.save((err: any) => {
       if (err) {
         ResponseService.mongoErrorResponse(res, err);
       } else {

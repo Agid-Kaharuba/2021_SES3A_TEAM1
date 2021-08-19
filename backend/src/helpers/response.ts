@@ -1,5 +1,5 @@
 import { Response } from 'express';
-import { MongoError } from 'mongodb';
+// import { MongoError } from 'mongodb';
 
 export default {
   // TODO set data to data?: any
@@ -25,7 +25,7 @@ export default {
       .status(401)
       .send({ msg });
   },
-  mongoErrorResponse: (res: Response, err: MongoError, data?: any) => {
+  mongoErrorResponse: (res: Response, err: any, data?: any) => {
     switch (err.code) {
       case 11000: // Duplicate key
         res.status(400).send({ msg: 'Duplicate key', err, data });
@@ -35,7 +35,7 @@ export default {
         break;
     }
   },
-  mongoNotFoundResponse: (res: Response, err: MongoError | string, data?: any) => {
+  mongoNotFoundResponse: (res: Response, err: any | string, data?: any) => {
     res
       .status(404)
       .send({ msg: 'Not Found', err, data });

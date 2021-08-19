@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { MongoError } from 'mongodb';
+// import { MongoError } from 'mongodb';
 import ProfileImage from '../model/image';
 import ResponseService from '../helpers/response';
 
@@ -56,7 +56,7 @@ export default class ImageController {
       img,
     } as any);
 
-    newImageRequest.save((err: MongoError) => {
+    newImageRequest.save((err: any) => {
       if (err) {
         ResponseService.mongoErrorResponse(res, err);
       } else {
