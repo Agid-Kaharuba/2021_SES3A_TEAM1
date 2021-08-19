@@ -1,9 +1,9 @@
-import { Express } from "express";
-import UserController from "../controllers/user";
-import { checkToken } from "../middleware/auth";
+import { Express } from 'express';
+import UserController from '../controllers/user';
+import { checkToken } from '../middleware/auth';
 
 export const UserRoute = (app: Express, controller: UserController) => {
-    /**
+  /**
      * @swagger
      * /user/all:
      *  get:
@@ -13,8 +13,8 @@ export const UserRoute = (app: Express, controller: UserController) => {
      *    200:
      *     description: Success
      */
-    app.get("/user/all", controller.getAll);
-    /**
+  app.get('/user/all', controller.getAll);
+  /**
      * @swagger
      * /user:
      *  get:
@@ -24,9 +24,9 @@ export const UserRoute = (app: Express, controller: UserController) => {
      *    200:
      *     description: Success
      */
-    app.get("/user", checkToken, controller.get);
+  app.get('/user', checkToken, controller.get);
 
-    /**
+  /**
      * @swagger
      * /user/search:
      *  get:
@@ -41,9 +41,9 @@ export const UserRoute = (app: Express, controller: UserController) => {
      *    200:
      *     description: Success
      */
-     app.get("/user/search", controller.getAllSupervisor);
-     
-    /**
+  app.get('/user/search', controller.getAllSupervisor);
+
+  /**
      * @swagger
      * /user/{userId}:
      *  get:
@@ -58,9 +58,9 @@ export const UserRoute = (app: Express, controller: UserController) => {
      *    200:
      *     description: Success
      */
-    app.get("/user/:userId", controller.get);
+  app.get('/user/:userId', controller.get);
 
-    /**
+  /**
      * @swagger
      * /user/{userId}:
      *  put:
@@ -106,5 +106,5 @@ export const UserRoute = (app: Express, controller: UserController) => {
      *    200:
      *     description: Success
      */
-    app.put("/user/:userId", controller.update);
-}
+  app.put('/user/:userId', controller.update);
+};

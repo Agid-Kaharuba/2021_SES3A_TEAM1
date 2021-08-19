@@ -1,29 +1,41 @@
-import { Request, Response } from "express";
-import ProfileImage from "../model/image";
-import ResponseService from "../helpers/response";
-import { MongoError } from "mongodb";
+import { Request, Response } from 'express';
+import { MongoError } from 'mongodb';
+import ProfileImage from '../model/image';
+import ResponseService from '../helpers/response';
+
+function checkMime(mime: string) {
+  if (mime === 'image/jpeg'
+    || mime === 'image/bmp'
+    || mime === 'image/png'
+    || mime === 'image/tiff'
+    || mime === 'image/webp') {
+    return true;
+  }
+
+  return false;
+}
 
 export default class ImageController {
   public async uploadProfileImage(req: Request, res: Response) {
     const originalName = req.file.originalname;
-    const mimetype = req.file.mimetype;
+    const { mimetype } = req.file;
     const img = req.file.buffer;
-    //const name = originalName.substring(0, originalName.lastIndexOf('.'));
-    const name = req.file.originalname
-    console.log(name)
+    // const name = originalName.substring(0, originalName.lastIndexOf('.'));
+    const name = req.file.originalname;
     let delet = false;
 
     if (!checkMime(mimetype)) {
       // Add response
       res
         .status(500)
-        .send("Error: Wrong file type");
+        .send('Error: Wrong file type');
       return;
     }
 
-    await ProfileImage.findOne({ name: name }, async function (err: Error, img: typeof ProfileImage) {
+    // eslint-disable-next-line no-shadow
+    await ProfileImage.findOne({ name }, async (err: Error, img: typeof ProfileImage) => {
       if (err) {
-        console.log(err);
+        throw err;
       }
       if (img) {
         delet = true;
@@ -31,18 +43,17 @@ export default class ImageController {
     });
 
     if (delet) {
-      console.log("deleting")
-      ProfileImage.deleteOne({ name: name }, undefined, (err) => {
+      ProfileImage.deleteOne({ name }, undefined, (err) => {
         if (err) {
-          console.log(err)
+          throw err;
         }
-      })
+      });
     }
 
     const newImageRequest = new ProfileImage({
       name,
       mimetype,
-      img
+      img,
     } as any);
 
     newImageRequest.save((err: MongoError) => {
@@ -57,30 +68,15 @@ export default class ImageController {
   public downloadProfileImage(req: Request, res: Response) {
     const name = req.params.username;
 
-    ProfileImage.findOne({ name: name }, function (err: Error, image: typeof ProfileImage) {
+    ProfileImage.findOne({ name }, (err: Error, image: typeof ProfileImage) => {
       if (image) {
         const fileType = (image as any).mimetype;
         const conversion = ((image as any).img).toString('base64');
         res.set('Content-Type', fileType);
-        return res.status(200).send("data:" + fileType + ';base64,' + conversion);
+        return res.status(200).send(`data:${fileType};base64,${conversion}`);
       }
-      else {
-        //ResponseService.mongoNotFoundResponse(res, "File not found");
-        return res.status(200).send("https://i.pinimg.com/236x/1f/25/5d/1f255d7f9cf3afe7cd9cd97626d08fbf.jpg");
-      }
-    })
-  }
-}
-
-function checkMime(mime: String) {
-  if (mime === "image/jpeg" ||
-    mime === "image/bmp" ||
-    mime === "image/png" ||
-    mime === "image/tiff" ||
-    mime === "image/webp") {
-    return true;
-  }
-  else {
-    return false;
+      // ResponseService.mongoNotFoundResponse(res, "File not found");
+      return res.status(200).send('https://i.pinimg.com/236x/1f/25/5d/1f255d7f9cf3afe7cd9cd97626d08fbf.jpg');
+    });
   }
 }

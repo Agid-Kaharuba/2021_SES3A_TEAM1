@@ -1,21 +1,21 @@
+import { Server } from 'http';
+import config from '../helpers/config';
+
+// Models
+import Course from '../model/course';
+import Recipe from '../model/recipe';
+import Task from '../model/task';
+import User from '../model/user';
+
 // Override database name
-process.env.DATABASE_NAME = 'unit-test'
+config.DATABASE_NAME = config.TEST_DATABASE_NAME;
 
-import express from 'express';
-import request from "supertest";
-import { expect } from "chai";
-import mongoose from "mongoose";
-import Course from "../model/course";
-import Recipe from "../model/recipe";
-import Task from "../model/task";
-import User from "../model/user";
-
-describe("Prepare Unit Test", () => {
-  var server: any;
+describe('Prepare Unit Test', () => {
+  let server: Server;
 
   beforeEach(() => {
     // We will create a new instance of the server for each test
-    server = require("../app");
+    server = require('../app');
   });
 
   afterEach(() => {
@@ -23,16 +23,28 @@ describe("Prepare Unit Test", () => {
     server.close();
   });
 
-  it("should empty Course", async function () {
+  it('should empty Course', async () => {
     await Course.deleteMany({});
   });
-  it("should empty Recipe", async function () {
+  it('should empty Recipe', async () => {
     await Recipe.deleteMany({});
   });
-  it("should empty Task", async function () {
+  it('should empty Task', async () => {
     await Task.deleteMany({});
   });
-  it("should empty User", async function () {
+  it('should empty User', async () => {
     await User.deleteMany({});
+  });
+  it('should create a test user', async () => {
+    const user = new User({
+      "username": "supervisor",
+      "password": "test123",
+      "firstname": "supervisor",
+      "lastname": "unit-test",
+      "email": "supervisor.unit-test@example.com",
+      "staffid": "901",
+      "isSupervisor": true
+    });
+    await user.save();
   });
 });
