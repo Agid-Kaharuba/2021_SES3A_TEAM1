@@ -17,10 +17,14 @@ function checkMime(mime: string) {
 
 export default class ImageController {
   public async uploadProfileImage(req: Request, res: Response) {
+    // @ts-ignore
     const originalName = req.file.originalname;
+    // @ts-ignore
     const { mimetype } = req.file;
+    // @ts-ignore
     const img = req.file.buffer;
     // const name = originalName.substring(0, originalName.lastIndexOf('.'));
+    // @ts-ignore
     const name = req.file.originalname;
     let delet = false;
 
