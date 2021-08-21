@@ -174,7 +174,7 @@ function ProfilePicture(props) {
       {/*Accepting only files with image type*/}
       <input type="file" id="input" accept="image/*" onChange={handleImageUpload} ref={imageUploader} className={classes.imageUpload} />
       <div className={classes.profileImg}>
-        <img className={classes.image} src={props.image.data} alt="profile image" />
+        <img className={classes.image} src={props.image} alt="profile image" />
         <IconButton onClick={() => imageUploader.current.click()} className={classes.uploadBtn}><EditIcon fontSize="large" /></IconButton>
       </div>
       <div>

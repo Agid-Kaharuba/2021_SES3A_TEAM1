@@ -41,17 +41,7 @@ export default function Users({usersState, course}){
 
     return(
         <>
-         <Box m={5}>
-             <Grid container spacing={2} justify="space-between">
-                <Grid item>
-                    <Typography className={classes.bold} variant='h4'>
-                    Users
-                    </Typography>
-                </Grid>
-              </Grid>
-            <Divider variant="middle" />
-          </Box>
-    
+
           <Box m={5}>
               <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="simple table">
