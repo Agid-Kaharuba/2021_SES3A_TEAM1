@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import { MongoError } from 'mongodb';
 import Course from '../model/course';
 import Progress from '../model/progress';
 import ResponseService from '../helpers/response';
+import ObjectId from 'mongoose';
 
 export default class CourseController {
   public async getAll(req: Request, res: Response) {
@@ -42,7 +42,7 @@ export default class CourseController {
       tasks: body.tasks,
       assignedEmployees: body.assignedEmployees,
     } as any);
-    newCourseRequest.save((err: MongoError) => {
+    newCourseRequest.save((err: any) => {
       if (err) {
         ResponseService.mongoErrorResponse(res, err);
       } else {
@@ -82,7 +82,7 @@ export default class CourseController {
       completed: completed,
       score: score
     });
-    newProgressRequest.save((err: MongoError) => {
+    newProgressRequest.save((err: any) => {
       if (err) {
         ResponseService.mongoErrorResponse(res, err);
       } else {

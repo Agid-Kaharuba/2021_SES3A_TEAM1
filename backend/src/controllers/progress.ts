@@ -1,9 +1,8 @@
-import { Request, Response } from "express";
-import Progress from "../model/progress";
-import Course from "../model/course";
-import Task from "../model/task";
-import ResponseService from "../helpers/response"
-import { MongoError, ObjectId } from "mongodb";
+import { Request, Response } from 'express';
+import Progress from '../model/progress';
+import Course from '../model/course';
+import Task from '../model/task';
+import ResponseService from '../helpers/response';
 
 export default class ProgressController {
   public async put(req: Request, res: Response) {
@@ -26,7 +25,7 @@ export default class ProgressController {
         ResponseService.successResponse(res, response);
       } else {
         const newProgressRequest = new Progress(body as any);
-        newProgressRequest.save((err: MongoError) => {
+        newProgressRequest.save((err: any) => {
           if (err) {
             ResponseService.mongoErrorResponse(res, err);
           } else {
