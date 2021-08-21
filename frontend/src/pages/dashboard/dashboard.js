@@ -35,6 +35,10 @@ const useStyles = makeStyles({
     paddingLeft: '20px',
     paddingRight: '20px',
     // flexWrap: 'nowrap'
+  },
+  trainingModules: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(4,1fr)'
   }
 })
 
@@ -65,30 +69,30 @@ export default function CreateNewTrainingPage() {
 
    const testMethod = () => {
      return(
-       <div>
-    {coursesState.map((course) => {
-      return buildCourse(course);
-    })}
-    
-     {authState.user.isSupervisor && (
-      <Grid item xs={12} sm={6} md={3}>
-      <Card className={classes.root} variant="outlined" style={{ textDecoration: 'none' }} component={Link} to={"/dashboard/create"}>
-        <CardActionArea>
-        <CardMedia 
-        className={classes.media}
-        //these images are just placeholders for now
-        image="https://cdn0.iconfinder.com/data/icons/very-basic-2-android-l-lollipop-icon-pack/24/plus-512.png"
-        title="Fast Food Training"
-        />
-        <CardContent>
-          <Typography align="center" gutterBottom variant="h6" component="h2">
-          Create New Training
-        </Typography>
-        </CardContent>
-        </CardActionArea>
-      </Card>
-      </Grid>
-     )}
+       <div className = {classes.trainingModules}>
+        {coursesState.map((course) => {
+          return buildCourse(course);
+        })}
+        
+        {authState.user.isSupervisor && (
+          <Grid item xs={12} sm={6} md={3}>
+          <Card className={classes.root} variant="outlined" style={{ textDecoration: 'none' }} component={Link} to={"/dashboard/create"}>
+            <CardActionArea>
+            <CardMedia 
+            className={classes.media}
+            //these images are just placeholders for now
+            image="https://cdn0.iconfinder.com/data/icons/very-basic-2-android-l-lollipop-icon-pack/24/plus-512.png"
+            title="Fast Food Training"
+            />
+            <CardContent>
+              <Typography align="center" gutterBottom variant="h6" component="h2">
+              Create New Training
+            </Typography>
+            </CardContent>
+            </CardActionArea>
+          </Card>
+          </Grid>
+        )}
     </div>
      )
   }
