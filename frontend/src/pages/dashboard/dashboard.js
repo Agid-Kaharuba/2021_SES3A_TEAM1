@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 
 // IMPORT COMPONENTS
 import { Box, Button, Typography, Divider, Card, CardContent, CardActions, Paper, Grid, CardMedia, CardActionArea } from "@material-ui/core";
+import AddIcon from '@material-ui/icons/Add';
 import { makeStyles } from "@material-ui/core/styles";
 
 import { Link } from "react-router-dom";
@@ -62,6 +63,36 @@ export default function CreateNewTrainingPage() {
     window.open('xrt-training://?courseId=' + courseID + '&token=' + token)
   }
 
+   const testMethod = () => {
+     return(
+       <div>
+    {coursesState.map((course) => {
+      return buildCourse(course);
+    })}
+    
+     {authState.user.isSupervisor && (
+      <Grid item xs={12} sm={6} md={3}>
+      <Card className={classes.root} variant="outlined" style={{ textDecoration: 'none' }} component={Link} to={"/dashboard/create"}>
+        <CardActionArea>
+        <CardMedia 
+        className={classes.media}
+        //these images are just placeholders for now
+        image="https://cdn0.iconfinder.com/data/icons/very-basic-2-android-l-lollipop-icon-pack/24/plus-512.png"
+        title="Fast Food Training"
+        />
+        <CardContent>
+          <Typography align="center" gutterBottom variant="h6" component="h2">
+          Create New Training
+        </Typography>
+        </CardContent>
+        </CardActionArea>
+      </Card>
+      </Grid>
+     )}
+    </div>
+     )
+  }
+
   const buildCourse = (course) => {
     return (
       <Grid container spacing={4} className={classes.gridContainer}  direction="row" justifyContent="center" alignItems="center" wrap="nowrap">
@@ -91,25 +122,6 @@ export default function CreateNewTrainingPage() {
             </CardActionArea>
           </Card>
           </Grid>
-
-        <Grid item xs={12} sm={6} md={3}>
-        {authState.user.isSupervisor && (
-          <Card className={classes.root} variant="outlined" style={{ textDecoration: 'none' }} component={Link} to={"/dashboard/create"}>
-            <CardActionArea>
-            <CardMedia 
-            className={classes.media}
-            //these images are just placeholders for now
-            image="https://cdn0.iconfinder.com/data/icons/very-basic-2-android-l-lollipop-icon-pack/24/plus-512.png"
-            title="Fast Food Training"
-            />
-            <CardContent>
-              <Typography align="center" gutterBottom variant="h6" component="h2">
-              Create New Training
-            </Typography>
-            </CardContent>
-            </CardActionArea>
-          </Card>)}
-       </Grid>
           
       </Grid>
     )
@@ -146,9 +158,7 @@ export default function CreateNewTrainingPage() {
 
       <Box m={5}>
         {coursesState ?
-          coursesState.map((course) => {
-            return buildCourse(course);
-          })
+          testMethod()
           :
           <h1>LOADING</h1>
         }
