@@ -1,8 +1,20 @@
 [
     {
-        "name": "Burger Task 1.0",
-        "description": "The user will need to make the recipe attached.",
+        "name": "Make an Empty Burger",
+        "description": "Practice making a empty burger",
+        "recipe": 0,
+        "type": "Practice"
+    },
+    {
+        "name": "Make a Cheese Burger",
+        "description": "Practice making a cheese burger",
         "recipe": 1,
+        "type": "Practice"
+    },
+    {
+        "name": "Make a Big Mac",
+        "description": "Practice making a big mac",
+        "recipe": 2,
         "type": "Practice"
     }
 ]

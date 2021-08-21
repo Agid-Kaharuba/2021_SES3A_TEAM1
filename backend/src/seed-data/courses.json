@@ -1,13 +1,13 @@
 [
     {
         "tasks": [
-            0
+            0,1,2,3,4
         ],
         "assignedEmployees": [
             0,1,2
         ],
-        "name": "Build a Burger",
-        "description": "Build a first initial burger for our first day."
+        "name": "A Few Burgers",
+        "description": "Learn a few new burgers."
     },
     {
         "tasks": [
@@ -16,7 +16,7 @@
         "assignedEmployees": [
             0,1,2
         ],
-        "name": "Build a Burger",
-        "description": "Build a first initial burger for our first day."
+        "name": "Just an empty burger",
+        "description": "There isn't much to this course."
     }
 ]

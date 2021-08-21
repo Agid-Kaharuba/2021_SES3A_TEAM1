@@ -25,6 +25,7 @@ async function wipe() {
   await Course.deleteMany({});
   await Task.deleteMany({});
   await Recipe.deleteMany({});
+  await Progress.deleteMany({});
 }
 
 async function seed() {
@@ -38,7 +39,6 @@ async function seed() {
       tasks: data.tasks.map((i: number) => Tasks[i]),
       assignedEmployees: data.assignedEmployees.map((i: number) => Employees[i]),
     }));
-
     const Progresses: Document[] = await (ProgressesData as any[]).map((data) => new Progress({
       ...data,
       userId: Employees[CoursesData[data.courseId].assignedEmployees[data.userId]],
