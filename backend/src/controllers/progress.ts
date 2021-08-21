@@ -74,9 +74,9 @@ export default class ProgressController {
         totals[task.type]++;
         const progress = await Progress.findOne({
           $and: [
-            { userId: new ObjectId(req.query.userId as string) },
-            { taskId: task._id },
-            { courseId: new ObjectId(req.query.courseId as string) },
+            { 'userId._id': req.query.userId },
+            { 'taskId._id': task._id },
+            { 'courseId._id': req.query.courseId },
           ],
         });
         if (progress) {
