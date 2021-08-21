@@ -73,8 +73,15 @@ export default class CourseController {
   }
 
   public async submitProgress(req: Request, res: Response) {
-    const { body } = req;
-    const newProgressRequest = new Progress(body as any);
+    const { data, userId, taskId, courseId, completed, score } = req.body;
+    const newProgressRequest = new Progress({
+      data: data,
+      userId: new ObjectId(userId),
+      taskId: new ObjectId(taskId),
+      courseId: new ObjectId(courseId),
+      completed: completed,
+      score: score
+    });
     newProgressRequest.save((err: MongoError) => {
       if (err) {
         ResponseService.mongoErrorResponse(res, err);
