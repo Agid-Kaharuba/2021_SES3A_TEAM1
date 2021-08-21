@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { MongoError } from 'mongodb';
+// import { MongoError } from 'mongodb';
 import Course from '../model/course';
 import Progress from '../model/progress';
 import ResponseService from '../helpers/response';
@@ -42,7 +42,7 @@ export default class CourseController {
       tasks: body.tasks,
       assignedEmployees: body.assignedEmployees,
     } as any);
-    newCourseRequest.save((err: MongoError) => {
+    newCourseRequest.save((err: any) => {
       if (err) {
         ResponseService.mongoErrorResponse(res, err);
       } else {
@@ -75,7 +75,7 @@ export default class CourseController {
   public async submitProgress(req: Request, res: Response) {
     const { body } = req;
     const newProgressRequest = new Progress(body as any);
-    newProgressRequest.save((err: MongoError) => {
+    newProgressRequest.save((err: any) => {
       if (err) {
         ResponseService.mongoErrorResponse(res, err);
       } else {

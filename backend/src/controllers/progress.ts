@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { MongoError } from 'mongodb';
+// import { MongoError } from 'mongodb';
 import Progress from '../model/progress';
 import Course from '../model/course';
 import Task from '../model/task';
@@ -26,7 +26,7 @@ export default class ProgressController {
         ResponseService.successResponse(res, response);
       } else {
         const newProgressRequest = new Progress(body as any);
-        newProgressRequest.save((err: MongoError) => {
+        newProgressRequest.save((err: any) => {
           if (err) {
             ResponseService.mongoErrorResponse(res, err);
           } else {
