@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import Tasks from "../../../components/Task/list.js";
-import { Box, Button, Typography, Divider, Card, CardContent, CardActions, Paper, Grid } from "@material-ui/core";
+import { Box, Button, Typography, Divider, Card, CardContent, CardActions, CardActionArea, CardMedia, Paper, Grid } from "@material-ui/core";
 import { AuthContext } from "../../../context/auth";
 import api from "../../../helpers/api";
 import { makeStyles } from "@material-ui/core/styles";
@@ -56,6 +56,35 @@ export default function TasksList() {
     }
   });
 
+  const testMethod = () => {
+    return(
+      <div className = {classes.tasks}>
+       {tasksState.map((task) => {
+         return buildTask(task);
+       })}
+       
+       {authState.user.isSupervisor && (
+         <Grid item xs={12} sm={6} md={3}>
+         <Card className={classes.root} variant="outlined" style={{ textDecoration: 'none' }} component={Link} to={"/task/create"}>
+           <CardActionArea>
+           <CardMedia 
+           className={classes.media}
+           //these images are just placeholders for now
+           image="https://cdn0.iconfinder.com/data/icons/very-basic-2-android-l-lollipop-icon-pack/24/plus-512.png"
+           title="Fast Food Training"
+           />
+           <CardContent>
+             <Typography align="center" gutterBottom variant="h6" component="h2">
+             Create New Task
+           </Typography>
+           </CardContent>
+           </CardActionArea>
+         </Card>
+         </Grid>
+       )}
+   </div>
+    )
+ }
   const buildTask = (task) => {
     return (
       <Box mx={5} my={2}>
@@ -82,7 +111,7 @@ export default function TasksList() {
   return (
     <Box>
 
-      <Box m={5}>
+<Box m={5}>
         <Grid
           container
           direction='row'
@@ -90,15 +119,15 @@ export default function TasksList() {
           alignItems='baseline'>
           <Grid item>
             <Typography className={classes.bold} variant='h4'>
-              Task List
+              Dashboard
             </Typography>
           </Grid>
-          <Grid item>
+          {/* <Grid item>
             {authState.user.isSupervisor && (
               <Button component={Link} color="primary" variant="contained" to={"/dashboard/create"}>
-                Create Task
+                Create Training
               </Button>)}
-          </Grid>
+          </Grid> */}
         </Grid>
         <Box my={1}>
           <Divider variant="middle" />
@@ -107,9 +136,7 @@ export default function TasksList() {
 
       <Box m={5}>
         {tasksState ?
-          tasksState.map((task) => {
-            return buildTask(task);
-          })
+          testMethod()
           :
           <h1>LOADING</h1>
         }
