@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
 
 // IMPORT COMPONENTS
-import { Box, Button, Typography, Divider, Card, CardContent, CardActions, Paper, Grid } from "@material-ui/core";
+import { Box, Button, Typography, Divider, Card, CardContent, CardActions, Paper, Grid, CardMedia, CardActionArea } from "@material-ui/core";
+import AddIcon from '@material-ui/icons/Add';
 import { makeStyles } from "@material-ui/core/styles";
 
 import { Link } from "react-router-dom";
@@ -10,6 +11,11 @@ import api from "../../helpers/api";
 
 
 const useStyles = makeStyles({
+  root: {
+    // maxWidth:345,
+    minWidth: 250
+    // position: 'relative'
+  },
   bold: {
     fontWeight: 600
   },
@@ -22,24 +28,21 @@ const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
+  media: {
+    height: 143,
+  },
+  gridContainer: {
+    paddingLeft: '20px',
+    paddingRight: '20px',
+    // flexWrap: 'nowrap'
+  },
+  trainingModules: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(4,1fr)'
+  }
 })
 
-const cardStyles = makeStyles({
-  root: {
-    minWidth: 275,
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  },
-});
+
 
 export default function CreateNewTrainingPage() {
   const classes = useStyles();
@@ -64,28 +67,71 @@ export default function CreateNewTrainingPage() {
     window.open('xrt-training://?courseId=' + courseID + '&token=' + token)
   }
 
+   const testMethod = () => {
+     return(
+       <div className = {classes.trainingModules}>
+        {coursesState.map((course) => {
+          return buildCourse(course);
+        })}
+        
+        {authState.user.isSupervisor && (
+          <Grid item xs={12} sm={6} md={3}>
+          <Card className={classes.root} variant="outlined" style={{ textDecoration: 'none' }} component={Link} to={"/dashboard/create"}>
+            <CardActionArea>
+            <CardMedia 
+            className={classes.media}
+            //these images are just placeholders for now
+            image="https://cdn0.iconfinder.com/data/icons/very-basic-2-android-l-lollipop-icon-pack/24/plus-512.png"
+            title="Fast Food Training"
+            />
+            <CardContent>
+              <Typography align="center" gutterBottom variant="h6" component="h2">
+              Create New Training
+            </Typography>
+            </CardContent>
+            </CardActionArea>
+          </Card>
+          </Grid>
+        )}
+    </div>
+     )
+  }
+
   const buildCourse = (course) => {
     return (
-      <Box mx={5} my={2}>
-        <Paper>
+      <Grid container spacing={4} className={classes.gridContainer}  direction="row" justifyContent="center" alignItems="center" wrap="nowrap">
+        <Grid item xs={12} sm={6} md={3}>
           <Card className={classes.root} variant="outlined">
+            <CardActionArea>
+            <CardMedia 
+            className={classes.media}
+            image="https://static.thenounproject.com/png/1176750-200.png"
+            title="Fast Food Training"
+            />
             <CardContent>
-              <Typography className={classes.title} color="textSecondary" gutterBottom>
-                {course.name} - {course.description}
+              <Typography gutterBottom variant="h6" component="h2">
+              {course.name}
+            </Typography>
+              <Typography variant="body1" color="textSecondary" gutterBottom>
+                 {course.description}
               </Typography>
-
             </CardContent>
+
             <CardActions>
               <Link className={classes.underline} to={`/dashboard/${course._id}`}>
                 <Button size="small">View Training</Button>
               </Link>
               <Button size="small" onClick={() => handleLaunchXR(course._id)}>Launch XR</Button>
             </CardActions>
+            </CardActionArea>
           </Card>
-        </Paper>
-      </Box>
+          </Grid>
+          
+      </Grid>
     )
   }
+
+ 
   //Course is now changed to Training
   //Line 104 checks if the user is a supervisor and show create training button if they are.
   return (
@@ -102,12 +148,12 @@ export default function CreateNewTrainingPage() {
               Dashboard
             </Typography>
           </Grid>
-          <Grid item>
+          {/* <Grid item>
             {authState.user.isSupervisor && (
               <Button component={Link} color="primary" variant="contained" to={"/dashboard/create"}>
                 Create Training
               </Button>)}
-          </Grid>
+          </Grid> */}
         </Grid>
         <Box my={1}>
           <Divider variant="middle" />
@@ -116,9 +162,7 @@ export default function CreateNewTrainingPage() {
 
       <Box m={5}>
         {coursesState ?
-          coursesState.map((course) => {
-            return buildCourse(course);
-          })
+          testMethod()
           :
           <h1>LOADING</h1>
         }
