@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import Tasks from "../../../components/Task/list.js";
-import { Button, Typography, Box, Divider, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Grid } from "@material-ui/core";
+import { Box, Button, Typography, Divider, Card, CardContent, CardActions, Paper, Grid } from "@material-ui/core";
 import { AuthContext } from "../../../context/auth";
 import api from "../../../helpers/api";
 import { makeStyles } from "@material-ui/core/styles";
@@ -12,7 +12,7 @@ const useStyles = makeStyles({
     fontWeight: 600
   },
   underline: {
-    textDecorationLine: 'underline'
+    textDecorationLine: 'none'
   },
   italic: {
     fontStyle: 'italic'
@@ -22,17 +22,22 @@ const useStyles = makeStyles({
   },
 })
 
-// function createData(name, description, duration, view) {
-//   return {name,description, duration, view};
-// }
-
-//0 is a placeholder for the view button
-// const rows = [
-//     createData('Task 1', 'Learn the essentials of CPR through an interactive simulation', 10,0),
-//     createData('Task 2', 'Learn how to mitigate safety hazards in the workplace', 20,0),
-//     createData('Task 3', 'Learn the safety terminology', 5,0)
-// ];
-
+const cardStyles = makeStyles({
+  root: {
+    minWidth: 275,
+  },
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
+  },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
+});
 
 
 export default function TasksList() {
@@ -51,23 +56,65 @@ export default function TasksList() {
     }
   });
 
+  const buildTask = (task) => {
+    return (
+      <Box mx={5} my={2}>
+        <Paper>
+          <Card className={classes.root} variant="outlined">
+            <CardContent>
+              <Typography className={classes.title} color="textSecondary" gutterBottom>
+                {task.name} - {task.description}
+              </Typography>
+
+            </CardContent>
+            <CardActions>
+              <Link className={classes.underline} to={`/dashboard/${task._id}`}>
+                <Button size="small">View Task</Button>
+              </Link>
+            </CardActions>
+          </Card>
+        </Paper>
+      </Box>
+    )
+  }
+  //Course is now changed to Training
+  //Line 104 checks if the user is a supervisor and show create training button if they are.
   return (
-    <>
+    <Box>
+
       <Box m={5}>
-        <Grid container spacing={2} justify="space-between">
+        <Grid
+          container
+          direction='row'
+          justify='space-between'
+          alignItems='baseline'>
           <Grid item>
             <Typography className={classes.bold} variant='h4'>
-              Tasks
+              Task List
             </Typography>
           </Grid>
-          <Grid item align="right">
-            <Button variant="contained" color="primary" component={Link} to={"/task/create"}>Create Task</Button>
+          <Grid item>
+            {authState.user.isSupervisor && (
+              <Button component={Link} color="primary" variant="contained" to={"/dashboard/create"}>
+                Create Task
+              </Button>)}
           </Grid>
         </Grid>
-        <Divider variant="middle" />
+        <Box my={1}>
+          <Divider variant="middle" />
+        </Box>
       </Box>
-      <Tasks tasksState={tasksState} />
-    </>
-  );
+
+      <Box m={5}>
+        {tasksState ?
+          tasksState.map((task) => {
+            return buildTask(task);
+          })
+          :
+          <h1>LOADING</h1>
+        }
+      </Box>
+    </Box>
+  )
 
 }
