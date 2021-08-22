@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import Course from '../model/course';
 import Progress from '../model/progress';
 import ResponseService from '../helpers/response';
-import ObjectId from 'mongoose';
+import mongoose from 'mongoose';
 
 export default class CourseController {
   public async getAll(req: Request, res: Response) {
@@ -76,9 +76,9 @@ export default class CourseController {
     const { data, userId, taskId, courseId, completed, score } = req.body;
     const newProgressRequest = new Progress({
       data: data,
-      userId: new ObjectId(userId),
-      taskId: new ObjectId(taskId),
-      courseId: new ObjectId(courseId),
+      userId: new mongoose.Types.ObjectId(userId),
+      taskId: new mongoose.Types.ObjectId(taskId),
+      courseId: new mongoose.Types.ObjectId(courseId),
       completed: completed,
       score: score
     });
