@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { MongoError } from 'mongodb';
+// import { MongoError } from 'mongodb';
 import Recipe from '../model/recipe';
 import ResponseService from '../helpers/response';
 
@@ -51,7 +51,7 @@ export default class RecipeController {
       ingredients: body.ingredients,
       category: body.category,
     } as any);
-    newRecipeRequest.save((err: MongoError) => {
+    newRecipeRequest.save((err: any) => {
       if (err) {
         ResponseService.mongoErrorResponse(res, err);
       } else {
@@ -79,6 +79,15 @@ export default class RecipeController {
       const response = await Recipe.updateOne({ _id: id }, { archive: true });
       ResponseService.successResponse(res, response);
     } catch (err) {
+      ResponseService.mongoNotFoundResponse(res, err);
+    }
+  }
+  public async getCat(req: Request, res: Response) {
+    try {
+      const response = await Recipe.find({ archive: { $ne: true } }) .distinct("category");
+      ResponseService.successResponse(res, response);
+    } catch (err) {
+      console.log(err);
       ResponseService.mongoNotFoundResponse(res, err);
     }
   }
