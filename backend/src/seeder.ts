@@ -7,12 +7,14 @@ import SupervisorsData from './seed-data/supervisors.json';
 import RecipesData from './seed-data/recipes.json';
 import TasksData from './seed-data/tasks.json';
 import CoursesData from './seed-data/courses.json';
+import ImagesData from './seed-data/images.json'
 
 // Mongo models
 import User from './model/user';
 import Recipe from './model/recipe';
 import Task from './model/task';
 import Course from './model/course';
+import ProfileImage from './model/image';
 
 async function save(models: Document[][]) {
   await Promise.all(models.map(async (model) => Promise.all(model.map(async (obj) => obj.save()))));
@@ -23,6 +25,7 @@ async function wipe() {
   await Course.deleteMany({});
   await Task.deleteMany({});
   await Recipe.deleteMany({});
+  await ProfileImage.deleteMany({});
 }
 
 async function seed() {
@@ -36,8 +39,9 @@ async function seed() {
       tasks: data.tasks.map((i: number) => Tasks[i]),
       assignedEmployees: data.assignedEmployees.map((i: number) => Employees[i]),
     }));
+    const Images: Document[] = await ImagesData.map((data) => new ProfileImage(data));
 
-    await save([Employees, Supervisors, Recipes, Tasks, Courses]);
+    await save([Employees, Supervisors, Recipes, Tasks, Courses, Images]);
   } catch (e) {
     // eslint-disable-next-line no-console
     console.log(`Error ${e}`);
