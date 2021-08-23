@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import { MongoError } from 'mongodb';
 import Course from '../model/course';
 import Progress from '../model/progress';
 import ResponseService from '../helpers/response';
+import mongoose from 'mongoose';
 
 export default class CourseController {
   public async getAll(req: Request, res: Response) {
@@ -42,7 +42,7 @@ export default class CourseController {
       tasks: body.tasks,
       assignedEmployees: body.assignedEmployees,
     } as any);
-    newCourseRequest.save((err: MongoError) => {
+    newCourseRequest.save((err: any) => {
       if (err) {
         ResponseService.mongoErrorResponse(res, err);
       } else {
@@ -73,9 +73,16 @@ export default class CourseController {
   }
 
   public async submitProgress(req: Request, res: Response) {
-    const { body } = req;
-    const newProgressRequest = new Progress(body as any);
-    newProgressRequest.save((err: MongoError) => {
+    const { data, userId, taskId, courseId, completed, score } = req.body;
+    const newProgressRequest = new Progress({
+      data: data,
+      userId: new mongoose.Types.ObjectId(userId),
+      taskId: new mongoose.Types.ObjectId(taskId),
+      courseId: new mongoose.Types.ObjectId(courseId),
+      completed: completed,
+      score: score
+    });
+    newProgressRequest.save((err: any) => {
       if (err) {
         ResponseService.mongoErrorResponse(res, err);
       } else {

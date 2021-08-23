@@ -7,19 +7,34 @@
             "top_bun",
             "bottom_bun"
         ],
-        "category": ""
+        "category": "Burger"
     },
     {
         "ref": 2,
-        "name": "Super Burger",
+        "name": "Cheese Burger",
         "steps": [],
         "ingredients": [
             "top_bun",
-            "lettuce",
             "sauce",
-            "tomato",
             "cheese",
             "patty",
+            "bottom_bun"
+        ],
+        "category": "Burger"
+    },
+    {
+        "ref": 3,
+        "name": "Big Mac",
+        "steps": [],
+        "ingredients": [
+            "top_bun",
+            "patty",
+            "lettuce",
+            "sauce",
+            "bottom_bun",
+            "patty",
+            "lettuce",
+            "cheese",
             "bottom_bun"
         ],
         "category": "Burger"

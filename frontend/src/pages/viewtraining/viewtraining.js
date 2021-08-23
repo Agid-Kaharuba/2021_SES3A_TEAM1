@@ -5,6 +5,7 @@ import Users from "../../components/usersList/index.js";
 import Tasks from "../../components/Task/list.js";
 import { AuthContext } from "../../context/auth";
 import api from "../../helpers/api";
+import PlaceholderImage from "../../components/uploadImage/index.js";
 
 const useStyles = makeStyles({
     bold: {
@@ -19,6 +20,15 @@ const useStyles = makeStyles({
     formControl: {
         minWidth: 200,
     },
+    flex: {
+        display: 'flex',
+    },
+    container: {
+        width: "20%",
+    },
+    trainDiv: {
+        width: "80%",
+    },
 })
 
 
@@ -30,29 +40,29 @@ export default function ViewCourse(props) {
     const [usersState, setUsersState] = useState(undefined);
     const [courseState, setCourseState] = useState(undefined);
     const [editState, setEditState] = useState(true);
-    
+
     // Get User Data
     const fetchUserData = async () => {
-      const res = await api.user.all(authState.token);
-      setUsersState(res.data);
+        const res = await api.user.all(authState.token);
+        setUsersState(res.data);
     };
-  
+
     useEffect(() => {
-      if (usersState === undefined) {
-        fetchUserData();
-      }
+        if (usersState === undefined) {
+            fetchUserData();
+        }
     });
 
     //Get Tasks Data
     const fetchTasksData = async () => {
-      const res = await api.task.getAll(authState.token);
-      setTasksState(res.data);
+        const res = await api.task.getAll(authState.token);
+        setTasksState(res.data);
     };
-  
+
     useEffect(() => {
-      if (tasksState === undefined) {
-        fetchTasksData();
-      }
+        if (tasksState === undefined) {
+            fetchTasksData();
+        }
     });
 
     // Edit Course Data
@@ -97,7 +107,7 @@ export default function ViewCourse(props) {
                         <Grid item>
                             <Typography className={classes.bold} variant='h4'>
                                 Training
-                       </Typography>
+                            </Typography>
                         </Grid>
                         <Grid item align="right">
                             <Button variant="contained" style={{ width: 80 }} color={editState ? "secondary" : "primary"} size="large" onClick={handleEdit}>
@@ -110,33 +120,41 @@ export default function ViewCourse(props) {
                 <Box m={5}>
                     <Grid container spacing={2} direction="column" justify="space-between">
                         <Grid>
-                            <Typography className={classes.bold} variant='h6'>
-                                Training Name
-                            </Typography>
-                            <TextField value={courseState.name} id="name" disabled={editState} variant="outlined" fullWidth margin='normal' onChange={handleChange} />
-                        </Grid>
-                        <Grid>
-                            <Typography className={classes.bold} variant='h6'>
-                                Training Description
-                            </Typography>
-                            <TextField value={courseState.description} id="description" disabled={editState} variant="outlined" fullWidth margin='normal' multiline rows={10} onChange={handleChange} />
+                            <div className={classes.flex}>
+                                <div className={classes.container}>
+                                    <PlaceholderImage />
+                                </div>
+                                <div className={classes.trainDiv}>
+                                    <form>
+                                        <Typography className={classes.bold} variant='h6'>
+                                            Training Name
+                                        </Typography>
+                                        <TextField value={courseState.name} id="name" disabled={editState} variant="outlined" fullWidth margin='normal' onChange={handleChange} />
+                                        <Typography className={classes.bold} variant='h6'>
+                                            Training Description
+                                        </Typography>
+                                        <TextField value={courseState.description} id="description" disabled={editState} variant="outlined" fullWidth margin='normal' multiline rows={10} onChange={handleChange} />
+                                    </form>
+                                </div>
+                            </div>
+
                         </Grid>
                     </Grid>
                 </Box>
                 <Box m={5}>
                     <Typography className={classes.bold} variant='h6'>
-                                Assigned Users
+                        Assigned Users
                     </Typography>
                     <Grid>
-                        <Users usersState = {courseState.assignedEmployees} course={courseState}/>
+                        <Users usersState={courseState.assignedEmployees} course={courseState} />
                     </Grid>
                 </Box>
                 <Box m={5}>
                     <Typography className={classes.bold} variant='h6'>
-                                Assigned Tasks
+                        Assigned Tasks
                     </Typography>
                     <Grid>
-                        <Tasks tasksState = {tasksState}/>
+                        <Tasks tasksState={tasksState} />
                     </Grid>
                 </Box>
             </>

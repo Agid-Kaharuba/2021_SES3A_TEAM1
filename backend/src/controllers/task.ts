@@ -1,12 +1,12 @@
 import { Request, Response } from 'express';
-import { MongoError } from 'mongodb';
+// import { MongoError } from 'mongodb';
 import Task from '../model/task';
 import ResponseService from '../helpers/response';
 
 export async function findTask(Id: string) {
   const task = await Task.findOne({
     _id: Id,
-  }).populate('recipe');
+  });
   return task;
 }
 
@@ -40,7 +40,7 @@ export default class TaskController {
       recipe: body.recipe,
       type: body.type,
     } as any);
-    newTaskRequest.save((err: MongoError) => {
+    newTaskRequest.save((err: any) => {
       if (err) {
         ResponseService.mongoErrorResponse(res, err);
       } else {

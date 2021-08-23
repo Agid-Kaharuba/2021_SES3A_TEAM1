@@ -2,6 +2,18 @@ import { Express } from 'express';
 import RecipeController from '../controllers/recipe';
 
 export const RecipeRoute = (app: Express, controller: RecipeController) => {
+   /**
+     * @swagger
+     * /recipe/category:
+     *  get:
+     *   description: Get all the Categoriesnnp
+     *   tags: [Recipe]
+     *   responses:
+     *    200:
+     *     description: Success
+     */
+   app.get("/recipe/category", controller.getCat);
+
   /**
      * @swagger
      * /recipe:
@@ -144,4 +156,5 @@ export const RecipeRoute = (app: Express, controller: RecipeController) => {
      *     description: Success
      */
   app.delete('/recipe/:recipeId', controller.delete);
+  
 };
