@@ -5,12 +5,15 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import express from 'express';
 import fs from 'fs';
-import mongoose from 'mongoose';
+import mongoose, { ObjectId } from 'mongoose';
 import morgan from 'morgan';
 import swaggerJsDoc from 'swagger-jsdoc';
 import swaggerUI from 'swagger-ui-express';
 import ApiInitializer from './initializer';
 import { Routes } from './routes';
+import Course from './model/course';
+import Task from './model/task';
+import Recipe from './model/recipe';
 
 const mongoUri = `${config.DATABASE_URL}/${config.DATABASE_NAME}` as string;
 mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
@@ -54,7 +57,7 @@ const swaggerOptions = {
 };
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 if (process.env.STAGE !== 'prod') {
-	fs.writeFileSync('../docs/swagger/swagger.json', JSON.stringify(swaggerDocs));
+  fs.writeFileSync('../docs/swagger/swagger.json', JSON.stringify(swaggerDocs));
 }
 app.use('/swagger', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
@@ -86,5 +89,46 @@ const server: Server = app.listen(config.API_PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`Swagger Docs:              http://localhost:${config.API_PORT}/swagger`);
 });
+
+//Create a course if it doesn't exists
+
+async function masterData() {
+  if (!await Recipe.findOne({ _id: "0000000282828b5134935015" })) {
+    var masterRecipe = await new Recipe({
+      name: "Classic Burger",
+      _id: new mongoose.Types.ObjectId("0000000282828b5134935015")
+    } as any);
+    await masterRecipe.save();
+  }
+
+  if (!await Task.findOne({ _id: "0000000696969b5134935015" })) {
+    var masterTask = await new Task({
+      name: "Beef Burger",
+      recipe: [masterRecipe],
+      type: "Test Course",
+      _id: new mongoose.Types.ObjectId("0000000696969b5134935015")
+    } as any);
+    await masterTask.save();
+  }
+
+
+  if (!await Course.findOne({ _id: "0000000114758b5134935015" })) {
+    const masterCourse = await new Course({
+      name: "Burger",
+      description: "Test Course",
+      tasks: [masterTask],
+      assignedEmployees: [],
+      _id: new mongoose.Types.ObjectId("0000000114758b5134935015")
+    } as any);
+    await masterCourse.save((err: any) => {
+      if (err) {
+        console.log(err);
+      }
+    });
+  }
+}
+
+masterData();
+
 
 module.exports = server;

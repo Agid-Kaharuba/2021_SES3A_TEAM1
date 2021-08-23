@@ -26,8 +26,17 @@ const getUser = async (token: any) => {
 
 const verifyUser = async (req: Request, res: Response, next: any) => {
   const token = getAuthToken(req);
-  if (token == 'MASTER_TOKEN') {
+  //Supervisor
+  if (token == 'SUPERVISOR_MASTER_TOKEN') {
+    // @ts-ignore
+    req.user = await User.findOne({ username: "hard coded username" });;
+    return next();
+  }
 
+  //Employee
+  if (token == 'EMPLOYEE_MASTER_TOKEN') {
+    // @ts-ignore
+    req.user = await User.findOne({ username: "hard coded username" });;
     return next();
   }
 
