@@ -15,23 +15,36 @@ export default function Ingredient(props) {
 					{...provided.dragHandleProps}
 					{...provided.draggableProps}
 					ref={provided.innerRef}>
+					
+					<Grid container spacing={1}>
+						
 					<Paper>
 						<Card variant="outlined"
-							style={{ width: "6vw", height: "6vw" }}
+							style={{ width: "9vw", height: "6vw" }}
 						>
 							<CardContent>
-								<Typography color="textSecondary" align="center" gutterBottom>
+								<tr>
+									<th>
+										<Typography color="textSecondary" align="center" gutterBottom>
 									{props.ingredient.value}
-								</Typography>
-								<img
-									style={{
-										"max-width":"100%",
-										"max-height":"100%"
-									}}
-									srcset={props.ingredient.src} />
+									</Typography>
+									</th>
+									<th>
+										<img
+										style={{
+											"max-width":"100%",
+											"max-height":"100%"
+										}}
+										srcset={props.ingredient.src} />
+									</th>
+								</tr>
 							</CardContent>
+							
 						</Card>
 					</Paper>
+						
+					</Grid>
+
 				</Box>
 			)}
 		</Draggable>
