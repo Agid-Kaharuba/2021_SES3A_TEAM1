@@ -7,6 +7,7 @@ import SupervisorsData from './seed-data/supervisors.json';
 import RecipesData from './seed-data/recipes.json';
 import TasksData from './seed-data/tasks.json';
 import CoursesData from './seed-data/courses.json';
+import ImagesData from './seed-data/images.json'
 import ProgressesData from './seed-data/progress.json';
 
 // Mongo models
@@ -14,6 +15,7 @@ import User from './model/user';
 import Recipe from './model/recipe';
 import Task from './model/task';
 import Course from './model/course';
+import ProfileImage from './model/image';
 import Progress from './model/progress';
 
 async function save(models: Document[][]) {
@@ -25,6 +27,7 @@ async function wipe() {
   await Course.deleteMany({});
   await Task.deleteMany({});
   await Recipe.deleteMany({});
+  await ProfileImage.deleteMany({});
   await Progress.deleteMany({});
 }
 
@@ -39,6 +42,7 @@ async function seed() {
       tasks: data.tasks.map((i: number) => Tasks[i]),
       assignedEmployees: data.assignedEmployees.map((i: number) => Employees[i]),
     }));
+    const Images: Document[] = await ImagesData.map((data) => new ProfileImage(data));
     const Progresses: Document[] = await (ProgressesData as any[]).map((data) => new Progress({
       ...data,
       userId: Employees[CoursesData[data.courseId].assignedEmployees[data.userId]],
@@ -46,7 +50,7 @@ async function seed() {
       courseId: Courses[data.courseId]
     }))
 
-    await save([Employees, Supervisors, Recipes, Tasks, Courses, Progresses]);
+    await save([Employees, Supervisors, Recipes, Tasks, Courses, Progresses, Images]);
     console.log(`Done seeding`);
   } catch (e) {
     // eslint-disable-next-line no-console
