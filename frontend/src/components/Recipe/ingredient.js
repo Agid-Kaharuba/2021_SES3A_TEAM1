@@ -7,7 +7,6 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 
 
-
 export default function Ingredient(props) {
 	return (
 		<Draggable key={props.ingredient.id} draggableId={props.ingredient.id} index={props.index} isDragDisabled={!(props.edit == undefined || props.edit)}>
@@ -16,9 +15,6 @@ export default function Ingredient(props) {
 					{...provided.dragHandleProps}
 					{...provided.draggableProps}
 					ref={provided.innerRef}>
-					
-
-						
 					<Paper>
 						<Card variant="outlined"
 							style={{ width: "14vw", height: "7.2vw" }}
@@ -42,9 +38,6 @@ export default function Ingredient(props) {
 							</CardContent>
 						</Card>
 					</Paper>
-						
-
-
 				</Box>
 			)}
 		</Draggable>
