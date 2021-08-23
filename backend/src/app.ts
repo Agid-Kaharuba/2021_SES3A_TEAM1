@@ -90,13 +90,27 @@ const server: Server = app.listen(config.API_PORT, () => {
   console.log(`Swagger Docs:              http://localhost:${config.API_PORT}/swagger`);
 });
 
-//Create a course if it doesn't exists
 
+// TODO move function to a new file in helper folder.
+// Can call file anything. (maybe ./helpers/unity-data.ts)
+//Create a course if it doesn't exists
 async function masterData() {
-  if (!await Recipe.findOne({ _id: "0000000282828b5134935015" })) {
-    var masterRecipe = await new Recipe({
+  // // if the course doesn't exist we can assume the Recipe and Task wont.
+
+  // if (no course){
+  //   var recipe = new Recipe(...)
+  //   await recipe.save()
+  //   do same for task
+  //   ...
+  //   var course = new Course({..._id: "...", recipe: recipe ...})
+  //   await course.save()
+  // }
+
+  let masterRecipe;
+  if (!(await Recipe.findOne({ _id: "0000000482828b5134935015" }))) {
+    masterRecipe = await new Recipe({
       name: "Classic Burger",
-      _id: new mongoose.Types.ObjectId("0000000282828b5134935015")
+      _id: new mongoose.Types.ObjectId("0000000482828b5134935015")
     } as any);
     await masterRecipe.save();
   }
