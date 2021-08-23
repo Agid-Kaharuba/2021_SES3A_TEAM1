@@ -91,6 +91,7 @@ export default function CreateNewTrainingPage() {
 
             <Grid container className={classes.gridContainer}>
             <Grid item xs={12} sm={6} md={3}>
+              <Link to={"/dashboard/create"} className={classes.underline}>
               <Card className={classes.root} variant="outlined">
                 <CardActionArea className={classes.actionArea}>
                 <CardMedia className={classes.trainingImage}
@@ -105,6 +106,7 @@ export default function CreateNewTrainingPage() {
                 </CardContent>
                 </CardActionArea>
                 </Card>
+                </Link>
               </Grid>
               
             </Grid>
