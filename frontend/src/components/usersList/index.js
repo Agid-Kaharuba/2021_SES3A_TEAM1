@@ -74,7 +74,6 @@ export default function Users({usersState, course}){
         }
 
     return(
-      <>
         <Container maxWidth="md">
          <Box m={5}>
              <Grid container spacing={2} justify="space-between">
@@ -119,8 +118,5 @@ export default function Users({usersState, course}){
               </TableContainer>
           </Box>
         </Container>
-      </>
         );
 }
-
-
