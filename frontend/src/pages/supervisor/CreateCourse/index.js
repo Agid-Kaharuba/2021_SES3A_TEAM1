@@ -22,6 +22,7 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 // import { Link } from "react-router-dom";
 import { AuthContext } from "../../../context/auth";
 import api from "../../../helpers/api";
+import PlaceholderImage from "../../../components/uploadImage";
 
 
 const useStyles = makeStyles({
@@ -44,6 +45,16 @@ const useStyles = makeStyles({
     marginLeft: 2,
     flex: 1,
   },
+  flex: {
+    display: 'flex',
+  },
+  container:{
+    width: "20%" ,
+  },
+  trainDiv:{
+    width: "80%",
+  },
+
 })
 
 // function createData(name, description, recipe, task) {
@@ -297,38 +308,52 @@ export default function CreateNewTrainingPage() {
         <Typography className={classes.bold} variant='h4'>
           Create New Training
         </Typography>
-        <Divider variant="middle" />
+        <Divider variant="middle" /> 
       </Box>
+      <Box>
 
+      </Box>
       <Box m={5}>
         <Box my={2}>
           <Typography variant='h5'>
             Training Details
           </Typography>
         </Box>
+        <div className={classes.flex}>
+        <div className={classes.container}>
+        <PlaceholderImage/>
+        </div>
+        <div className={classes.trainDiv}>
+        <form>
+        
+          <Box my={2}>
+            <Typography variant='h5'>Training Name</Typography>
+            <TextField
+              id="filled-multiline-static"
+              label="Enter the Training's Name"
+              fullWidth='true'
+              variant="filled"
+              name="name"
+              onChange={handleChange}
+            />
+          </Box>
+          <Box my={2}>
+            <Typography variant='h5' >Training Description</Typography>
+            <TextField
+              id="filled-multiline-static"
+              label="Enter the Training's Description"
+              multiline
+              rows={4}
+              fullWidth='true'
+              variant="filled"
+              name="description"
+              onChange={handleChange}
+            />
+          </Box>
+        </form>
+          </div>
+        </div>
 
-        <Box my={2}>
-          <TextField
-            id="filled-multiline-static"
-            label="Enter the Training's Name"
-            fullWidth='true'
-            variant="filled"
-            name="name"
-            onChange={handleChange}
-          />
-        </Box>
-        <Box my={2}>
-          <TextField
-            id="filled-multiline-static"
-            label="Enter the Training's Description"
-            multiline
-            rows={4}
-            fullWidth='true'
-            variant="filled"
-            name="description"
-            onChange={handleChange}
-          />
-        </Box>
       </Box>
 
       <Box m={5}>
@@ -343,18 +368,17 @@ export default function CreateNewTrainingPage() {
             </Typography>
           </Grid>
 
-          {/* <Grid item >
-            <Button component={Link} color="secondary" variant="contained" to={"/createtask"}>
-              Create Task
-            </Button>
-          </Grid> */}
 
           <Grid item>
             {/* <Button component={Link} color="secondary" variant="contained" onClick={handleClickOpenTask}>
               Add Task
             </Button> */}
-            <div>
-              <Button variant="contained" color="primary" onClick={handleClickOpenTask}>
+            <div >
+            <Button className={classes.title} component={Link} color="primary" variant="contained" to={"/task/create"}>
+              Create Task
+            </Button>
+
+              <Button className={classes.title} variant="contained" color="primary" onClick={handleClickOpenTask}>
                 Assign Task
               </Button>
               <Dialog fullScreen open={openTask} onClose={handleCloseTask} TransitionComponent={Transition}>
