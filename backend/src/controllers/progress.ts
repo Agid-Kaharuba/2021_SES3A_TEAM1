@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-// import { MongoError } from 'mongodb';
 import Progress from '../model/progress';
 import Course from '../model/course';
 import Task from '../model/task';
