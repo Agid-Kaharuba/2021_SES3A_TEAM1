@@ -49,11 +49,11 @@ export default function Recipe(props) {
             <Typography className={classes.bold} variant='h6'>
               Ingredients
             </Typography>
-            <Box my={2}>
-              <Paper elevation={3}>
+            <div>
+              {/* <Paper elevation={3}> */}
                 <RecipeBuilder edit={editState} ingredients={recipeState.ingredients} onChange={onChangeIngredients} />
-              </Paper>
-            </Box>
+              {/* </Paper> */}
+            </div>
           </Grid>
         </Grid>
       </Box>
