@@ -106,40 +106,66 @@ async function masterData() {
   //   await course.save()
   // }
 
-  let masterRecipe;
-  if (!(await Recipe.findOne({ _id: "0000000482828b5134935015" }))) {
-    masterRecipe = await new Recipe({
+  if (!await Course.findOne({ _id: "0000000114758b5134935015" })) {
+    let recipe = new Recipe({
       name: "Classic Burger",
-      _id: new mongoose.Types.ObjectId("0000000482828b5134935015")
+      _id: new mongoose.Types.ObjectId("0000000282828b5134935015")
     } as any);
-    await masterRecipe.save();
-  }
+    await recipe.save();
 
-  if (!await Task.findOne({ _id: "0000000696969b5134935015" })) {
-    var masterTask = await new Task({
+    let task = new Task({
       name: "Beef Burger",
-      recipe: [masterRecipe],
+      recipe: recipe,
       type: "Test Course",
       _id: new mongoose.Types.ObjectId("0000000696969b5134935015")
     } as any);
-    await masterTask.save();
-  }
+    await task.save();
 
-
-  if (!await Course.findOne({ _id: "0000000114758b5134935015" })) {
-    const masterCourse = await new Course({
+    const course = new Course({
       name: "Burger",
       description: "Test Course",
-      tasks: [masterTask],
+      tasks: [task],
       assignedEmployees: [],
       _id: new mongoose.Types.ObjectId("0000000114758b5134935015")
     } as any);
-    await masterCourse.save((err: any) => {
-      if (err) {
-        console.log(err);
-      }
-    });
   }
+
+
+  // let masterRecipe;
+  // let masterTask;
+  // if (!(await Recipe.findOne({ _id: "0000000482828b5134935015" }))) {
+  //   masterRecipe = await new Recipe({
+  //     name: "Classic Burger",
+  //     _id: new mongoose.Types.ObjectId("0000000482828b5134935015")
+  //   } as any);
+  //   await masterRecipe.save();
+  // }
+
+  // if (!await Task.findOne({ _id: "0000000696969b5134935015" })) {
+  //   masterTask = await new Task({
+  //     name: "Beef Burger",
+  //     recipe: [masterRecipe],
+  //     type: "Test Course",
+  //     _id: new mongoose.Types.ObjectId("0000000696969b5134935015")
+  //   } as any);
+  //   await masterTask.save();
+  // }
+
+
+  // if (!await Course.findOne({ _id: "0000000114758b5134935015" })) {
+  //   const masterCourse = await new Course({
+  //     name: "Burger",
+  //     description: "Test Course",
+  //     tasks: [masterTask],
+  //     assignedEmployees: [],
+  //     _id: new mongoose.Types.ObjectId("0000000114758b5134935015")
+  //   } as any);
+  //   await masterCourse.save((err: any) => {
+  //     if (err) {
+  //       console.log(err);
+  //     }
+  //   });
+  // }
 }
 
 masterData();
