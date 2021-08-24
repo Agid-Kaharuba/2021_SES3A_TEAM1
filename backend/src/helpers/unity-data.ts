@@ -1,0 +1,76 @@
+import Course from '../model/course';
+import Task from '../model/task';
+import Recipe from '../model/recipe';
+import User from '../model/user';
+import mongoose, { ObjectId } from 'mongoose';
+
+async function masterData() {
+    // // if the course doesn't exist we can assume the Recipe and Task wont.
+
+    if (!await Course.findOne({ _id: "0000000114758b5134935015" })) {
+        let employee;
+
+        let recipe = new Recipe({
+            name: "Classic Burger",
+            steps: [],
+            ingredients: [
+                "top_bun",
+                "lettuce",
+                "sauce",
+                "cheese",
+                "patty",
+                "bottom_bun"
+            ],
+            category: "Burger",
+            _id: new mongoose.Types.ObjectId("0000000282828b5134935015")
+        } as any);
+        await recipe.save();
+
+        let task = new Task({
+            name: "Beef Burger",
+            description: "The user will need to make the recipe attached",
+            recipe: recipe,
+            type: "Practice",
+            _id: new mongoose.Types.ObjectId("0000000696969b5134935015")
+        } as any);
+        await task.save();
+
+        if (!await User.findOne({ username: "employee" })) {
+            employee = new User({
+                username: "employee",
+                password: "employee",
+                firstname: "Big",
+                lastname: "Chungus",
+                email: "bigchungus@gmail.com",
+                staffid: "69696969",
+                isSupervisor: false
+            } as any);
+            await employee.save();
+        }
+
+        const course = new Course({
+            name: "Burger",
+            description: "Test Course",
+            tasks: [task],
+            assignedEmployees: [employee],
+            _id: new mongoose.Types.ObjectId("0000000114758b5134935015")
+        } as any);
+        await course.save();
+    }
+
+    if (!await User.findOne({ username: "supervisor" })) {
+        let user = new User({
+            username: "supervisor",
+            password: "supervisor",
+            firstname: "Brendon",
+            lastname: "Tong",
+            email: "brendonrocks@gmail.com",
+            staffid: "13204767",
+            isSupervisor: true
+        } as any);
+        await user.save();
+    }
+}
+
+export default masterData;
+

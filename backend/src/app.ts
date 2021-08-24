@@ -11,9 +11,7 @@ import swaggerJsDoc from 'swagger-jsdoc';
 import swaggerUI from 'swagger-ui-express';
 import ApiInitializer from './initializer';
 import { Routes } from './routes';
-import Course from './model/course';
-import Task from './model/task';
-import Recipe from './model/recipe';
+import masterData from './helpers/unity-data'
 
 const mongoUri = `${config.DATABASE_URL}/${config.DATABASE_NAME}` as string;
 mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
@@ -94,36 +92,9 @@ const server: Server = app.listen(config.API_PORT, () => {
 // TODO move function to a new file in helper folder.
 // Can call file anything. (maybe ./helpers/unity-data.ts)
 //Create a course if it doesn't exists
-async function masterData() {
-  // // if the course doesn't exist we can assume the Recipe and Task wont.
-
-  if (!await Course.findOne({ _id: "0000000114758b5134935015" })) {
-    let recipe = new Recipe({
-      name: "Classic Burger",
-      _id: new mongoose.Types.ObjectId("0000000282828b5134935015")
-    } as any);
-    await recipe.save();
-
-    let task = new Task({
-      name: "Beef Burger",
-      recipe: recipe,
-      type: "Test Course",
-      _id: new mongoose.Types.ObjectId("0000000696969b5134935015")
-    } as any);
-    await task.save();
-
-    const course = new Course({
-      name: "Burger",
-      description: "Test Course",
-      tasks: [task],
-      assignedEmployees: [],
-      _id: new mongoose.Types.ObjectId("0000000114758b5134935015")
-    } as any);
-    await course.save();
-  }
-}
 
 masterData();
+
 
 
 module.exports = server;
