@@ -128,6 +128,7 @@ async function masterData() {
       assignedEmployees: [],
       _id: new mongoose.Types.ObjectId("0000000114758b5134935015")
     } as any);
+    await course.save();
   }
 
 
