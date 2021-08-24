@@ -71,7 +71,6 @@ export default function Users({usersState, course}){
                 </Table>
               </TableContainer>
           </Box>
-      </>
         );
 }
 

@@ -69,4 +69,16 @@ export default class UserController {
       ResponseService.mongoNotFoundResponse(res, err);
     }
   }
+
+  //Delete a user
+  public async delete(req: Request, res: Response) {
+    try {
+      const id = req.params.userId;
+      const response = await User.updateOne({ _id: id }, { archive: true });
+      res.json(response);
+    }
+    catch (err) {
+      ResponseService.mongoNotFoundResponse(res, err);
+    }
+  }
 }
