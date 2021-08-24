@@ -2,12 +2,14 @@ import Course from '../model/course';
 import Task from '../model/task';
 import Recipe from '../model/recipe';
 import User from '../model/user';
-import mongoose, { ObjectId } from 'mongoose';
+import mongoose from 'mongoose';
+
+const COURSEID = "123456789123456789123456"
 
 async function masterData() {
     // // if the course doesn't exist we can assume the Recipe and Task wont.
 
-    if (!await Course.findOne({ _id: "0000000114758b5134935015" })) {
+    if (!await Course.findOne({ _id: COURSEID })) {
         let employee;
 
         let recipe = new Recipe({
@@ -53,7 +55,7 @@ async function masterData() {
             description: "Test Course",
             tasks: [task],
             assignedEmployees: [employee],
-            _id: new mongoose.Types.ObjectId("0000000114758b5134935015")
+            _id: new mongoose.Types.ObjectId(COURSEID)
         } as any);
         await course.save();
     }

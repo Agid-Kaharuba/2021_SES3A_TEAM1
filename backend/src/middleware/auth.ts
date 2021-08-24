@@ -4,6 +4,9 @@ import config from '../helpers/config';
 import User from '../model/user';
 import ResponseService from '../helpers/response';
 
+const SUPERVISOR_TOKEN = 'SUPERVISOR';
+const EMPLOYEE_TOKEN = 'EMPLOYEE';
+
 const getAuthToken = (req: Request): string | null => {
   if (
     req.headers.authorization
@@ -27,16 +30,16 @@ const getUser = async (token: any) => {
 const verifyUser = async (req: Request, res: Response, next: any) => {
   const token = getAuthToken(req);
   //Supervisor
-  if (token == 'SUPERVISOR_MASTER_TOKEN') {
+  if (token == SUPERVISOR_TOKEN) {
     // @ts-ignore
-    req.user = await User.findOne({ username: "hard coded username" });;
+    req.user = await User.findOne({ username: "supervisor" });;
     return next();
   }
 
   //Employee
-  if (token == 'EMPLOYEE_MASTER_TOKEN') {
+  if (token == EMPLOYEE_TOKEN) {
     // @ts-ignore
-    req.user = await User.findOne({ username: "hard coded username" });;
+    req.user = await User.findOne({ username: "employee" });;
     return next();
   }
 
