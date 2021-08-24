@@ -88,13 +88,7 @@ const server: Server = app.listen(config.API_PORT, () => {
   console.log(`Swagger Docs:              http://localhost:${config.API_PORT}/swagger`);
 });
 
-
-// TODO move function to a new file in helper folder.
-// Can call file anything. (maybe ./helpers/unity-data.ts)
-//Create a course if it doesn't exists
-
+//Unity Test Data
 masterData();
-
-
 
 module.exports = server;
