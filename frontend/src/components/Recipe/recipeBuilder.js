@@ -16,7 +16,7 @@ const insertIntoArray = (list, value, index) => {
   list.splice(list, index, value);
 };
 
-//testing side by side items in grid
+//testing side by side items in grid************** TEMP
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -90,86 +90,83 @@ export default function RecipeBuilder(props) {
 
   return (
     state && (
-      /*<Box mx={50}
-        style={{
-          "min-height": "70vh",
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center'
-        }}>
-        <Grid container spacing={2}>
-          <DragDropContext onDragEnd={onDragEnd}>
-            <Grid item style={{ flex: 0.3 }}>
-              {(props.edit == undefined || props.edit) &&
-                <Droppable droppableId="ingredients" isDropDisabled={true}>
-                  {(provided, snapshot) => (
-                    <Grid
-                      {...provided.droppableProps}
-                      ref={provided.innerRef}
-                      container
-                      direction="column"
-                      alignItems="center"
-                      justify="center"
-                    >
+      // <Box mx={50}
+      //   style={{
+      //     "min-height": "70vh",
+      //     display: 'flex',
+      //     justifyContent: 'center',
+      //     alignItems: 'center'
+      //   }}>
+      //   <Grid container spacing={2}>
+      //     <DragDropContext onDragEnd={onDragEnd}>
+      //       <Grid item style={{ flex: 0.3 }}>
+      //         {(props.edit == undefined || props.edit) &&
+      //           <Droppable droppableId="ingredients" isDropDisabled={true}>
+      //             {(provided, snapshot) => (
+      //               <Grid
+      //                 {...provided.droppableProps}
+      //                 ref={provided.innerRef}
+      //                 container
+      //                 direction="column"
+      //                 alignItems="center"
+      //                 justify="center"
+      //               >
                       
-                      {ingredients.map((ingredient, index) => <Ingredient ingredient={ingredient} index={index} />)}
-                      {provided.placeholder}
+      //                 {ingredients.map((ingredient, index) => <Ingredient ingredient={ingredient} index={index} />)}
+      //                 {provided.placeholder}
                       
-                    </Grid >
-                  )}
-                </Droppable>
-              }
-            </Grid>
+      //               </Grid >
+      //             )}
+      //           </Droppable>
+      //         }
+      //       </Grid>
 
-            <Grid item style={{ flex: 1 }}>
-              <Typography variant='h4' align="center">
-                Recipe Ingredients
-              </Typography>
-              <Box my={3}>
-                <Droppable droppableId="recipe" draggable={false}>
-                  {(provided, snapshot) => (
-                    <Paper
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center'
-                      }}
-                      elevation={3}>
-                      <Grid
-                        {...provided.droppableProps}
-                        ref={provided.innerRef}
-                        isDraggingOver={snapshot.isDraggingOver}
-                        container
-                        direction="column"
-                        alignItems="center"
-                        justify="center"
-                      >
-                        {state && state.length > 0
-                          ? state.map((ingredient, index) => <Ingredient ingredient={ingredient} index={index} edit={props.edit} />)
-                          : <Typography variant='h6' justify="center">
-                            Drop ingredients here
-                          </Typography>
-                        }
-                        {provided.placeholder}
-                      </Grid>
-                    </Paper>
-                  )}
-                </Droppable>
-              </Box>
-            </Grid>
-          </DragDropContext>
-        </Grid>
-      </Box > */
+      //       <Grid item style={{ flex: 1 }}>
+      //         <Typography variant='h4' align="center">
+      //           Recipe Ingredients
+      //         </Typography>
+      //         <Box my={3}>
+      //           <Droppable droppableId="recipe" draggable={false}>
+      //             {(provided, snapshot) => (
+      //               <Paper
+      //                 style={{
+      //                   display: 'flex',
+      //                   justifyContent: 'center',
+      //                   alignItems: 'center'
+      //                 }}
+      //                 elevation={3}>
+      //                 <Grid
+      //                   {...provided.droppableProps}
+      //                   ref={provided.innerRef}
+      //                   isDraggingOver={snapshot.isDraggingOver}
+      //                   container
+      //                   direction="column"
+      //                   alignItems="center"
+      //                   justify="center"
+      //                 >
+      //                   {state && state.length > 0
+      //                     ? state.map((ingredient, index) => <Ingredient ingredient={ingredient} index={index} edit={props.edit} />)
+      //                     : <Typography variant='h6' justify="center">
+      //                       Drop ingredients here
+      //                     </Typography>
+      //                   }
+      //                   {provided.placeholder}
+      //                 </Grid>
+      //               </Paper>
+      //             )}
+      //           </Droppable>
+      //         </Box>
+      //       </Grid>
+      //     </DragDropContext>
+      //   </Grid>
+      // </Box > 
 
       <div>
-        
-          
           
           <Grid container spacing={2}>
           <DragDropContext onDragEnd={onDragEnd}>
-            {/* <tr>
-            <td> */}
-            {/* <div>  */}
+
+            <div > 
             <Grid item style={{ flex: 0.3 }}>
               {(props.edit == undefined || props.edit) &&
                 <Droppable droppableId="ingredients" isDropDisabled={true}>
@@ -177,10 +174,11 @@ export default function RecipeBuilder(props) {
                     <Grid
                       {...provided.droppableProps}
                       ref={provided.innerRef}
+                      style={{display:'grid', gridTemplateColumns: 'auto auto', gap: '18px'}}
                       container
-                       direction="row"
+                       //direction="row"
                        alignItems="center"
-                       //justify="center"                       
+                       justify="center"                       
                     >
                       {ingredients.map((ingredient, index) => <Ingredient ingredient={ingredient} index={index} />)}
                       {provided.placeholder}
@@ -189,12 +187,12 @@ export default function RecipeBuilder(props) {
                 </Droppable>
               }
             </Grid>
-            {/* </div> */}
-            {/*</td>
+            </div>
 
-            <td>
-            <div> */}
-            <Grid item style={{ flex: 1 }}>
+
+  
+            {/* <div> */}
+            <Grid item style={{ flex: 1 }}> {/*FIX THIS GRID TMR, ITS TOO BIG***********/}
               <Typography variant='h4' align="center">
                 Recipe Ingredients
               </Typography>
@@ -212,8 +210,9 @@ export default function RecipeBuilder(props) {
                         {...provided.droppableProps}
                         ref={provided.innerRef}
                         isDraggingOver={snapshot.isDraggingOver}
+                        style={{display:'grid', gridTemplateColumns: 'auto auto', gap: '18px'}}
                         container
-                        direction="column"
+                        //direction="column"
                         alignItems="center"
                         justify="center"
                       >
@@ -230,22 +229,15 @@ export default function RecipeBuilder(props) {
                 </Droppable>
               </Box>
             </Grid>
-            {/* </div>
-            </td>
+            {/* </div> */}
 
 
 
-          </tr> */}
           </DragDropContext>
           </Grid>
-
         
       </div>
-
       
-
-
-
 
     )
   );
