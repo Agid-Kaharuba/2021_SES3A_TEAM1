@@ -97,15 +97,6 @@ const server: Server = app.listen(config.API_PORT, () => {
 async function masterData() {
   // // if the course doesn't exist we can assume the Recipe and Task wont.
 
-  // if (no course){
-  //   var recipe = new Recipe(...)
-  //   await recipe.save()
-  //   do same for task
-  //   ...
-  //   var course = new Course({..._id: "...", recipe: recipe ...})
-  //   await course.save()
-  // }
-
   if (!await Course.findOne({ _id: "0000000114758b5134935015" })) {
     let recipe = new Recipe({
       name: "Classic Burger",
@@ -130,43 +121,6 @@ async function masterData() {
     } as any);
     await course.save();
   }
-
-
-  // let masterRecipe;
-  // let masterTask;
-  // if (!(await Recipe.findOne({ _id: "0000000482828b5134935015" }))) {
-  //   masterRecipe = await new Recipe({
-  //     name: "Classic Burger",
-  //     _id: new mongoose.Types.ObjectId("0000000482828b5134935015")
-  //   } as any);
-  //   await masterRecipe.save();
-  // }
-
-  // if (!await Task.findOne({ _id: "0000000696969b5134935015" })) {
-  //   masterTask = await new Task({
-  //     name: "Beef Burger",
-  //     recipe: [masterRecipe],
-  //     type: "Test Course",
-  //     _id: new mongoose.Types.ObjectId("0000000696969b5134935015")
-  //   } as any);
-  //   await masterTask.save();
-  // }
-
-
-  // if (!await Course.findOne({ _id: "0000000114758b5134935015" })) {
-  //   const masterCourse = await new Course({
-  //     name: "Burger",
-  //     description: "Test Course",
-  //     tasks: [masterTask],
-  //     assignedEmployees: [],
-  //     _id: new mongoose.Types.ObjectId("0000000114758b5134935015")
-  //   } as any);
-  //   await masterCourse.save((err: any) => {
-  //     if (err) {
-  //       console.log(err);
-  //     }
-  //   });
-  // }
 }
 
 masterData();
