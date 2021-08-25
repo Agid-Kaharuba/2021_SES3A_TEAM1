@@ -17,7 +17,7 @@ export default function Ingredient(props) {
 					ref={provided.innerRef}>
 					<Paper>
 						<Card variant="outlined"
-							style={{ width: "14vw", height: "7.2vw" }}
+							style={{ width: "14vw", height: "7.2vw" }} //14vw 7.2vw
 						>
 							<CardContent>
 								<TableRow>
@@ -29,8 +29,8 @@ export default function Ingredient(props) {
 									<TableCell>
 										<img
 										style={{
-											"max-width":"120%",
-											"max-height":"120%"
+											"max-width":"120%", //120
+											"max-height":"120%" //120
 										}}
 										srcset={props.ingredient.src} />
 									</TableCell>
