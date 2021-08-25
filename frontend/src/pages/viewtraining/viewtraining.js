@@ -117,30 +117,24 @@ export default function ViewCourse(props) {
                     </Grid>
                     <Divider variant="middle" />
                 </Box>
-                <Box m={5}>
-                    <Grid container spacing={2} direction="column" justify="space-between">
-                        <Grid>
-                            <div className={classes.flex}>
-                                <div className={classes.container}>
-                                    <PlaceholderImage />
-                                </div>
-                                <div className={classes.trainDiv}>
-                                    <form>
-                                        <Typography className={classes.bold} variant='h6'>
-                                            Training Name
-                                        </Typography>
-                                        <TextField value={courseState.name} id="name" disabled={editState} variant="outlined" fullWidth margin='normal' onChange={handleChange} />
-                                        <Typography className={classes.bold} variant='h6'>
-                                            Training Description
-                                        </Typography>
-                                        <TextField value={courseState.description} id="description" disabled={editState} variant="outlined" fullWidth margin='normal' multiline rows={10} onChange={handleChange} />
-                                    </form>
-                                </div>
-                            </div>
-
+                <div>
+                    <Grid container>
+                        <Grid item sm={12} md={3}>
+                            <PlaceholderImage />
+                        </Grid>
+                        <Grid item sm={12} md={9}>
+                            <Typography className={classes.bold} variant='h6'>
+                                Training Name
+                            </Typography>
+                            <TextField value={courseState.name} id="name" disabled={editState} variant="outlined" fullWidth margin='normal' onChange={handleChange} />
+                            <Typography className={classes.bold} variant='h6'>
+                                Training Description
+                            </Typography>
+                            <TextField value={courseState.description} id="description" disabled={editState} variant="outlined" fullWidth margin='normal' multiline rows={10} onChange={handleChange} />
                         </Grid>
                     </Grid>
-                </Box>
+                </div>
+
                 <Box m={5}>
                     <Typography className={classes.bold} variant='h6'>
                         Assigned Users

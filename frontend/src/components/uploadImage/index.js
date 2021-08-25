@@ -49,11 +49,6 @@ const useStyles = makeStyles(theme => ({
   imageUpload: {
     display: "none",
   },
-  container: {
-    display: "grid",
-    gridTemplateColumns: "1fr 4fr",
-    columnGap: "2vw"
-  },
   name: {
     display: "grid",
     gridTemplateColumns: "1fr 1fr",
@@ -110,10 +105,10 @@ export default function PlaceholderImage(props) {
   const classes = useStyles();
 
   return (
-    <Container maxWidth="md">
+    <div maxWidth="md">
       <div className={classes.container}>
         <UploadImage {...props} />
       </div>
-    </Container>
+    </div>
   )
 }

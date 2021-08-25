@@ -48,10 +48,10 @@ const useStyles = makeStyles({
   flex: {
     display: 'flex',
   },
-  container:{
-    width: "20%" ,
+  container: {
+    width: "20%",
   },
-  trainDiv:{
+  trainDiv: {
     width: "80%",
   },
 
@@ -308,7 +308,7 @@ export default function CreateNewTrainingPage() {
         <Typography className={classes.bold} variant='h4'>
           Create New Training
         </Typography>
-        <Divider variant="middle" /> 
+        <Divider variant="middle" />
       </Box>
       <Box>
 
@@ -319,40 +319,39 @@ export default function CreateNewTrainingPage() {
             Training Details
           </Typography>
         </Box>
-        <div className={classes.flex}>
-        <div className={classes.container}>
-        <PlaceholderImage/>
-        </div>
-        <div className={classes.trainDiv}>
-        <form>
-        
-          <Box my={2}>
-            <Typography variant='h5'>Training Name</Typography>
-            <TextField
-              id="filled-multiline-static"
-              label="Enter the Training's Name"
-              fullWidth='true'
-              variant="filled"
-              name="name"
-              onChange={handleChange}
-            />
-          </Box>
-          <Box my={2}>
-            <Typography variant='h5' >Training Description</Typography>
-            <TextField
-              id="filled-multiline-static"
-              label="Enter the Training's Description"
-              multiline
-              rows={4}
-              fullWidth='true'
-              variant="filled"
-              name="description"
-              onChange={handleChange}
-            />
-          </Box>
-        </form>
-          </div>
-        </div>
+        <Grid container>
+          <Grid item sm={12} md={3}>
+            <PlaceholderImage />
+          </Grid>
+          <Grid item sm={12} md={9}>
+            <form>
+              <Box my={2}>
+                <Typography variant='h5'>Training Name</Typography>
+                <TextField
+                  id="filled-multiline-static"
+                  label="Enter the Training's Name"
+                  fullWidth='true'
+                  variant="filled"
+                  name="name"
+                  onChange={handleChange}
+                />
+              </Box>
+              <Box my={2}>
+                <Typography variant='h5' >Training Description</Typography>
+                <TextField
+                  id="filled-multiline-static"
+                  label="Enter the Training's Description"
+                  multiline
+                  rows={4}
+                  fullWidth='true'
+                  variant="filled"
+                  name="description"
+                  onChange={handleChange}
+                />
+              </Box>
+            </form>
+          </Grid>
+        </Grid>
 
       </Box>
 
@@ -374,9 +373,9 @@ export default function CreateNewTrainingPage() {
               Add Task
             </Button> */}
             <div >
-            <Button className={classes.title} component={Link} color="primary" variant="contained" to={"/task/create"}>
-              Create Task
-            </Button>
+              <Button className={classes.title} component={Link} color="primary" variant="contained" to={"/task/create"}>
+                Create Task
+              </Button>
 
               <Button className={classes.title} variant="contained" color="primary" onClick={handleClickOpenTask}>
                 Assign Task
