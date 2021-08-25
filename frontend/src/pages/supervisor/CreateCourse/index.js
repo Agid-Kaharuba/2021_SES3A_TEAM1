@@ -94,9 +94,10 @@ export default function CreateNewTrainingDialog(props) {
   }
 
   const handleSubmit = async (event) => {
-    event.preventDefault();;
+    // event.preventDefault();;
     await api.course.create(authState.token, { ...formState, tasks: rowsTasks, assignedEmployees: rowsEmployees });
     history.push('/dashboard');
+    window.location.reload(false);
   }
 
   const handleCloseTraining = () => {
@@ -532,6 +533,11 @@ export default function CreateNewTrainingDialog(props) {
 
   const handleStepperNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
+
+    if (activeStep === steps.length - 1) {
+      handleSubmit();
+      handleCloseTraining();
+    }
   };
 
   const handleStepperBack = () => {
@@ -591,7 +597,6 @@ export default function CreateNewTrainingDialog(props) {
               </Step>
             ))}
           </Stepper>
-          {activeStep === steps.length && handleSubmit}
         </div>
       </Dialog>
 
