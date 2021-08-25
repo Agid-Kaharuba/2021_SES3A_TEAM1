@@ -42,8 +42,8 @@ const useStyles = makeStyles(theme => ({
     alignSelf: "start"
   },
   image: {
-    height: 200,
-    width: 200,
+    height: 150,
+    width: 150,
     margin: theme.spacing(2),
   },
   imageUpload: {
