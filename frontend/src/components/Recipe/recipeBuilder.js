@@ -34,7 +34,6 @@ export default function RecipeBuilder(props) {
     { id: "tomato", value: "Tomato", src: "https://s3.envato.com/files/250360646/DSC_0674.jpg" }
   ];
 
-
   const [state, setState] = useState([]);
   const [itemCount, setItemCount] = useState(props.ingredients ? props.ingredients.length + 1 : 1);
 
