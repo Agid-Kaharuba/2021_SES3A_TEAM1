@@ -43,7 +43,7 @@ export default function Recipe(props) {
               Category
             </Typography>
             {/* <TextField value={recipeState.category} id="category" name="category" disabled={!editState} variant="outlined" fullWidth margin='normal' onChange={handleChange} /> */}
-            <select name="category" id="category" onChange={handleChange} value={recipeState.category} style={{width: '25vw', height: '4vw', fontSize: '1.2vw'}}>
+            <select name="category" id="category" onChange={handleChange} value={recipeState.category} disabled={!editState} style={{width: '25vw', height: '4vw', fontSize: '1.2vw'}}>
               <option> </option>
               <option value="Burger">Burger</option>
               <option value="Dessert">Dessert</option>
