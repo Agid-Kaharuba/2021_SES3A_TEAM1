@@ -7,7 +7,7 @@ public class StandardInteractionController : MonoBehaviour {
     private GrillController grill;
 
     void Start() {
-        grill = GameObject.Find ( "grill" ).GetComponent<GrillController> ();
+        grill = GameObject.Find ( "Grill" ).GetComponent<GrillController> ();
     }
 
     void Update() {
@@ -15,7 +15,7 @@ public class StandardInteractionController : MonoBehaviour {
             Ray ray = Camera.main.ScreenPointToRay ( Input.mousePosition );
             RaycastHit hit;
             if ( Physics.Raycast ( ray, out hit ) ) {
-                if ( hit.transform.gameObject == GameObject.Find ( "grill_knob.001" ) ) {
+                if ( hit.transform.gameObject == GameObject.Find ( "grill_knob" ) ) {
                     grill.ToggleGrill ();
                 }
             }
