@@ -163,23 +163,25 @@ export default function RecipeBuilder(props) {
 
             {/* ingredients list to choose from*/}
             <Grid item style={{ flex: 0.3}}>
-            <Typography className={classes.bold} variant='h6'>
-                Ingredients
-              </Typography>
               {(props.edit == undefined || props.edit) &&
                 <Droppable droppableId="ingredients" isDropDisabled={true}>
                   {(provided, snapshot) => (
-                    <Grid
-                      {...provided.droppableProps}
-                      ref={provided.innerRef}
-                      style={{display:'grid', gridTemplateColumns: 'auto auto', gap: '18px'}}
-                      container
-                       //direction="row"
-                       alignItems="center"
-                       justify="center"                       
-                    >
-                      {ingredients.map((ingredient, index) => <Ingredient ingredient={ingredient} index={index} />)}
-                      {provided.placeholder}
+                    <Grid container direction="column">
+                      <Typography className={classes.bold} variant='h6'>
+                        Ingredients
+                      </Typography>
+                      <Grid
+                        {...provided.droppableProps}
+                        ref={provided.innerRef}
+                        style={{display:'grid', gridTemplateColumns: 'auto auto', gap: '18px'}}
+                        container
+                        //direction="row"
+                        alignItems="center"
+                        justify="center"                       
+                      >
+                        {ingredients.map((ingredient, index) => <Ingredient ingredient={ingredient} index={index} />)}
+                        {provided.placeholder}
+                      </Grid>
                     </Grid>
                   )}
                 </Droppable>
