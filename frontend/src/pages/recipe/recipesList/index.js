@@ -38,24 +38,90 @@ export default function RecipesList() {
       fetchData();
     }
   });
+  const testMethod = () => {
+    return(
+      <div className = {classes.recipes}>
+       {recipesState.map((recipe) => {
+         return buildRecipe(recipe);
+       })}
+       
+       {authState.user.isSupervisor && (
+         <Grid item xs={12} sm={6} md={3}>
+         <Card className={classes.root} variant="outlined" style={{ textDecoration: 'none' }} component={Link} to={"/task/create"}>
+           <CardActionArea>
+           <CardMedia 
+           className={classes.media}
+           //these images are just placeholders for now
+           image="https://cdn0.iconfinder.com/data/icons/very-basic-2-android-l-lollipop-icon-pack/24/plus-512.png"
+           title="Fast Food Training"
+           />
+           <CardContent>
+             <Typography align="center" gutterBottom variant="h6" component="h2">
+             Create New Recipe
+           </Typography>
+           </CardContent>
+           </CardActionArea>
+         </Card>
+         </Grid>
+       )}
+   </div>
+    )
+ }
+  const buildRecipe = (recipe) => {
+    return (
+      <Box mx={5} my={2}>
+        <Paper>
+          <Card className={classes.root} variant="outlined">
+            <CardContent>
+              <Typography className={classes.title} color="textSecondary" gutterBottom>
+                {recipe.name} - {recipe.description}
+              </Typography>
 
+            </CardContent>
+            <CardActions>
+              <Link className={classes.underline} to={`/dashboard/${recipe._id}`}>
+                <Button size="small">View Task</Button>
+              </Link>
+            </CardActions>
+          </Card>
+        </Paper>
+      </Box>
+    )
+  }
   return (
-    <>
-      <Box m={5}>
-        <Grid container spacing={2} justify="space-between">
+    <Box>
+
+<Box m={5}>
+        <Grid
+          container
+          direction='row'
+          justify='space-between'
+          alignItems='baseline'>
           <Grid item>
             <Typography className={classes.bold} variant='h4'>
-              Recipes
+              Dashboard
             </Typography>
           </Grid>
-          <Grid item align="right">
-            <Button variant="contained" color="primary" component={Link} to={"/recipe/create"}>Create Recipe</Button>
-          </Grid>
+          {/* <Grid item>
+            {authState.user.isSupervisor && (
+              <Button component={Link} color="primary" variant="contained" to={"/dashboard/create"}>
+                Create Training
+              </Button>)}
+          </Grid> */}
         </Grid>
-        <Divider variant="middle" />
+        <Box my={1}>
+          <Divider variant="middle" />
+        </Box>
       </Box>
-      <Recipes recipesState={recipesState} />
-    </>
-  );
+
+      <Box m={5}>
+        {recipesState ?
+          testMethod()
+          :
+          <h1>LOADING</h1>
+        }
+      </Box>
+    </Box>
+  )
 
 }
