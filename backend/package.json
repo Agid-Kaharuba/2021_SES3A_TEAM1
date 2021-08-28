@@ -6,6 +6,7 @@
   "scripts": {
     "start": "tsc -p . && node dist/app.js",
     "dev": "nodemon src/app.ts",
+    "debug": "tsc -p . --sourcemap",
     "build": "tsc -p .",
     "test": "mocha -r ts-node/register -r dotenv/config 'src/tests/app.unit.ts' 'src/controllers/**/tests/*.unit.ts'",
     "seed": "tsc -p . && node dist/seeder.js",
