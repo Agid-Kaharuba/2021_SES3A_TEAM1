@@ -25,6 +25,7 @@ export default class ImageController {
     const img64 = req.file.buffer.toString('base64');
     // @ts-ignore
     const img = `data:${mimetype};base64,${img64}`;
+    // @ts-ignore
     const name = req.file.originalname;
     let delet = false;
 
