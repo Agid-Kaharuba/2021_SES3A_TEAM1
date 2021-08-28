@@ -25,6 +25,7 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 import { AuthContext } from "../../../context/auth";
 import api from "../../../helpers/api";
 import PlaceholderImage from "../../../components/uploadImage";
+import bbt from "../../../images/bbt.jpg";
 
 
 const useStyles = makeStyles(theme => ({
@@ -76,6 +77,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function CreateNewTrainingDialog(props) {
   const classes = useStyles();
   const { onClose: onCloseTraining, open: openTraining } = props;
+  const [imagesrc, setImagesrc] = useState(bbt);
 
 
   //SAVE COURSE
@@ -115,6 +117,11 @@ export default function CreateNewTrainingDialog(props) {
   const handleCloseTask = () => {
     setOpenTask(false);
   };
+
+  const imageChange = (e) => {
+    setImagesrc(e);
+  
+}
 
   const [tasksState, setTasksState] = useState(undefined);
 
@@ -328,7 +335,7 @@ export default function CreateNewTrainingDialog(props) {
         return (
           <Grid container spacing={2}>
             <Grid item sm={12} md={3}>
-              <PlaceholderImage />
+              <PlaceholderImage imageChange={imageChange} imagesrc={imagesrc}/>
             </Grid>
             <Grid item sm={12} md={9}>
               <form>

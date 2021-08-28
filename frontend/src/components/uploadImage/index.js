@@ -4,11 +4,13 @@ import { Button, TextField, Container, Typography, IconButton, Dialog } from "@m
 import { makeStyles } from "@material-ui/core/styles";
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import { Grid } from "@material-ui/core";
-import BackButton from "../backbutton";
-import EditIcon from '@material-ui/icons/Edit';
 import CloseIcon from '@material-ui/icons/Close';
 import api from '../../helpers/api'
 import { AuthContext } from "../../context/auth";
+import bbt from "../../images/bbt.jpg";
+import burger from "../../images/burger.jpg";
+import burger2 from "../../images/burger2.jpg";
+import burger3 from "../../images/pizza.jpg";
 
 
 const useStyles = makeStyles(theme => ({
@@ -60,46 +62,93 @@ const useStyles = makeStyles(theme => ({
   saveBtn: {
     marginTop: "32px",
     textAlign: "center"
+  },
+  imagedisplay: {
+    display: "none",
+    padding: "16px 24px",
   }
 }));
 
 
+function DialogTitle(props) {
+  const classes = useStyles();
+  const { children, onClose, ...other } = props;
+  return (
+    <MuiDialogTitle disableTypography {...other}>
+      <Typography variant="h6">{children}</Typography>
+      {onClose ? (
+        <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
+          <CloseIcon />
+        </IconButton>
+      ) : null}
+    </MuiDialogTitle>
+  );
+}
+
+function ChangeImageDialog(props) {
+  const classes = useStyles();
+  const { onClose, open, imageChange, handleChange, saveChanges } = props;
+
+  const handleClose = () => {
+    onClose();
+  }
+
+  return (
+    <Dialog onClose={handleClose} open={open} disableBackdropClick disableEscapeKeyDown fullWidth="true" maxWidth="xs">
+      <DialogTitle onClose={handleClose}>Choose a Image</DialogTitle>
+      <form onSubmit={saveChanges} className={classes.changePswForm}>
+        <Grid>
+          <Button onClick={() => {imageChange(bbt); handleClose()}}>
+            <img className={classes.image} src={bbt} alt="profile image" />
+          </Button>
+          <Button onClick={() =>{imageChange(burger); handleClose()}}>
+            <img className={classes.image} src={burger} alt="profile image" />
+          </Button>
+          <Button onClick={() =>{imageChange(burger2); handleClose()}}>
+            <img className={classes.image} src={burger2} alt="profile image" />
+          </Button>
+          <Button onClick={() =>{imageChange(burger3); handleClose()}}>
+            <img className={classes.image} src={burger3} alt="profile image" />
+          </Button>
+        </Grid>
+      </form>
+    </Dialog>
+  );
+}
 
 function UploadImage(props) {
-  const { authState } = useContext(AuthContext);
-  const [img, setImg] = useState(undefined);
-
   const classes = useStyles();
+  // TODO: I dont know what these are for
+  // There were declared before this component was pulled from being hardcoded in a page
+  // Just propping them in for now.
+  const { imagesrc, editState } = props;
 
-  const imageUploader = React.useRef(null);
+  const [open, setOpen] = React.useState(false);
 
-  const handleImageUpload = async e => {
-    try {
-      const file = e.target.files[0];
-      let fileSend = new FormData();
-      const fileName = authState.user.username;
-      fileSend.append('file', file, fileName)
-      const res = await api.user.upload(fileSend);
-      setImg(await api.user.download(authState.user.username))
-    }
-    catch (error) {
-      console.log(error)
-    }
+  const handleDialogOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (value) => {
+    setOpen(false);
   };
 
   return (
     <div>
       {/*Accepting only files with image type*/}
-      <input type="file" id="input" accept="image/*" onChange={handleImageUpload} ref={imageUploader} className={classes.imageUpload} />
+      {/* <input type="file" id="input" accept="image/*" onChange={imagesrc} ref={imagesrc} className={classes.imageUpload} /> */}
       <div className={classes.profileImg}>
-        <img className={classes.image} src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/320px-Google_%22G%22_Logo.svg.png?1629536456659" alt="profile image" />
+        <img className={classes.image} src={imagesrc} alt="placeholder image" />
       </div>
       <div>
-        <Button onClick={() => imageUploader.current.click()} variant="outlined" color="secondary">Upload Image</Button>
+        <Button onClick={handleDialogOpen} variant="outlined" color="secondary" className={editState ? classes.imagedisplay : classes.changePswForm}>Upload Image</Button>
+        <ChangeImageDialog open={open} onClose={handleClose} {...props}></ChangeImageDialog>
       </div>
     </div>
   )
 }
+
+
 
 export default function PlaceholderImage(props) {
   const classes = useStyles();
