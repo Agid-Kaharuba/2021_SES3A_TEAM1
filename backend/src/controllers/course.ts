@@ -39,6 +39,7 @@ export default class CourseController {
     const newCourseRequest = new Course({
       name: body.name,
       description: body.description,
+      image: body.image,
       tasks: body.tasks,
       assignedEmployees: body.assignedEmployees,
     } as any);
