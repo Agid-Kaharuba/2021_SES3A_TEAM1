@@ -40,8 +40,12 @@ const UserSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
   },
+  archive: {
+    type: Boolean,
+    required: false,
+  }
 },
-{ collection: 'users' });
+  { collection: 'users' });
 
 UserSchema.methods.checkPassword = async function (plainPass) {
   // @ts-ignore

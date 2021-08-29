@@ -7,6 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/auth";
 import api from "../../helpers/api";
+import CreateNewTrainingDialog from "../supervisor/CreateCourse";
 
 
 const useStyles = makeStyles({
@@ -62,6 +63,16 @@ export default function CreateNewTrainingPage() {
   const { authState } = useContext(AuthContext);
   const [coursesState, setCoursesState] = useState(undefined);
   // const [coursesState, setCoursesState] = useState([{"name":"test","description":"asdsdf"},{"name":"test","description":"asdsdf"}]);
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleDialogOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (value) => {
+    setOpen(false);
+  };
 
   const fetchData = async () => {
     const res = await api.course.getAll(authState.token);
@@ -163,6 +174,14 @@ export default function CreateNewTrainingPage() {
             <Typography className={classes.bold} variant='h4'>
               Dashboard
             </Typography>
+          </Grid>
+          <Grid item>
+            {authState.user.isSupervisor && (
+              <div>
+                <Button onClick={handleDialogOpen} color="primary" variant="contained">Create Training</Button>
+                <CreateNewTrainingDialog open={open} onClose={handleClose}></CreateNewTrainingDialog>
+              </div>
+            )}
           </Grid>
         </Grid>
         <Box my={1}>
