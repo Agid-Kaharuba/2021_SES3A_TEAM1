@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Button, Container, Typography, Box, Divider, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import EditIcon from '@material-ui/icons/Edit';
@@ -7,8 +7,8 @@ import { Link } from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
 import SearchIcon from '@material-ui/icons/Search';
 import IconButton from "@material-ui/core/IconButton";
-
-const useStyles = makeStyles({
+import api from '../../helpers/api'
+import { AuthContext } from "../../context/auth";const useStyles = makeStyles({
   bold: {
     fontWeight: 600
   },
@@ -24,9 +24,10 @@ const useStyles = makeStyles({
 })
 
 
-export default function Users({usersState, course}){
+export default function Users({usersState, setUsersState, course}){
     const classes = useStyles();
     const [search, setSearch] = React.useState("");
+    const { authState } = useContext(AuthContext);
 
     function handleChange(e) {
       const { name, value } = e.target;
@@ -43,7 +44,8 @@ export default function Users({usersState, course}){
     }
 
     function onDeleteClick(user) {
-      console.log(user)
+      api.user.delete(authState.token, user._id)
+      setUsersState(usersState.filter((x)=>x._id != user._id))
     }
 
     function buildUser(user) {
@@ -62,8 +64,8 @@ export default function Users({usersState, course}){
                 <EditIcon/>
               </TableCell>
               <TableCell>
-                {/* TODO: once backend creates the delete user endpoint, update the onClick below: */}
               <IconButton
+                color="inherit"
                 onClick={() => onDeleteClick(user)}
               >
                 <DeleteIcon/>
