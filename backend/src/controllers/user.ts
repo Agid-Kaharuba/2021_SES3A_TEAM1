@@ -10,7 +10,7 @@ export async function findUser(Id: string) {
 export default class UserController {
   public async getAll(req: Request, res: Response) {
     try {
-      const users = await User.find();
+      const users = await User.find({ archive: { $ne: true } });
       ResponseService.successResponse(res, users);
     } catch (err) {
       ResponseService.mongoErrorResponse(res, err);
@@ -31,7 +31,7 @@ export default class UserController {
   public async getAllSupervisor(req: Request, res: Response) {
     try {
       const user = await User.find({
-        isSupervisor: req.query.isSupervisor,
+        isSupervisor: req.query.isSupervisor, archive: { $ne: true }
       });
       ResponseService.successResponse(res, user);
     } catch (err) {
@@ -66,6 +66,18 @@ export default class UserController {
         }
       });
     } catch (err) {
+      ResponseService.mongoNotFoundResponse(res, err);
+    }
+  }
+
+  //Delete a user
+  public async delete(req: Request, res: Response) {
+    try {
+      const id = req.params.userId;
+      const response = await User.updateOne({ _id: id }, { archive: true });
+      res.json(response);
+    }
+    catch (err) {
       ResponseService.mongoNotFoundResponse(res, err);
     }
   }
