@@ -38,6 +38,8 @@
     "dev": "npm start",
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "prod": "npm run build && serve build/ -p 3000",
+    "clean": "rm -r -f build node_modules",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
