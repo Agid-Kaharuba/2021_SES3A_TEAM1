@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import Recipes from "../../../components/Recipe/list.js";
-import { Button, Typography, Box, Divider, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Grid } from "@material-ui/core";
+import { Button, Typography, Box, Divider, Table, TableBody, TableCell, TableContainer, Card, CardContent, CardActions, CardActionArea, CardMedia, TableHead, TableRow, Paper, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { Link } from "react-router-dom";

@@ -56,92 +56,104 @@ export default function TasksList() {
     }
   });
 
-  const testMethod = () => {
+  const createTaskobjects = () => {
     return(
       <div className = {classes.tasks}>
        {tasksState.map((task) => {
          return buildTask(task);
        })}
-       
+       {/* Line checks if the user is a supervisor and show create training button if they are. */}
        {authState.user.isSupervisor && (
-         <Grid item xs={12} sm={6} md={3}>
-         <Card className={classes.root} variant="outlined" style={{ textDecoration: 'none' }} component={Link} to={"/task/create"}>
-           <CardActionArea>
-           <CardMedia 
-           className={classes.media}
-           //these images are just placeholders for now
-           image="https://cdn0.iconfinder.com/data/icons/very-basic-2-android-l-lollipop-icon-pack/24/plus-512.png"
-           title="Fast Food Training"
-           />
-           <CardContent>
-             <Typography align="center" gutterBottom variant="h6" component="h2">
-             Create New Task
-           </Typography>
-           </CardContent>
-           </CardActionArea>
-         </Card>
-         </Grid>
+
+           <Grid container className={classes.gridContainer}>
+           <Grid item xs={12} sm={6} md={3}>
+             <Link to={"/task/create"} className={classes.underline}>
+             <Card className={classes.root} variant="outlined">
+               <CardActionArea className={classes.actionArea}>
+               <CardMedia className={classes.trainingImage}
+               //these images are just placeholders for now
+               image="https://icons.veryicon.com/png/o/miscellaneous/standard-general-linear-icon/plus-60.png"
+               title="Create New Task"
+               />
+               <CardContent className={classes.text}>
+                 <Typography gutterBottom variant="h6" component="h2">
+                   Create New Task
+                 </Typography>
+               </CardContent>
+               </CardActionArea>
+               </Card>
+               </Link>
+             </Grid>
+             
+           </Grid>
        )}
    </div>
     )
  }
-  const buildTask = (task) => {
-    return (
-      <Box mx={5} my={2}>
-        <Paper>
-          <Card className={classes.root} variant="outlined">
-            <CardContent>
-              <Typography className={classes.title} color="textSecondary" gutterBottom>
-                {task.name} - {task.description}
-              </Typography>
 
-            </CardContent>
-            <CardActions>
-              <Link className={classes.underline} to={`/dashboard/${task._id}`}>
-                <Button size="small">View Task</Button>
-              </Link>
-            </CardActions>
-          </Card>
-        </Paper>
-      </Box>
-    )
-  }
-  //Course is now changed to Training
-  //Line 104 checks if the user is a supervisor and show create training button if they are.
-  return (
-    <Box>
+ const buildTask = (task) => {
+   return (
+     <Grid container className={classes.gridContainer}>
+       <Grid item xs={12} sm={6} md={3}>
+         <Card className={classes.root} variant="outlined">
+           <CardActionArea className={classes.actionArea}>
+           <CardMedia 
+           className={classes.media}
+            //these images are just placeholders for now
+           image="https://i.pinimg.com/originals/8b/f0/76/8bf07692b7f9704f1b3552943bdcf1cd.jpg"
+           title="Burger Task"
+           />
+           <CardContent className={classes.text}>
+             <Typography gutterBottom variant="h6" component="h2">
+             {task.name}
+           </Typography>
+             <Typography variant="body1" color="textSecondary" gutterBottom>
+                {task.description}
+             </Typography>
+           </CardContent>
 
-<Box m={5}>
-        <Grid
-          container
-          direction='row'
-          justify='space-between'
-          alignItems='baseline'>
-          <Grid item>
-            <Typography className={classes.bold} variant='h4'>
-              Dashboard
-            </Typography>
-          </Grid>
-          {/* <Grid item>
-            {authState.user.isSupervisor && (
-              <Button component={Link} color="primary" variant="contained" to={"/dashboard/create"}>
-                Create Training
-              </Button>)}
-          </Grid> */}
+           <CardActions className= {classes.buttons}>
+             <Link className={classes.underline} to={`/task/${task._id}`}>
+               <Button size="small">View Task</Button>
+             </Link>
+           </CardActions>
+           </CardActionArea>
+         </Card>
+         </Grid>
+         
+     </Grid>
+   )
+ }
+ return (
+  <Box>
+
+    <Box m={5}>
+      <Grid
+        container
+        direction='row'
+        justify='space-between'
+        alignItems='baseline'>
+        <Grid item>
+          <Typography className={classes.bold} variant='h4'>
+            Tasks
+          </Typography>
         </Grid>
-        <Box my={1}>
-          <Divider variant="middle" />
-        </Box>
-      </Box>
-
-      <Box m={5}>
-        {tasksState ?
-          testMethod()
-          :
-          <h1>LOADING</h1>
-        }
+        <Grid item>
+          {authState.user.isSupervisor}
+        </Grid>
+      </Grid>
+      <Box my={1}>
+        <Divider variant="middle" />
       </Box>
     </Box>
-  )
 
+    <Box m={5}>
+      {tasksState ?
+        createTaskobjects()
+        :
+        <h1>LOADING</h1>
+      }
+    </Box>
+  </Box>
+)
 }
