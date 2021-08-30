@@ -7,15 +7,17 @@ A Software engineering project about using VR/AR technology for creating a platf
 # Unity Test Data
 
 Supervisor
+Token: **SUPERVISOR**
 Username: supervisor
 Password: supervisor
 
 Employee
+Token: **EMPLOYEE**
 Username: employee
 Password: employee
 
 Test Course
-CourseId: 123456789123456789123456
+CourseId: **123456789123456789123456**
 Course Name: Test Course
 
 Recipe
