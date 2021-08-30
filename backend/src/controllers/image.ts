@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { MongoError } from 'mongodb';
 import ProfileImage from '../model/image';
+import CourseImage from '../model/coursePics'
 import ResponseService from '../helpers/response';
 
 function checkMime(mime: string) {
@@ -74,6 +75,18 @@ export default class ImageController {
       }
       // ResponseService.mongoNotFoundResponse(res, "File not found");
       return res.status(200).send('https://i.pinimg.com/236x/1f/25/5d/1f255d7f9cf3afe7cd9cd97626d08fbf.jpg');
+    });
+  }
+
+  public downloadCourseImage(req: Request, res: Response) {
+    const name = req.params.name;
+
+    CourseImage.findOne({ name }, (err: Error, image: typeof CourseImage) => {
+      if (image) {
+        return res.status(200).send((image as any).img)
+      }
+      // ResponseService.mongoNotFoundResponse(res, "File not found");
+      return res.status(200).send('https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg');
     });
   }
 }
