@@ -19,7 +19,7 @@ export default function UsersList() {
     });
 
     return(
-      <Users usersState = {usersState}/>
+      <Users usersState = {usersState} setUsersState = {setUsersState}/>
     );
 
 }

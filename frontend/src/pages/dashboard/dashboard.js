@@ -1,20 +1,20 @@
 import React, { useEffect, useState, useContext } from "react";
 
 // IMPORT COMPONENTS
-import { Box, Button, Typography, Divider, Card, CardContent, CardActions, Paper, Grid, CardMedia, CardActionArea } from "@material-ui/core";
-import AddIcon from '@material-ui/icons/Add';
+import { Box, Button, Typography, Divider, Card, CardContent, CardActions, Grid, CardMedia, CardActionArea } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/auth";
 import api from "../../helpers/api";
+import CreateNewTrainingDialog from "../supervisor/CreateCourse";
 
 
 const useStyles = makeStyles({
   root: {
-    // maxWidth:345,
-    minWidth: 250
-    // position: 'relative'
+    minWidth: 250,
+    textDecoration: 'none',
+    height: 315
   },
   bold: {
     fontWeight: 600
@@ -30,15 +30,29 @@ const useStyles = makeStyles({
   },
   media: {
     height: 143,
+    backgroundSize: 'contain'
   },
   gridContainer: {
     paddingLeft: '20px',
-    paddingRight: '20px',
-    // flexWrap: 'nowrap'
+    paddingRight: '20px'
   },
   trainingModules: {
     display: 'grid',
     gridTemplateColumns: 'repeat(4,1fr)'
+  },
+  trainingImage: {
+    height: 143,
+    backgroundSize: 'contain',
+    marginBottom: 45
+  },
+  buttons: {
+    marginLeft: 10
+  },
+  text: {
+    textAlign: 'center'
+  },
+  actionArea: {
+    height: 315
   }
 })
 
@@ -49,6 +63,16 @@ export default function CreateNewTrainingPage() {
   const { authState } = useContext(AuthContext);
   const [coursesState, setCoursesState] = useState(undefined);
   // const [coursesState, setCoursesState] = useState([{"name":"test","description":"asdsdf"},{"name":"test","description":"asdsdf"}]);
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleDialogOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (value) => {
+    setOpen(false);
+  };
 
   const fetchData = async () => {
     const res = await api.course.getAll(authState.token);
@@ -67,31 +91,36 @@ export default function CreateNewTrainingPage() {
     window.open('xrt-training://?courseId=' + courseID + '&token=' + token)
   }
 
-   const testMethod = () => {
+   const createTrainingModules = () => {
      return(
        <div className = {classes.trainingModules}>
         {coursesState.map((course) => {
           return buildCourse(course);
         })}
-        
+        {/* Line checks if the user is a supervisor and show create training button if they are. */}
         {authState.user.isSupervisor && (
-          <Grid item xs={12} sm={6} md={3}>
-          <Card className={classes.root} variant="outlined" style={{ textDecoration: 'none' }} component={Link} to={"/dashboard/create"}>
-            <CardActionArea>
-            <CardMedia 
-            className={classes.media}
-            //these images are just placeholders for now
-            image="https://cdn0.iconfinder.com/data/icons/very-basic-2-android-l-lollipop-icon-pack/24/plus-512.png"
-            title="Fast Food Training"
-            />
-            <CardContent>
-              <Typography align="center" gutterBottom variant="h6" component="h2">
-              Create New Training
-            </Typography>
-            </CardContent>
-            </CardActionArea>
-          </Card>
-          </Grid>
+
+            <Grid container className={classes.gridContainer}>
+            <Grid item xs={12} sm={6} md={3}>
+              <Link to={"/dashboard/create"} className={classes.underline}>
+              <Card className={classes.root} variant="outlined">
+                <CardActionArea className={classes.actionArea}>
+                <CardMedia className={classes.trainingImage}
+                //these images are just placeholders for now
+                image="https://icons.veryicon.com/png/o/miscellaneous/standard-general-linear-icon/plus-60.png"
+                title="Create New Training"
+                />
+                <CardContent className={classes.text}>
+                  <Typography gutterBottom variant="h6" component="h2">
+                    Create New Training
+                  </Typography>
+                </CardContent>
+                </CardActionArea>
+                </Card>
+                </Link>
+              </Grid>
+              
+            </Grid>
         )}
     </div>
      )
@@ -99,16 +128,17 @@ export default function CreateNewTrainingPage() {
 
   const buildCourse = (course) => {
     return (
-      <Grid container spacing={4} className={classes.gridContainer}  direction="row" justifyContent="center" alignItems="center" wrap="nowrap">
+      <Grid container className={classes.gridContainer}>
         <Grid item xs={12} sm={6} md={3}>
           <Card className={classes.root} variant="outlined">
-            <CardActionArea>
+            <CardActionArea className={classes.actionArea}>
             <CardMedia 
             className={classes.media}
-            image="https://static.thenounproject.com/png/1176750-200.png"
+             //these images are just placeholders for now
+            image="https://i.pinimg.com/originals/8b/f0/76/8bf07692b7f9704f1b3552943bdcf1cd.jpg"
             title="Fast Food Training"
             />
-            <CardContent>
+            <CardContent className={classes.text}>
               <Typography gutterBottom variant="h6" component="h2">
               {course.name}
             </Typography>
@@ -117,7 +147,7 @@ export default function CreateNewTrainingPage() {
               </Typography>
             </CardContent>
 
-            <CardActions>
+            <CardActions className= {classes.buttons}>
               <Link className={classes.underline} to={`/dashboard/${course._id}`}>
                 <Button size="small">View Training</Button>
               </Link>
@@ -131,9 +161,6 @@ export default function CreateNewTrainingPage() {
     )
   }
 
- 
-  //Course is now changed to Training
-  //Line 104 checks if the user is a supervisor and show create training button if they are.
   return (
     <Box>
 
@@ -148,12 +175,14 @@ export default function CreateNewTrainingPage() {
               Dashboard
             </Typography>
           </Grid>
-          {/* <Grid item>
+          <Grid item>
             {authState.user.isSupervisor && (
-              <Button component={Link} color="primary" variant="contained" to={"/dashboard/create"}>
-                Create Training
-              </Button>)}
-          </Grid> */}
+              <div>
+                <Button onClick={handleDialogOpen} color="primary" variant="contained">Create Training</Button>
+                <CreateNewTrainingDialog open={open} onClose={handleClose}></CreateNewTrainingDialog>
+              </div>
+            )}
+          </Grid>
         </Grid>
         <Box my={1}>
           <Divider variant="middle" />
@@ -162,7 +191,7 @@ export default function CreateNewTrainingPage() {
 
       <Box m={5}>
         {coursesState ?
-          testMethod()
+          createTrainingModules()
           :
           <h1>LOADING</h1>
         }
