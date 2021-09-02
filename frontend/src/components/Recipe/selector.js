@@ -1,8 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import Recipes from "./list"
 import { Button, Typography, Box, Divider, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Grid } from "@material-ui/core";
-
-import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/auth";
 import api from "../../helpers/api";
 import Recipe from "./";
@@ -47,7 +45,6 @@ export default function RecipeSelector(props) {
     return (<Button variant="outlined" color="secondary" onClick={() => handleRecipe(props.recipe)}>Set Recipe</Button>)
   }
 
-
   const onChangeRecipe = (event) => {
     const target = event.target;
     const value = target.value;
@@ -84,7 +81,6 @@ export default function RecipeSelector(props) {
         <h1>No recipe set</h1>
       )
       )
-
     )
   }
 }

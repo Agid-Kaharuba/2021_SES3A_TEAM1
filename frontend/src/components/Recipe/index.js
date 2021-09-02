@@ -16,7 +16,8 @@ const useStyles = makeStyles({
     fontStyle: 'italic'
   },
   formControl: {
-    minWidth: 200,
+    margin: 2,
+    minWidth: 120,
   },
 })
 
@@ -62,3 +63,29 @@ export default function Recipe(props) {
     </>
   );
 }
+
+//PLEASE DON'T TOUCH BELOW CODE THANKS, for me to work on tmr
+//from: frontend>components>Task>index.js , to standardise drop down list for whole web app
+
+{/* <Box my={2}>
+<FormControl disabled={!editState} className={classes.formControl}>
+  <Typography className={classes.bold} variant='h6'>
+    Task Type
+  </Typography>
+  <Select
+    id="demo-simple-select-placeholder-label"
+    onChange={handleChange}
+    displayEmpty
+    name="type"
+    className={classes.selectEmpty}
+    value={taskState.type}
+  >
+    <MenuItem value="">
+      <em>None</em>
+    </MenuItem>
+    <MenuItem value={"Practice"}>Practice</MenuItem>
+    <MenuItem value={"Testing"}>Testing</MenuItem>
+    <MenuItem value={"Performance"}>Performance</MenuItem>
+  </Select>
+</FormControl>
+</Box> */}
