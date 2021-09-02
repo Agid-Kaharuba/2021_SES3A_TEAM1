@@ -11,300 +11,120 @@ using Valve.Newtonsoft.Json.Linq;
 
 public class ApiService
 {
-    static string API_HOST = "http://localhost:4000";
-    string token;
+    private static string API_HOST = "http://localhost:4000";
+    private string token;
 
     public ApiService(string token)
     {
         this.token = token;
     }
 
+    private ApiRequest SendRequest(string path, HTTPRequestType requestType)
+    {
+        return new ApiRequest(API_HOST, path, requestType);
+    }
+
+    private ApiRequest SendAuthenticatedRequest(string path, HTTPRequestType requestType)
+    {
+        return new ApiRequest(API_HOST, path, requestType).WithToken(token);
+    }
+
     public IEnumerator Register(User user, Action<object> callback = null)
     {
-        string jsonString = JsonConvert.SerializeObject(user);
-
-        UnityWebRequest www = UnityWebRequest.Post($"{API_HOST}/auth/register", jsonString);
-        yield return www.SendWebRequest();
-
-        if (www.result != UnityWebRequest.Result.Success)
-        {
-            BackendErrorResponse response = JsonConvert.DeserializeObject<BackendErrorResponse>(www.downloadHandler.text);
-            
-            // If the backend returns a non-json (like empty text), then response would be null
-            if (response == null)
-                response = new BackendErrorResponse();
-            
-            response.Status = www.responseCode;
-            callback?.Invoke(response);
-        }
-        else
-        {
-            callback?.Invoke(JsonConvert.DeserializeObject<User>(www.downloadHandler.text));
-        }
+        ApiRequest apiRequest = SendAuthenticatedRequest($"auth/register", HTTPRequestType.Get)
+            .HandleError(callback)
+            .HandleJsonResponse<User>(callback);
+        yield return apiRequest.Execute();
     }
 
     public IEnumerator Login(User user, Action<object> callback = null)
     {
-        UnityWebRequest www = UnityWebRequest.Post($"{API_HOST}/auth/login", JsonConvert.SerializeObject(user));
-        yield return www.SendWebRequest();
-
-        if (www.result != UnityWebRequest.Result.Success)
-        {
-            BackendErrorResponse response = JsonConvert.DeserializeObject<BackendErrorResponse>(www.downloadHandler.text);
-            
-            // If the backend returns a non-json (like empty text), then response would be null
-            if (response == null)
-                response = new BackendErrorResponse();
-            
-            response.Status = www.responseCode;
-            callback?.Invoke(response);
-        }
-        else
-        {
-            callback?.Invoke(JsonConvert.DeserializeObject<User>(www.downloadHandler.text));
-        }
+        ApiRequest apiRequest = SendRequest($"auth/login", HTTPRequestType.Get)
+            .HandleError(callback)
+            .HandleJsonResponse<User>(callback);
+        yield return apiRequest.Execute();
     }
 
     // Get the current user using the token.
     public IEnumerator GetCurrentUser(Action<object> callback = null)
     {
-        UnityWebRequest www = UnityWebRequest.Get($"{API_HOST}/user");
-        www.SetRequestHeader("Authorization", $"Bearer {token}");
-        yield return www.SendWebRequest();
-
-        if (www.result != UnityWebRequest.Result.Success)
-        {
-            BackendErrorResponse response = JsonConvert.DeserializeObject<BackendErrorResponse>(www.downloadHandler.text);
-            
-            // If the backend returns a non-json (like empty text), then response would be null
-            if (response == null)
-                response = new BackendErrorResponse();
-            
-            response.Status = www.responseCode;
-            callback?.Invoke(response);
-        }
-        else
-        {
-            callback?.Invoke(JsonConvert.DeserializeObject<User>(www.downloadHandler.text));
-        }
+        ApiRequest apiRequest = SendAuthenticatedRequest($"user", HTTPRequestType.Get)
+            .HandleError(callback)
+            .HandleJsonResponse<User>(callback);
+        yield return apiRequest.Execute();
     }
 
     public IEnumerator GetUser(string userId, Action<object> callback = null)
     {
-        UnityWebRequest www = UnityWebRequest.Get($"{API_HOST}/user/{userId}");
-        www.SetRequestHeader("Authorization", $"Bearer {token}");
-        yield return www.SendWebRequest();
-
-        if (www.result != UnityWebRequest.Result.Success)
-        {
-            BackendErrorResponse response = JsonConvert.DeserializeObject<BackendErrorResponse>(www.downloadHandler.text);
-            
-            // If the backend returns a non-json (like empty text), then response would be null
-            if (response == null)
-                response = new BackendErrorResponse();
-            
-            response.Status = www.responseCode;
-            callback?.Invoke(response);
-        }
-        else
-        {
-            callback?.Invoke(JsonConvert.DeserializeObject<User>(www.downloadHandler.text));
-        }
+        ApiRequest apiRequest = SendAuthenticatedRequest($"user/{userId}", HTTPRequestType.Get)
+            .HandleError(callback)
+            .HandleJsonResponse<User>(callback);
+        yield return apiRequest.Execute();
     }
 
     public IEnumerator HasAuth(Action<bool> callback = null)
     {
-        UnityWebRequest www = UnityWebRequest.Get($"{API_HOST}/auth");
-        www.SetRequestHeader("Authorization", $"Bearer {token}");
-        yield return www.SendWebRequest();
-
-        if (www.result != UnityWebRequest.Result.Success)
-        {
-            callback?.Invoke(false);
-        }
-        else
-        {
-            callback?.Invoke(true);
-        }
+        ApiRequest apiRequest = SendAuthenticatedRequest($"auth", HTTPRequestType.Get);
+        yield return apiRequest.Execute();
+        callback?.Invoke(apiRequest.IsSuccessful);
     }
 
     public IEnumerator GetTrainingModule(string courseId, Action<object> callback = null)
     {
-        UnityWebRequest www = UnityWebRequest.Get($"{API_HOST}/course/{courseId}");
-        www.SetRequestHeader("Authorization", $"Bearer {token}");
-        yield return www.SendWebRequest();
-
-        if (www.result != UnityWebRequest.Result.Success)
-        {
-            BackendErrorResponse response = JsonConvert.DeserializeObject<BackendErrorResponse>(www.downloadHandler.text);
-
-            // If the backend returns a non-json (like empty text), then response would be null
-            if (response == null)
-                response = new BackendErrorResponse();
-            
-            response.Status = www.responseCode;
-            callback?.Invoke(response);
-        }
-        else
-        {
-            //Debug.Log(www.downloadHandler.text);
-            TrainingModule module = JsonConvert.DeserializeObject<TrainingModule>(www.downloadHandler.text);
-            //Debug.Log(module);
-            callback?.Invoke(module);
-        }
+        ApiRequest apiRequest = SendAuthenticatedRequest($"course/{courseId}", HTTPRequestType.Get)
+            .HandleJsonResponse<TrainingModule>(callback)
+            .HandleError(callback);
+        yield return apiRequest.Execute();
     }
 
     public IEnumerator UpdateTrainingModule(TrainingModule course, Action<object> callback = null)
     {
-        string jsonString = JsonConvert.SerializeObject(course);
-
-        UnityWebRequest www = UnityWebRequest.Put($"{API_HOST}/course/{course.Id}", jsonString);
-        //www.SetRequestHeader("Authorization", $"Bearer {token}");
-        www.SetRequestHeader("Content-Type", "application/json");
-        yield return www.SendWebRequest();
-
-        if (www.result != UnityWebRequest.Result.Success)
-        {
-            BackendErrorResponse response = JsonConvert.DeserializeObject<BackendErrorResponse>(www.downloadHandler.text);
-            
-            // If the backend returns a non-json (like empty text), then response would be null
-            if (response == null)
-                response = new BackendErrorResponse();
-            
-            response.Status = www.responseCode;
-            callback?.Invoke(response);
-        }
-        else
-        {
-            callback?.Invoke(null);
-        }
+        ApiRequest apiRequest = SendAuthenticatedRequest($"course/{course.Id}", HTTPRequestType.Put)
+            .SendJson(course)
+            .HandleError(callback);
+        yield return apiRequest.Execute();
     }
 
     public IEnumerator CreateTask(Task task, Action<object> callback = null)
     {
-        string jsonString = JsonConvert.SerializeObject(task);
-
-        UnityWebRequest www = UnityWebRequest.Put($"{API_HOST}/task", jsonString);
-        www.SetRequestHeader("Authorization", $"Bearer {token}");
-        www.SetRequestHeader("Content-Type", "application/json");
-        yield return www.SendWebRequest();
-
-        if (www.result != UnityWebRequest.Result.Success)
-        {
-            BackendErrorResponse response = JsonConvert.DeserializeObject<BackendErrorResponse>(www.downloadHandler.text);
-            // If the backend returns a non-json (like empty text), then response would be null
-            if (response == null)
-                response = new BackendErrorResponse();
-            
-            response.Status = www.responseCode;
-            callback?.Invoke(response);
-        }
-        else
-        {
-            callback?.Invoke(JsonConvert.DeserializeObject<Task>(www.downloadHandler.text));
-        }
+        ApiRequest apiRequest = SendAuthenticatedRequest("task", HTTPRequestType.Put)
+            .SendJson(task)
+            .HandleJsonResponse<Task>(callback)
+            .HandleError(callback);
+        yield return apiRequest.Execute();
     }
 
     public IEnumerator UpdateTask(Task task, Action<object> callback = null)
     {
-        string jsonString = JsonConvert.SerializeObject(task);
-
-        UnityWebRequest www = UnityWebRequest.Put($"{API_HOST}/task/{task.Id}", jsonString);
-        www.SetRequestHeader("Authorization", $"Bearer {token}");
-        www.SetRequestHeader("Content-Type", "application/json");
-        yield return www.SendWebRequest();
-
-        if (www.result != UnityWebRequest.Result.Success)
-        {
-            BackendErrorResponse response = JsonConvert.DeserializeObject<BackendErrorResponse>(www.downloadHandler.text);
-            
-            // If the backend returns a non-json (like empty text), then response would be null
-            if (response == null)
-                response = new BackendErrorResponse();
-            
-            response.Status = www.responseCode;
-            callback?.Invoke(response);
-        }
-        else
-        {
-            callback?.Invoke(null);
-        }
+        ApiRequest apiRequest = SendAuthenticatedRequest($"task/{task.Id}", HTTPRequestType.Put)
+            .SendJson(task)
+            .HandleError(callback);
+        yield return apiRequest.Execute();
     }
 
     public IEnumerator CreateRecipe(Recipe recipe, Action<object> callback = null)
     {
-        string jsonString = JsonConvert.SerializeObject(recipe);
-
-        UnityWebRequest www = UnityWebRequest.Put($"{API_HOST}/recipe", jsonString);
-        www.SetRequestHeader("Authorization", $"Bearer {token}");
-        www.SetRequestHeader("Content-Type", "application/json");
-        yield return www.SendWebRequest();
-
-        if (www.result != UnityWebRequest.Result.Success)
-        {
-            BackendErrorResponse response = JsonConvert.DeserializeObject<BackendErrorResponse>(www.downloadHandler.text);
-            
-            // If the backend returns a non-json (like empty text), then response would be null
-            if (response == null)
-                response = new BackendErrorResponse();
-            
-            response.Status = www.responseCode;
-            callback?.Invoke(response);
-        }
-        else
-        {
-            callback?.Invoke(JsonConvert.DeserializeObject<Recipe>(www.downloadHandler.text));
-        }
+        ApiRequest apiRequest = SendAuthenticatedRequest("recipe", HTTPRequestType.Put)
+            .SendJson(recipe)
+            .HandleJsonResponse<Recipe>(callback)
+            .HandleError(callback);
+        yield return apiRequest.Execute();
     }
 
     public IEnumerator UpdateRecipe(Recipe recipe, Action<object> callback = null)
     {
-        string jsonString = JsonConvert.SerializeObject(recipe);
-
-        UnityWebRequest www = UnityWebRequest.Put($"{API_HOST}/recipe/{recipe.Id}", jsonString);
-        www.SetRequestHeader("Authorization", $"Bearer {token}");
-        www.SetRequestHeader("Content-Type", "application/json");
-        yield return www.SendWebRequest();
-
-        if (www.result != UnityWebRequest.Result.Success)
-        {
-            BackendErrorResponse response = JsonConvert.DeserializeObject<BackendErrorResponse>(www.downloadHandler.text);
-            
-            // If the backend returns a non-json (like empty text), then response would be null
-            if (response == null)
-                response = new BackendErrorResponse();
-            
-            response.Status = www.responseCode;
-            callback?.Invoke(response);
-        }
-        else
-        {
-            callback?.Invoke(null);
-        }
+        ApiRequest apiRequest = SendAuthenticatedRequest($"recipe/{recipe.Id}", HTTPRequestType.Put)
+            .SendJson(recipe)
+            .HandleError(callback);
+        yield return apiRequest.Execute();
     }
 
     public IEnumerator SubmitTaskProgress(Progress progress, Action<object> callback = null)
     {
-        string jsonString = JsonConvert.SerializeObject(progress);
-
-        UnityWebRequest www = UnityWebRequest.Put($"{API_HOST}/progress", jsonString);
-        www.SetRequestHeader("Content-Type", "application/json");
-        yield return www.SendWebRequest();
-
-        if (www.result != UnityWebRequest.Result.Success)
-        {
-            BackendErrorResponse response = JsonConvert.DeserializeObject<BackendErrorResponse>(www.downloadHandler.text);
-            
-            // If the backend returns a non-json (like empty text), then response would be null
-            if (response == null)
-                response = new BackendErrorResponse();
-            
-            response.Status = www.responseCode;
-            callback?.Invoke(response);
-        }
-        else
-        {
-            callback?.Invoke(JsonConvert.DeserializeObject<Progress>(www.downloadHandler.text));
-        }
+        ApiRequest apiRequest = SendAuthenticatedRequest("progress", HTTPRequestType.Put)
+            .SendJson(progress)
+            .HandleJsonResponse<Progress>(callback)
+            .HandleError(callback);
+        yield return apiRequest.Execute();
     }
 }
