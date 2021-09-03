@@ -4,5 +4,6 @@
 FROM node:14-alpine
 COPY ./ /app
 WORKDIR /app
+RUN npm install
 ENTRYPOINT npm run prod
 EXPOSE 3000
