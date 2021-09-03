@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import Recipes from "./list"
-import { Button, Typography, Box, Divider, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Grid } from "@material-ui/core";
+import { Button, Typography, Box, Divider, Table, TableBody, TableCell, TableContainer, 
+  TableHead, TableRow, Paper, Grid } from "@material-ui/core";
 import { AuthContext } from "../../context/auth";
 import api from "../../helpers/api";
 import Recipe from "./";
