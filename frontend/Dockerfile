@@ -4,6 +4,5 @@
 FROM node:14
 COPY ./ /app
 WORKDIR /app
-RUN npm install --unsafe-perm
 ENTRYPOINT npm run prod
 EXPOSE 3000
