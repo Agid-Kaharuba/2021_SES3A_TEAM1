@@ -8,7 +8,8 @@ import TextField from '@material-ui/core/TextField';
 import SearchIcon from '@material-ui/icons/Search';
 import IconButton from "@material-ui/core/IconButton";
 import api from '../../helpers/api'
-import { AuthContext } from "../../context/auth";const useStyles = makeStyles({
+import { AuthContext } from "../../context/auth";
+const useStyles = makeStyles({
   bold: {
     fontWeight: 600
   },
@@ -76,28 +77,6 @@ export default function Users({usersState, setUsersState, course}){
         }
 
     return(
-        <Container maxWidth="md">
-         <Box m={5}>
-             <Grid container spacing={2} justify="space-between">
-                <Grid item>
-                    <Typography className={classes.bold} variant='h4'>
-                    Users
-                    </Typography>
-                </Grid>
-              <div className={classes.margin}>
-                  <Grid container spacing={1} alignItems="flex-end">
-                    <Grid item>
-                      <SearchIcon />
-                    </Grid>
-                    <Grid item>
-                      <TextField id="user-search" label="Search" onChange={handleChange}/>
-                    </Grid>
-                  </Grid>
-                </div>
-              </Grid>
-            <Divider variant="fullwidth" />
-          </Box>
-    
           <Box m={5}>
               <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="simple table">
@@ -119,6 +98,5 @@ export default function Users({usersState, setUsersState, course}){
                 </Table>
               </TableContainer>
           </Box>
-        </Container>
         );
 }
