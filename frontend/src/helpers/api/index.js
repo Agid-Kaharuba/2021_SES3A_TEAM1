@@ -32,8 +32,8 @@ import {
   getRecipe
 } from "./recipe";
 
-export const API_HOST = "http://localhost:4000";
-//export const API_HOST = "http://ec2-54-206-90-20.ap-southeast-2.compute.amazonaws.com:4000";
+//export const API_HOST = "http://localhost:4000";
+export const API_HOST = "http://ec2-54-206-90-20.ap-southeast-2.compute.amazonaws.com:4000";
 
 export default {
   auth: {
