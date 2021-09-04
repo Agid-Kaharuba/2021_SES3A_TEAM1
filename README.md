@@ -10,6 +10,53 @@ Our team's objective is:
 * Expandable for use as a platform to create training modules
 * Create a webapp that links into the XR modules so users can access them and be assessed
 
+
+# Unity Test Data
+
+
+Supervisor
+
+Token: **SUPERVISOR**
+
+Username: supervisor
+
+Password: supervisor
+
+
+Employee
+
+Token: **EMPLOYEE**
+
+Username: employee
+
+Password: employee
+
+
+Test Course
+
+CourseId: **123456789123456789123456**
+
+Course Name: Test Course
+
+
+Recipe
+
+Name: Classic Burger
+
+Ingredients: top_bun, lettuce, sauce, cheese, patty, bottom_bun
+
+Category: Burger
+
+
+Task
+
+Name: Beef Burger
+
+Description: The user will need to make the recipe attached
+
+Type: Practice
+
+
 [Swagger Docs](http://agid-kaharuba.github.io/2021_SES3A_TEAM1/swagger)
 
 # Instruction Manual
@@ -118,4 +165,3 @@ Add the workload with visual studio installer. Select the game development with 
 * Press the `Launch Unity button` in the dashboard on Frontend
 
 * Press the `Play Button` in Unity
-

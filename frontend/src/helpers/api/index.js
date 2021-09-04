@@ -10,7 +10,8 @@ import {
   updateUser,
   uploadImage,
   downloadImage,
-  searchUser
+  searchUser, 
+  deleteUser
 } from "./user";
 import {
   getAllCourses,
@@ -48,7 +49,8 @@ export default {
     update: updateUser,
     upload: uploadImage,
     download: downloadImage,
-    search: searchUser
+    search: searchUser,
+    delete: deleteUser
   },
   course: {
     getAll: getAllCourses,

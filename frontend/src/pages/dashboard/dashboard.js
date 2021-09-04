@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 
 // IMPORT COMPONENTS
-import { Box, Button, Typography, Divider, Card, CardContent, CardActions, Paper, Grid } from "@material-ui/core";
+import { Box, Button, Typography, Divider, Card, CardContent, CardActions, Grid, CardMedia, CardActionArea } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { Link } from "react-router-dom";
@@ -11,6 +11,11 @@ import CreateNewTrainingDialog from "../supervisor/CreateCourse";
 
 
 const useStyles = makeStyles({
+  root: {
+    minWidth: 250,
+    textDecoration: 'none',
+    height: 315
+  },
   bold: {
     fontWeight: 600
   },
@@ -23,24 +28,35 @@ const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
+  media: {
+    height: 143,
+    backgroundSize: 'contain'
+  },
+  gridContainer: {
+    paddingLeft: '20px',
+    paddingRight: '20px'
+  },
+  trainingModules: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(4,1fr)'
+  },
+  trainingImage: {
+    height: 143,
+    backgroundSize: 'contain',
+    marginBottom: 45
+  },
+  buttons: {
+    marginLeft: 10
+  },
+  text: {
+    textAlign: 'center'
+  },
+  actionArea: {
+    height: 315
+  }
 })
 
-const cardStyles = makeStyles({
-  root: {
-    minWidth: 275,
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  },
-});
+
 
 export default function CreateNewTrainingPage() {
   const classes = useStyles();
@@ -75,30 +91,76 @@ export default function CreateNewTrainingPage() {
     window.open('xrt-training://?courseId=' + courseID + '&token=' + token)
   }
 
+   const createTrainingModules = () => {
+     return(
+       <div className = {classes.trainingModules}>
+        {coursesState.map((course) => {
+          return buildCourse(course);
+        })}
+        {/* Line checks if the user is a supervisor and show create training button if they are. */}
+        {authState.user.isSupervisor && (
+
+            <Grid container className={classes.gridContainer}>
+            <Grid item xs={12} sm={6} md={3}>
+              <Link to={"/dashboard/create"} className={classes.underline}>
+              <Card className={classes.root} variant="outlined">
+                <CardActionArea className={classes.actionArea}>
+                <CardMedia className={classes.trainingImage}
+                //these images are just placeholders for now
+                image="https://icons.veryicon.com/png/o/miscellaneous/standard-general-linear-icon/plus-60.png"
+                title="Create New Training"
+                />
+                <CardContent className={classes.text}>
+                  <Typography gutterBottom variant="h6" component="h2">
+                    Create New Training
+                  </Typography>
+                </CardContent>
+                </CardActionArea>
+                </Card>
+                </Link>
+              </Grid>
+              
+            </Grid>
+        )}
+    </div>
+     )
+  }
+
   const buildCourse = (course) => {
     return (
-      <Box mx={5} my={2}>
-        <Paper>
+      <Grid container className={classes.gridContainer}>
+        <Grid item xs={12} sm={6} md={3}>
           <Card className={classes.root} variant="outlined">
-            <CardContent>
-              <Typography className={classes.title} color="textSecondary" gutterBottom>
-                {course.name} - {course.description}
+            <CardActionArea className={classes.actionArea}>
+            <CardMedia 
+            className={classes.media}
+             //these images are just placeholders for now
+            image="https://i.pinimg.com/originals/8b/f0/76/8bf07692b7f9704f1b3552943bdcf1cd.jpg"
+            title="Fast Food Training"
+            />
+            <CardContent className={classes.text}>
+              <Typography gutterBottom variant="h6" component="h2">
+              {course.name}
+            </Typography>
+              <Typography variant="body1" color="textSecondary" gutterBottom>
+                 {course.description}
               </Typography>
-
             </CardContent>
-            <CardActions>
+
+            <CardActions className= {classes.buttons}>
               <Link className={classes.underline} to={`/dashboard/${course._id}`}>
                 <Button size="small">View Training</Button>
               </Link>
               <Button size="small" onClick={() => handleLaunchXR(course._id)}>Launch XR</Button>
             </CardActions>
+            </CardActionArea>
           </Card>
-        </Paper>
-      </Box>
+          </Grid>
+          
+      </Grid>
     )
   }
-  //Course is now changed to Training
-  //Line 104 checks if the user is a supervisor and show create training button if they are.
+
   return (
     <Box>
 
@@ -129,9 +191,7 @@ export default function CreateNewTrainingPage() {
 
       <Box m={5}>
         {coursesState ?
-          coursesState.map((course) => {
-            return buildCourse(course);
-          })
+          createTrainingModules()
           :
           <h1>LOADING</h1>
         }
