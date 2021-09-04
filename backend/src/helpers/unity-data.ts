@@ -53,7 +53,7 @@ async function masterData() {
             description: "Test Course",
             tasks: [task],
             assignedEmployees: [employee],
-            _id: new mongoose.Types.ObjectId(COURSEID)
+            _id: COURSEID
         } as any);
         await course.save();
     }
