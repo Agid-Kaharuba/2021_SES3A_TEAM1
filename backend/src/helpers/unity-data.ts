@@ -23,8 +23,7 @@ async function masterData() {
                 "patty",
                 "bottom_bun"
             ],
-            category: "Burger",
-            _id: new mongoose.Types.ObjectId()
+            category: "Burger"
         } as any);
         await recipe.save();
 
@@ -32,8 +31,7 @@ async function masterData() {
             name: "Beef Burger",
             description: "The user will need to make the recipe attached",
             recipe: recipe,
-            type: "Practice",
-            _id: new mongoose.Types.ObjectId()
+            type: "Practice"
         } as any);
         await task.save();
 
