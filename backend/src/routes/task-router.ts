@@ -35,7 +35,15 @@ export const TaskRoute = (app: Express, controller: TaskController) => {
      *         example: Boil water
      *        recipe:
      *         type: string
-     *         example: recipe01
+     *         example: {
+     *          "name": "Empty Burger",
+     *          "steps": [],
+     *          "ingredients": [
+     *            "top_bun",
+     *            "bottom_bun"
+     *          ],
+     *          "category": ""
+     *         }
      *        type:
      *         type: string
      *         example: liquid
