@@ -91,5 +91,5 @@ export default class CourseController {
     } catch (err) {
       ResponseService.mongoErrorResponse(res, err);
     }
-  }
+  }  
 }
