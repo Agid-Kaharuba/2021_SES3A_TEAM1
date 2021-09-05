@@ -25,7 +25,7 @@ import UserList from "./pages/userslist/userslist.js";
 import Dashboard from "./pages/dashboard/dashboard.js";
 
 // IMPORT COURSE PAGES
-import CreateNewCourse from './pages/supervisor/CreateCourse';
+import CreateNewCourse from './pages/supervisor/CreateCourse/createNewTraining';
 import ViewTrainingPage from './pages/viewtraining/viewtraining';
 
 // IMPORT TASKS PAGES

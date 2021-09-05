@@ -7,7 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/auth";
 import api from "../../helpers/api";
-import CreateNewTrainingDialog from "../supervisor/CreateCourse";
+import CreateNewTrainingDialog from "../supervisor/CreateCourse/createNewTraining";
 
 
 const useStyles = makeStyles({
