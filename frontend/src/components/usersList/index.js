@@ -25,24 +25,9 @@ const useStyles = makeStyles({
 })
 
 
-export default function Users({usersState, setUsersState, course}){
+export default function Users({usersState, setUsersState, course, filter =()=>true}){
     const classes = useStyles();
-    const [search, setSearch] = React.useState("");
     const { authState } = useContext(AuthContext);
-
-    function handleChange(e) {
-      const { name, value } = e.target;
-      setSearch(value)
-      console.log(value)
-    }
-
-    function filter(user) {
-      const re = new RegExp(search.toLowerCase());
-      if (!search) {
-        return true
-      }
-      return re.test(user.staffid) || re.test(user.firstname.toLowerCase()) || re.test(user.lastname.toLowerCase())
-    }
 
     function onDeleteClick(user) {
       api.user.delete(authState.token, user._id)
@@ -62,15 +47,19 @@ export default function Users({usersState, setUsersState, course}){
               </Link>)}
               </TableCell> */}
               <TableCell>
+                <IconButton
+                  color="inherit"
+                >
                 <EditIcon/>
+                </IconButton>
               </TableCell>
               <TableCell>
-              <IconButton
-                color="inherit"
-                onClick={() => onDeleteClick(user)}
-              >
-                <DeleteIcon/>
-              </IconButton>
+                <IconButton
+                  color="inherit"
+                  onClick={() => onDeleteClick(user)}
+                >
+                  <DeleteIcon/>
+                </IconButton>
               </TableCell>
           </TableRow>
         )

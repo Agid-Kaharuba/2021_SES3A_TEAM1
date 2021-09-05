@@ -9,6 +9,21 @@ import SearchIcon from '@material-ui/icons/Search';
 export default function UsersList() {
     const { authState } = useContext(AuthContext);
     const [usersState, setUsersState] = useState(undefined);
+    const [search, setSearch] = React.useState("");
+
+    function handleChange(e) {
+      const { name, value } = e.target;
+      setSearch(value)
+      console.log(value)
+    }
+
+    function filter(user) {
+      const re = new RegExp(search.toLowerCase());
+      if (!search) {
+        return true
+      }
+      return re.test(user.staffid) || re.test(user.firstname.toLowerCase()) || re.test(user.lastname.toLowerCase())
+    }
 
     const fetchData = async () => {
       const res = await api.user.all(authState.token);
@@ -36,15 +51,14 @@ export default function UsersList() {
                       <SearchIcon />
                     </Grid>
                     <Grid item>
-                      {/* <TextField id="user-search" label="Search" onChange={handleChange}/> */}
-                      <TextField id="user-search" label="Search"/>
+                      <TextField id="user-search" label="Search" onChange={handleChange}/>
                     </Grid>
                   </Grid>
                 </div>
               </Grid>
             <Divider variant="fullwidth" />
         </Box>
-        <Users usersState = {usersState} setUsersState = {setUsersState}/>
+        <Users usersState = {usersState} setUsersState = {setUsersState} filter= {filter}/>
       </Container>
     );
 
