@@ -33,11 +33,11 @@ const useStyles = makeStyles({
     paddingLeft: '20px',
     paddingRight: '20px'
   },
-  recipesModules: {
+  trainingModules: {
     display: 'grid',
     gridTemplateColumns: 'repeat(4,1fr)'
   },
-  recipeImage: {
+  trainingImage: {
     height: 143,
     backgroundSize: 'contain',
     marginBottom: 45
@@ -69,96 +69,106 @@ export default function RecipesList() {
       fetchData();
     }
   });
-  const testMethod = () => {
+
+  const createRecipeModules = () => {
     return(
-      <div className = {classes.recipeModules}>
+      <div className = {classes.trainingModules}>
        {recipesState.map((recipe) => {
          return buildRecipe(recipe);
        })}
-       
+       {/* Line checks if the user is a supervisor and show create training button if they are. */}
        {authState.user.isSupervisor && (
 
-<Grid container className={classes.gridContainer}>
-<Grid item xs={12} sm={6} md={3}>
-  <Link to={"/dashboard/create"} className={classes.underline}>
-  <Card className={classes.root} variant="outlined">
-    <CardActionArea className={classes.actionArea}>
-    <CardMedia className={classes.recipeImage}
-    //these images are just placeholders for now
-    image="https://icons.veryicon.com/png/o/miscellaneous/standard-general-linear-icon/plus-60.png"
-    title="Create New Recipe"
-    />
-    <CardContent className={classes.text}>
-      <Typography gutterBottom variant="h6" component="h2">
-        Create New Recipe
-      </Typography>
-    </CardContent>
-    </CardActionArea>
-    </Card>
-    </Link>
-  </Grid>
-  
-</Grid>
-)}
-</div>
-)
-}
-
-  const buildRecipe = (recipe) => {
-    return (
-      <Box mx={5} my={2}>
-        <Paper>
-          <Card className={classes.root} variant="outlined">
-            <CardContent>
-              <Typography className={classes.title} color="textSecondary" gutterBottom>
-                {recipe.name} - {recipe.description}
-              </Typography>
-
-            </CardContent>
-            <CardActions>
-              <Link className={classes.underline} to={`/dashboard/${recipe._id}`}>
-                <Button size="small">View Task</Button>
-              </Link>
-            </CardActions>
-          </Card>
-        </Paper>
-      </Box>
+           <Grid container className={classes.gridContainer}>
+           <Grid item xs={12} sm={6} md={3}>
+             <Link to={"/recipe/create"} className={classes.underline}>
+             <Card className={classes.root} variant="outlined">
+               <CardActionArea className={classes.actionArea}>
+               <CardMedia className={classes.trainingImage}
+               //these images are just placeholders for now
+               image="https://icons.veryicon.com/png/o/miscellaneous/standard-general-linear-icon/plus-60.png"
+               title="Create New Training"
+               />
+               <CardContent className={classes.text}>
+                 <Typography gutterBottom variant="h6" component="h2">
+                   Create New Recipe
+                 </Typography>
+               </CardContent>
+               </CardActionArea>
+               </Card>
+               </Link>
+             </Grid>
+             
+           </Grid>
+       )}
+   </div>
     )
-  }
-  return (
-    <Box>
+ }
 
-<Box m={5}>
-        <Grid
-          container
-          direction='row'
-          justify='space-between'
-          alignItems='baseline'>
-          <Grid item>
-            <Typography className={classes.bold} variant='h4'>
-              Dashboard
-            </Typography>
-          </Grid>
-          {/* <Grid item>
-            {authState.user.isSupervisor && (
-              <Button component={Link} color="primary" variant="contained" to={"/dashboard/create"}>
-                Create Training
-              </Button>)}
-          </Grid> */}
-        </Grid>
-        <Box my={1}>
-          <Divider variant="middle" />
-        </Box>
-      </Box>
+ const buildRecipe = (recipe) => {
+   return (
+     <Grid container className={classes.gridContainer}>
+       <Grid item xs={12} sm={6} md={3}>
+         <Card className={classes.root} variant="outlined">
+           <CardActionArea className={classes.actionArea}>
+           <CardMedia 
+           className={classes.media}
+            //these images are just placeholders for now
+           image="https://i.pinimg.com/originals/8b/f0/76/8bf07692b7f9704f1b3552943bdcf1cd.jpg"
+           title="Fast Food Training"
+           />
+           <CardContent className={classes.text}>
+             <Typography gutterBottom variant="h6" component="h2">
+             {recipe.name}
+           </Typography>
+             <Typography variant="body1" color="textSecondary" gutterBottom>
+                {recipe.description}
+             </Typography>
+           </CardContent>
 
-      <Box m={5}>
-        {recipesState ?
-          testMethod()
-          :
-          <h1>LOADING</h1>
-        }
-      </Box>
-    </Box>
-  )
+           <CardActions className= {classes.buttons}>
+             <Link className={classes.underline} to={`/recipe/${recipe._id}`}>
+               <Button size="small">View Recipe</Button>
+             </Link>
+           </CardActions>
+           </CardActionArea>
+         </Card>
+         </Grid>
+         
+     </Grid>
+   )
+ }
 
+ return (
+   <Box>
+
+     <Box m={5}>
+       <Grid
+         container
+         direction='row'
+         justify='space-between'
+         alignItems='baseline'>
+         <Grid item>
+           <Typography className={classes.bold} variant='h4'>
+             Recipes
+           </Typography>
+         </Grid>
+         <Grid item>
+           {authState.user.isSupervisor}
+         </Grid>
+       </Grid>
+       <Box my={1}>
+         <Divider variant="middle" />
+       </Box>
+     </Box>
+
+     <Box m={5}>
+       {recipesState ?
+         createRecipeModules()
+         :
+         <h1>LOADING</h1>
+       }
+     </Box>
+   </Box>
+ )
 }
