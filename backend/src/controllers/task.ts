@@ -30,7 +30,7 @@ export default class TaskController {
 
   public async getAllById(req: Request, res: Response) {
     try {
-      const tasks = await Task.find({ userId: req.params.userId, archive: false });
+      const tasks = await Task.find({ userId: req.params.userId });
       ResponseService.successResponse(res, tasks);
     } catch (err) {
       ResponseService.mongoErrorResponse(res, err);
@@ -39,7 +39,7 @@ export default class TaskController {
 
   public async getAllNotById(req: Request, res: Response) {
     try {
-      const tasks = await Task.find({ userId: { $ne: req.params.userId }, archive: false });
+      const tasks = await Task.find({ userId: { $ne: req.params.userId } });
       ResponseService.successResponse(res, tasks);
     } catch (err) {
       ResponseService.mongoErrorResponse(res, err);

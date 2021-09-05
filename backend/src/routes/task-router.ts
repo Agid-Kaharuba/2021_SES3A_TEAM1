@@ -118,8 +118,8 @@ export const TaskRoute = (app: Express, controller: TaskController) => {
 
   /**
      * @swagger
-     * /task/{userId}:
-     *  delete:
+     * /task/getById/{userId}:
+     *  get:
      *   description: Get all tasks assigned to a certain Id
      *   tags: [Task]
      *   parameters:
@@ -131,22 +131,22 @@ export const TaskRoute = (app: Express, controller: TaskController) => {
      *    200:
      *     description: Success
      */
-   app.get('/task/:userId', controller.getAllById);
+   app.get('/task/getById/:userId', controller.getAllById);
 
    /**
-     * @swagger
-     * /task/not/{userId}:
-     *  delete:
-     *   description: Get all tasks not assigned to a certain Id
-     *   tags: [Task]
-     *   parameters:
-     *    - in: path
-     *      name: userId
-     *      required: false
-     *      type: string
-     *   responses:
-     *    200:
-     *     description: Success
-     */
-    app.get('/task/not/:userId', controller.getAllById);
+      * @swagger
+      * /task/getById/not/{userId}:
+      *  get:
+      *   description: Get all tasks not assigned to a certain Id
+      *   tags: [Task]
+      *   parameters:
+      *    - in: path
+      *      name: userId
+      *      required: false
+      *      type: string
+      *   responses:
+      *    200:
+      *     description: Success
+      */
+   app.get('/task/getById/not/:userId', controller.getAllNotById);
 };
