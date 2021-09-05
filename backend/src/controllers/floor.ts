@@ -3,12 +3,11 @@ import { Request, Response } from 'express';
 import Floor from '../model/floor';
 import ResponseService from '../helpers/response';
 
-// export async function findTask(Id: string) {
-//   const task = await Task.findOne({
-//     _id: Id,
-//   });
-//   return task;
-// }
+export async function findFloor(Id: string) {
+  return Floor.findOne({
+    _id: Id,
+  });
+}
 
 export default class FloorController {
   // Get all floorplans
@@ -21,55 +20,52 @@ export default class FloorController {
     }
   }
 
-  // // Get a task by id
-  // public async get(req: Request, res: Response) {
-  //   try {
-  //     const task = await findTask(req.params.taskId);
-  //     ResponseService.successResponse(res, task);
-  //   } catch (err) {
-  //     ResponseService.mongoNotFoundResponse(res, err);
-  //   }
-  // }
+  // Get Floor by id
+  public async getById(req: Request, res: Response) {
+    try {
+      const floor = await findFloor(req.params.floorId);
+      ResponseService.successResponse(res, floor);
+    } catch (err) {
+      ResponseService.mongoNotFoundResponse(res, err);
+    }
+  }
 
-  // // Create a task
-  // public async create(req: Request, res: Response) {
-  //   const { body } = req;
-  //   const newTaskRequest = new Task({
-  //     name: body.name,
-  //     description: body.description,
-  //     recipe: body.recipe,
-  //     type: body.type,
-  //   } as any);
-  //   newTaskRequest.save((err: any) => {
-  //     if (err) {
-  //       ResponseService.mongoErrorResponse(res, err);
-  //     } else {
-  //       ResponseService.successResponse(res, newTaskRequest);
-  //     }
-  //   });
-  // }
+  // Create a Floor
+  public async create(req: Request, res: Response) {
+    const { body } = req;
+    const newFloorRequest = new Floor({
+      name: body.name,
+      data: body.data,
+    } as any);
+    newFloorRequest.save((err: any) => {
+      if (err) {
+        ResponseService.mongoErrorResponse(res, err);
+      } else {
+        ResponseService.successResponse(res, newFloorRequest);
+      }
+    });
+  }
 
-  // // Update a task
-  // public async update(req: Request, res: Response) {
-  //   try {
-  //     const id = req.params.taskId;
-  //     req.body.recipe = undefined;
-  //     const { body } = req;
-  //     const response = await Task.updateOne({ _id: id }, body, { omitUndefined: true });
-  //     ResponseService.successResponse(res, response);
-  //   } catch (err) {
-  //     ResponseService.mongoNotFoundResponse(res, err);
-  //   }
-  // }
+  // Update a Floor
+  public async update(req: Request, res: Response) {
+    try {
+      const id = req.params.floorId;
+      const { body } = req;
+      const response = await Floor.updateOne({ _id: id }, body);
+      ResponseService.successResponse(res, response);
+    } catch (err) {
+      ResponseService.mongoNotFoundResponse(res, err);
+    }
+  }
 
-  // // Delete a task
-  // public async delete(req: Request, res: Response) {
-  //   try {
-  //     const id = req.params.taskId;
-  //     const response = await Task.updateOne({ _id: id }, { archive: true });
-  //     res.json(response);
-  //   } catch (err) {
-  //     ResponseService.mongoNotFoundResponse(res, err);
-  //   }
-  // }
+  // Delete a Floor
+  public async delete(req: Request, res: Response) {
+    try {
+      const id = req.params.floorId;
+      const response = await Floor.updateOne({ _id: id }, { archive: true });
+      res.json(response);
+    } catch (err) {
+      ResponseService.mongoNotFoundResponse(res, err);
+    }
+  }
 }
