@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { MongoError } from 'mongodb';
+// import { MongoError } from 'mongodb';
 import ProfileImage from '../model/image';
 import CourseImage from '../model/coursePics'
 import ResponseService from '../helpers/response';
@@ -18,10 +18,15 @@ function checkMime(mime: string) {
 
 export default class ImageController {
   public async uploadProfileImage(req: Request, res: Response) {
+    // @ts-ignore
     const originalName = req.file.originalname;
+    // @ts-ignore
     const { mimetype } = req.file;
+    // @ts-ignore
     const img64 = req.file.buffer.toString('base64');
+    // @ts-ignore
     const img = `data:${mimetype};base64,${img64}`;
+    // @ts-ignore
     const name = req.file.originalname;
     let delet = false;
 
@@ -57,7 +62,7 @@ export default class ImageController {
       img,
     } as any);
 
-    newImageRequest.save((err: MongoError) => {
+    newImageRequest.save((err: any) => {
       if (err) {
         ResponseService.mongoErrorResponse(res, err);
       } else {

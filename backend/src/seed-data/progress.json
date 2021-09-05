@@ -1,0 +1,72 @@
+[
+    {
+        "userId": 0,
+        "taskId": 0, 
+        "courseId": 0,
+        "completed": 1,
+        "score": 100
+    },
+    {
+        "userId": 0,
+        "taskId": 1, 
+        "courseId": 0,
+        "completed": 1,
+        "score": 90
+    },
+    {
+        "userId": 1,
+        "taskId": 0, 
+        "courseId": 0,
+        "completed": 1,
+        "score": 70
+    },
+    {
+        "userId": 1,
+        "taskId": 1, 
+        "courseId": 0,
+        "completed": 1,
+        "score": 80
+    },
+    {
+        "userId": 2,
+        "taskId": 0, 
+        "courseId": 0,
+        "completed": 1,
+        "score": 70
+    },
+    {
+        "userId": 2,
+        "taskId": 1, 
+        "courseId": 0,
+        "completed": 1,
+        "score": 80
+    },
+    {
+        "userId": 3,
+        "taskId": 0, 
+        "courseId": 0,
+        "completed": 0,
+        "score": 5
+    },
+    {
+        "userId": 3,
+        "taskId": 1, 
+        "courseId": 0,
+        "completed": 0,
+        "score": 10
+    },
+    {
+        "userId": 4,
+        "taskId": 0, 
+        "courseId": 0,
+        "completed": 0,
+        "score": 50
+    },
+    {
+        "userId": 4,
+        "taskId": 1, 
+        "courseId": 0,
+        "completed": 1,
+        "score": 100
+    }
+]
