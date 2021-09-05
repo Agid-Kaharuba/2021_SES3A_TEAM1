@@ -8,11 +8,16 @@ import { AuthContext } from "../../../context/auth";
 import api from "../../../helpers/api";
 
 const useStyles = makeStyles({
+  root: {
+    minWidth: 250,
+    textDecoration: 'none',
+    height: 315
+  },
   bold: {
     fontWeight: 600
   },
   underline: {
-    textDecoration: 'none'
+    textDecorationLine: 'none'
   },
   italic: {
     fontStyle: 'italic'
@@ -20,6 +25,32 @@ const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
+  media: {
+    height: 143,
+    backgroundSize: 'contain'
+  },
+  gridContainer: {
+    paddingLeft: '20px',
+    paddingRight: '20px'
+  },
+  recipesModules: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(4,1fr)'
+  },
+  recipeImage: {
+    height: 143,
+    backgroundSize: 'contain',
+    marginBottom: 45
+  },
+  buttons: {
+    marginLeft: 10
+  },
+  text: {
+    textAlign: 'center'
+  },
+  actionArea: {
+    height: 315
+  }
 })
 
 export default function RecipesList() {
@@ -40,33 +71,39 @@ export default function RecipesList() {
   });
   const testMethod = () => {
     return(
-      <div className = {classes.recipes}>
+      <div className = {classes.recipeModules}>
        {recipesState.map((recipe) => {
          return buildRecipe(recipe);
        })}
        
        {authState.user.isSupervisor && (
-         <Grid item xs={12} sm={6} md={3}>
-         <Card className={classes.root} variant="outlined" style={{ textDecoration: 'none' }} component={Link} to={"/task/create"}>
-           <CardActionArea>
-           <CardMedia 
-           className={classes.media}
-           //these images are just placeholders for now
-           image="https://cdn0.iconfinder.com/data/icons/very-basic-2-android-l-lollipop-icon-pack/24/plus-512.png"
-           title="Fast Food Training"
-           />
-           <CardContent>
-             <Typography align="center" gutterBottom variant="h6" component="h2">
-             Create New Recipe
-           </Typography>
-           </CardContent>
-           </CardActionArea>
-         </Card>
-         </Grid>
-       )}
-   </div>
-    )
- }
+
+<Grid container className={classes.gridContainer}>
+<Grid item xs={12} sm={6} md={3}>
+  <Link to={"/dashboard/create"} className={classes.underline}>
+  <Card className={classes.root} variant="outlined">
+    <CardActionArea className={classes.actionArea}>
+    <CardMedia className={classes.recipeImage}
+    //these images are just placeholders for now
+    image="https://icons.veryicon.com/png/o/miscellaneous/standard-general-linear-icon/plus-60.png"
+    title="Create New Recipe"
+    />
+    <CardContent className={classes.text}>
+      <Typography gutterBottom variant="h6" component="h2">
+        Create New Recipe
+      </Typography>
+    </CardContent>
+    </CardActionArea>
+    </Card>
+    </Link>
+  </Grid>
+  
+</Grid>
+)}
+</div>
+)
+}
+
   const buildRecipe = (recipe) => {
     return (
       <Box mx={5} my={2}>
