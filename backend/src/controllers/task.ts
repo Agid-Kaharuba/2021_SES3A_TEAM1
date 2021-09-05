@@ -60,16 +60,18 @@ export default class TaskController {
   public async create(req: Request, res: Response) {
     const { body } = req;
     let user: any
-    user = req.user
-    console.log(user);
-    //const test = req.user._id
-    //const { user } = 
+    if (req.user){
+      user = req.user;
+    }
+    else{
+      user = null;
+    }
     const newTaskRequest = new Task({
       name: body.name,
       description: body.description,
       recipe: body.recipe,
       type: body.type,
-      userId: body.userId,
+      userId: user._id,
     } as any);
     newTaskRequest.save((err: any) => {
       if (err) {
