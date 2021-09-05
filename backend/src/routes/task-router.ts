@@ -1,5 +1,6 @@
 import { Express } from 'express';
 import TaskController from '../controllers/task';
+import { checkToken } from '../middleware/auth';
 
 export const TaskRoute = (app: Express, controller: TaskController) => {
   /**
@@ -51,7 +52,7 @@ export const TaskRoute = (app: Express, controller: TaskController) => {
      *    200:
      *     description: Success
      */
-  app.post('/task', controller.create);
+  app.post('/task', checkToken, controller.create);
   app.put('/task', controller.create);
 
   /**
