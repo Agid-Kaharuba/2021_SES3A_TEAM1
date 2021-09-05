@@ -3,12 +3,12 @@ import { Request, Response } from 'express';
 import Floor from '../model/floor';
 import ResponseService from '../helpers/response';
 
-
 export async function findFloor(Id: string) {
   return Floor.findOne({
     _id: Id,
   });
 }
+
 export default class FloorController {
   // Get all floorplans
   public async getAll(req: Request, res: Response) {
