@@ -10,11 +10,36 @@ export async function findTask(Id: string) {
   return task;
 }
 
+export async function findTaskByUser(Id: string) {
+  const task = await Task.find({
+    userId: Id,
+  }).populate('recipe');
+  return task;
+}
+
 export default class TaskController {
   // Get all tasks
   public async getAll(req: Request, res: Response) {
     try {
       const tasks = await Task.find({ archive: { $ne: true } });
+      ResponseService.successResponse(res, tasks);
+    } catch (err) {
+      ResponseService.mongoErrorResponse(res, err);
+    }
+  }
+
+  public async getAllById(req: Request, res: Response) {
+    try {
+      const tasks = await Task.find({ userId: req.params.userId, archive: false });
+      ResponseService.successResponse(res, tasks);
+    } catch (err) {
+      ResponseService.mongoErrorResponse(res, err);
+    }
+  }
+
+  public async getAllNotById(req: Request, res: Response) {
+    try {
+      const tasks = await Task.find({ userId: { $ne: req.params.userId }, archive: false });
       ResponseService.successResponse(res, tasks);
     } catch (err) {
       ResponseService.mongoErrorResponse(res, err);
@@ -39,6 +64,7 @@ export default class TaskController {
       description: body.description,
       recipe: body.recipe,
       type: body.type,
+      userId: body.userId,
     } as any);
     newTaskRequest.save((err: MongoError) => {
       if (err) {
