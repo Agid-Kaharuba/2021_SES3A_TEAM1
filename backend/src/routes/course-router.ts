@@ -139,7 +139,7 @@ export const CourseRoute = (app: Express, controller: CourseController) => {
      *         example: ["user01", "user02"]
      *        dueDate:
      *         type: Date
-     *         example: 05/09/2021
+     *         example: 2021/09/05
      *   responses:
      *    200:
      *     description: Success
