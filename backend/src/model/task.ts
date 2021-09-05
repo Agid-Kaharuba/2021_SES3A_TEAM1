@@ -22,6 +22,10 @@ const taskSchema = new mongoose.Schema({
     type: Boolean,
     required: false,
   },
+  userId:{
+    type: String,
+    required: false,
+  }
 });
 
 export default mongoose.model('Task', taskSchema);
