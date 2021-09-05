@@ -91,39 +91,38 @@ export default function CreateNewTrainingPage() {
     window.open('xrt-training://?courseId=' + courseID + '&token=' + token)
   }
 
-   const createTrainingModules = () => {
-     return(
-       <div className = {classes.trainingModules}>
+  const createTrainingModules = () => {
+    return (
+      <div className={classes.trainingModules}>
         {coursesState.map((course) => {
           return buildCourse(course);
         })}
         {/* Line checks if the user is a supervisor and show create training button if they are. */}
         {authState.user.isSupervisor && (
 
-            <Grid container className={classes.gridContainer}>
+          <Grid container className={classes.gridContainer}>
             <Grid item xs={12} sm={6} md={3}>
-              <Link to={"/dashboard/create"} className={classes.underline}>
-              <Card className={classes.root} variant="outlined">
+              <Card className={classes.root} variant="outlined" onClick={handleDialogOpen}>
                 <CardActionArea className={classes.actionArea}>
-                <CardMedia className={classes.trainingImage}
-                //these images are just placeholders for now
-                image="https://icons.veryicon.com/png/o/miscellaneous/standard-general-linear-icon/plus-60.png"
-                title="Create New Training"
-                />
-                <CardContent className={classes.text}>
-                  <Typography gutterBottom variant="h6" component="h2">
-                    Create New Training
-                  </Typography>
-                </CardContent>
+                  <CardMedia className={classes.trainingImage}
+                    //these images are just placeholders for now
+                    image="https://icons.veryicon.com/png/o/miscellaneous/standard-general-linear-icon/plus-60.png"
+                    title="Create New Training"
+                  />
+                  <CardContent className={classes.text}>
+                    <Typography gutterBottom variant="h6" component="h2">
+                      Create New Training
+                    </Typography>
+                  </CardContent>
                 </CardActionArea>
-                </Card>
-                </Link>
-              </Grid>
-              
+              </Card>
             </Grid>
+            <CreateNewTrainingDialog TrainingDialog open={open} onClose={handleClose}></CreateNewTrainingDialog>
+          </Grid>
+
         )}
-    </div>
-     )
+      </div>
+    )
   }
 
   const buildCourse = (course) => {
@@ -132,31 +131,31 @@ export default function CreateNewTrainingPage() {
         <Grid item xs={12} sm={6} md={3}>
           <Card className={classes.root} variant="outlined">
             <CardActionArea className={classes.actionArea}>
-            <CardMedia 
-            className={classes.media}
-             //these images are just placeholders for now
-            image="https://i.pinimg.com/originals/8b/f0/76/8bf07692b7f9704f1b3552943bdcf1cd.jpg"
-            title="Fast Food Training"
-            />
-            <CardContent className={classes.text}>
-              <Typography gutterBottom variant="h6" component="h2">
-              {course.name}
-            </Typography>
-              <Typography variant="body1" color="textSecondary" gutterBottom>
-                 {course.description}
-              </Typography>
-            </CardContent>
+              <CardMedia
+                className={classes.media}
+                //these images are just placeholders for now
+                image="https://i.pinimg.com/originals/8b/f0/76/8bf07692b7f9704f1b3552943bdcf1cd.jpg"
+                title="Fast Food Training"
+              />
+              <CardContent className={classes.text}>
+                <Typography gutterBottom variant="h6" component="h2">
+                  {course.name}
+                </Typography>
+                <Typography variant="body1" color="textSecondary" gutterBottom>
+                  {course.description}
+                </Typography>
+              </CardContent>
 
-            <CardActions className= {classes.buttons}>
-              <Link className={classes.underline} to={`/dashboard/${course._id}`}>
-                <Button size="small">View Training</Button>
-              </Link>
-              <Button size="small" onClick={() => handleLaunchXR(course._id)}>Launch XR</Button>
-            </CardActions>
+              <CardActions className={classes.buttons}>
+                <Link className={classes.underline} to={`/dashboard/${course._id}`}>
+                  <Button size="small">View Training</Button>
+                </Link>
+                <Button size="small" onClick={() => handleLaunchXR(course._id)}>Launch XR</Button>
+              </CardActions>
             </CardActionArea>
           </Card>
-          </Grid>
-          
+        </Grid>
+
       </Grid>
     )
   }
@@ -165,28 +164,10 @@ export default function CreateNewTrainingPage() {
     <Box>
 
       <Box m={5}>
-        <Grid
-          container
-          direction='row'
-          justify='space-between'
-          alignItems='baseline'>
-          <Grid item>
-            <Typography className={classes.bold} variant='h4'>
-              Dashboard
-            </Typography>
-          </Grid>
-          <Grid item>
-            {authState.user.isSupervisor && (
-              <div>
-                <Button onClick={handleDialogOpen} color="primary" variant="contained">Create Training</Button>
-                <CreateNewTrainingDialog open={open} onClose={handleClose}></CreateNewTrainingDialog>
-              </div>
-            )}
-          </Grid>
-        </Grid>
-        <Box my={1}>
-          <Divider variant="middle" />
-        </Box>
+        <Typography className={classes.bold} variant='h4'>
+          Dashboard
+        </Typography>
+        <Divider variant="middle" />
       </Box>
 
       <Box m={5}>
