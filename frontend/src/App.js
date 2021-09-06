@@ -29,7 +29,7 @@ import CreateNewCourse from './pages/supervisor/CreateCourse/createNewTraining';
 import ViewTrainingPage from './pages/viewtraining/viewtraining';
 
 // IMPORT TASKS PAGES
-import TaskList from "./pages/task/taskslist";
+import TaskList from "./pages/task/taskslist/taskList";
 import ViewTask from "./pages/task/viewtask";
 import CreateNewTask from "./pages/task/createtask/createtask.js";
 import CreateTaskGlobal from "./pages/task/createtask/createtaskglobal.js";
