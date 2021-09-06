@@ -6,19 +6,17 @@ import ResponseService from '../helpers/response';
 
 export default class CourseController {
   public async getAll(req: Request, res: Response) {
-    if (req.user){
-      const { user } = req;
-      try {
-        let courses;
-        if (user.isSupervisor) {
-          courses = await Course.find({ archive: { $ne: true } });
-        } else {
-          courses = await Course.find({ archive: { $ne: true }, assignedEmployees: user._id });
-        }
-        ResponseService.successResponse(res, courses);
-      } catch (err) {
-        ResponseService.mongoErrorResponse(res, err);
+    try {
+      const { user } = req
+      let courses;
+      if (user?.isSupervisor) {
+        courses = await Course.find({ archive: { $ne: true } });
+      } else {
+        courses = await Course.find({ archive: { $ne: true }, assignedEmployees: user?._id });
       }
+      ResponseService.successResponse(res, courses);
+    } catch (err) {
+      ResponseService.mongoErrorResponse(res, err);
     }
   }
 
