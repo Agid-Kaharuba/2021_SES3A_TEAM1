@@ -11,7 +11,8 @@ const taskSchema = new mongoose.Schema({
     required: false,
   },
   recipe: {
-    type: Recipe.schema,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Recipe",
     required: false,
   },
   type: {

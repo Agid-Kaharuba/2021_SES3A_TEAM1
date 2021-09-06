@@ -8,7 +8,8 @@ import TextField from '@material-ui/core/TextField';
 import SearchIcon from '@material-ui/icons/Search';
 import IconButton from "@material-ui/core/IconButton";
 import api from '../../helpers/api'
-import { AuthContext } from "../../context/auth";const useStyles = makeStyles({
+import { AuthContext } from "../../context/auth";
+const useStyles = makeStyles({
   bold: {
     fontWeight: 600
   },
@@ -24,24 +25,9 @@ import { AuthContext } from "../../context/auth";const useStyles = makeStyles({
 })
 
 
-export default function Users({usersState, setUsersState, course}){
+export default function Users({usersState, setUsersState, course, filter =()=>true}){
     const classes = useStyles();
-    const [search, setSearch] = React.useState("");
     const { authState } = useContext(AuthContext);
-
-    function handleChange(e) {
-      const { name, value } = e.target;
-      setSearch(value)
-      console.log(value)
-    }
-
-    function filter(user) {
-      const re = new RegExp(search.toLowerCase());
-      if (!search) {
-        return true
-      }
-      return re.test(user.staffid) || re.test(user.firstname.toLowerCase()) || re.test(user.lastname.toLowerCase())
-    }
 
     function onDeleteClick(user) {
       api.user.delete(authState.token, user._id)
@@ -61,43 +47,25 @@ export default function Users({usersState, setUsersState, course}){
               </Link>)}
               </TableCell> */}
               <TableCell>
+                <IconButton
+                  color="inherit"
+                >
                 <EditIcon/>
+                </IconButton>
               </TableCell>
               <TableCell>
-              <IconButton
-                color="inherit"
-                onClick={() => onDeleteClick(user)}
-              >
-                <DeleteIcon/>
-              </IconButton>
+                <IconButton
+                  color="inherit"
+                  onClick={() => onDeleteClick(user)}
+                >
+                  <DeleteIcon/>
+                </IconButton>
               </TableCell>
           </TableRow>
         )
         }
 
     return(
-        <Container maxWidth="md">
-         <Box m={5}>
-             <Grid container spacing={2} justify="space-between">
-                <Grid item>
-                    <Typography className={classes.bold} variant='h4'>
-                    Users
-                    </Typography>
-                </Grid>
-              <div className={classes.margin}>
-                  <Grid container spacing={1} alignItems="flex-end">
-                    <Grid item>
-                      <SearchIcon />
-                    </Grid>
-                    <Grid item>
-                      <TextField id="user-search" label="Search" onChange={handleChange}/>
-                    </Grid>
-                  </Grid>
-                </div>
-              </Grid>
-            <Divider variant="fullwidth" />
-          </Box>
-    
           <Box m={5}>
               <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="simple table">
@@ -119,6 +87,5 @@ export default function Users({usersState, setUsersState, course}){
                 </Table>
               </TableContainer>
           </Box>
-        </Container>
         );
 }
