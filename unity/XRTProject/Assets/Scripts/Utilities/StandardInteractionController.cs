@@ -17,7 +17,7 @@ public class StandardInteractionController : MonoBehaviour {
             Ray ray = Camera.main.ScreenPointToRay ( Input.mousePosition );
             RaycastHit hit;
             if ( Physics.Raycast ( ray, out hit ) ) {
-                if ( hit.transform.gameObject == GameObject.Find ( "grill_knob" ) ) {
+                if ( hit.transform.gameObject == GameObject.Find ( "GrillKnob" ) ) {
                     grill.ToggleGrill ();
                     Debug.Log ( "Grill" );
                 }
