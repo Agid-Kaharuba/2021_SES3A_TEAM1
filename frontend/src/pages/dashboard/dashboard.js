@@ -12,9 +12,9 @@ import CreateNewTrainingDialog from "../supervisor/CreateCourse";
 
 const useStyles = makeStyles({
   root: {
-    minWidth: 250,
+    minWidth: 285,
     textDecoration: 'none',
-    height: 315
+    height: 355
   },
   bold: {
     fontWeight: 600
@@ -33,8 +33,9 @@ const useStyles = makeStyles({
     backgroundSize: 'contain'
   },
   gridContainer: {
-    paddingLeft: '20px',
-    paddingRight: '20px'
+    paddingLeft: 20,
+    paddingRight: 20,
+    marginBottom: 50
   },
   trainingModules: {
     display: 'grid',
@@ -43,16 +44,18 @@ const useStyles = makeStyles({
   trainingImage: {
     height: 143,
     backgroundSize: 'contain',
-    marginBottom: 45
+    marginBottom: 59,
+    marginTop: 34
   },
   buttons: {
     marginLeft: 10
   },
   text: {
-    textAlign: 'center'
+    textAlign: 'center',
+    height: 120
   },
   actionArea: {
-    height: 315
+    height: 355
   }
 })
 
@@ -141,6 +144,9 @@ export default function CreateNewTrainingPage() {
             <CardContent className={classes.text}>
               <Typography gutterBottom variant="h6" component="h2">
               {course.name}
+            </Typography>
+            <Typography gutterBottom variant="body2" component="h2">
+              16th August
             </Typography>
               <Typography variant="body1" color="textSecondary" gutterBottom>
                  {course.description}
