@@ -10,7 +10,8 @@ import {
   updateUser,
   uploadImage,
   downloadImage,
-  searchUser
+  searchUser, 
+  deleteUser
 } from "./user";
 import {
   getAllCourses,
@@ -32,8 +33,10 @@ import {
   getRecipe
 } from "./recipe";
 
-export const API_HOST = "http://localhost:4000";
-// export const API_HOST = "http://ec2-54-206-90-20.ap-southeast-2.compute.amazonaws.com:4000";
+import dotenv from "dotenv";
+dotenv.config();
+
+export const API_HOST = process.env.REACT_APP_API_HOST ?? 'http://ec2-13-55-156-75.ap-southeast-2.compute.amazonaws.com:4000';
 
 export default {
   auth: {
@@ -48,7 +51,8 @@ export default {
     update: updateUser,
     upload: uploadImage,
     download: downloadImage,
-    search: searchUser
+    search: searchUser,
+    delete: deleteUser
   },
   course: {
     getAll: getAllCourses,

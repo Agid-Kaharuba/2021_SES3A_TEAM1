@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
-import Tasks from "../../../components/Task/list.js";
-import { Box, Button, Typography, Divider, Card, CardContent, CardActions, CardActionArea, CardMedia, Paper, Grid } from "@material-ui/core";
+import Recipes from "../../../components/Recipe/list.js";
+import { Button, Typography, Box, Divider, Table, TableBody, TableCell, TableContainer, Card, CardContent, CardActions, CardActionArea, CardMedia, TableHead, TableRow, Paper, Grid } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../../context/auth";
 import api from "../../../helpers/api";
-import { makeStyles } from "@material-ui/core/styles";
-import { Link } from "react-router-dom";
-
 
 const useStyles = makeStyles({
   root: {
@@ -53,35 +53,35 @@ const useStyles = makeStyles({
   }
 })
 
-
-export default function TasksList() {
+export default function RecipesList() {
   const classes = useStyles();
   const { authState } = useContext(AuthContext);
-  const [tasksState, setTasksState] = useState(undefined);
+  const [recipesState, setRecipesState] = useState(undefined);
 
   const fetchData = async () => {
-    const res = await api.task.getAll(authState.token);
-    setTasksState(res.data);
+    const res = await api.recipe.getAll(authState.token);
+    setRecipesState(res.data);
+    console.log(res.data);
   };
 
   useEffect(() => {
-    if (tasksState === undefined) {
+    if (recipesState === undefined) {
       fetchData();
     }
   });
 
-  const createTaskModules = () => {
+  const createRecipeModules = () => {
     return(
       <div className = {classes.trainingModules}>
-       {tasksState.map((task) => {
-         return buildTask(task);
+       {recipesState.map((recipe) => {
+         return buildRecipe(recipe);
        })}
        {/* Line checks if the user is a supervisor and show create training button if they are. */}
        {authState.user.isSupervisor && (
 
            <Grid container className={classes.gridContainer}>
            <Grid item xs={12} sm={6} md={3}>
-             <Link to={"/dashboard/create"} className={classes.underline}>
+             <Link to={"/recipe/create"} className={classes.underline}>
              <Card className={classes.root} variant="outlined">
                <CardActionArea className={classes.actionArea}>
                <CardMedia className={classes.trainingImage}
@@ -91,7 +91,7 @@ export default function TasksList() {
                />
                <CardContent className={classes.text}>
                  <Typography gutterBottom variant="h6" component="h2">
-                   Create New Task
+                   Create New Recipe
                  </Typography>
                </CardContent>
                </CardActionArea>
@@ -105,7 +105,7 @@ export default function TasksList() {
     )
  }
 
- const buildTask = (task) => {
+ const buildRecipe = (recipe) => {
    return (
      <Grid container className={classes.gridContainer}>
        <Grid item xs={12} sm={6} md={3}>
@@ -119,16 +119,16 @@ export default function TasksList() {
            />
            <CardContent className={classes.text}>
              <Typography gutterBottom variant="h6" component="h2">
-             {task.name}
+             {recipe.name}
            </Typography>
              <Typography variant="body1" color="textSecondary" gutterBottom>
-                {task.description}
+                {recipe.description}
              </Typography>
            </CardContent>
 
            <CardActions className= {classes.buttons}>
-             <Link className={classes.underline} to={`/task/${task._id}`}>
-               <Button size="small">View Task</Button>
+             <Link className={classes.underline} to={`/recipe/${recipe._id}`}>
+               <Button size="small">View Recipe</Button>
              </Link>
            </CardActions>
            </CardActionArea>
@@ -150,7 +150,7 @@ export default function TasksList() {
          alignItems='baseline'>
          <Grid item>
            <Typography className={classes.bold} variant='h4'>
-             Tasks
+             Recipes
            </Typography>
          </Grid>
          <Grid item>
@@ -163,8 +163,8 @@ export default function TasksList() {
      </Box>
 
      <Box m={5}>
-       {tasksState ?
-         createTaskModules()
+       {recipesState ?
+         createRecipeModules()
          :
          <h1>LOADING</h1>
        }

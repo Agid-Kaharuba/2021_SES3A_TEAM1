@@ -56,3 +56,12 @@ export const searchUser = async (token, query) => {
 	});
 	return res;
   }
+
+export const deleteUser = async (token, userId) => {
+	const res = await axios.delete(`${API_HOST}/user/${userId}`,
+		{
+			headers: { Authorization: `Bearer ${token}` },
+		}
+	);
+	return res;
+}
