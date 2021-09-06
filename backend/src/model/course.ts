@@ -10,8 +10,13 @@ const courseSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
+  image: {
+    type: String,
+    required: false,
+  },
   tasks: [{
-    type: Task.schema,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Task',
     required: false,
   }],
   assignedEmployees: [{

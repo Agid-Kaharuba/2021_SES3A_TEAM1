@@ -6,6 +6,13 @@ import ResponseService from '../helpers/response';
 export async function findTask(Id: string) {
   const task = await Task.findOne({
     _id: Id,
+  });
+  return task;
+}
+
+export async function findTaskByUser(Id: string) {
+  const task = await Task.find({
+    userId: Id,
   }).populate('recipe');
   return task;
 }
@@ -15,6 +22,24 @@ export default class TaskController {
   public async getAll(req: Request, res: Response) {
     try {
       const tasks = await Task.find({ archive: { $ne: true } });
+      ResponseService.successResponse(res, tasks);
+    } catch (err) {
+      ResponseService.mongoErrorResponse(res, err);
+    }
+  }
+
+  public async getAllById(req: Request, res: Response) {
+    try {
+      const tasks = await Task.find({ userId: req.params.userId });
+      ResponseService.successResponse(res, tasks);
+    } catch (err) {
+      ResponseService.mongoErrorResponse(res, err);
+    }
+  }
+
+  public async getAllNotById(req: Request, res: Response) {
+    try {
+      const tasks = await Task.find({ userId: { $ne: req.params.userId } });
       ResponseService.successResponse(res, tasks);
     } catch (err) {
       ResponseService.mongoErrorResponse(res, err);
@@ -34,11 +59,19 @@ export default class TaskController {
   // Create a task
   public async create(req: Request, res: Response) {
     const { body } = req;
+    let user: any
+    if (req.user){
+      user = req.user;
+    }
+    else{
+      user = null;
+    }
     const newTaskRequest = new Task({
       name: body.name,
       description: body.description,
       recipe: body.recipe,
       type: body.type,
+      userId: user._id,
     } as any);
     newTaskRequest.save((err: any) => {
       if (err) {

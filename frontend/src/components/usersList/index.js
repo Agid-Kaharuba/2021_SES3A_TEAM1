@@ -1,9 +1,14 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Button, Container, Typography, Box, Divider, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
 import { Link } from "react-router-dom";
-
+import TextField from '@material-ui/core/TextField';
+import SearchIcon from '@material-ui/icons/Search';
+import IconButton from "@material-ui/core/IconButton";
+import api from '../../helpers/api'
+import { AuthContext } from "../../context/auth";
 const useStyles = makeStyles({
   bold: {
     fontWeight: 600
@@ -15,13 +20,19 @@ const useStyles = makeStyles({
     fontStyle: 'italic'
   },
   table: {
-    minWidth: 650,
-  },
+    minWidth: 650
+  }
 })
 
 
-export default function Users({usersState, course}){
+export default function Users({usersState, setUsersState, course, filter =()=>true}){
     const classes = useStyles();
+    const { authState } = useContext(AuthContext);
+
+    function onDeleteClick(user) {
+      api.user.delete(authState.token, user._id)
+      setUsersState(usersState.filter((x)=>x._id != user._id))
+    }
 
     function buildUser(user) {
         return (
@@ -29,29 +40,32 @@ export default function Users({usersState, course}){
               <TableCell align="left">{user.firstname}</TableCell>
               <TableCell align="left">{user.lastname}</TableCell>
               <TableCell align="left">{user.staffid}</TableCell>
-              <TableCell align="left">
+              {/* Don't know what is going here with the statistics */}
+              {/* <TableCell align="left">
               {course && (<Link className={classes.underline} to={`/dashboard/${course._id}/statistics/${user._id}`}>
                   <Button variant="outlined" color="secondary">View Statistics</Button>
               </Link>)}
-               
+              </TableCell> */}
+              <TableCell>
+                <IconButton
+                  color="inherit"
+                >
+                <EditIcon/>
+                </IconButton>
+              </TableCell>
+              <TableCell>
+                <IconButton
+                  color="inherit"
+                  onClick={() => onDeleteClick(user)}
+                >
+                  <DeleteIcon/>
+                </IconButton>
               </TableCell>
           </TableRow>
         )
         }
 
     return(
-        <>
-         <Box m={5}>
-             <Grid container spacing={2} justify="space-between">
-                <Grid item>
-                    <Typography className={classes.bold} variant='h4'>
-                    Users
-                    </Typography>
-                </Grid>
-              </Grid>
-            <Divider variant="middle" />
-          </Box>
-    
           <Box m={5}>
               <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="simple table">
@@ -60,19 +74,18 @@ export default function Users({usersState, course}){
                             <TableCell className={classes.bold} align="left">First Name</TableCell>
                             <TableCell className={classes.bold} align="left">Last Name</TableCell>
                             <TableCell className={classes.bold} align="left">Staff ID</TableCell>
+                            {/* <TableCell align="right"></TableCell> */}
+                            <TableCell align="right"></TableCell>
                             <TableCell align="right"></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {usersState && usersState.map((user) => {
+                        {usersState && usersState.filter(filter).map((user) => {
                             return buildUser(user);
                         })}
                     </TableBody>
                 </Table>
               </TableContainer>
           </Box>
-        </>
         );
 }
-
-

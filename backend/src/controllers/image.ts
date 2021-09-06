@@ -22,8 +22,9 @@ export default class ImageController {
     // @ts-ignore
     const { mimetype } = req.file;
     // @ts-ignore
-    const img = req.file.buffer;
-    // const name = originalName.substring(0, originalName.lastIndexOf('.'));
+    const img64 = req.file.buffer.toString('base64');
+    // @ts-ignore
+    const img = `data:${mimetype};base64,${img64}`;
     // @ts-ignore
     const name = req.file.originalname;
     let delet = false;
@@ -74,10 +75,7 @@ export default class ImageController {
 
     ProfileImage.findOne({ name }, (err: Error, image: typeof ProfileImage) => {
       if (image) {
-        const fileType = (image as any).mimetype;
-        const conversion = ((image as any).img).toString('base64');
-        res.set('Content-Type', fileType);
-        return res.status(200).send(`data:${fileType};base64,${conversion}`);
+        return res.status(200).send((image as any).img)
       }
       // ResponseService.mongoNotFoundResponse(res, "File not found");
       return res.status(200).send('https://i.pinimg.com/236x/1f/25/5d/1f255d7f9cf3afe7cd9cd97626d08fbf.jpg');

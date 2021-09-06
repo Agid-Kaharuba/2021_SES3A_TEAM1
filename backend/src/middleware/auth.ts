@@ -4,10 +4,13 @@ import config from '../helpers/config';
 import User from '../model/user';
 import ResponseService from '../helpers/response';
 
-const getAuthToken = (req: Request): string|null => {
+const SUPERVISOR_TOKEN = 'SUPERVISOR';
+const EMPLOYEE_TOKEN = 'EMPLOYEE';
+
+const getAuthToken = (req: Request): string | null => {
   if (
     req.headers.authorization
-        && req.headers.authorization.split(' ')[0] === 'Bearer'
+    && req.headers.authorization.split(' ')[0] === 'Bearer'
   ) {
     return req.headers.authorization.split(' ')[1];
   }
@@ -26,6 +29,20 @@ const getUser = async (token: any) => {
 
 const verifyUser = async (req: Request, res: Response, next: any) => {
   const token = getAuthToken(req);
+  //Supervisor
+  if (token == SUPERVISOR_TOKEN) {
+    // @ts-ignore
+    req.user = await User.findOne({ username: "supervisor" });;
+    return next();
+  }
+
+  //Employee
+  if (token == EMPLOYEE_TOKEN) {
+    // @ts-ignore
+    req.user = await User.findOne({ username: "employee" });;
+    return next();
+  }
+
   if (!token) {
     ResponseService.unauthorizedResponse(res, 'Unauthorized - no token found');
   } else {

@@ -2,7 +2,6 @@ import { Server } from 'http';
 import bodyParser from 'body-parser';
 import config from './helpers/config';
 import cors from 'cors';
-import dotenv from 'dotenv';
 import express from 'express';
 import fs from 'fs';
 import mongoose from 'mongoose';
@@ -11,8 +10,10 @@ import swaggerJsDoc from 'swagger-jsdoc';
 import swaggerUI from 'swagger-ui-express';
 import ApiInitializer from './initializer';
 import { Routes } from './routes';
+import masterData from './helpers/unity-data'
 
 const mongoUri = `${config.DATABASE_URL}/${config.DATABASE_NAME}` as string;
+// @ts-ignore
 mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
   if (err) {
     throw err;
@@ -54,7 +55,7 @@ const swaggerOptions = {
 };
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 if (process.env.STAGE !== 'prod') {
-	fs.writeFileSync('../docs/swagger/swagger.json', JSON.stringify(swaggerDocs));
+  fs.writeFileSync('../docs/swagger/swagger.json', JSON.stringify(swaggerDocs));
 }
 app.use('/swagger', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
@@ -86,5 +87,8 @@ const server: Server = app.listen(config.API_PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`Swagger Docs:              http://localhost:${config.API_PORT}/swagger`);
 });
+
+//Unity Test Data
+masterData();
 
 module.exports = server;
