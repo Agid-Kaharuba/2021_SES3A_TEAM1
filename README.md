@@ -1,6 +1,6 @@
 # XRT Project (Extended Reality Training Project)
 
-A Software engineering project about using VR/AR technology for creating a platform that provides extensive and immersive training.
+A Software engineering project about using VR/AR technology for creating a platform that provides extensive and immersive training. TEST
 
 ### Project Outline
 The Virtual Organizational Training Experience is focusing on large corporate organizations that are looking to improve their training experience. The training experience is envisioned to eventually become a platform where companies can create their own XR training modules however, due to the time constraints of Software Studio 3A/3B, we will focus on creating the webapp component of the product, and one specific training scenario which is burger training for now.
