@@ -80,7 +80,7 @@ export default function CreateNewTrainingDialog(props) {
   const [imagesrc, setImagesrc] = useState(bbt);
 
 
-  //SAVE COURSE
+  //#region SAVE COURSE
   const [formState, setFormState] = useState({ name: "", description: "" });
   const { authState, setAuthState } = React.useContext(AuthContext);
   let history = useHistory();
@@ -105,9 +105,9 @@ export default function CreateNewTrainingDialog(props) {
   const handleCloseTraining = () => {
     onCloseTraining();
   };
+  //#endregion
 
-
-  // CREATE TASKS
+  //#region CREATE TASKS
   const [openTask, setOpenTask] = React.useState(false);
 
   const handleClickOpenTask = () => {
@@ -133,6 +133,8 @@ export default function CreateNewTrainingDialog(props) {
   };
 
   const [tasksState, setTasksState] = useState(undefined);
+  const [rowsTasks, setRowsTasks] = React.useState([]);
+  const [checkedTask, setCheckedTask] = React.useState([1]);
 
   const fetchDataTask = async () => {
     const res = await api.task.getAll(authState.token);
@@ -141,7 +143,9 @@ export default function CreateNewTrainingDialog(props) {
 
   const taskCreated = (value) => {
     if (value) {
-      fetchDataTask();
+      tasksState.push(value);
+      rowsTasks.push(value);
+      checkedTask.push(value);
     }
   };
 
@@ -150,12 +154,6 @@ export default function CreateNewTrainingDialog(props) {
       fetchDataTask();
     }
   });
-
-
-  const [rowsTasks, setRowsTasks] = React.useState([]);
-
-  const [checkedTask, setCheckedTask] = React.useState([1]);
-
 
   const handleToggleTask = (value) => () => {
     const currentIndex = checkedTask.indexOf(value);
@@ -223,10 +221,9 @@ export default function CreateNewTrainingDialog(props) {
       </TableRow>
     )
   }
+  //#endregion
 
-
-
-  //ASSIGN EMPLOYEE
+  //#region ASSIGN EMPLOYEE
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -337,8 +334,9 @@ export default function CreateNewTrainingDialog(props) {
       </TableRow>
     )
   }
+  //#endregion
 
-  //Build Stepper
+  //#region Build Stepper
 
   function getSteps() {
     return ['Training Details', 'Assign Tasks', 'Assign Employees'];
@@ -570,6 +568,7 @@ export default function CreateNewTrainingDialog(props) {
   const handleStepperReset = () => {
     setActiveStep(0);
   };
+  //#endregion
 
   function DialogTitle(props) {
     const classes = useStyles();

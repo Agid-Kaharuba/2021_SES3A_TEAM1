@@ -94,8 +94,8 @@ export default function CreateNewTaskGlobalDialog(props) {
           console.log(err);
         }
       }
-      await api.task.create(authState.token, formState);
-      props.createdTask(true);
+      const res = await api.task.create(authState.token, formState);
+      props.createdTask(res.data);
       setResultState("Success");
       setOpenNotification(true);
       setSeverity("success");
