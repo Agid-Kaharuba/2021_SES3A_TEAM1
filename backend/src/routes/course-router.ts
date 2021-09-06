@@ -93,6 +93,9 @@ export const CourseRoute = (app: Express, controller: CourseController) => {
      *          type: string
      *          example: "user01"
      *         example: ["user01", "user02"]
+     *        dueDate:
+     *         type: Date
+     *         example: 05/09/2021
      *   responses:
      *    200:
      *     description: Success
@@ -134,6 +137,9 @@ export const CourseRoute = (app: Express, controller: CourseController) => {
      *          type: string
      *          example: "user01"
      *         example: ["user01", "user02"]
+     *        dueDate:
+     *         type: Date
+     *         example: yyyy-mm-dd
      *   responses:
      *    200:
      *     description: Success
