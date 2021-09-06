@@ -1,20 +1,18 @@
-import React, { useEffect, useState, useContext } from "react";
-
-// IMPORT COMPONENTS
-import { Box, Button, Typography, Divider, Card, CardContent, CardActions, Grid, CardMedia, CardActionArea } from "@material-ui/core";
+import React, { useState, useEffect, useContext } from "react";
+import Tasks from "../../../components/Task/list.js";
+import { Box, Button, Typography, Divider, Card, CardContent, CardActions, CardActionArea, CardMedia, Paper, Grid } from "@material-ui/core";
+import { AuthContext } from "../../../context/auth";
+import api from "../../../helpers/api";
 import { makeStyles } from "@material-ui/core/styles";
-
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../context/auth";
-import api from "../../helpers/api";
-import CreateNewTrainingDialog from "../supervisor/CreateCourse/createNewTraining";
+import CreateNewTaskGlobalDialog from "../createtask/createtaskglobal.js";
 
 
 const useStyles = makeStyles({
   root: {
-    minWidth: 285,
+    minWidth: 250,
     textDecoration: 'none',
-    height: 355
+    height: 315
   },
   bold: {
     fontWeight: 600
@@ -33,72 +31,67 @@ const useStyles = makeStyles({
     backgroundSize: 'contain'
   },
   gridContainer: {
-    paddingLeft: 20,
-    paddingRight: 20,
-    marginBottom: 50
+    paddingLeft: '20px',
+    paddingRight: '20px'
   },
   trainingModules: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(4,1fr)'
+    gridTemplateColumns: 'repeat(4,1fr)',
+    rowGap: '1em'
   },
   trainingImage: {
     height: 143,
     backgroundSize: 'contain',
-    marginBottom: 59,
-    marginTop: 34
+    marginBottom: 45
   },
   buttons: {
     marginLeft: 10
   },
   text: {
-    textAlign: 'center',
-    height: 120
+    textAlign: 'center'
   },
   actionArea: {
-    height: 355
+    height: 315
   }
 })
 
 
-
-export default function CreateNewTrainingPage() {
+export default function TasksList() {
   const classes = useStyles();
   const { authState } = useContext(AuthContext);
-  const [coursesState, setCoursesState] = useState(undefined);
-  // const [coursesState, setCoursesState] = useState([{"name":"test","description":"asdsdf"},{"name":"test","description":"asdsdf"}]);
+  const [tasksState, setTasksState] = useState(undefined);
 
+  // open/close dialog
   const [open, setOpen] = React.useState(false);
-
   const handleDialogOpen = () => {
     setOpen(true);
   };
-
   const handleClose = (value) => {
     setOpen(false);
   };
 
   const fetchData = async () => {
-    const res = await api.course.getAll(authState.token);
-    setCoursesState(res.data);
+    const res = await api.task.getAll(authState.token);
+    setTasksState(res.data);
+  };
+
+  const taskCreated = (value) => {
+    if (value) {
+      fetchData();
+    }
   };
 
   useEffect(() => {
-    if (coursesState === undefined) {
+    if (tasksState === undefined) {
       fetchData();
     }
   });
 
-  //Passes courseID and authState token to launch XR training module
-  const handleLaunchXR = (courseID) => {
-    const token = authState.token
-    window.open('xrt-training://?courseId=' + courseID + '&token=' + token)
-  }
-
-  const createTrainingModules = () => {
+  const createTaskModules = () => {
     return (
       <div className={classes.trainingModules}>
-        {coursesState.map((course) => {
-          return buildCourse(course);
+        {tasksState.map((task) => {
+          return buildTask(task);
         })}
         {/* Line checks if the user is a supervisor and show create training button if they are. */}
         {authState.user.isSupervisor && (
@@ -114,21 +107,21 @@ export default function CreateNewTrainingPage() {
                   />
                   <CardContent className={classes.text}>
                     <Typography gutterBottom variant="h6" component="h2">
-                      Create New Training
+                      Create New Task
                     </Typography>
                   </CardContent>
                 </CardActionArea>
               </Card>
+              <CreateNewTaskGlobalDialog open={open} onClose={handleClose} createdTask={taskCreated}></CreateNewTaskGlobalDialog>
             </Grid>
-            <CreateNewTrainingDialog TrainingDialog open={open} onClose={handleClose}></CreateNewTrainingDialog>
-          </Grid>
 
+          </Grid>
         )}
       </div>
     )
   }
 
-  const buildCourse = (course) => {
+  const buildTask = (task) => {
     return (
       <Grid container className={classes.gridContainer}>
         <Grid item xs={12} sm={6} md={3}>
@@ -142,21 +135,17 @@ export default function CreateNewTrainingPage() {
               />
               <CardContent className={classes.text}>
                 <Typography gutterBottom variant="h6" component="h2">
-                  {course.name}
-                </Typography>
-                <Typography gutterBottom variant="body2" component="h2">
-                  16th August
+                  {task.name}
                 </Typography>
                 <Typography variant="body1" color="textSecondary" gutterBottom>
-                  {course.description}
+                  {task.description}
                 </Typography>
               </CardContent>
 
               <CardActions className={classes.buttons}>
-                <Link className={classes.underline} to={`/dashboard/${course._id}`}>
-                  <Button size="small">View Training</Button>
+                <Link className={classes.underline} to={`/task/${task._id}`}>
+                  <Button size="small">View Task</Button>
                 </Link>
-                <Button size="small" onClick={() => handleLaunchXR(course._id)}>Launch XR</Button>
               </CardActions>
             </CardActionArea>
           </Card>
@@ -170,15 +159,28 @@ export default function CreateNewTrainingPage() {
     <Box>
 
       <Box m={5}>
-        <Typography className={classes.bold} variant='h4'>
-          Dashboard
-        </Typography>
-        <Divider variant="middle" />
+        <Grid
+          container
+          direction='row'
+          justify='space-between'
+          alignItems='baseline'>
+          <Grid item>
+            <Typography className={classes.bold} variant='h4'>
+              Tasks
+            </Typography>
+          </Grid>
+          <Grid item>
+            {authState.user.isSupervisor}
+          </Grid>
+        </Grid>
+        <Box my={1}>
+          <Divider variant="middle" />
+        </Box>
       </Box>
 
       <Box m={5}>
-        {coursesState ?
-          createTrainingModules()
+        {tasksState ?
+          createTaskModules()
           :
           <h1>LOADING</h1>
         }

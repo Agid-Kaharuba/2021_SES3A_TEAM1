@@ -26,7 +26,7 @@ import { AuthContext } from "../../../context/auth";
 import api from "../../../helpers/api";
 import PlaceholderImage from "../../../components/uploadImage";
 import bbt from "../../../images/bbt.jpg";
-
+import CreateNewTaskGlobalDialog from "../../task/createtask/createtaskglobal";
 
 const useStyles = makeStyles(theme => ({
   bold: {
@@ -80,7 +80,7 @@ export default function CreateNewTrainingDialog(props) {
   const [imagesrc, setImagesrc] = useState(bbt);
 
 
-  //SAVE COURSE
+  //#region SAVE COURSE
   const [formState, setFormState] = useState({ name: "", description: "" });
   const { authState, setAuthState } = React.useContext(AuthContext);
   let history = useHistory();
@@ -105,9 +105,9 @@ export default function CreateNewTrainingDialog(props) {
   const handleCloseTraining = () => {
     onCloseTraining();
   };
+  //#endregion
 
-
-  // CREATE TASKS
+  //#region CREATE TASKS
   const [openTask, setOpenTask] = React.useState(false);
 
   const handleClickOpenTask = () => {
@@ -120,14 +120,33 @@ export default function CreateNewTrainingDialog(props) {
 
   const imageChange = (e) => {
     setImagesrc(e);
-  
-}
+
+  }
+
+  // open/close dialog
+  const [openCreateTask, setOpenCreateTask] = React.useState(false);
+  const handleCreateTaskOpen = () => {
+    setOpenCreateTask(true);
+  };
+  const handleCreateTaskClose = (value) => {
+    setOpenCreateTask(false);
+  };
 
   const [tasksState, setTasksState] = useState(undefined);
+  const [rowsTasks, setRowsTasks] = React.useState([]);
+  const [checkedTask, setCheckedTask] = React.useState([1]);
 
   const fetchDataTask = async () => {
     const res = await api.task.getAll(authState.token);
     setTasksState(res.data);
+  };
+
+  const taskCreated = (value) => {
+    if (value) {
+      tasksState.push(value);
+      rowsTasks.push(value);
+      checkedTask.push(value);
+    }
   };
 
   useEffect(() => {
@@ -135,12 +154,6 @@ export default function CreateNewTrainingDialog(props) {
       fetchDataTask();
     }
   });
-
-
-  const [rowsTasks, setRowsTasks] = React.useState([]);
-
-  const [checkedTask, setCheckedTask] = React.useState([1]);
-
 
   const handleToggleTask = (value) => () => {
     const currentIndex = checkedTask.indexOf(value);
@@ -208,18 +221,17 @@ export default function CreateNewTrainingDialog(props) {
       </TableRow>
     )
   }
+  //#endregion
 
-
-
-  //ASSIGN EMPLOYEE
+  //#region ASSIGN EMPLOYEE
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
-    setOpen(true);
+    setOpenCreateTask(true);
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setOpenCreateTask(false);
   };
 
   const [usersState, setUsersState] = useState(undefined);
@@ -322,8 +334,9 @@ export default function CreateNewTrainingDialog(props) {
       </TableRow>
     )
   }
+  //#endregion
 
-  //Build Stepper
+  //#region Build Stepper
 
   function getSteps() {
     return ['Training Details', 'Assign Tasks', 'Assign Employees'];
@@ -331,11 +344,11 @@ export default function CreateNewTrainingDialog(props) {
 
   function getStepContent(step) {
     switch (step) {
-      case 0:
+      case 0: // training description
         return (
           <Grid container spacing={2}>
             <Grid item sm={12} md={3}>
-              <PlaceholderImage imageChange={imageChange} imagesrc={imagesrc}/>
+              <PlaceholderImage imageChange={imageChange} imagesrc={imagesrc} />
             </Grid>
             <Grid item sm={12} md={9}>
               <form>
@@ -367,7 +380,7 @@ export default function CreateNewTrainingDialog(props) {
             </Grid>
           </Grid>
         );
-      case 1:
+      case 1: // create/assign task
         return (
           <div>
             <Grid item>
@@ -375,14 +388,15 @@ export default function CreateNewTrainingDialog(props) {
               Add Task
             </Button> */}
               <div >
-                <Button className={classes.title} component={Link} color="primary" variant="contained" to={"/task/create"}>
+                <Button className={classes.title} component={Link} color="primary" variant="contained" onClick={handleCreateTaskOpen}>
                   Create Task
                 </Button>
-
                 <Button className={classes.title} variant="contained" color="primary" onClick={handleClickOpenTask}>
                   Assign Task
                 </Button>
-                <Dialog fullScreen open={openTask} onClose={handleCloseTask} TransitionComponent={Transition}>
+
+                <CreateNewTaskGlobalDialog open={openCreateTask} onClose={handleCreateTaskClose} createdTask={taskCreated}></CreateNewTaskGlobalDialog>
+                <Dialog open={openTask} onClose={handleCloseTask} TransitionComponent={Transition} fullWidth="true" maxWidth="sm">
                   <AppBar className={classes.appBar}>
                     <Toolbar>
                       <IconButton edge="start" color="inherit" onClick={handleCloseTask} aria-label="close">
@@ -443,7 +457,7 @@ export default function CreateNewTrainingDialog(props) {
             </Box>
           </div>
         );
-      case 2:
+      case 2: // assign employees
         return (
           <div>
             <Box m={5}>
@@ -462,16 +476,16 @@ export default function CreateNewTrainingDialog(props) {
                     <Button variant="contained" color="primary" onClick={handleClickOpen}>
                       Assign User
                     </Button>
-                    <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
+                    <Dialog open={openCreateTask} onClose={handleCreateTaskClose} TransitionComponent={Transition} fullWidth="true" maxWidth="sm">
                       <AppBar className={classes.appBar}>
                         <Toolbar>
-                          <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
+                          <IconButton edge="start" color="inherit" onClick={handleCreateTaskClose} aria-label="close">
                             <CloseIcon />
                           </IconButton>
                           <Typography variant="h6" className={classes.title}>
                             Available Employees
                           </Typography>
-                          <Button autoFocus color="inherit" onClick={handleClose}>
+                          <Button autoFocus color="inherit" onClick={handleCreateTaskClose}>
                             Save
                           </Button>
                         </Toolbar>
@@ -554,6 +568,7 @@ export default function CreateNewTrainingDialog(props) {
   const handleStepperReset = () => {
     setActiveStep(0);
   };
+  //#endregion
 
   function DialogTitle(props) {
     const classes = useStyles();
@@ -573,7 +588,7 @@ export default function CreateNewTrainingDialog(props) {
   return (
     <div>
       <Dialog onClose={handleCloseTraining} open={openTraining} disableBackdropClick disableEscapeKeyDown fullWidth="true" maxWidth="md">
-        <DialogTitle onClose={handleCloseTraining}>Change Password</DialogTitle>
+        <DialogTitle onClose={handleCloseTraining}>Create New Training</DialogTitle>
         <div className={classes.root}>
           <Stepper activeStep={activeStep} orientation="vertical">
             {steps.map((label, index) => (
