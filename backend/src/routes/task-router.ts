@@ -1,5 +1,6 @@
 import { Express } from 'express';
 import TaskController from '../controllers/task';
+import { checkToken } from '../middleware/auth';
 
 export const TaskRoute = (app: Express, controller: TaskController) => {
   /**
@@ -35,7 +36,15 @@ export const TaskRoute = (app: Express, controller: TaskController) => {
      *         example: Boil water
      *        recipe:
      *         type: string
-     *         example: recipe01
+     *         example: {
+     *          "name": "Empty Burger",
+     *          "steps": [],
+     *          "ingredients": [
+     *            "top_bun",
+     *            "bottom_bun"
+     *          ],
+     *          "category": ""
+     *         }
      *        type:
      *         type: string
      *         example: liquid
@@ -43,7 +52,7 @@ export const TaskRoute = (app: Express, controller: TaskController) => {
      *    200:
      *     description: Success
      */
-  app.post('/task', controller.create);
+  app.post('/task', checkToken, controller.create);
   app.put('/task', controller.create);
 
   /**
@@ -115,4 +124,38 @@ export const TaskRoute = (app: Express, controller: TaskController) => {
      *     description: Success
      */
   app.delete('/task/:taskId', controller.delete);
+
+  /**
+     * @swagger
+     * /task/getById/{userId}:
+     *  get:
+     *   description: Get all tasks assigned to a certain Id
+     *   tags: [Task]
+     *   parameters:
+     *    - in: path
+     *      name: userId
+     *      required: false
+     *      type: string
+     *   responses:
+     *    200:
+     *     description: Success
+     */
+   app.get('/task/getById/:userId', controller.getAllById);
+
+   /**
+      * @swagger
+      * /task/getById/not/{userId}:
+      *  get:
+      *   description: Get all tasks not assigned to a certain Id
+      *   tags: [Task]
+      *   parameters:
+      *    - in: path
+      *      name: userId
+      *      required: false
+      *      type: string
+      *   responses:
+      *    200:
+      *     description: Success
+      */
+   app.get('/task/getById/not/:userId', controller.getAllNotById);
 };
