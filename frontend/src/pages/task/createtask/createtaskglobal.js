@@ -3,18 +3,20 @@ import { Link, useHistory } from "react-router-dom";
 
 // IMPORT COMPONENTS
 import {
-  Box, Button, Typography, Divider, TextField, Grid, FormControl, Select, MenuItem, Paper,
-  ExpansionPanel, ExpansionPanelDetails, ExpansionPanelSummary
+  Box, Button, Typography, Dialog, Snackbar, IconButton
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import MuiDialogTitle from '@material-ui/core/DialogTitle';
+import CloseIcon from '@material-ui/icons/Close';
 import { makeStyles } from "@material-ui/core/styles";
+import MuiAlert from '@material-ui/lab/Alert';
 
 import { AuthContext } from "../../../context/auth";
 import api from "../../../helpers/api";
 
 import Task from "../../../components/Task";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   bold: {
     fontWeight: 600
   },
@@ -34,15 +36,34 @@ const useStyles = makeStyles({
   selectEmpty: {
     marginTop: 2,
   },
-})
+  closeButton: {
+    position: 'absolute',
+    right: theme.spacing(1),
+    top: theme.spacing(1),
+    color: theme.palette.grey[500],
+  }
+}));
 
-export default function CreateNewTaskGlobalPage() {
+export default function CreateNewTaskGlobalDialog(props) {
   const { authState, setAuthState } = React.useContext(AuthContext);
   const classes = useStyles();
 
   const [formState, setFormState] = useState({ name: "", description: "", recipe: undefined });
   const [editState, setEditState] = useState(true);
   let history = useHistory();
+
+  // open notification
+  const [resultState, setResultState] = useState(undefined);
+  const [openNotification, setOpenNotification] = React.useState(false);
+  const [severity, setSeverity] = useState(undefined);
+  const handleCloseNotification = () => {
+    setOpenNotification(false);
+  };
+
+  const { onClose: onCloseTraining, open: openTask } = props;
+  const handleCloseTask = () => {
+    onCloseTraining();
+  };
 
   const handleChange = async (event) => {
     const target = event.target;
@@ -62,7 +83,7 @@ export default function CreateNewTaskGlobalPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(formState);
+    setResultState("Submitting");
     try {
       if (formState.recipe && formState.recipe._id == undefined) {
         try {
@@ -73,62 +94,64 @@ export default function CreateNewTaskGlobalPage() {
           console.log(err);
         }
       }
-      const res = await api.task.create(authState.token, formState);
-      history.push(`/task/${res.data._id}`);
+      await api.task.create(authState.token, formState);
+      props.createdTask(true);
+      setResultState("Success");
+      setOpenNotification(true);
+      setSeverity("success");
+
+      handleCloseTask();
     }
     catch (err) {
-      console.log(err);
+      setResultState(err.response.data.err);
+      setOpenNotification(true);
+      setSeverity("error");
     }
+  }
+
+  const buildResult = () => {
+    return (
+      <div>
+        <Snackbar open={openNotification} autoHideDuration={6000} onClose={handleCloseNotification} anchorOrigin={{ vertical: 'top', horizontal: 'center' }}>
+          <MuiAlert onClose={handleCloseNotification} severity={severity} elevation={6} variant="filled">{resultState}</MuiAlert>
+        </Snackbar>
+      </div>
+    );
+  };
+
+  function DialogTitle(props) {
+    const classes = useStyles();
+    const { children, onClose, ...other } = props;
+    return (
+      <MuiDialogTitle disableTypography {...other}>
+        <Typography variant="h6">{children}</Typography>
+        {onClose ? (
+          <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
+            <CloseIcon />
+          </IconButton>
+        ) : null}
+      </MuiDialogTitle>
+    );
   }
 
   return (
     <div>
-      <Box m={5}>
-        <Grid
-          container
-          direction='row'
-          justify='space-between'
-          alignItems='baseline'>
-          <Grid item>
-            <Typography className={classes.bold} variant='h4'>
-              Create New Task
-            </Typography>
-          </Grid>
-        </Grid>
-        <Box my={1}>
-          <Divider variant="middle" />
+      <Dialog onClose={handleCloseTask} open={openTask} disableBackdropClick disableEscapeKeyDown fullWidth="true" maxWidth="md">
+        <DialogTitle onClose={handleCloseTask}>Create New Task</DialogTitle>
+        <Box m={5}>
+          <Typography variant='h6'>
+            Please enter the details of your desired task below.
+          </Typography>
+          <Task handleChange={handleChange} taskState={formState} editState={editState} handleRecipe={handleRecipe} />
         </Box>
-      </Box>
 
-      <Box m={5}>
-        <Paper style={{ backgroundColor: "white" }} elevation={3}>
-          <Box m={5} p={2}>
-            <Box my={2} pb={2} fontStyle="italic">
-              <Typography variant='h6'>
-                Please enter the details of your desired task below.
-              </Typography>
-            </Box>
-
-            <Task handleChange={handleChange} taskState={formState} editState={editState} handleRecipe={handleRecipe} />
-
-          </Box>
-        </Paper>
-      </Box>
-
-      <Box justifyContent='center' display="flex" m={6}>
-        <Box mr={6}>
-          <Button variant="contained" color="secondary" component={Link} to="/task">
-            Back
-          </Button>
-        </Box>
-        <Box>
+        <Box justifyContent='center' display="flex" m={6}>
           <Button variant="contained" color="primary" onClick={handleSubmit}>
             Save
           </Button>
         </Box>
-      </Box>
-
-
+      </Dialog>
+      {resultState !== undefined && buildResult()}
     </div>
   )
 }
