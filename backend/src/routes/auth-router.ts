@@ -68,10 +68,10 @@ export const AuthRoute = (app: Express, controller: AuthController) => {
      *       properties:
      *        username:
      *         type: string
-     *         example: test123
+     *         example: sup1
      *        password:
      *         type: string
-     *         example: password123
+     *         example: test123
      *   responses:
      *    200:
      *     description: Success
