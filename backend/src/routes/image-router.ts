@@ -48,21 +48,4 @@ export const ImageRoute = (app: Express, controller: ImageController) => {
      *     description: Success
      */
   app.get('/upload/:username', controller.downloadProfileImage);
-
-  /**
-     * @swagger
-     * /download/{username}:
-     *  get:
-     *   description: Get course image for user
-     *   tags: [User]
-     *   parameters:
-     *    - in: path
-     *      name: name
-     *      required: true
-     *      type: string
-     *   responses:
-     *    200:
-     *     description: Success
-     */
-   app.get('/download/:name', controller.downloadCourseImage);
 };
