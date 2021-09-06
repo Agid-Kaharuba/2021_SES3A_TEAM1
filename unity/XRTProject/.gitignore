@@ -79,3 +79,6 @@ crashlytics-build.properties
 
 # DS_Store from OSX
 *.DS_Store
+
+# Hide Dev token
+Assets/DevToken.asset**

@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Valve.Newtonsoft.Json;
 using System.Linq;
+using Training;
 
 public class TrainingManager : MonoBehaviour
 {
@@ -57,7 +58,7 @@ public class TrainingManager : MonoBehaviour
         
         Instance = this;
 
-        string token = "";
+        string token;
         
         try
         {
@@ -65,13 +66,9 @@ public class TrainingManager : MonoBehaviour
         }
         catch (Exception e)
         {
-            Debug.Log($"Could not get token : {e}");
+            throw new Exception("Cannot start application without any token!");
         }
-        
-        //token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QxMjMiLCJwYXNzd29yZCI6InBhc3N3b3JkMTIzIiwiaWF0IjoxNjIxMDkyMzY5LCJleHAiOjE2MjExNzg3Njl9.IBeeev2Hkf8pQZ3djiDyqWykkBLS__KJUVjtMXRA9es";
-        //token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImUiLCJwYXNzd29yZCI6InBhc3N3b3JkMTIzIiwiaWF0IjoxNjIxMTcwNjYwLCJleHAiOjE2MjEyNTcwNjB9.ZI41JKjxrwY5Te-09CNPbG6SXLOpsgOCxnW71M5kU2o";
-        //token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QxMjMiLCJwYXNzd29yZCI6InBhc3N3b3JkMTIzIiwiaWF0IjoxNjIxNzk5MTI1LCJleHAiOjE2MjE4ODU1MjV9.q9fmkpCuOjJBYmXT3GFRr8zHQ5NFJmnyF1Yu4wCmmmI";
-        
+
         apiService = new ApiService(token);
 
         // Use apiService.GetCurrentUser once the token is provided.
