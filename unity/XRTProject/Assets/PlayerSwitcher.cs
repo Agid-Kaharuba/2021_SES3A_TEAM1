@@ -1,32 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR;
 
-public class PlayerSwitcher : MonoBehaviour {
+public class PlayerSwitcher : MonoBehaviour
+{
+    [SerializeField] public bool forceVRPlayer;
+    [SerializeField] private bool forceStandardPlayer;
 
-    public bool nonVRTesting;
+    [SerializeField] private GameObject standardPlayer;
+    [SerializeField] private GameObject VRPlayer;
 
-    private GameObject standardPlayer;
-    private GameObject VRPlayer;
+    private void Awake()
+    {
+        if (standardPlayer == null)
+            standardPlayer = gameObject.transform.Find("2D-Player").gameObject;
+        
+        if (standardPlayer == null)
+            VRPlayer = gameObject.transform.Find("VR-Player").gameObject;
 
-    void Start () {
-        standardPlayer = gameObject.transform.Find( "2D-Player" ).gameObject;
-        VRPlayer = gameObject.transform.Find ( "VR-Player" ).gameObject;
-
-        UpdatePlayerMode ();
+        SetupPlayerMode();
     }
 
-    void Update() {
-        UpdatePlayerMode ();
+    private void SetupPlayerMode()
+    {
+        bool shouldBeVR = (forceVRPlayer || SteamVR.instance != null) && !forceStandardPlayer;
+        SetPlayerMode(shouldBeVR);
     }
 
-    void UpdatePlayerMode () {
-        if ( nonVRTesting ) {
-            standardPlayer.SetActive ( true );
-            VRPlayer.SetActive ( false );
-        } else {
-            standardPlayer.SetActive ( false );
-            VRPlayer.SetActive ( true );
-        }
+    private void SetPlayerMode(bool isVRMode)
+    {
+        standardPlayer.SetActive(!isVRMode);
+        VRPlayer.SetActive(isVRMode);
     }
 }
