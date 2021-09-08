@@ -18,7 +18,6 @@ async function masterData() {
             ingredients: [
                 "top_bun",
                 "lettuce",
-                "sauce",
                 "cheese",
                 "patty",
                 "bottom_bun"
