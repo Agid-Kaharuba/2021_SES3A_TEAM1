@@ -1,6 +1,6 @@
 # XRT Project (Extended Reality Training Project)
 
-A Software engineering project about using VR/AR technology for creating a platform that provides extensive and immersive training.
+A Software engineering project about using VR/AR technology for creating a platform that provides extensive and immersive training. TEST
 
 ### Project Outline
 The Virtual Organizational Training Experience is focusing on large corporate organizations that are looking to improve their training experience. The training experience is envisioned to eventually become a platform where companies can create their own XR training modules however, due to the time constraints of Software Studio 3A/3B, we will focus on creating the webapp component of the product, and one specific training scenario which is burger training for now.
@@ -9,53 +9,6 @@ Our team's objective is:
 * Create an example of an immersive training experience module in XR
 * Expandable for use as a platform to create training modules
 * Create a webapp that links into the XR modules so users can access them and be assessed
-
-
-# Unity Test Data
-
-
-Supervisor
-
-Token: **SUPERVISOR**
-
-Username: supervisor
-
-Password: supervisor
-
-
-Employee
-
-Token: **EMPLOYEE**
-
-Username: employee
-
-Password: employee
-
-
-Test Course
-
-CourseId: **123456789123456789123456**
-
-Course Name: Test Course
-
-
-Recipe
-
-Name: Classic Burger
-
-Ingredients: top_bun, lettuce, sauce, cheese, patty, bottom_bun
-
-Category: Burger
-
-
-Task
-
-Name: Beef Burger
-
-Description: The user will need to make the recipe attached
-
-Type: Practice
-
 
 [Swagger Docs](http://agid-kaharuba.github.io/2021_SES3A_TEAM1/swagger)
 
