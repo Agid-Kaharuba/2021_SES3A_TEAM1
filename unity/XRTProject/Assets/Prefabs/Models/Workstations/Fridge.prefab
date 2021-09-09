@@ -828,7 +828,6 @@ GameObject:
   m_Component:
   - component: {fileID: 249662937684533976}
   - component: {fileID: 2763997510567667583}
-  - component: {fileID: 3799251666551803140}
   m_Layer: 0
   m_Name: Fridge_Collider
   m_TagString: Untagged
@@ -858,16 +857,3 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8992057967037477418}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &3799251666551803140
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8992057967037477418}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}

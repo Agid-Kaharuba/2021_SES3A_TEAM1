@@ -153,7 +153,7 @@ namespace Valve.VR.InteractionSystem
 			fullTintAlpha = 0.5f;
 #else
 			int tintColorID = Shader.PropertyToID("_TintColor");
-			fullTintAlpha = pointVisibleMaterial.GetColor(tintColorID).a;
+			//fullTintAlpha = pointVisibleMaterial.GetColor(tintColorID).a;
 #endif
 
 			teleportArc = GetComponent<TeleportArc>();

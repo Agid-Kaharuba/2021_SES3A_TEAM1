@@ -18,11 +18,11 @@ public class StandardInteractionController : MonoBehaviour {
             RaycastHit hit;
             if ( Physics.Raycast ( ray, out hit ) ) {
                 if ( hit.transform.gameObject == GameObject.Find ( "GrillKnob" ) ) {
-                    grill.ToggleGrill ();
+                    //grill.ToggleGrill ();
                     Debug.Log ( "Grill" );
                 }
                 if ( hit.transform.gameObject == GameObject.Find ( "MopBucket" ) ) {
-                    bucket.ToggleBucket ();
+                    //bucket.ToggleBucket ();
                     Debug.Log ( "bucket" );
                 }
             }

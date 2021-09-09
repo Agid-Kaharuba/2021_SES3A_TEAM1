@@ -1,44 +1,45 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class GrillController : MonoBehaviour {
 
-    Animator anim;
     Renderer rend;
-    GameObject steam;
+    VisualEffect steamEffect;
 
     void Start() {
-        anim = gameObject.GetComponent<Animator> ();
-        rend = gameObject.transform.Find("grill").GetComponent<Renderer> ();
-        steam = gameObject.transform.Find ( "Steam" ).gameObject;
+        rend = GameObject.Find("grill").GetComponent<Renderer> ();
+        steamEffect = GameObject.Find ( "Steam" ).GetComponent<VisualEffect> ();
     }
 
     void Update() {
         
     }
 
-    public void ToggleGrill() {
-        if ( anim.GetBool( "grillOn" ) ) {
-            anim.SetBool ( "grillOn", false );
-        } else {
-            anim.SetBool ( "grillOn", true );
-        }
-
-        StartCoroutine ( TogglePower() );
-    }
-
-    IEnumerator TogglePower () {
+    IEnumerator PowerOn () {
         yield return new WaitForSeconds ( 0.5f );
 
-        if ( anim.GetBool ( "grillOn" ) ) {
-            rend.material.SetColor ( "_EmissiveColor", Color.green * 1000f );
-            steam.SetActive ( true );
-        } else {
-            rend.material.SetColor ( "_EmissiveColor", Color.red * 1000f );
-            steam.SetActive ( false );
-        }
+        rend.material.SetColor ( "_EmissiveColor", Color.green * 1000f );
+        steamEffect.enabled = true;
 
         yield return null;
+    }
+
+    IEnumerator PowerOff () {
+        yield return new WaitForSeconds ( 0.5f );
+
+        rend.material.SetColor ( "_EmissiveColor", Color.red * 1000f );
+        steamEffect.enabled = false;
+
+        yield return null;
+    }
+
+    public void SwitchOn () {
+        StartCoroutine ( PowerOn() );
+    }
+
+    public void SwitchOff () {
+        StartCoroutine ( PowerOff() );
     }
 }

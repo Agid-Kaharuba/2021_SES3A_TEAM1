@@ -105,8 +105,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4685719914575923887}
-  - component: {fileID: 5813847205144182392}
-  - component: {fileID: 3647187110271608516}
   m_Layer: 0
   m_Name: Grill
   m_TagString: Untagged
@@ -131,37 +129,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5813847205144182392
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5353889091269546005}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fee4a09af8864584b8d857da1e070bc4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!95 &3647187110271608516
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5353889091269546005}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7575bf7c959729142b6263c00bcb1752, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6682905453433482902
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,7 +251,6 @@ GameObject:
   - component: {fileID: 8332658233169431363}
   - component: {fileID: 1268549256349897437}
   - component: {fileID: 1912060563092162066}
-  - component: {fileID: 9550574606493896}
   m_Layer: 0
   m_Name: grill_knob
   m_TagString: Untagged
@@ -355,16 +321,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &9550574606493896
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8823724145542672752}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.0003, y: 0.000794037, z: 0.0006999996}
-  m_Center: {x: -0.00015563882, y: 0.000050698392, z: 0.0000029663788}
