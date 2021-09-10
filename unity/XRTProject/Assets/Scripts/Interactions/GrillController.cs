@@ -7,39 +7,34 @@ public class GrillController : MonoBehaviour {
 
     Renderer rend;
     VisualEffect steamEffect;
+    private bool poweredOn = false;
+    private AudioSource click;
 
     void Start() {
         rend = GameObject.Find("grill").GetComponent<Renderer> ();
         steamEffect = GameObject.Find ( "Steam" ).GetComponent<VisualEffect> ();
+        click = gameObject.GetComponent<AudioSource> ();
     }
 
-    void Update() {
-        
-    }
+    IEnumerator ToggleGrill () {
+        click.Play ();
 
-    IEnumerator PowerOn () {
         yield return new WaitForSeconds ( 0.5f );
-
-        rend.material.SetColor ( "_EmissiveColor", Color.green * 1000f );
-        steamEffect.enabled = true;
+            
+        if ( poweredOn ) {
+            rend.material.SetColor ( "_EmissiveColor", Color.red * 1000f );
+            steamEffect.enabled = false;
+            poweredOn = false;
+        } else {
+            rend.material.SetColor ( "_EmissiveColor", Color.green * 1000f );
+            steamEffect.enabled = true;
+            poweredOn = true;
+        }
 
         yield return null;
     }
 
-    IEnumerator PowerOff () {
-        yield return new WaitForSeconds ( 0.5f );
-
-        rend.material.SetColor ( "_EmissiveColor", Color.red * 1000f );
-        steamEffect.enabled = false;
-
-        yield return null;
-    }
-
-    public void SwitchOn () {
-        StartCoroutine ( PowerOn() );
-    }
-
-    public void SwitchOff () {
-        StartCoroutine ( PowerOff() );
+    public void TogglePower () {
+        StartCoroutine ( ToggleGrill () );
     }
 }
