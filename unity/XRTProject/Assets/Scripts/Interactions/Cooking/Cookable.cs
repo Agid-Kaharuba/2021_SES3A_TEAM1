@@ -11,7 +11,7 @@ public class Cookable : MonoBehaviour
     [SerializeField] private float perfectCookDuration = 10f;
     [SerializeField] private float maxCookDuration = 20f;
     [Tooltip("How much of the heat will transfer to the other sides of the item when one side is being cooked")]
-    [SerializeField] private float heatConductivity = 0.2f;
+    [SerializeField] private float heatConductivity = 0.01f;
 
     private List<CookTextureTransition> cookTextureTransitions;
 
@@ -50,7 +50,7 @@ public class Cookable : MonoBehaviour
         // Current cooking side
         CookableSide currentSide = GetCurrentSide();
         currentSide.CookTime = Mathf.Clamp(currentSide.CookTime + deltaTime * strength, 0, maxCookDuration);
-        cookTextureTransitions.ForEach(t => t.SetCookPercentage(CookPercentage, currentSide.CookSide));
+        cookTextureTransitions.ForEach(t => t.SetCookPercentage(currentSide.CookPercentage, currentSide.CookSide));
 
         // Also cook the other sides by the percentage defined by heat conductivity
         foreach (CookableSide side in AllSides)
@@ -59,7 +59,7 @@ public class Cookable : MonoBehaviour
             {
                 float addedCookTime = deltaTime * strength * heatConductivity;
                 side.CookTime = Mathf.Clamp(side.CookTime + addedCookTime, 0, maxCookDuration);
-                cookTextureTransitions.ForEach(t => t.SetCookPercentage(CookPercentage, side.CookSide));
+                cookTextureTransitions.ForEach(t => t.SetCookPercentage(side.CookPercentage, side.CookSide));
             }
         }
     }
@@ -71,7 +71,7 @@ public class Cookable : MonoBehaviour
         {
             float addedCookTime = deltaTime * strength * heatConductivity;
             side.CookTime = Mathf.Clamp(side.CookTime + addedCookTime, 0, maxCookDuration);
-            cookTextureTransitions.ForEach(t => t.SetCookPercentage(CookPercentage, side.CookSide));
+            cookTextureTransitions.ForEach(t => t.SetCookPercentage(side.CookPercentage, side.CookSide));
         }
     }
 

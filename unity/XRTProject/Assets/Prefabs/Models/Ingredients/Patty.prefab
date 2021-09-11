@@ -384,5 +384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7795df58d8d43319048a567a85fadbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canCookBothSides: 1
   perfectCookDuration: 20
   maxCookDuration: 40
+  heatConductivity: 0.01
