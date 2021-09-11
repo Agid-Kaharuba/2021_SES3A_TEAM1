@@ -2676,7 +2676,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3072388443866150744, guid: 8c57c61ff5ba7404ca90ee6ba8a71073, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3072388443866150744, guid: 8c57c61ff5ba7404ca90ee6ba8a71073, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4906,6 +4906,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fee4a09af8864584b8d857da1e070bc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GrillPoweredOn:
+    m_PersistentCalls:
+      m_Calls: []
+  GrillPoweredOff:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &886341358
 GameObject:
   m_ObjectHideFlags: 0
@@ -5405,7 +5411,7 @@ Transform:
   m_Children:
   - {fileID: 2087476007}
   m_Father: {fileID: 261092000862383442}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &945752175
 MonoBehaviour:
@@ -8062,6 +8068,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   oneSidedCooking: 1
+  isActive: 0
   strength: 1
 --- !u!65 &1546511011
 BoxCollider:
@@ -8074,7 +8081,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.6514679, y: 0.1, z: 1.3556249}
+  m_Size: {x: 0.6514679, y: 0.01, z: 1.3556249}
   m_Center: {x: -0.024266064, y: 0, z: -0.02218759}
 --- !u!4 &1546511012
 Transform:
@@ -8083,12 +8090,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1546511009}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.468, y: 0.92, z: 5.764}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.03408742, y: 0.85277575, z: 0.023000717}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_Father: {fileID: 261092000862383442}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1547202592
 GameObject:
@@ -9464,7 +9471,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3072388443866150744, guid: 8c57c61ff5ba7404ca90ee6ba8a71073, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3072388443866150744, guid: 8c57c61ff5ba7404ca90ee6ba8a71073, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10001,7 +10008,7 @@ Transform:
   m_Children:
   - {fileID: 3547460084954098878}
   m_Father: {fileID: 261092000862383442}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!114 &1903678028
 MonoBehaviour:
@@ -10439,6 +10446,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fee4a09af8864584b8d857da1e070bc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GrillPoweredOn:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1546511010}
+        m_TargetAssemblyTypeName: CookZone, Assembly-CSharp
+        m_MethodName: SetCanCook
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  GrillPoweredOff:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1546511010}
+        m_TargetAssemblyTypeName: CookZone, Assembly-CSharp
+        m_MethodName: SetCanCook
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!65 &2087476009
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11056,6 +11093,7 @@ Transform:
   m_LocalPosition: {x: 3.4339125, y: 0.01822424, z: 5.740999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1546511012}
   - {fileID: 7288974397302139591}
   - {fileID: 1903678026}
   - {fileID: 4412354282997183608}
@@ -17046,7 +17084,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 261092000862383442}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &4428521531530145420
 MeshRenderer:
@@ -22398,7 +22436,7 @@ Transform:
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 261092000862383442}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &7303589701395612552
 PrefabInstance:
