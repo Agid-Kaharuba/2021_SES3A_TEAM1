@@ -11,7 +11,7 @@ using Valve.Newtonsoft.Json.Linq;
 
 public class ApiService
 {
-    private static string API_HOST = "http://localhost:4000";
+    private static string API_HOST = "http://ec2-13-55-156-75.ap-southeast-2.compute.amazonaws.com:4000";
     private string token;
 
     public ApiService(string token)

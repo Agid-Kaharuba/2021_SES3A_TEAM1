@@ -87,7 +87,7 @@ static class LaunchArgsService
     private static DevToken GetDevToken()
     {
 #if UNITY_EDITOR
-        return UnityEditor.AssetDatabase.LoadAssetAtPath<DevToken>("DevToken.asset");
+        return UnityEditor.AssetDatabase.LoadAssetAtPath<DevToken>("Assets/DevToken.asset");
 #else
         return null;
 #endif
