@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Patty
-  m_Shader: {fileID: -6465566751694194690, guid: 763b75a7e52b8784daa6a2f4631b0bdd, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 3a5d842fff0e90d47b15d60155c65dbb, type: 3}
   m_ShaderKeywords: _DISABLE_SSR_TRANSPARENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -170,6 +170,7 @@ Material:
     - _AlphaToMaskInspectorValue: 0
     - _Anisotropy: 0
     - _BlendMode: 0
+    - _BottomCookTime: 0
     - _BumpScale: 1
     - _CoatMask: 0
     - _CookTime: 0
@@ -274,6 +275,8 @@ Material:
     - _TexWorldScale: 1
     - _TexWorldScaleEmissive: 1
     - _Thickness: 1
+    - _TopCookTime: 0
+    - _Top_Cook_Time: 0
     - _TransmissionEnable: 1
     - _TransparentBackfaceEnable: 0
     - _TransparentCullMode: 2
@@ -294,11 +297,13 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
-    - Color_61524903e7c94d19a52eec3349b30405: {r: 0.6415094, g: 0, b: 0.06197992, a: 0}
+    - Color_5d7abbccec684eeb8bda62d9127e327a: {r: 0.066037714, g: 0.01911618, b: 0, a: 0}
+    - Color_61524903e7c94d19a52eec3349b30405: {r: 1, g: 0, b: 0.16320229, a: 0}
+    - Vector3_288e83026e6e4a138a03547867470da1: {r: -90, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 0.5566038, g: 0.26736766, b: 0, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 0.5566037, g: 0.26736763, b: 0, a: 1}
-    - _CookedColor: {r: 0.16981125, g: 0.07273791, b: 0, a: 0}
+    - _CookedColor: {r: 0.5471698, g: 0.26469484, b: 0.038714837, a: 0}
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}

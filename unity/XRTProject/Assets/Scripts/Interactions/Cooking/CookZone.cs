@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CookZone : MonoBehaviour
 {
+    [SerializeField] private bool oneSidedCooking;
+    
     public float strength = 1f;
     
     private void OnTriggerStay(Collider other)
@@ -12,7 +14,7 @@ public class CookZone : MonoBehaviour
 
         if (cookable != null)
         {
-            cookable.TickCookTime(strength, Time.fixedDeltaTime);
+            cookable.TickCooking(strength, Time.fixedDeltaTime, oneSidedCooking);
         }
     }
 
