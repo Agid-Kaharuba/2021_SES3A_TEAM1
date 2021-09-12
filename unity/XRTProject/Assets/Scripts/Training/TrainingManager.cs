@@ -21,6 +21,8 @@ public class TrainingManager : MonoBehaviour
     
     public static TrainingManager Instance { get; private set; }
 
+    public static Logger Logger;
+
     public bool CanCustomize => forceCanCustomize || (CurrentUser != null && CurrentUser.IsSupervisor);
 
     public Task CurrentTask { get; private set; }
@@ -82,6 +84,8 @@ public class TrainingManager : MonoBehaviour
             {
                 CurrentUser = user;
                 OnUserReady?.Invoke();
+                Logger = gameObject.AddComponent<Logger>();
+                Logger.Setup(apiService, TrainingModule, user);
                 Debug.Log("Retrieved user data!");
             }
             
