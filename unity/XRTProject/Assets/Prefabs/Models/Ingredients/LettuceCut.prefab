@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -4465234172306398404}
   - component: {fileID: -4011836877722569982}
   - component: {fileID: 3658863049681801011}
+  - component: {fileID: 3747300367746049201}
   m_Layer: 0
   m_Name: LettuceCut
   m_TagString: Untagged
@@ -167,6 +168,18 @@ MonoBehaviour:
   highlightOnHover: 1
   hideHighlight: []
   hoverPriority: 0
+--- !u!114 &3747300367746049201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3627731019425942570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ec987cba7c09614f9b9a6cc7ca7a06e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5400791525179582451
 GameObject:
   m_ObjectHideFlags: 0

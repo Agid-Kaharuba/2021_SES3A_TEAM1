@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2206038469590502531}
   - component: {fileID: 7537743749795388108}
   - component: {fileID: 292321895}
+  - component: {fileID: 5979088801118171783}
   m_Layer: 0
   m_Name: LettuceFull
   m_TagString: Untagged
@@ -30,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 6179890493596747720}
   m_LocalRotation: {x: -0.7076051, y: 0.021828383, z: 0.04776141, w: 0.7046541}
   m_LocalPosition: {x: -2.314289, y: 0.7467018, z: -5.5631676}
-  m_LocalScale: {x: 0.6693327, y: 0.6693327, z: 0.6693327}
+  m_LocalScale: {x: 0.6693327, y: 0.6693327, z: 0.66933274}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -166,3 +167,15 @@ MonoBehaviour:
   highlightOnHover: 1
   hideHighlight: []
   hoverPriority: 0
+--- !u!114 &5979088801118171783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6179890493596747720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ec987cba7c09614f9b9a6cc7ca7a06e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

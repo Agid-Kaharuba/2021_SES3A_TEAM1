@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2208199798977735565}
   - component: {fileID: 5691220434328919409}
   - component: {fileID: 2650133875501882422}
+  - component: {fileID: 2570755728476038744}
   m_Layer: 0
   m_Name: Sause
   m_TagString: Untagged
@@ -149,3 +150,15 @@ MonoBehaviour:
   highlightOnHover: 1
   hideHighlight: []
   hoverPriority: 0
+--- !u!114 &2570755728476038744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2527373256547863074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ec987cba7c09614f9b9a6cc7ca7a06e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

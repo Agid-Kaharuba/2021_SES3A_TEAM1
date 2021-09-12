@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 1057395097445307169}
   - component: {fileID: 3299474970143148139}
   - component: {fileID: 8017105398111518257}
-  - component: {fileID: -8561916099383404080}
+  - component: {fileID: 1945780529}
+  - component: {fileID: 7327915793197205857}
   m_Layer: 0
   m_Name: TomatoS
   m_TagString: Untagged
@@ -27,9 +28,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7743435904080134236}
-  m_LocalRotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3, y: 1.1308094, z: 1}
-  m_LocalScale: {x: 1, y: 1.2483422, z: 1}
+  m_LocalScale: {x: 0.076126814, y: 0.09503231, z: 0.076126814}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -101,8 +102,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &-8561916099383404080
-MeshCollider:
+--- !u!65 &1945780529
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -111,7 +112,18 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 3390558720134950976, guid: 12d487c8c57351b46bc270feca66d0eb, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 0.5878708, y: 0.021927092, z: 0.5878707}
+  m_Center: {x: 0.009480566, y: 0.0000015986152, z: -0.0000038295984}
+--- !u!114 &7327915793197205857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7743435904080134236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ec987cba7c09614f9b9a6cc7ca7a06e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

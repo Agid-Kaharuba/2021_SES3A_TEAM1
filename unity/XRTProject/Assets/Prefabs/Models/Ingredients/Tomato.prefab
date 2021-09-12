@@ -93,8 +93,9 @@ GameObject:
   - component: {fileID: 5807101088574022478}
   - component: {fileID: 8606942825116718980}
   - component: {fileID: 1745115285597153375}
-  - component: {fileID: 6749412594030164114}
   - component: {fileID: 537629736}
+  - component: {fileID: 537629737}
+  - component: {fileID: 8516840662803711546}
   m_Layer: 0
   m_Name: Tomato
   m_TagString: Untagged
@@ -182,20 +183,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &6749412594030164114
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7814586024272754257}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -5495902117074765545, guid: 71b73eedee921c040bb00429080d734a, type: 3}
 --- !u!114 &537629736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,3 +235,28 @@ MonoBehaviour:
   highlightOnHover: 1
   hideHighlight: []
   hoverPriority: 0
+--- !u!135 &537629737
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7814586024272754257}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.017097784
+  m_Center: {x: 0.00000006055646, y: 0.00000023750923, z: 0.000737176}
+--- !u!114 &8516840662803711546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7814586024272754257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ec987cba7c09614f9b9a6cc7ca7a06e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
