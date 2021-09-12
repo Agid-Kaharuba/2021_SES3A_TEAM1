@@ -13,6 +13,11 @@ import SignOut from "./components/signout";
 
 // IMPORT HOMEPAGE PAGES
 import AboutUs from "./pages/aboutus/aboutus.js";
+import ProjectOutline from './pages/aboutus/projectoutline';
+
+import VrExperience from './pages/aboutus/vrexperience';
+import TeamCommunication from './pages/aboutus/teamcommunication';
+import TheTeam from './pages/aboutus/theteam';
 import HomePage from "./pages/home/home.js";
 
 // IMPORT USER PAGES
@@ -70,6 +75,23 @@ function AppRouter(props) {
         exact={true}
         component={AboutUs}>
       </Route>
+      <Route path="/aboutus/projectoutline"
+        exact={true}
+        component={ProjectOutline}>
+      </Route>
+      <Route path="/aboutus/teamcommunication"
+        exact={true}
+        component={TeamCommunication}>
+      </Route>
+      <Route path="/aboutus/vrexperience"
+        exact={true}
+        component={VrExperience}>
+      </Route>
+      <Route path="/aboutus/theteam"
+        exact={true}
+        component={TheTeam}>
+      </Route>
+
 
       // Login Profile User Routes
       <Route path="/login"
