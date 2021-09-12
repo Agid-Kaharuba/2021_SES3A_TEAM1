@@ -65,7 +65,6 @@ export default function CreateNewTrainingPage() {
   const classes = useStyles();
   const { authState } = useContext(AuthContext);
   const [coursesState, setCoursesState] = useState(undefined);
-  // const [coursesState, setCoursesState] = useState([{"name":"test","description":"asdsdf"},{"name":"test","description":"asdsdf"}]);
 
   const [open, setOpen] = React.useState(false);
 
@@ -145,7 +144,7 @@ export default function CreateNewTrainingPage() {
                   {course.name}
                 </Typography>
                 <Typography gutterBottom variant="body2" component="h2">
-                  16th August
+                  {course.dueDate}
                 </Typography>
                 <Typography variant="body1" color="textSecondary" gutterBottom>
                   {course.description}
