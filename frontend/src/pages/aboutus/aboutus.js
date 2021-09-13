@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 
 // IMPORT COMPONENTS
 import { Box, Grid, Container, Typography, Paper, Avatar, Card, CardActionArea, CardContent, CardMedia, Button, CardActions } from "@material-ui/core";
-import { withStyles, makeStyles} from "@material-ui/core/styles";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
 
 // IMPORT IMAGES
 
@@ -43,15 +43,19 @@ const profileStyles = makeStyles((theme) => ({
 
 const useStyles = makeStyles({
   media: {
-    height: 140,
+    height: 180,
   },
   root: {
-    maxWidth: 345,
+    maxWidth: 300,
+    height: 300
   },
   margins: {
-    marginTop: 2,
+    gridGap: 10,
   },
-  });
+  heading:{
+    color:  "#FFFFFF",
+  }
+});
 
 export default function AboutUsPage() {
   const history = useHistory();
@@ -78,341 +82,80 @@ export default function AboutUsPage() {
       </Grid>
       <Grid container direction="column" alignItems='flex-start'>
         <Container>
-          <Grid container direction="row" alignItems='flex-start'>
-          <Card className={classes.root}>
-            <CardActionArea>
-              <CardMedia
-                className={classes.media}
-                image={Andy}
-                title="Contemplative Reptile"
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                  Lizard
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                  across all continents except Antarctica
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-            <CardActions>
-              <Button size="small" color="primary">
-                Share
-              </Button>
-              <Button size="small" color="primary">
-                Learn More
-              </Button>
-            </CardActions>
-          </Card>
-          <Card className={classes.root}>
-            <CardActionArea>
-              <CardMedia
-                className={classes.media}
-                image={Andy}
-                title="Contemplative Reptile"
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                  Lizard
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                  across all continents except Antarctica
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-            <CardActions>
-              <Button size="small" color="primary">
-                Share
-              </Button>
-              <Button size="small" color="primary">
-                Learn More
-              </Button>
-            </CardActions>
-          </Card>
-          <Card className={classes.root}>
-            <CardActionArea>
-              <CardMedia
-                className={classes.media}
-                image={Andy}
-                title="Contemplative Reptile"
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                  Lizard
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                  across all continents except Antarctica
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-            <CardActions>
-              <Button size="small" color="primary">
-                Share
-              </Button>
-              <Button size="small" color="primary">
-                Learn More
-              </Button>
-            </CardActions>
-          </Card>
-          <Card className={classes.root}>
-            <CardActionArea>
-              <CardMedia
-                className={classes.media}
-                image={Andy}
-                title="Contemplative Reptile"
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                  Lizard
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                  across all continents except Antarctica
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-            <CardActions>
-              <Button size="small" color="primary">
-                Share
-              </Button>
-              <Button size="small" color="primary">
-                Learn More
-              </Button>
-            </CardActions>
-          </Card>
-          </Grid>
-          <Box style={{ fontSize: '24px', fontFamily: 'Roboto', color: "white" }}>
-            <h2>Project Outline</h2>
-
-            <p>The Virtual Organizational Training Experience is focusing on large corporate organizations that are looking to improve their training experience.
-              The training experience is envisioned to eventually become a platform where companies can create their own XR training modules however, due to the time constraints
-              of Software Studio 3A/3B, we will focus on creating the webapp component of the product, and one specific training scenario which is burger training for now. </p>
-
-            <p>Our team's objective is:
-              <ul>
-                <li>Create an example of an immersive training experience module in XR </li>
-                <li>Expandable for use as a platform to create training modules</li>
-                <li>Create a webapp that links into the XR modules so users can access them and be assessed </li>
-              </ul>
-            </p>
-
-            <h2>Storing Information</h2>
-            <p>
-              This system employs a database using MongoDB to store supervisor and employee information, including their credentials for authentication and recording.
-            </p>
-
-            <h2>Team Communication</h2>
-            <p>
-              All tasks were split and assigned to team members on Trello so that it was always transparent which tasks were being worked on, have been completed or still required additional progress.
-            </p>
-            <p>
-              Microsoft Teams was the main form of communication used for collaborating and holding meetings, while Facebook Messenger was used for general communication.
-              The code for this project can be found at our <a href="https://github.com/Agid-Kaharuba/2021_SES3A_TEAM1">GitHub repository</a>.
-            </p>
-          </Box>
-        </Container>
-        <Container>
-          <Grid container alignItems="center" justify="center" direction='column'>
-            <WhiteTextTypography>
-              Customer Training
-            </WhiteTextTypography>
-            <Grid container alignItems="center" justify="space-around" direction='row'>
-              <Grid alignItems="center" justify="center" direction='column'>
-                <Box>
-                  <img src={MitchGif}></img>
-                </Box>
-                <Box fontStyle="italic">
-                  <WhiteTextTypography >- "Mitchell trying VR"</WhiteTextTypography>
-                </Box>
-              </Grid>
-              <Box>
-                <img src={VanishaGif}></img>
-                <Box fontStyle="italic" >
-                  <WhiteTextTypography>- "Vanisha trying VR"</WhiteTextTypography>
-                </Box>
-              </Box>
-              <Box>
-                <img src={BryanGif}></img>
-                <Box fontStyle="italic">
-                  <WhiteTextTypography>- "Bryan trying VR"</WhiteTextTypography>
-                </Box>
-              </Box>
-            </Grid>
-
+          <h2 className={classes.heading}>Our Storyy</h2>
+          <p>What is Lorem Ipsum?
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+            when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
+            remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker
+            including versions of Lorem Ipsum.</p>
+          <Grid container direction="row" alignItems='flex-start' className={classes.margins} >
+            <Card className={classes.root} onClick={() => history.push('/aboutus/projectoutline')}>
+              <CardActionArea>
+                <CardMedia
+                  className={classes.media}
+                  image={Andy}
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="h2">
+                    Project Outline
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary" component="p">
+                    The aim of the project is to create training in VR.
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+            <Card className={classes.root} onClick={() => history.push('/aboutus/teamcommunication')}>
+              <CardActionArea>
+                <CardMedia
+                  className={classes.media}
+                  image={Andy}
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="h2">
+                    Team Communication
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary" component="p">
+                    Information of how our team communicate between each other.
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+            <Card className={classes.root} onClick={() => history.push('/aboutus/vrexperience')}>
+              <CardActionArea>
+                <CardMedia
+                  className={classes.media}
+                  image={Andy}
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="h2">
+                    VR experiences
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary" component="p">
+                    Some experiences of clients using the our application.
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+            <Card className={classes.root} onClick={() => history.push('/aboutus/theteam')}>
+              <CardActionArea>
+                <CardMedia
+                  className={classes.media}
+                  image={Andy}
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="h2">
+                    The Team
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary" component="p">
+                    Our team consist of three division: Unity team, Backend team & Frontend team.
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
           </Grid>
         </Container>
       </Grid>
-      <Box style={{ fontSize: '24px', fontFamily: 'Roboto', color: "white" }}>
-        <h2>
-          Team Structure
-        </h2>
-      </Box>
-      <Box mt={6}>
-        <Grid
-          container
-          spacing={4}
-          direction='row'
-          alignItems='center'
-          justify='center'>
-          <Grid item>
-            <Grid
-              container
-              direction='column'
-              alignItems='center'
-              justify='center'>
-              <Avatar src={Andrew} className={profiles.large} />
-              <WhiteTextTypography style={{ fontWeight: '600', fontSize: '1.2rem' }}>Na Tian</WhiteTextTypography>
-              <WhiteTextTypography>Front-End Developer</WhiteTextTypography>
-            </Grid>
-          </Grid>
-          <Grid item>
-            <Grid
-              container
-              direction='column'
-              alignItems='center'
-              justify='center'>
-              <Avatar src={Vanisha} className={profiles.large} />
-              <WhiteTextTypography style={{ fontWeight: '600', fontSize: '1.2rem' }}>Vanisha Singh</WhiteTextTypography>
-              <WhiteTextTypography>UI/UX Design Lead</WhiteTextTypography>
-            </Grid>
-          </Grid>
-          <Grid item>
-            <Grid
-              container
-              direction='column'
-              alignItems='center'
-              justify='center'>
-              <Avatar src={Andy} className={profiles.large} />
-              <WhiteTextTypography style={{ fontWeight: '600', fontSize: '1.2rem' }}>Andy Lee</WhiteTextTypography>
-              <WhiteTextTypography>Unity Dev / Scrum Master</WhiteTextTypography>
-            </Grid>
-          </Grid>
-          <Grid item>
-            <Grid
-              container
-              direction='column'
-              alignItems='center'
-              justify='center'>
-              <Avatar src={Matthew} className={profiles.large} />
-              <WhiteTextTypography style={{ fontWeight: '600', fontSize: '1.2rem' }}>Matthew Barrett</WhiteTextTypography>
-              <WhiteTextTypography>Unity Lead</WhiteTextTypography>
-            </Grid>
-          </Grid>
-          <Grid item>
-            <Grid
-              container
-              direction='column'
-              alignItems='center'
-              justify='center'>
-              <Avatar src={Mitchell} className={profiles.large} />
-              <WhiteTextTypography style={{ fontWeight: '600', fontSize: '1.2rem' }}>Mitchell Murphy</WhiteTextTypography>
-              <WhiteTextTypography>Back-End Lead</WhiteTextTypography>
-            </Grid>
-          </Grid>
-          <Grid item>
-            <Grid
-              container
-              direction='column'
-              alignItems='center'
-              justify='center'>
-              <Avatar src={Herrick} className={profiles.large} />
-              <WhiteTextTypography style={{ fontWeight: '600', fontSize: '1.2rem' }}>Herrick Feng</WhiteTextTypography>
-              <WhiteTextTypography>Front-End Lead</WhiteTextTypography>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Box>
-
-      <Box m={6}>
-        <Grid
-          container
-          spacing={4}
-          direction='row'
-          alignItems='center'
-          justify='center'>
-          <Grid item>
-            <Grid
-              container
-              direction='column'
-              alignItems='center'
-              justify='center'>
-              <Avatar src={Bryan} className={profiles.large} />
-              <WhiteTextTypography style={{ fontWeight: '600', fontSize: '1.2rem' }}>Bryan Dinh</WhiteTextTypography>
-              <WhiteTextTypography>Front-End Developer</WhiteTextTypography>
-            </Grid>
-          </Grid>
-          <Grid item>
-            <Grid
-              container
-              direction='column'
-              alignItems='center'
-              justify='center'>
-              <Avatar src={Kelvin} className={profiles.large} />
-              <WhiteTextTypography style={{ fontWeight: '600', fontSize: '1.2rem' }}>Kelvin Luong</WhiteTextTypography>
-              <WhiteTextTypography>Front-End Developer</WhiteTextTypography>
-            </Grid>
-          </Grid>
-          <Grid item>
-            <Grid
-              container
-              direction='column'
-              alignItems='center'
-              justify='center'>
-              <Avatar src={Brendon} className={profiles.large} />
-              <WhiteTextTypography style={{ fontWeight: '600', fontSize: '1.2rem' }}>Brendon Tong</WhiteTextTypography>
-              <WhiteTextTypography>Back-End Developer</WhiteTextTypography>
-            </Grid>
-          </Grid>
-          <Grid item>
-            <Grid
-              container
-              direction='column'
-              alignItems='center'
-              justify='center'>
-              <Avatar src={Calvin} className={profiles.large} />
-              <WhiteTextTypography style={{ fontWeight: '600', fontSize: '1.2rem' }}>Calvin Dong</WhiteTextTypography>
-              <WhiteTextTypography>Back-End Developer</WhiteTextTypography>
-            </Grid>
-          </Grid>
-          <Grid item>
-            <Grid
-              container
-              direction='column'
-              alignItems='center'
-              justify='center'>
-              <Avatar src={Lakshva} className={profiles.large} />
-              <WhiteTextTypography style={{ fontWeight: '600', fontSize: '1.2rem' }}>Lakshya Sharma</WhiteTextTypography>
-              <WhiteTextTypography>Back-End Developer</WhiteTextTypography>
-            </Grid>
-          </Grid>
-          <Grid item>
-            <Grid
-              container
-              direction='column'
-              alignItems='center'
-              justify='center'>
-              <Avatar src={Vladimir} className={profiles.large} />
-              <WhiteTextTypography style={{ fontWeight: '600', fontSize: '1.2rem' }}>Vladimir Poshevelya</WhiteTextTypography>
-              <WhiteTextTypography>Unity Developer</WhiteTextTypography>
-            </Grid>
-          </Grid>
-          <Grid item>
-            <Grid
-              container
-              direction='column'
-              alignItems='center'
-              justify='center'>
-              <Avatar src={Agid} className={profiles.large} />
-              <WhiteTextTypography style={{ fontWeight: '600', fontSize: '1.2rem' }}>Agid Kaharuba</WhiteTextTypography>
-              <WhiteTextTypography>Unity Developer</WhiteTextTypography>
-            </Grid>
-          </Grid>
-        </Grid>
-
-      </Box>
 
     </Grid>
 

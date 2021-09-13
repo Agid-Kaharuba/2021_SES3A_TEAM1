@@ -58,7 +58,7 @@ export default function UsersList() {
               </Grid>
             <Divider variant="fullwidth" />
         </Box>
-        <Users usersState = {usersState} setUsersState = {setUsersState} filter= {filter}/>
+        <Users usersState = {usersState} setUsersState = {setUsersState} filter = {filter}/>
       </Container>
     );
 

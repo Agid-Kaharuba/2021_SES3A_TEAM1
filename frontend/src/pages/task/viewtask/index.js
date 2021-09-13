@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Button, Typography, Divider, Box, FormControl, Select, MenuItem, Grid, TextField } from "@material-ui/core";
+import { Button, Container, Typography, Divider, Box, FormControl, Select, MenuItem, Grid, TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import LoadingSpinner from "../../../components/loadingSpinner/index.js"
 import { Link, useHistory } from "react-router-dom";
@@ -78,10 +78,9 @@ export default function ViewTask(props) {
   }
   else {
     return (
-      <>
+      <Container maxWidth="lg">
         <Box m={5}>
           <Grid container spacing={2} justify="flex-start" direction='row'>
-            <BackButton handleBack={() => history.push("/task")} />
             <Grid item>
               <Typography className={classes.bold} variant='h4'>
                 Task
@@ -96,20 +95,21 @@ export default function ViewTask(props) {
 
             <Task handleChange={handleChange} taskState={taskState} editState={editState} handleRecipe={handleRecipe} />
 
-            <Grid container
-              direction="row"
-              justify="center"
-              alignItems="center"
-              margin="normal">
+            <Box justifyContent='center' display="flex" m={6}>
+              <Box mr={6}>
+                <Button variant="contained" color="secondary" component={Link} to="/task">
+                  Back
+                </Button>
+              </Box>
               <Box>
-                <Button variant="contained" style={{ width: 80 }} color={editState ? "secondary" : "primary"} size="large" onClick={handleEdit}>
+                <Button variant="contained" color="primary" onClick={handleEdit}>
                   {editState ? "Save" : "Edit"}
                 </Button>
               </Box>
-            </Grid>
+            </Box>
           </Grid>
         </Box>
-      </>
+      </Container>
     )
   }
 }

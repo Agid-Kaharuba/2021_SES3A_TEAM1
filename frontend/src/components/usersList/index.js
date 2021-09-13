@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import { Button, Container, Typography, Box, Divider, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import EditIcon from '@material-ui/icons/Edit';
@@ -9,6 +9,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import IconButton from "@material-ui/core/IconButton";
 import api from '../../helpers/api'
 import { AuthContext } from "../../context/auth";
+import DoneIcon from '@material-ui/icons/Done';
 const useStyles = makeStyles({
   bold: {
     fontWeight: 600
@@ -24,47 +25,67 @@ const useStyles = makeStyles({
   }
 })
 
+function User({user, onDeleteClick, usersState, setUsersState} ) {
+  const [editState, setEditState] = useState(true);
+  const classes = useStyles();
+  const { authState } = useContext(AuthContext);
+  const handleEdit = async (e, user) => {
+    if (!editState) {
+        await api.user.update(authState.token, user._id, user);
+    }
+    setEditState(!editState);
+  }
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    const index = usersState.findIndex(x => x._id == user._id);
+    usersState[index][id] = value;
+    user[id] = value;
+    console.log(usersState[index])
+    setUsersState([...usersState])
+  }
+    return (
+      <TableRow key={user.name}>
+          <TableCell align="left"> {!editState ? <TextField id="firstname" onChange={handleChange} value={user.firstname}/> : user.firstname}</TableCell>
+          <TableCell align="left"> {!editState ? <TextField id="lastname" onChange={handleChange} value={user.lastname}/> : user.lastname}</TableCell>
+          <TableCell align="left"> {!editState ? <TextField id="staffid" onChange={handleChange} value={user.staffid}/> : user.staffid}</TableCell>
+          {/* Don't know what is going here with the statistics */}
+          {/* <TableCell align="left">
+          {course && (<Link className={classes.underline} to={`/dashboard/${course._id}/statistics/${user._id}`}>
+              <Button variant="outlined" color="secondary">View Statistics</Button>
+          </Link>)}
+          </TableCell> */}
+          <TableCell>
+            <IconButton
+              color="inherit"
+              onClick={(event) => handleEdit(event, user)}
+            >
+              {editState ? <EditIcon/> : <DoneIcon/>}
+            
+            </IconButton>
+          </TableCell>
+          <TableCell>
+            <IconButton
+              color="inherit"
+              onClick={() => onDeleteClick(user)}
+            >
+              <DeleteIcon/>
+            </IconButton>
+          </TableCell>
+      </TableRow>
+    )
+    }
 
-export default function Users({usersState, setUsersState, course, filter =()=>true}){
+
+export default function Users({usersState, setUsersState, handleEdit, editState, filter =()=>true}){
     const classes = useStyles();
     const { authState } = useContext(AuthContext);
-
     function onDeleteClick(user) {
       api.user.delete(authState.token, user._id)
       setUsersState(usersState.filter((x)=>x._id != user._id))
     }
 
-    function buildUser(user) {
-        return (
-          <TableRow key={user.name}>
-              <TableCell align="left">{user.firstname}</TableCell>
-              <TableCell align="left">{user.lastname}</TableCell>
-              <TableCell align="left">{user.staffid}</TableCell>
-              {/* Don't know what is going here with the statistics */}
-              {/* <TableCell align="left">
-              {course && (<Link className={classes.underline} to={`/dashboard/${course._id}/statistics/${user._id}`}>
-                  <Button variant="outlined" color="secondary">View Statistics</Button>
-              </Link>)}
-              </TableCell> */}
-              <TableCell>
-                <IconButton
-                  color="inherit"
-                >
-                <EditIcon/>
-                </IconButton>
-              </TableCell>
-              <TableCell>
-                <IconButton
-                  color="inherit"
-                  onClick={() => onDeleteClick(user)}
-                >
-                  <DeleteIcon/>
-                </IconButton>
-              </TableCell>
-          </TableRow>
-        )
-        }
 
+    
     return(
           <Box m={5}>
               <TableContainer component={Paper}>
@@ -81,7 +102,7 @@ export default function Users({usersState, setUsersState, course, filter =()=>tr
                     </TableHead>
                     <TableBody>
                         {usersState && usersState.filter(filter).map((user) => {
-                            return buildUser(user);
+                            return (<User user={user} onDeleteClick={onDeleteClick} setUsersState={setUsersState} usersState={usersState}/>)
                         })}
                     </TableBody>
                 </Table>

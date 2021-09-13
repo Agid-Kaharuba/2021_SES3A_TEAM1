@@ -23,10 +23,6 @@ const useStyles = makeStyles(theme => ({
     top: theme.spacing(1),
     color: theme.palette.grey[500],
   },
-  changePswForm: {
-    padding: "16px 24px",
-
-  },
   textField: {
     marginTop: theme.spacing(0.5),
     marginBottom: theme.spacing(0.5),
@@ -46,7 +42,6 @@ const useStyles = makeStyles(theme => ({
   image: {
     height: 150,
     width: 150,
-    margin: theme.spacing(2),
   },
   imageUpload: {
     display: "none",
@@ -63,9 +58,12 @@ const useStyles = makeStyles(theme => ({
     marginTop: "32px",
     textAlign: "center"
   },
-  imagedisplay: {
+  imageHidden: {
     display: "none",
     padding: "16px 24px",
+  },
+  imageDisplayed: {
+    padding: "16px 0",
   }
 }));
 
@@ -98,16 +96,16 @@ function ChangeImageDialog(props) {
       <DialogTitle onClose={handleClose}>Choose a Image</DialogTitle>
       <form onSubmit={saveChanges} className={classes.changePswForm}>
         <Grid>
-          <Button onClick={() => {imageChange(bbt); handleClose()}}>
+          <Button onClick={() => { imageChange(bbt); handleClose() }}>
             <img className={classes.image} src={bbt} alt="profile image" />
           </Button>
-          <Button onClick={() =>{imageChange(burger); handleClose()}}>
+          <Button onClick={() => { imageChange(burger); handleClose() }}>
             <img className={classes.image} src={burger} alt="profile image" />
           </Button>
-          <Button onClick={() =>{imageChange(burger2); handleClose()}}>
+          <Button onClick={() => { imageChange(burger2); handleClose() }}>
             <img className={classes.image} src={burger2} alt="profile image" />
           </Button>
-          <Button onClick={() =>{imageChange(burger3); handleClose()}}>
+          <Button onClick={() => { imageChange(burger3); handleClose() }}>
             <img className={classes.image} src={burger3} alt="profile image" />
           </Button>
         </Grid>
@@ -140,8 +138,8 @@ function UploadImage(props) {
       <div className={classes.profileImg}>
         <img className={classes.image} src={imagesrc} alt="placeholder image" />
       </div>
-      <div>
-        <Button onClick={handleDialogOpen} variant="outlined" color="secondary" className={editState ? classes.imagedisplay : classes.changePswForm}>Upload Image</Button>
+      <div className={editState ? classes.imageHidden : classes.imageDisplayed}>
+        <Button onClick={handleDialogOpen} variant="outlined" color="secondary">Upload Image</Button>
         <ChangeImageDialog open={open} onClose={handleClose} {...props}></ChangeImageDialog>
       </div>
     </div>
