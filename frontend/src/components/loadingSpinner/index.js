@@ -4,7 +4,7 @@ import CircularProgress from "@material-ui/core/CircularProgress"
 export default function LoadingSpinner() {
 
   return (
-    <div style={{
+    <div data-testid = "LoadingSpinnerTest" style={{
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',

@@ -94,7 +94,7 @@ function ChangeImageDialog(props) {
   }
 
   return (
-    <Dialog onClose={handleClose} open={open} disableBackdropClick disableEscapeKeyDown fullWidth="true" maxWidth="xs">
+    <Dialog data-testid = "ChangeImageDialogTest" onClose={handleClose} open={open} disableBackdropClick disableEscapeKeyDown fullWidth="true" maxWidth="xs">
       <DialogTitle onClose={handleClose}>Choose a Image</DialogTitle>
       <form onSubmit={saveChanges} className={classes.changePswForm}>
         <Grid>
@@ -137,7 +137,7 @@ function UploadImage(props) {
     <div>
       {/*Accepting only files with image type*/}
       {/* <input type="file" id="input" accept="image/*" onChange={imagesrc} ref={imagesrc} className={classes.imageUpload} /> */}
-      <div className={classes.profileImg}>
+      <div data-testid = "UploadImageTest" className={classes.profileImg}>
         <img className={classes.image} src={imagesrc} alt="placeholder image" />
       </div>
       <div>

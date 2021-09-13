@@ -36,7 +36,7 @@ export default function Users({usersState, setUsersState, course, filter =()=>tr
 
     function buildUser(user) {
         return (
-          <TableRow key={user.name}>
+          <TableRow  key={user.name}>
               <TableCell align="left">{user.firstname}</TableCell>
               <TableCell align="left">{user.lastname}</TableCell>
               <TableCell align="left">{user.staffid}</TableCell>
@@ -66,7 +66,7 @@ export default function Users({usersState, setUsersState, course, filter =()=>tr
         }
 
     return(
-          <Box m={5}>
+          <Box data-testid = "buildUserTest" m={5}>
               <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="simple table">
                     <TableHead>

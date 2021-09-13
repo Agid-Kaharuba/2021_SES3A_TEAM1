@@ -44,7 +44,7 @@ export default function Task(props) {
   let history = useHistory();
 
   return (
-    <div>
+    <div data-testid = "TasksTest">
 
       <Box my={2}>
         <Typography className={classes.bold} variant='h6'>
