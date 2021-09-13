@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import Progress from '../model/progress';
-import Course from '../model/course';
-import Task from '../model/task';
+import ProgressModel, { Progress, Tracking, TrackingModel } from '../model/progress';
+import CourseModel from '../model/course';
+import TaskModel from '../model/task';
 import ResponseService from '../helpers/response';
 
 export default class ProgressController {
@@ -15,16 +15,16 @@ export default class ProgressController {
       score: req.body.score,
     };
     try {
-      const progress = await Progress.findOne({
+      const progress = await ProgressModel.findOne({
         userId: req.body.userId,
         taskId: req.body.taskId,
         courseId: req.body.courseId,
       });
       if (progress) {
-        const response = await Progress.updateOne({ _id: progress._id }, body);
+        const response = await ProgressModel.updateOne({ _id: progress._id }, body);
         ResponseService.successResponse(res, response);
       } else {
-        const newProgressRequest = new Progress(body as any);
+        const newProgressRequest = new ProgressModel(body as any);
         newProgressRequest.save((err: any) => {
           if (err) {
             ResponseService.mongoErrorResponse(res, err);
@@ -40,7 +40,7 @@ export default class ProgressController {
 
   public async searchProgress(req: Request, res: Response) {
     try {
-      const search = await Progress.find({
+      const search = await ProgressModel.find({
         $and: [
           { $or: [{ undefined: { $eq: req.query.userId } }, { userId: req.query.userId }] },
           { $or: [{ undefined: { $eq: req.query.taskId } }, { taskId: req.query.taskId }] },
@@ -55,7 +55,7 @@ export default class ProgressController {
 
   public async userCourseStatistics(req: Request, res: Response) {
     try {
-      const course = await Course.findOne({ _id: req.query.courseId });
+      const course = await CourseModel.findOne({ _id: req.query.courseId });
       const totals = {
         Testing: 0,
         Performance: 0,
@@ -68,10 +68,10 @@ export default class ProgressController {
       };
       const tasks = [];
       for (const i in course.tasks) {
-        const task = await Task.findOne({ _id: course.tasks[i]._id });
+        const task = await TaskModel.findOne({ _id: course.tasks[i]._id });
         // @ts-ignore
         totals[task.type]++;
-        const progress = await Progress.findOne({
+        const progress = await ProgressModel.findOne({
           $and: [
             { userId: req.query.userId },
             { taskId: task._id },
@@ -96,18 +96,40 @@ export default class ProgressController {
       ResponseService.mongoErrorResponse(res, err);
     }
   }
+
+  public async putTracking(req: Request, res: Response) {
+    try {
+      let tracking: Tracking = req.body;
+      tracking._id = undefined;
+
+      let progress = await ProgressModel.findOne({
+        $and: [
+          { userId: req.query.userId },
+          { taskId: req.query.taskId },
+          { courseId: req.query.courseId },
+        ],
+      });
+
+      let response;
+      if (!progress){
+        progress = new ProgressModel({
+          userId: req.query.userId,
+          taskId: req.query.taskId,
+          courseId: req.query.courseId,
+          completed: false,
+          tracking: [tracking]
+        });
+        response = await progress.save();
+      }
+      else {
+        progress.tracking.push(tracking);
+        response = await ProgressModel.updateOne({ _id: progress._id }, { $set: { tracking: progress.tracking } });
+      }
+
+      ResponseService.successResponse(res, progress);
+    } catch (err) {
+      console.log(err);
+      ResponseService.mongoErrorResponse(res, err);
+    }
+  }
 }
-
-// {
-//     course: {
-
-//     },
-//     completion: {
-//         practice: 50,
-//         test: 50,
-//         perforamnce: 50
-//     },
-//     task: {
-
-//     }
-// }

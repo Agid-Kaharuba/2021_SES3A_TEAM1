@@ -1,7 +1,41 @@
-import mongoose from 'mongoose';
-import User from './user';
-import Task from './task';
-import Course from './course';
+import mongoose, { ObjectId } from 'mongoose';
+
+export interface Tracking {
+  _id: ObjectId | undefined;
+  date: Date;
+  event: String;
+  value: String;
+  data: Object | undefined;
+}
+
+export interface Progress {
+  data: object;
+  userId: string;
+  taskId: string;
+  courseId: string;
+  completed: string;
+  score: string;
+  tracking: Tracking[];
+}
+
+const trackingSchema = new mongoose.Schema({
+  date: {
+    type: Date,
+    require: true,
+  },
+  event: {
+    type: String
+  },
+  value: {
+    type: String
+  },
+  data: {
+    type: Object,
+    required: false,
+  },
+});
+
+export const TrackingModel = mongoose.model('Tracking', trackingSchema);
 
 const progressSchema = new mongoose.Schema({
   data: {
@@ -33,7 +67,10 @@ const progressSchema = new mongoose.Schema({
     required: false,
     default: 0,
   },
-
+  tracking: [{
+    type: TrackingModel.schema,
+    required: false,
+  }]
 });
 
 export default mongoose.model('Progress', progressSchema);
