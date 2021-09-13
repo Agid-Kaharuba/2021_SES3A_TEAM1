@@ -60,7 +60,7 @@ export default function ChangePasswordDialog(props) {
 
   return (
     <Dialog onClose={handleClose} open={open} fullWidth={true} maxWidth="xs">
-      <DialogTitle onClose={handleClose} data-testid="dialogTitle">Change Password</DialogTitle>
+      <DialogTitle onClose={handleClose} data-testid="dialogTitleTest">Change Password</DialogTitle>
       <form onSubmit={(e) => { saveChanges(e); onClose() }} className={classes.changePswForm}>
         <Typography variant="subtitle1" className={classes.typography}>Current Password*</Typography>
         <TextField
@@ -78,7 +78,7 @@ export default function ChangePasswordDialog(props) {
         <Typography variant="subtitle1" className={classes.typography}>New Password*</Typography>
         <TextField
           id="outlined-password-input"
-          data-testid="inputNewPsw"
+          data-testid="inputNewPswTest"
           type="password"
           name="newPassword"
           autoComplete="current-password"
@@ -92,7 +92,7 @@ export default function ChangePasswordDialog(props) {
         <Typography variant="subtitle1" className={classes.typography}>Confirm Password*</Typography>
         <TextField
           id="outlined-password-input"
-          data-testid="inputCfmPsw"
+          data-testid="inputCfmPswTest"
           type="password"
           name="confirmPassword"
           autoComplete="current-password"

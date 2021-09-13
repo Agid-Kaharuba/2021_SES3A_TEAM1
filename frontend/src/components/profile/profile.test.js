@@ -51,10 +51,10 @@ describe("Profile", () => {
   it('should be able to change input value', async () => {
     const { rerender } = render(<MockProfile mock={mockEmployee} />);
 
-    const inputElmFirstName = screen.getByTestId('inputFirstName').querySelector('input');
-    const inputElmLastName = screen.getByTestId('inputLastName').querySelector('input');
-    const inputElmStaffId = screen.getByTestId('inputStaffId').querySelector('input');
-    const inputElmEmail = screen.getByTestId('inputEmail').querySelector('input');
+    const inputElmFirstName = screen.getByTestId('inputFirstNameTest').querySelector('input');
+    const inputElmLastName = screen.getByTestId('inputLastNameTest').querySelector('input');
+    const inputElmStaffId = screen.getByTestId('inputStaffIdTest').querySelector('input');
+    const inputElmEmail = screen.getByTestId('inputEmailTest').querySelector('input');
     inputElmFirstName.onchange = evt => mockChange(evt);
     inputElmLastName.onchange = evt => mockChange(evt);
     inputElmStaffId.onchange = evt => mockChange(evt);
@@ -76,7 +76,7 @@ describe("Profile", () => {
   it('should not render dialog by default', async () => {
     const { rerender } = render(<MockProfile mock={mockEmployee} />);
 
-    const dialogElm = screen.getByTestId('dialogChangePsw');
+    const dialogElm = screen.getByTestId('dialogChangePswTest');
 
     expect(dialogElm).toBeEmpty();
   });
@@ -85,7 +85,7 @@ describe("Profile", () => {
     const { rerender } = render(<MockProfile mock={mockEmployee} />);
 
     const mockFn = jest.fn();
-    const button = screen.getByTestId('btnChangePsw');
+    const button = screen.getByTestId('btnChangePswTest');
     button.onclick = () => mockFn();
     fireEvent.click(button);
 
@@ -95,7 +95,7 @@ describe("Profile", () => {
   it('should render change password dialog if open is true', async () => {
     const { rerender } = render(<MockDialog mock={mockEmployee} />)
 
-    const dialogElm = screen.getByTestId('dialogTitle');
+    const dialogElm = screen.getByTestId('dialogTitleTest');
 
     expect(dialogElm).toHaveTextContent('Change Password');
   });
@@ -103,8 +103,8 @@ describe("Profile", () => {
   it('should display helper text if new password not match with confirmed password', async () => {
     const { rerender } = render(<MockDialog mock={mockEmployee} />)
 
-    const inputElmNewPsw = screen.getByTestId('inputNewPsw').querySelector('input');
-    const inputElmCfmPsw = screen.getByTestId('inputCfmPsw').querySelector('input');
+    const inputElmNewPsw = screen.getByTestId('inputNewPswTest').querySelector('input');
+    const inputElmCfmPsw = screen.getByTestId('inputCfmPswTest').querySelector('input');
     inputElmNewPsw.onchange = evt => mockChange(evt);
     inputElmCfmPsw.onchange = evt => mockChange(evt);
     fireEvent.change(inputElmNewPsw, { target: { value: 'Pass001' } });
@@ -119,7 +119,7 @@ describe("Profile", () => {
     const { rerender } = render(<MockProfile mock={mockEmployee} />);
 
     const mockFn = jest.fn();
-    const button = screen.getByTestId('btnSave');
+    const button = screen.getByTestId('btnSaveTest');
     button.onclick = () => mockFn();
     fireEvent.click(button);
 

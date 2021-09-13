@@ -87,8 +87,8 @@ function ProfilePicture(props) {
         <IconButton onClick={() => imageUploader.current.click()} className={classes.uploadBtn}><EditIcon fontSize="large" /></IconButton>
       </div>
       <div>
-        <Button onClick={handleDialogOpen} variant="outlined" color="secondary" className={classes.changePsw} data-testid="btnChangePsw">Change Password</Button>
-        <div data-testid="dialogChangePsw">
+        <Button onClick={handleDialogOpen} variant="outlined" color="secondary" className={classes.changePsw} data-testid="btnChangePswTest">Change Password</Button>
+        <div data-testid="dialogChangePswTest">
           <ChangePasswordDialog open={open} onClose={handleClose} {...props}></ChangePasswordDialog>
         </div>
       </div>
@@ -111,7 +111,7 @@ export default function Profile(props) {
               <Typography variant="subtitle1" className={classes.typography}>First Name</Typography>
               <TextField
                 id="outlined-required"
-                data-testid="inputFirstName"
+                data-testid="inputFirstNameTest"
                 name="firstname"
                 onChange={handleChange}
                 value={employee.firstname}
@@ -125,7 +125,7 @@ export default function Profile(props) {
               <Typography variant="subtitle1" className={classes.typography}>Last Name</Typography>
               <TextField
                 id="outlined-required"
-                data-testid="inputLastName"
+                data-testid="inputLastNameTest"
                 name="lastname"
                 onChange={handleChange}
                 value={employee.lastname}
@@ -139,7 +139,7 @@ export default function Profile(props) {
             <Typography variant="subtitle1" className={classes.typography}>Staff ID</Typography>
             <TextField
               id="outlined-required"
-              data-testid="inputStaffId"
+              data-testid="inputStaffIdTest"
               name="staffid"
               onChange={handleChange}
               value={employee.staffid}
@@ -152,7 +152,7 @@ export default function Profile(props) {
             <Typography variant="subtitle1" className={classes.typography}>Email</Typography>
             <TextField
               id="outlined-required"
-              data-testid="inputEmail"
+              data-testid="inputEmailTest"
               name="email"
               onChange={handleChange}
               value={employee.email}
@@ -165,7 +165,7 @@ export default function Profile(props) {
       </div>
       <div className={classes.saveBtn}>
         <Button
-          data-testid="btnSave"
+          data-testid="btnSaveTest"
           variant="contained"
           color="secondary"
           className={classes.button}
