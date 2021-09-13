@@ -13,6 +13,11 @@ import SignOut from "./components/signout";
 
 // IMPORT HOMEPAGE PAGES
 import AboutUs from "./pages/aboutus/aboutus.js";
+import ProjectOutline from './pages/aboutus/projectoutline';
+
+import VrExperience from './pages/aboutus/vrexperience';
+import TeamCommunication from './pages/aboutus/teamcommunication';
+import TheTeam from './pages/aboutus/theteam';
 import HomePage from "./pages/home/home.js";
 
 // IMPORT USER PAGES
@@ -25,11 +30,11 @@ import UserList from "./pages/userslist/userslist.js";
 import Dashboard from "./pages/dashboard/dashboard.js";
 
 // IMPORT COURSE PAGES
-import CreateNewCourse from './pages/supervisor/CreateCourse';
+import CreateNewCourse from './pages/supervisor/CreateCourse/createNewTraining';
 import ViewTrainingPage from './pages/viewtraining/viewtraining';
 
 // IMPORT TASKS PAGES
-import TaskList from "./pages/task/taskslist";
+import TaskList from "./pages/task/taskslist/taskList";
 import ViewTask from "./pages/task/viewtask";
 import CreateNewTask from "./pages/task/createtask/createtask.js";
 import CreateTaskGlobal from "./pages/task/createtask/createtaskglobal.js";
@@ -70,6 +75,23 @@ function AppRouter(props) {
         exact={true}
         component={AboutUs}>
       </Route>
+      <Route path="/aboutus/projectoutline"
+        exact={true}
+        component={ProjectOutline}>
+      </Route>
+      <Route path="/aboutus/teamcommunication"
+        exact={true}
+        component={TeamCommunication}>
+      </Route>
+      <Route path="/aboutus/vrexperience"
+        exact={true}
+        component={VrExperience}>
+      </Route>
+      <Route path="/aboutus/theteam"
+        exact={true}
+        component={TheTeam}>
+      </Route>
+
 
       // Login Profile User Routes
       <Route path="/login"

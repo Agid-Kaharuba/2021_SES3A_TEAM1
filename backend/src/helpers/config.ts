@@ -7,5 +7,6 @@ export default {
 	DATABASE_URL: process.env.DATABASE_URL as string,
 	DATABASE_NAME: process.env.DATABASE_NAME as string,
 	TEST_DATABASE_NAME: process.env.TEST_DATABASE_NAME as string,
-    TOKEN_SECRET: process.env.TOKEN_SECRET as string
+    TOKEN_SECRET: process.env.TOKEN_SECRET as string,
+    SALT: Number(process.env.SALT)
 };

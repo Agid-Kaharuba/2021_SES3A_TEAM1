@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
+import config from '../helpers/config';
 import User from '../model/user';
 import ResponseService from '../helpers/response';
 
@@ -51,7 +52,7 @@ export default class UserController {
             // @ts-ignore
             if (await user.checkPassword(body.password)) {
               // delete body.password;
-              body.password = await bcrypt.hash(body.newPassword, 10);
+              body.password = await bcrypt.hash(body.newPassword, config.SALT);
               await User.updateOne({ _id: id }, { $set: { ...body } });
               ResponseService.successResponse(res, 'User updated');
             } else {

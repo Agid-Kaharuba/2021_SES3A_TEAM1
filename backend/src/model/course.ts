@@ -29,6 +29,10 @@ const courseSchema = new mongoose.Schema({
     type: Boolean,
     required: false,
   },
+  dueDate: {
+    type: Date,
+    required: false,
+  }
 });
 
 export default mongoose.model('Course', courseSchema);

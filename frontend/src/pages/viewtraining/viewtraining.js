@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Button, Typography, Divider, Box, Grid, TextField } from "@material-ui/core";
+import { Button, Container, Typography, Divider, Box, Grid, TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Users from "../../components/usersList/index.js";
 import Tasks from "../../components/Task/list.js";
@@ -30,8 +30,8 @@ const useStyles = makeStyles({
     trainDiv: {
         width: "80%",
     },
-    imagedisplay:{
-        display:"none",
+    imagedisplay: {
+        display: "none",
     }
 })
 
@@ -98,7 +98,7 @@ export default function ViewCourse(props) {
         const res = await api.course.get(authState.token, courseId);
         console.log(res.data);
         setCourseState(res.data);
-        setImagesrc(res.data.image||bbt);
+        setImagesrc(res.data.image || bbt);
     };
 
     useEffect(() => {
@@ -112,7 +112,7 @@ export default function ViewCourse(props) {
     }
     else {
         return (
-            <>
+            <Container maxWidth="lg">
                 <Box m={5}>
                     <Grid container spacing={2} justify="space-between">
                         <Grid item>
@@ -128,23 +128,25 @@ export default function ViewCourse(props) {
                     </Grid>
                     <Divider variant="middle" />
                 </Box>
-                <div>
-                    <Grid container>
-                        <Grid item sm={12} md={3}>
-                            <PlaceholderImage imageChange={imageChange} imagesrc={imagesrc} editState={editState}/>
+                <Box m={5}>
+                    <Box m={5}>
+                        <Grid container>
+                            <Grid item sm={12} md={3}>
+                                <PlaceholderImage imageChange={imageChange} imagesrc={imagesrc} editState={editState} />
+                            </Grid>
+                            <Grid item sm={12} md={9}>
+                                <Typography className={classes.bold} variant='h6'>
+                                    Training Name
+                                </Typography>
+                                <TextField value={courseState.name} id="name" disabled={editState} variant="outlined" fullWidth margin='normal' onChange={handleChange} />
+                                <Typography className={classes.bold} variant='h6'>
+                                    Training Description
+                                </Typography>
+                                <TextField value={courseState.description} id="description" disabled={editState} variant="outlined" fullWidth margin='normal' multiline rows={10} onChange={handleChange} />
+                            </Grid>
                         </Grid>
-                        <Grid item sm={12} md={9}>
-                            <Typography className={classes.bold} variant='h6'>
-                                Training Name
-                            </Typography>
-                            <TextField value={courseState.name} id="name" disabled={editState} variant="outlined" fullWidth margin='normal' onChange={handleChange} />
-                            <Typography className={classes.bold} variant='h6'>
-                                Training Description
-                            </Typography>
-                            <TextField value={courseState.description} id="description" disabled={editState} variant="outlined" fullWidth margin='normal' multiline rows={10} onChange={handleChange} />
-                        </Grid>
-                    </Grid>
-                </div>
+                    </Box>
+                </Box>
 
                 <Box m={5}>
                     <Typography className={classes.bold} variant='h6'>
@@ -162,7 +164,7 @@ export default function ViewCourse(props) {
                         <Tasks tasksState={tasksState} />
                     </Grid>
                 </Box>
-            </>
+            </Container>
         )
     }
 }

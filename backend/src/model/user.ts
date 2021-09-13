@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
+import config from '../helpers/config';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const uniqueValidator = require('mongoose-unique-validator');
@@ -56,7 +57,7 @@ UserSchema.methods.checkPassword = async function (plainPass) {
 UserSchema.pre('save', function (next) {
   // @ts-ignore
   const user: IUser = this;
-  bcrypt.hash(user.password, 10, (err, hash) => {
+  bcrypt.hash(user.password, config.SALT, (err, hash) => {
     user.password = hash;
     next();
   });

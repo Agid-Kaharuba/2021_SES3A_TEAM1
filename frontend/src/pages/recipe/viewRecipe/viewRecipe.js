@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { Button, Typography, Divider, Box, FormControl, Select, MenuItem, Grid, TextField } from "@material-ui/core";
+import { Button, Container, Typography, Divider, Box, FormControl, Select, MenuItem, Grid, TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { AuthContext } from "../../../context/auth";
@@ -71,7 +71,7 @@ export default function ViewRecipe(props) {
   }
   else {
     return (
-      <>
+      <Container maxWidth="lg">
         <Box m={5}>
           <Grid container spacing={2} justify="space-between">
             <Grid item>
@@ -97,7 +97,7 @@ export default function ViewRecipe(props) {
             </Button>
           </Box>
         </Box>
-      </>
+      </Container>
     );
   }
 }
