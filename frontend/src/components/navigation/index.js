@@ -46,7 +46,7 @@ const styles = theme => ({
 
 //Guest Tool bar
 const MyToolbar = withStyles(styles)(({ classes, title, onMenuClick }) => (
-  <Fragment>
+  <Fragment data-testid = "MyToolbarTest">
     <AppBar className={classes.aboveDrawer}>
       <Toolbar>
         <IconButton
@@ -71,7 +71,7 @@ const MyToolbar = withStyles(styles)(({ classes, title, onMenuClick }) => (
 //Guest drawer
 const MyDrawer = withStyles(styles)(
   ({ classes, variant, open, onClose, onItemClick }) => (
-    <Box>
+    <Box data-testid = "MyDrawerTest" >
       <Drawer
         variant={variant}
         open={open}

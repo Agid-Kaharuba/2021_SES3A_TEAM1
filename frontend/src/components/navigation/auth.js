@@ -180,7 +180,7 @@ function AppBarInteraction({ classes, variant }) {
   };
 
   return (
-    <div className={classes.root}>
+    <div data-testid = "navigationTest" className={classes.root}>
       <MyToolbar 
       onMenuClick={toggleDrawer} />
       <MyDrawer
