@@ -11,7 +11,7 @@ export default function BackButton(props) {
     }
 
     return (
-        <div>
+        <div data-testid = "backButtonTest">
             <IconButton onClick={handleBack}>
                 <ArrowBackIcon></ArrowBackIcon>
             </IconButton>

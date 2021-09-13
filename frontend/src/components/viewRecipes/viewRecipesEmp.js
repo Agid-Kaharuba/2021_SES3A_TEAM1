@@ -24,7 +24,7 @@ export default function ViewRecipeSup(props){
     const classes = useStyles();
     return(
         <>
-        <Box m={5}>
+        <Box data-testid = "ViewRecipeSupTest"  m={5}>
             <Grid container spacing={2} justify="space-between">
                 <Grid item>
                     <Typography className={classes.bold} variant='h4'>
