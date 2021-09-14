@@ -15,21 +15,23 @@ const useStyles = makeStyles({
 //for testing
 
 const BlockWrapper = styled("div")`
-  position: relative;
+  position: absolute;
+  background: blue;
   border-radius: 4px;
-  margin-right: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 8px;
+  margin-right: 8px;
+  flex-shrink: 0;
   height: 120px;
   width: 120px;
-  background: blue;
 `;
 
 const StyledText = styled("p")`
+  font-weight: 800;
+  font-size: 38px;
   color: white;
-  font-weight: 600;
-  font-size: 24px;
 `;
 
 const Block = () => {
