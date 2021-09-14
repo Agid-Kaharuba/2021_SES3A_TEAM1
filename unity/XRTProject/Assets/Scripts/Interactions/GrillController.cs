@@ -25,12 +25,12 @@ public class GrillController : MonoBehaviour {
             rend.material.SetColor ( "_EmissiveColor", Color.red * 1000f );
             steamEffect.enabled = false;
             poweredOn = false;
-            TrainingManager.Logger.Log("GRILL", "OFF");
+            Track.Log("GRILL", "OFF");
         } else {
             rend.material.SetColor ( "_EmissiveColor", Color.green * 1000f );
             steamEffect.enabled = true;
             poweredOn = true;
-            TrainingManager.Logger.Log("GRILL", "ON");
+            Track.Log("GRILL", "ON");
         }
 
         yield return null;
