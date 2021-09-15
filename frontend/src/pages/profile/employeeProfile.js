@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
 import { Snackbar } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
-import Profile from '../../components/profile'
+import Profile from '../../components/profile/profile'
 import api from '../../helpers/api'
 import { AuthContext } from "../../context/auth";
 
