@@ -6,7 +6,7 @@ import { Link, useHistory } from "react-router-dom";
 import { AuthContext } from "../../../context/auth";
 import api from "../../../helpers/api";
 import BackButton from "../../../components/backbutton/index.js";
-import Task from "../../../components/Task";
+import Task from "../../../components/Task/task";
 
 const useStyles = makeStyles({
   bold: {
