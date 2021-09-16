@@ -21,7 +21,7 @@ export default function Footer() {
   const [value, setValue] = React.useState(0);
 
   return (
-    <BottomNavigation
+    <BottomNavigation data-testid = "BottomNavigationTest"
       value={value}
       onChange={(event, newValue) => {
         setValue(newValue);

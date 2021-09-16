@@ -98,7 +98,7 @@ function ChangePasswordDialog(props) {
   };
 
   return (
-    <Dialog onClose={handleClose} open={open} disableBackdropClick disableEscapeKeyDown fullWidth="true" maxWidth="xs">
+    <Dialog data-testid = "ChangePasswordDialogTest" onClose={handleClose} open={open} disableBackdropClick disableEscapeKeyDown fullWidth="true" maxWidth="xs">
       <DialogTitle onClose={handleClose}>Change Password</DialogTitle>
       <form onSubmit={saveChanges} className={classes.changePswForm}>
         <Typography variant="subtitle1" className={classes.typography}>Current Password*</Typography>
@@ -170,7 +170,7 @@ function ProfilePicture(props) {
   };
 
   return (
-    <div>
+    <div data-testid = "ProfilePictureTest" >
       {/*Accepting only files with image type*/}
       <input type="file" id="input" accept="image/*" onChange={handleImageUpload} ref={imageUploader} className={classes.imageUpload} />
       <div className={classes.profileImg}>
@@ -190,7 +190,7 @@ export default function Profile(props) {
   const { employee, handleChange, saveChanges } = props;
 
   return (
-    <Container maxWidth="md">
+    <Container data-testid = "ProfileTest" maxWidth="md">
       <Typography variant="h4" className={classes.heading}>My Profile</Typography>
       <div className={classes.container}>
         <ProfilePicture {...props} />

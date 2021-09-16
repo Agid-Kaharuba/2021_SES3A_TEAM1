@@ -29,12 +29,14 @@ async function masterData() {
         let task = new Task({
             name: "Beef Burger",
             description: "The user will need to make the recipe attached",
-            recipe: recipe,
+            recipe: recipe._id,
             type: "Practice"
         } as any);
         await task.save();
 
-        if (!await User.findOne({ username: "employee" })) {
+        employee = await User.findOne({ username: "employee" })
+
+        if (!employee) {
             employee = new User({
                 username: "employee",
                 password: "employee",
@@ -50,8 +52,8 @@ async function masterData() {
         const course = new Course({
             name: "Burger",
             description: "Test Course",
-            tasks: [task],
-            assignedEmployees: [employee],
+            tasks: [task._id],
+            assignedEmployees: [employee._id],
             _id: COURSEID
         } as any);
         await course.save();

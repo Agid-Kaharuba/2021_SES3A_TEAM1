@@ -8,7 +8,7 @@ import api from "../../helpers/api";
 
 export default function Ingredient(props) {
 	return (
-		<Draggable key={props.ingredient.id} draggableId={props.ingredient.id} 
+		<Draggable data-testid = "IngredientTest" key={props.ingredient.id} draggableId={props.ingredient.id} 
 		index={props.index} isDragDisabled={!(props.edit == undefined || props.edit)}>
 			{(provided) => (
 				<Box my={1}
