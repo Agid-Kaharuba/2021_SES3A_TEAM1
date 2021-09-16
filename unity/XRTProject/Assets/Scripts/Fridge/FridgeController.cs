@@ -6,51 +6,22 @@ using UnityEngine.VFX;
 
 public class FridgeController : MonoBehaviour
 {
-    GameObject items;
-    List<int> childC;
-    public GameObject pref;
-    public bool changed;
-    Vector3 P;
-    int reset = 0;
+    private List<GameObject> ItemsToAdd = new List<GameObject>();
+    private List<Transform> ItemsPosition = new List<Transform>();
+    private bool changed;
     private AudioSource click;
 
     void Start()
     {
         click = gameObject.GetComponent<AudioSource>();
-        childC = new List<int>();
-        items = GameObject.Find("ItemsInTheFridge");
         changed = false;
-        P = GameObject.Find("ItemsInTheFridge").transform.position;
-        for (int x = 0; x < items.transform.childCount; x++)
-        {
-            childC.Add(items.transform.GetChild(x).childCount);
-        }
     }
 
-    void Update()
+    void Changed(GameObject item, Transform position)
     {
-        if (changed == false && reset==0)
-        {
-            for (int x = 0; x < items.transform.childCount; x++)
-            {
-                if (childC[x] != items.transform.GetChild(x).childCount)
-                {
-                    changed = true;
-                }
-            }
-        }
-        if(changed == false && reset > 0)
-        {
-            items = GameObject.Find("ItemsInTheFridge(Clone)");
-            for (int x = 0; x < items.transform.childCount; x++)
-            {
-                if (childC[x] != items.transform.GetChild(x).childCount)
-                {
-                    changed = true;
-                }
-            }
-        }
-
+        ItemsToAdd.Add(item);
+        ItemsPosition.Add(position);
+        changed = true;
     }
 
     IEnumerator resetFridge()
@@ -59,23 +30,12 @@ public class FridgeController : MonoBehaviour
 
         if (changed)
         {
-            if (reset == 0)
-            {
-                Destroy(GameObject.Find("ItemsInTheFridge"));
-                var FridgeItems = Instantiate(pref, P, Quaternion.identity);
-                FridgeItems.transform.parent = GameObject.Find("Fridge").transform;
-                reset++;
+                for(int i =0; i < ItemsToAdd.Count; i++)
+                {
+                    var FridgeItems = Instantiate(ItemsToAdd[i], ItemsPosition[i]);
+                    FridgeItems.transform.parent = GameObject.Find(ItemsToAdd[i].transform.name).transform;
+                }
                 changed = false;
-            }
-            else
-            {
-                Destroy(GameObject.Find("ItemsInTheFridge(Clone)"));
-                var FridgeItems = Instantiate(pref, P, Quaternion.identity);
-                FridgeItems.transform.parent = GameObject.Find("Fridge").transform;
-                reset++;
-                changed = false;
-            }
-            
         }
         
 
