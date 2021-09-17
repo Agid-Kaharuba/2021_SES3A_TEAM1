@@ -70,6 +70,7 @@ public class TrainingManager : MonoBehaviour
         }
 
         apiService = new ApiService(token);
+        gameObject.AddComponent<Track>().Setup(apiService);
 
         // Use apiService.GetCurrentUser once the token is provided.
         StartCoroutine(apiService.GetCurrentUser((response) =>

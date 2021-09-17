@@ -61,7 +61,7 @@ public class ApiRequest
 
     public ApiRequest HandleJsonResponse<T>(Action<T> responsePayload)
     {
-        this.responsePayload = (p) => JsonConvert.DeserializeObject<T>(p);
+        this.responsePayload = (p) => responsePayload.Invoke(JsonConvert.DeserializeObject<T>(p));
         return this;
     }
 

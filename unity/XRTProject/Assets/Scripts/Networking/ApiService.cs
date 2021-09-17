@@ -127,4 +127,13 @@ public class ApiService
             .HandleError(callback);
         yield return apiRequest.Execute();
     }
+
+    public IEnumerator SubmitTaskTracking(Tracking tracking, string userId, string taskId, string courseId, Action<object> callback = null)
+    {
+        string queryParams = $"userId={userId}&taskId={taskId}&courseId={courseId}";
+        ApiRequest apiRequest = SendAuthenticatedRequest($"progress/tracking?{queryParams}", HTTPRequestType.Put)
+            .SendJson(tracking)
+            .HandleError(callback);
+        yield return apiRequest.Execute();
+    }
 }
