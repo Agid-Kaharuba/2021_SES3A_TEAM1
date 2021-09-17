@@ -86,7 +86,7 @@ export default function RecipeBuilder(props) {
 
   return (
     state && (
-      <DragDropContext onDragEnd={onDragEnd}>
+      <DragDropContext data-testid = "RecipeBuilderTest" onDragEnd={onDragEnd}>
 
         {/* ingredients list to choose from*/}
         <Grid item style={{ gridRow: 2 }}>

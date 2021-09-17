@@ -25,7 +25,7 @@ export default function Tasks({ tasksState }) {
 
   function buildTask(task) {
     return (
-      <TableRow key={task.name}>
+      <TableRow data-testid = "taskslistTest" key={task.name}>
         <TableCell align="left">{task.name}</TableCell>
         <TableCell align="left">{task.description}</TableCell>
         <TableCell align="left">{task.type}</TableCell>

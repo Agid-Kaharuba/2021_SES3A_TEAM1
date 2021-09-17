@@ -41,7 +41,7 @@ export default function Recipes(props) {
 
   return (
     <>
-      <Box m={5}>
+      <Box m={5} data-testid = "RecipeListTest" >
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="simple table">
             <TableHead>

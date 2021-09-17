@@ -6,19 +6,11 @@ import BackButton from "../backbutton";
 import EditIcon from '@material-ui/icons/Edit';
 import CloseIcon from '@material-ui/icons/Close';
 
+import ChangePasswordDialog from './changePswDialog';
+
 const useStyles = makeStyles(theme => ({
   button: {
     margin: theme.spacing(1)
-  },
-  closeButton: {
-    position: 'absolute',
-    right: theme.spacing(1),
-    top: theme.spacing(1),
-    color: theme.palette.grey[500],
-  },
-  changePswForm: {
-    padding: "16px 24px",
-
   },
   textField: {
     marginTop: theme.spacing(0.5),
@@ -69,89 +61,6 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-
-function DialogTitle(props) {
-  const classes = useStyles();
-  const { children, onClose, ...other } = props;
-  return (
-    <MuiDialogTitle disableTypography {...other}>
-      <Typography variant="h6">{children}</Typography>
-      {onClose ? (
-        <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
-          <CloseIcon />
-        </IconButton>
-      ) : null}
-    </MuiDialogTitle>
-  );
-}
-
-function ChangePasswordDialog(props) {
-  const classes = useStyles();
-  const { onClose, open, employee, handleChange, saveChanges } = props;
-
-  const handleClose = () => {
-    employee.password = null;
-    employee.newPassword = null;
-    employee.confirmPassword = null;
-    console.log(employee);
-    onClose();
-  };
-
-  return (
-    <Dialog onClose={handleClose} open={open} disableBackdropClick disableEscapeKeyDown fullWidth="true" maxWidth="xs">
-      <DialogTitle onClose={handleClose}>Change Password</DialogTitle>
-      <form onSubmit={saveChanges} className={classes.changePswForm}>
-        <Typography variant="subtitle1" className={classes.typography}>Current Password*</Typography>
-        <TextField
-          id="outlined-password-input"
-          type="password"
-          name="password"
-          autoComplete="current-password"
-          onChange={handleChange}
-          value={employee.password}
-          variant="outlined"
-          required
-          fullWidth
-          className={classes.password}
-        />
-        <Typography variant="subtitle1" className={classes.typography}>New Password*</Typography>
-        <TextField
-          id="outlined-password-input"
-          type="password"
-          name="newPassword"
-          autoComplete="current-password"
-          onChange={handleChange}
-          value={employee.newPassword}
-          variant="outlined"
-          fullWidth
-          required
-          className={classes.password}
-        />
-        <Typography variant="subtitle1" className={classes.typography}>Confirm Password*</Typography>
-        <TextField
-          id="outlined-password-input"
-          type="password"
-          name="confirmPassword"
-          autoComplete="current-password"
-          onChange={handleChange}
-          value={employee.confirmPassword}
-          variant="outlined"
-          fullWidth
-          required
-          error={(employee.confirmPassword !== undefined) && (employee.newPassword !== employee.confirmPassword)}
-          helperText={(employee.confirmPassword !== undefined) && (employee.newPassword !== employee.confirmPassword) ? 'Password do not match' : ''}
-          className={classes.password}
-        />
-        <div className={classes.saveBtn}>
-          <Button variant="contained" color="secondary" className={classes.button} type="submit">
-            Save
-          </Button>
-        </div>
-      </form>
-    </Dialog>
-  );
-}
-
 function ProfilePicture(props) {
   const classes = useStyles();
   // TODO: I dont know what these are for
@@ -170,7 +79,7 @@ function ProfilePicture(props) {
   };
 
   return (
-    <div>
+    <div data-testid="ProfilePictureTest" >
       {/*Accepting only files with image type*/}
       <input type="file" id="input" accept="image/*" onChange={handleImageUpload} ref={imageUploader} className={classes.imageUpload} />
       <div className={classes.profileImg}>
@@ -178,8 +87,10 @@ function ProfilePicture(props) {
         <IconButton onClick={() => imageUploader.current.click()} className={classes.uploadBtn}><EditIcon fontSize="large" /></IconButton>
       </div>
       <div>
-        <Button onClick={handleDialogOpen} variant="outlined" color="secondary" className={classes.changePsw}>Change Password</Button>
-        <ChangePasswordDialog open={open} onClose={handleClose} {...props}></ChangePasswordDialog>
+        <Button onClick={handleDialogOpen} variant="outlined" color="secondary" className={classes.changePsw} data-testid="btnChangePswTest">Change Password</Button>
+        <div data-testid="dialogChangePswTest">
+          <ChangePasswordDialog open={open} onClose={handleClose} {...props}></ChangePasswordDialog>
+        </div>
       </div>
     </div>
   )
@@ -190,7 +101,7 @@ export default function Profile(props) {
   const { employee, handleChange, saveChanges } = props;
 
   return (
-    <Container maxWidth="md">
+    <Container data-testid="ProfileTest" maxWidth="md">
       <Typography variant="h4" className={classes.heading}>My Profile</Typography>
       <div className={classes.container}>
         <ProfilePicture {...props} />
@@ -200,6 +111,7 @@ export default function Profile(props) {
               <Typography variant="subtitle1" className={classes.typography}>First Name</Typography>
               <TextField
                 id="outlined-required"
+                data-testid="inputFirstNameTest"
                 name="firstname"
                 onChange={handleChange}
                 value={employee.firstname}
@@ -213,6 +125,7 @@ export default function Profile(props) {
               <Typography variant="subtitle1" className={classes.typography}>Last Name</Typography>
               <TextField
                 id="outlined-required"
+                data-testid="inputLastNameTest"
                 name="lastname"
                 onChange={handleChange}
                 value={employee.lastname}
@@ -226,6 +139,7 @@ export default function Profile(props) {
             <Typography variant="subtitle1" className={classes.typography}>Staff ID</Typography>
             <TextField
               id="outlined-required"
+              data-testid="inputStaffIdTest"
               name="staffid"
               onChange={handleChange}
               value={employee.staffid}
@@ -238,6 +152,7 @@ export default function Profile(props) {
             <Typography variant="subtitle1" className={classes.typography}>Email</Typography>
             <TextField
               id="outlined-required"
+              data-testid="inputEmailTest"
               name="email"
               onChange={handleChange}
               value={employee.email}
@@ -249,7 +164,14 @@ export default function Profile(props) {
         </form>
       </div>
       <div className={classes.saveBtn}>
-        <Button variant="contained" color="secondary" className={classes.button} type="submit" onClick={saveChanges}>
+        <Button
+          data-testid="btnSaveTest"
+          variant="contained"
+          color="secondary"
+          className={classes.button}
+          type="submit"
+          onClick={saveChanges}
+        >
           Save
         </Button>
       </div>
