@@ -38,17 +38,24 @@ const StyledText = styled("p")`
 
 const Block = () => {
     const [coordinate, setCoordinate] = React.useState({
-      block: {
-        x: 0,
-        y: 0
-      },
+      // block: {
+      //   x: 0,
+      //   y: 0
+      // },
+      blocks: new Array(12).fill(1).map((_, index) => {
+        const col = Math.floor(index % 3);
+        const row = Math.floor(index / 3);
+        return { x: col * 120 + col * 8, y: 120 * row + row * 8 };
+      }),
       pointer: { x: 0, y: 0 },
-      moving: false
+      // moving: false
+      movingBlockIndex: null
     });
   
     const handleMouseMove = React.useCallback(
       (event) => {
-        if (!coordinate.moving) {
+        // if (!coordinate.moving) {
+        if (coordinate.movingBlockIndex === null) {
           return;
         }
         const coordinates = { x: event.clientX, y: event.clientY };
@@ -59,38 +66,50 @@ const Block = () => {
             y: coordinates.y - prev.pointer.y
           };
           return {
-            moving: true,
+            // moving: true,
+            // pointer: coordinates,
+            // block: { x: prev.block.x + diff.x, y: prev.block.y + diff.y }
+            ...prev,
             pointer: coordinates,
-            block: { x: prev.block.x + diff.x, y: prev.block.y + diff.y }
+            blocks: prev.blocks.map((b, index) =>
+              prev.movingBlockIndex === index
+                ? { x: b.x + diff.x, y: b.y + diff.y }
+                : b
+            )
           };
         });
       },
-      [coordinate.moving]
+      // [coordinate.moving]
+      [coordinate.movingBlockIndex]
     );
   
     const handleMouseUp = React.useCallback(() => {
       setCoordinate((prev) => ({
         ...prev,
-        moving: false
+        // moving: false
+        movingBlockIndex: null
       }));
     }, []);
   
     const handleMouseDown = React.useCallback((event) => {
       const startingCoordinates = { x: event.clientX, y: event.clientY };
+      const index = parseInt(event.target.getAttribute("data-index"), 10);
       setCoordinate((prev) => ({
         ...prev,
         pointer: startingCoordinates,
-        moving: true
+        // moving: true
+        movingBlockIndex: index
       }));
       event.stopPropagation();
     }, []);
 
     return (
         <BlockWrapper
-          style={{ top: coordinate.block.y, left: coordinate.block.x }}
+          // style={{ top: coordinate.block.y, left: coordinate.block.x }}
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
+          
         >
           <StyledText>Oven</StyledText>
         </BlockWrapper>
