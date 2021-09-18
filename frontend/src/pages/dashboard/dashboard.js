@@ -144,7 +144,9 @@ export default function CreateNewTrainingPage() {
                   {course.name}
                 </Typography>
                 <Typography gutterBottom variant="body2" component="h2">
-                  {course.dueDate}
+                {course.dueDate ? 
+                 new Date(course.dueDate).toLocaleDateString()
+                : ""}
                 </Typography>
                 <Typography variant="body1" color="textSecondary" gutterBottom>
                   {course.description}
