@@ -3,7 +3,8 @@
 import React from 'react';
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-import { Box, Button, Typography, Divider, } from "@material-ui/core";
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import { Box, Typography, Divider, Card, CardContent, CardActions, Paper} from "@material-ui/core";
 import styled from "styled-components";
 
 const useStyles = makeStyles({
@@ -12,9 +13,6 @@ const useStyles = makeStyles({
       },
 })
 
-
-//*************** temporary code from https://codesandbox.io/s/uequ3?file=/src/App.js
-//for testing
 
 const BlockWrapper = styled("div")`
   position: absolute;
@@ -38,15 +36,15 @@ const StyledText = styled("p")`
 
 const Block = () => {
     const [coordinate, setCoordinate] = React.useState({
-      // block: {
-      //   x: 0,
-      //   y: 0
-      // },
-      blocks: new Array(12).fill(1).map((_, index) => {
-        const col = Math.floor(index % 3);
-        const row = Math.floor(index / 3);
-        return { x: col * 120 + col * 8, y: 120 * row + row * 8 };
-      }),
+      block: {
+        x: 0,
+        y: 0
+      },
+      // blocks: new Array(5).fill(1).map((_, index) => {
+      //   const col = Math.floor(index % 5);
+      //   const row = Math.floor(index / 5);
+      //   return { x: col * 120 + col * 8, y: 120 * row + row * 8 };
+      // }),
       pointer: { x: 0, y: 0 },
       // moving: false
       movingBlockIndex: null
@@ -68,14 +66,15 @@ const Block = () => {
           return {
             // moving: true,
             // pointer: coordinates,
-            // block: { x: prev.block.x + diff.x, y: prev.block.y + diff.y }
+            
             ...prev,
             pointer: coordinates,
-            blocks: prev.blocks.map((b, index) =>
-              prev.movingBlockIndex === index
-                ? { x: b.x + diff.x, y: b.y + diff.y }
-                : b
-            )
+            // blocks: prev.blocks.map((b, index) =>
+            //   prev.movingBlockIndex === index
+            //     ? { x: b.x + diff.x, y: b.y + diff.y }
+            //     : b
+            // )
+            block: { x: prev.block.x + diff.x, y: prev.block.y + diff.y }
           };
         });
       },
@@ -92,8 +91,9 @@ const Block = () => {
     }, []);
   
     const handleMouseDown = React.useCallback((event) => {
-      const startingCoordinates = { x: event.clientX, y: event.clientY };
       const index = parseInt(event.target.getAttribute("data-index"), 10);
+      const startingCoordinates = { x: event.clientX, y: event.clientY };
+      
       setCoordinate((prev) => ({
         ...prev,
         pointer: startingCoordinates,
@@ -105,7 +105,7 @@ const Block = () => {
 
     return (
         <BlockWrapper
-          // style={{ top: coordinate.block.y, left: coordinate.block.x }}
+          style={{ top: coordinate.block.y, left: coordinate.block.x }}
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
@@ -116,11 +116,10 @@ const Block = () => {
     );
 };
 
-//************* */
 
+//TAKE IN KITCHEN ITEM'S NAME AS PARAM, use Card from ingredient.js instead of block = more smooth drag??
 
-
-export default function KitchenItem() {
+export default function KitchenItem() { 
     const classes = useStyles();
    
     return (
