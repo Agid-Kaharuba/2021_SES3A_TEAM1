@@ -14,7 +14,7 @@ import MuiAlert from '@material-ui/lab/Alert';
 import { AuthContext } from "../../../context/auth";
 import api from "../../../helpers/api";
 
-import Task from "../../../components/Task";
+import Task from "../../../components/Task/task";
 
 const useStyles = makeStyles(theme => ({
   bold: {
