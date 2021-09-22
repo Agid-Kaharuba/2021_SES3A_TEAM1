@@ -15,157 +15,123 @@ const useStyles = makeStyles({
 })
 
 
-// const BlockWrapper = styled("div")`
-//   position: absolute;
-//   background: blue;
-//   border-radius: 4px;
 //   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   margin-bottom: 8px;
-//   margin-right: 8px;
-//   flex-shrink: 0;
-//   height: 120px;
-//   width: 120px;
-// `;
+const BlockWrapper = styled("div")`
+  position: absolute;
+  background: blue;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+  margin-right: 8px;
+  flex-shrink: 0;
+  height: 120px;
+  width: 120px;
+`;
 
-// const StyledText = styled("p")`
-//   font-weight: 800;
-//   font-size: 38px;
-//   color: white;
-// `;
+const StyledText = styled("p")`
+  font-weight: 800;
+  font-size: 38px;
+  color: white;
+`;
 
-// const Block = () => {
-//     const [coordinate, setCoordinate] = React.useState({
-//       block: {
-//         x: 0,
-//         y: 0
-//       },
-//       // blocks: new Array(5).fill(1).map((_, index) => {
-//       //   const col = Math.floor(index % 5);
-//       //   const row = Math.floor(index / 5);
-//       //   return { x: col * 120 + col * 8, y: 120 * row + row * 8 };
-//       // }),
-//       pointer: { x: 0, y: 0 },
-//       // moving: false
-//       movingBlockIndex: null
-//     });
+const Block = () => {
+    const [coordinate, setCoordinate] = React.useState({
+      block: {
+        x: 0,
+        y: 0
+      },
+      // blocks: new Array(5).fill(1).map((_, index) => {
+      //   const col = Math.floor(index % 5);
+      //   const row = Math.floor(index / 5);
+      //   return { x: col * 120 + col * 8, y: 120 * row + row * 8 };
+      // }),
+      pointer: { x: 0, y: 0 },
+      // moving: false
+      movingBlockIndex: null
+    });
   
-//     const handleMouseMove = React.useCallback(
-//       (event) => {
-//         // if (!coordinate.moving) {
-//         if (coordinate.movingBlockIndex === null) {
-//           return;
-//         }
-//         const coordinates = { x: event.clientX, y: event.clientY };
+    const handleMouseMove = React.useCallback(
+      (event) => {
+        // if (!coordinate.moving) {
+        if (coordinate.movingBlockIndex === null) {
+          return;
+        }
+        const coordinates = { x: event.clientX, y: event.clientY };
   
-//         setCoordinate((prev) => {
-//           const diff = {
-//             x: coordinates.x - prev.pointer.x,
-//             y: coordinates.y - prev.pointer.y
-//           };
-//           return {
-//             // moving: true,
-//             // pointer: coordinates,
+        setCoordinate((prev) => {
+          const diff = {
+            x: coordinates.x - prev.pointer.x,
+            y: coordinates.y - prev.pointer.y
+          };
+          return {
+            // moving: true,
+            // pointer: coordinates,
             
-//             ...prev,
-//             pointer: coordinates,
-//             // blocks: prev.blocks.map((b, index) =>
-//             //   prev.movingBlockIndex === index
-//             //     ? { x: b.x + diff.x, y: b.y + diff.y }
-//             //     : b
-//             // )
-//             block: { x: prev.block.x + diff.x, y: prev.block.y + diff.y }
-//           };
-//         });
-//       },
-//       // [coordinate.moving]
-//       [coordinate.movingBlockIndex]
-//     );
+            ...prev,
+            pointer: coordinates,
+            // blocks: prev.blocks.map((b, index) =>
+            //   prev.movingBlockIndex === index
+            //     ? { x: b.x + diff.x, y: b.y + diff.y }
+            //     : b
+            // )
+            block: { x: prev.block.x + diff.x, y: prev.block.y + diff.y }
+          };
+        });
+      },
+      // [coordinate.moving]
+      [coordinate.movingBlockIndex]
+    );
   
-//     const handleMouseUp = React.useCallback(() => {
-//       setCoordinate((prev) => ({
-//         ...prev,
-//         // moving: false
-//         movingBlockIndex: null
-//       }));
-//     }, []);
+    const handleMouseUp = React.useCallback(() => {
+      setCoordinate((prev) => ({
+        ...prev,
+        // moving: false
+        movingBlockIndex: null
+      }));
+    }, []);
   
-//     const handleMouseDown = React.useCallback((event) => {
-//       const index = parseInt(event.target.getAttribute("data-index"), 10);
-//       const startingCoordinates = { x: event.clientX, y: event.clientY };
+    const handleMouseDown = React.useCallback((event) => {
+      const index = parseInt(event.target.getAttribute("data-index"), 10);
+      const startingCoordinates = { x: event.clientX, y: event.clientY };
       
-//       setCoordinate((prev) => ({
-//         ...prev,
-//         pointer: startingCoordinates,
-//         // moving: true
-//         movingBlockIndex: index
-//       }));
-//       event.stopPropagation();
-//     }, []);
+      setCoordinate((prev) => ({
+        ...prev,
+        pointer: startingCoordinates,
+        // moving: true
+        movingBlockIndex: index
+      }));
+      event.stopPropagation();
+    }, []);
 
-//     return (
-//         <BlockWrapper
-//           style={{ top: coordinate.block.y, left: coordinate.block.x }}
-//           onMouseDown={handleMouseDown}
-//           onMouseMove={handleMouseMove}
-//           onMouseUp={handleMouseUp}
+    return (
+        <BlockWrapper
+          style={{ top: coordinate.block.y, left: coordinate.block.x }}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
           
-//         >
-//           <StyledText>Oven</StyledText>
-//         </BlockWrapper>
-//     );
-// };
+        >
+          <StyledText>Oven</StyledText>
+        </BlockWrapper>
+    );
+};
 
+//https://codedaily.io/tutorials/Create-a-Draggable-Card-with-React-Native-Pan-Responder-and-Animateddecay
 
-//TAKE IN KITCHEN ITEM'S NAME AS PARAM, use Card from ingredient.js instead of block = more smooth drag
-
+//take in kitchen item's name as parameter in futre****
 export default function KitchenItem() { 
-    // const classes = useStyles();
+    const classes = useStyles();
    
-  //   return (
-  //       <div>
-  //           {/* moveable kitchen objects */}
-  //           <div>
-  //               <Block />
-  //               <Block />
-  //           </div>
-  //       </div>
-  //  )
+    return (
+        <div>
+            {/* moveable kitchen objects */}
+            <div>
+                <Block />
+                <Block />
+            </div>
+        </div>
+   )
 
-
-  return (
-    // <Droppable>
-	// 	<Draggable>
-	// 			<Box my={1}
-	// 			>
-	// 				<Paper style={{ boxShadow: "none" }}>
-	// 					<Card variant="outlined"
-	// 						style={{ width: "14vw", height: "7.2vw" }}
-	// 					>
-	// 						<CardContent 
-	// 							style={{ 
-	// 								display: "grid", 
-	// 								gridTemplateColumns: "1fr 1fr", 
-	// 								alignItems: "center" }}
-	// 						>
-	// 							<Typography color="textSecondary" align="center" gutterBottom>
-	// 								test
-	// 							</Typography>
-
-	// 						</CardContent>
-	// 					</Card>
-	// 				</Paper>
-	// 			</Box>
-			
-	// 	</Draggable>
-    // </Droppable>
-
-	<Draggable> 
-		<div>
-			test drag
-		</div>
-	</Draggable>
-
-	)
 }
