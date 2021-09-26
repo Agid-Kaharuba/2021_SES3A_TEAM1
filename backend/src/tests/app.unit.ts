@@ -6,6 +6,7 @@ import Course from '../model/course';
 import Recipe from '../model/recipe';
 import Task from '../model/task';
 import User from '../model/user';
+import Progress from '../model/progress';
 
 // Override database name
 config.DATABASE_NAME = config.TEST_DATABASE_NAME;
@@ -34,6 +35,9 @@ describe('Prepare Unit Test', () => {
   });
   it('should empty User', async () => {
     await User.deleteMany({});
+  });
+  it('should empty Progresses', async () => {
+    await Progress.deleteMany({});
   });
   it('should create a test user', async () => {
     const user = new User({
