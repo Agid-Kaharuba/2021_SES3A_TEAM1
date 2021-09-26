@@ -56,6 +56,7 @@ public class BurgerItem : MonoBehaviour
     [SerializeField] public UnityEvent OnAboveStackChanged;
     
     private const float SnapDistance = 0.1f;
+    private const float falloffAngle = 70;
     private Interactable interactable;
     private Rigidbody rb;
     private RigidbodyConfig rigidbodyConfig;
@@ -102,6 +103,13 @@ public class BurgerItem : MonoBehaviour
             handToAttachNextFrame.HoverLock(interactable);
             handToAttachNextFrame.AttachObject(gameObject, grabTypeNextFrame, attachmentFlags);
             handToAttachNextFrame = null;
+        }
+
+        float tiltAngle = Vector3.Angle(Vector3.up, transform.up);
+
+        if (tiltAngle >= falloffAngle)
+        {
+            UnGlueBurger();
         }
     }
 
