@@ -15,7 +15,6 @@ const useStyles = makeStyles({
 })
 
 
-//   display: flex;
 const BlockWrapper = styled("div")`
   position: absolute;
   background: blue;
@@ -118,7 +117,7 @@ const Block = () => {
     );
 };
 
-//https://codedaily.io/tutorials/Create-a-Draggable-Card-with-React-Native-Pan-Responder-and-Animateddecay
+//https://dev.to/mukuljainx/how-to-create-a-2d-draggable-grid-with-react-spring-part-2-6dh
 
 //take in kitchen item's name as parameter in futre****
 export default function KitchenItem() { 
@@ -132,6 +131,13 @@ export default function KitchenItem() {
                 <Block />
             </div>
         </div>
+
+        // <Draggable>
+        //   <Box my={1}>
+        //     dsds
+        //   </Box>
+
+        // </Draggable>
    )
 
 }
