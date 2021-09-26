@@ -222,7 +222,9 @@ public class BurgerItem : MonoBehaviour
         {
             Vector3 vectorFromBelow = transform.position - belowStickPoint.position;
             transform.position = otherBurgerItem.aboveStickPoint.position + vectorFromBelow;
-            transform.rotation = otherBurgerItem.GetBottomItem().transform.rotation;
+
+            transform.rotation = otherBurgerItem.aboveStickPoint.transform.rotation;
+            // transform.rotation = otherBurgerItem.GetBottomItem().transform.rotation;
         }
         else
         {
