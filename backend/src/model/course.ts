@@ -32,7 +32,7 @@ const courseSchema = new mongoose.Schema({
   dueDate: {
     type: Date,
     required: false,
-  }
+  },
 });
 
 export default mongoose.model('Course', courseSchema);

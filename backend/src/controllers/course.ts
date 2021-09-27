@@ -40,7 +40,7 @@ export default class CourseController {
       description: body.description,
       tasks: body.tasks,
       assignedEmployees: body.assignedEmployees,
-      dueDate: body.dueDate
+      dueDate: body.dueDate,
     } as any);
     newCourseRequest.save((err: any) => {
       if (err) {
