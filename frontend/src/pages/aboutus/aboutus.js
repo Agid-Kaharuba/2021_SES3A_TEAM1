@@ -7,23 +7,12 @@ import { withStyles, makeStyles } from "@material-ui/core/styles";
 
 // IMPORT IMAGES
 
-import Andrew from '../../images/profile-photos/andrew-do.jpg';
-import Vanisha from '../../images/profile-photos/vanisha-singh.png';
-import Andy from '../../images/profile-photos/andy-le.jpg';
-import Agid from '../../images/profile-photos/agid-kaharuba.png';
-import Mitchell from '../../images/profile-photos/mitchell-murphy.png';
-import Herrick from '../../images/profile-photos/herrick-feng.jpg';
-import Bryan from '../../images/profile-photos/bryan-dinh.png';
-import Kelvin from '../../images/profile-photos/kelvin-luong.jpg';
-import Calvin from '../../images/profile-photos/calvin-dong.jpg';
-import Brendon from '../../images/profile-photos/brendon-tong.png';
-import Lakshva from '../../images/profile-photos/lakshva-sharma.jpg';
-import MitchGif from '../../images/mitchellvr.gif';
-import VanishaGif from '../../images/vanishavr.gif';
-import BryanGif from '../../images/bryanvr.gif';
-import Matthew from '../../images/profile-photos/matt.jpg';
-import Vladimir from '../../images/profile-photos/vlad.jpg';
-import BackButton from "../../components/backbutton";
+
+import ProjectOutlineImage from '../../images/projuout.jpg';
+import TeamCommunicationImage from '../../images/teamcom.jpg';
+import VrImage from '../../images/vrthingy.jpg';
+import TeamImage from '../../images/teams.jpg';
+
 
 // import { Link } from "react-router-dom";
 // import { AuthContext } from "../../context/auth";
@@ -83,17 +72,17 @@ export default function AboutUsPage() {
       <Grid container direction="column" alignItems='flex-start'>
         <Container>
           <h2 className={classes.heading}>Our Storyy</h2>
-          <p>What is Lorem Ipsum?
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-            when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
+          <WhiteTextTypography>What is Lorem Ipsum?
+            Lakshya Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+            when and unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
             remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker
-            including versions of Lorem Ipsum.</p>
+            including versions of Lorem Ipsum.</WhiteTextTypography>
           <Grid container direction="row" alignItems='flex-start' className={classes.margins} >
             <Card className={classes.root} onClick={() => history.push('/aboutus/projectoutline')}>
               <CardActionArea>
                 <CardMedia
                   className={classes.media}
-                  image={Andy}
+                  image={ProjectOutlineImage}
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="h2">
@@ -109,7 +98,7 @@ export default function AboutUsPage() {
               <CardActionArea>
                 <CardMedia
                   className={classes.media}
-                  image={Andy}
+                  image={TeamCommunicationImage}
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="h2">
@@ -125,7 +114,7 @@ export default function AboutUsPage() {
               <CardActionArea>
                 <CardMedia
                   className={classes.media}
-                  image={Andy}
+                  image={VrImage}
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="h2">
@@ -141,7 +130,7 @@ export default function AboutUsPage() {
               <CardActionArea>
                 <CardMedia
                   className={classes.media}
-                  image={Andy}
+                  image={TeamImage}
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="h2">

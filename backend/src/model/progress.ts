@@ -1,11 +1,11 @@
 import mongoose, { ObjectId } from 'mongoose';
 
 export interface Tracking {
-  _id: ObjectId | undefined;
+  _id?: ObjectId;
   date: Date;
   event: String;
   value: String;
-  data: Object | undefined;
+  data?: Object;
 }
 
 export interface Progress {
