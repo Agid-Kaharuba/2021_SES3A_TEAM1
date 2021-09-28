@@ -7,14 +7,21 @@ import { Box, Button, Typography, Divider, } from "@material-ui/core";
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import styled from "styled-components";
 
+
 import { AuthContext } from "../../context/auth";
 
 import KitchenItem from './kitchenItem';
+import ToolboxLayout from './grid';
+import ToolBox from './grid';
+import ToolBoxItem from './grid';
 
 const useStyles = makeStyles({
     bold: {
         fontWeight: 600
       },
+    back:{
+        color: 'black'
+    },
 })
 
 
@@ -22,9 +29,12 @@ export default function FloorPlan() {
     const classes = useStyles();
    
     return (
-        <div>
+        <div className={classes.back}>
             {/* moveable kitchen objects */}
             <KitchenItem />
+            <ToolBox/>
+            <ToolBoxItem/>
+            <ToolboxLayout/>
         </div>
    )
 }
