@@ -6,9 +6,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Box, Button, Typography } from "@material-ui/core";
 import styled from "styled-components";
 import _ from "lodash";
-import { Responsive, WidthProvider } from "react-grid-layout";
-const ResponsiveReactGridLayout = WidthProvider(Responsive);
+import { Responsive, WidthProvider, GridLayout } from "react-grid-layout";
+import 'react-grid-layout/css/styles.css';
+import 'react-resizable/css/styles.css';
 
+const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 class ToolBoxItem extends React.Component {
   render() {
@@ -211,9 +213,7 @@ function generateLayout() {
     };
   });
 }
-
     
-
 // const useStyles = makeStyles({
 //     bold: {
 //         fontWeight: 600

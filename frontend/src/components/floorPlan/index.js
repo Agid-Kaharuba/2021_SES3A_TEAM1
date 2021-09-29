@@ -14,6 +14,9 @@ import KitchenItem from './kitchenItem';
 import ToolboxLayout from './grid';
 import ToolBox from './grid';
 import ToolBoxItem from './grid';
+// import ToolboxLayout from './toolbox';
+// import ToolBox from './toolbox';
+// import ToolBoxItem from './toolbox';
 
 const useStyles = makeStyles({
     bold: {
@@ -31,10 +34,11 @@ export default function FloorPlan() {
     return (
         <div className={classes.back}>
             {/* moveable kitchen objects */}
-            <KitchenItem />
+            {/* <KitchenItem /> */}
             <ToolBox/>
             <ToolBoxItem/>
             <ToolboxLayout/>
+
         </div>
    )
 }

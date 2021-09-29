@@ -2,8 +2,8 @@ import React from "react";
 import _ from "lodash";
 import { Responsive, WidthProvider } from "react-grid-layout";
 
-import '/node_modules/react-grid-layout/css/styles.css';
-import '/node_modules/react-resizable/css/styles.css';
+import 'react-grid-layout/css/styles.css';
+import 'react-resizable/css/styles.css';
 
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
@@ -210,6 +210,6 @@ function generateLayout() {
   });
 }
 
-if (process.env.STATIC_EXAMPLES === true) {
-  import("../test-hook.jsx").then(fn => fn.default(ToolboxLayout));
-}
+// if (process.env.STATIC_EXAMPLES === true) {
+//   import("../test-hook.jsx").then(fn => fn.default(ToolboxLayout));
+// }
