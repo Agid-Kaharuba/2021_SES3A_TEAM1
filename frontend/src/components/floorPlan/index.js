@@ -35,8 +35,6 @@ export default function FloorPlan() {
         <div className={classes.back}>
             {/* moveable kitchen objects */}
             {/* <KitchenItem /> */}
-            <ToolBox/>
-            <ToolBoxItem/>
             <ToolboxLayout/>
 
         </div>

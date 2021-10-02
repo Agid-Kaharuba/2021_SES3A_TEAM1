@@ -10,6 +10,7 @@ import { Responsive, WidthProvider, GridLayout } from "react-grid-layout";
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 
+
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 class ToolBoxItem extends React.Component {
@@ -27,7 +28,7 @@ class ToolBoxItem extends React.Component {
 class ToolBox extends React.Component {
   render() {
     return (
-      <div className="toolbox">
+      <div className="toolbox" style={{backgroundColor:"yellow"}}>
         <span className="toolbox__title">Toolbox</span>
         <div className="toolbox__items">
           {this.props.items.map(item => (
@@ -67,7 +68,7 @@ export default class ToolboxLayout extends React.Component {
   generateDOM() {
     return _.map(this.state.layouts[this.state.currentBreakpoint], l => {
       return (
-        <div key={l.i} className={l.static ? "static" : ""}>
+        <div key={l.i} className={l.static ? "static" : ""} style={{backgroundColor: "cyan"}}>
           <div className="hide-button" onClick={this.onPutItem.bind(this, l)}>
             &times;
           </div>
@@ -161,7 +162,7 @@ export default class ToolboxLayout extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={{backgroundColor: "grey"}}>
         <div>
           Current Breakpoint: {this.state.currentBreakpoint} (
           {this.props.cols[this.state.currentBreakpoint]} columns)
