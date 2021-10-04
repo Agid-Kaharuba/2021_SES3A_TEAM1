@@ -76,7 +76,6 @@ export default function VrExperiencePage() {
                 <WhiteTextTypography variant='h3'>
                     <Box style={{ fontWeight: '600', letterSpacing: 6 }} display='inline'> VR EXPERIENCE</Box>
                 </WhiteTextTypography>
-                <BackButton/>
             </Grid>
             <Grid container direction="column" alignItems='flex-start'>
             <Container>
@@ -109,6 +108,9 @@ export default function VrExperiencePage() {
 
                     </Grid>
                 </Container>
+            </Grid>
+            <Grid item>
+                <BackButton/>
             </Grid>
         </Grid>
 
