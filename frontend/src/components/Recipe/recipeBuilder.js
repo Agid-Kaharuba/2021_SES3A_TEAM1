@@ -7,6 +7,14 @@ import {
 
 import Ingredient from "./ingredient"
 
+import TopBun from '../../images/recipe/recipe-topBun.png';
+import BottomBun from '../../images/recipe/recipe-bottomBun.png';
+import Patty from '../../images/recipe/recipe-patty.png';
+import Lettuce from '../../images/recipe/recipe-lettuce.png';
+import Cheese from '../../images/recipe/recipe-cheese.png';
+import Sauce from '../../images/recipe/recipe-sauce.png';
+import Tomato from '../../images/recipe/recipe-tomato.png';
+
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
   const [removed] = result.splice(startIndex, 1);
@@ -28,13 +36,13 @@ const useStyles = makeStyles({
 
 export default function RecipeBuilder(props) {
   const ingredients = [
-    { id: "top_bun", value: "Top Bun", src: "https://www.metro.ca/userfiles/image/infographics/images/burgers/5-COWBOY/5-Cowboy-Bun-Top.png" },
-    { id: "bottom_bun", value: "Bottom Bun", src: "https://www.pngkey.com/png/full/431-4310202_burger-bun-bottom-png.png" },
-    { id: "patty", value: "Patty", src: "https://image.shutterstock.com/image-photo/single-grilled-hamburger-patty-isolated-260nw-534672568.jpg" },
-    { id: "lettuce", value: "Lettuce", src: "https://cdn.britannica.com/77/170677-050-F7333D51/lettuce.jpg" },
-    { id: "cheese", value: "Cheese", src: "https://qph.fs.quoracdn.net/main-qimg-fa4e8f9efa8f3ca480f03b93bb3e9b58" },
-    { id: "sauce", value: "Tomato Sauce", src: "https://pngimg.com/uploads/sauce/sauce_PNG72.png" },
-    { id: "tomato", value: "Tomato", src: "https://s3.envato.com/files/250360646/DSC_0674.jpg" }
+    { id: "top_bun", value: "Top Bun", src: TopBun, rSrc: TopBun },
+    { id: "bottom_bun", value: "Bottom Bun", src: BottomBun, rSrc: BottomBun },
+    { id: "patty", value: "Patty", src: "https://image.shutterstock.com/image-photo/single-grilled-hamburger-patty-isolated-260nw-534672568.jpg", rSrc: Patty },
+    { id: "lettuce", value: "Lettuce", src: "https://cdn.britannica.com/77/170677-050-F7333D51/lettuce.jpg", rSrc: Lettuce },
+    { id: "cheese", value: "Cheese", src: "https://qph.fs.quoracdn.net/main-qimg-fa4e8f9efa8f3ca480f03b93bb3e9b58", rSrc: Cheese },
+    { id: "sauce", value: "Tomato Sauce", src: "https://pngimg.com/uploads/sauce/sauce_PNG72.png", rSrc: Sauce },
+    { id: "tomato", value: "Tomato", src: "https://s3.envato.com/files/250360646/DSC_0674.jpg", rSrc: Tomato }
   ];
 
   const [state, setState] = useState([]);

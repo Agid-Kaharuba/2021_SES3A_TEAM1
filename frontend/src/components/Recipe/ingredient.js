@@ -8,6 +8,9 @@ import { AuthContext } from "../../context/auth";
 import api from "../../helpers/api";
 
 const useStyles = makeStyles({
+	box: {
+		display: 'block'
+	},
 	grid: {
 		display: 'grid',
 		gridTemplateColumns: '1fr 0.5fr 0.2fr',
@@ -40,10 +43,13 @@ const useStyles = makeStyles({
 		gridTemplateColumns: "1fr 1fr",
 		alignItems: "center"
 	},
-	img: {
+	ingImg: {
 		maxWidth: "100%",
 		maxHeight: "70px",
 		justifySelf: "center"
+	},
+	rImg: {
+		maxWidth: "200px"
 	}
 })
 
@@ -57,15 +63,16 @@ export default function Ingredient(props) {
 		<Draggable data-testid="IngredientTest" key={props.ingredient.id} draggableId={props.ingredient.id}
 			index={props.index} isDragDisabled={!(props.edit == undefined || props.edit)}>
 			{(provided) => (
-				<Box my={1}
+				<div my={1}
 					{...provided.dragHandleProps}
 					{...provided.draggableProps}
-					ref={provided.innerRef}>
+					ref={provided.innerRef}
+					className={classes.box}>
 					{props.edit
 						? <Grid className={classes.grid}>
 							<img
-								className={classes.img}
-								srcset={props.ingredient.src}
+								className={classes.rImg}
+								srcset={props.ingredient.rSrc}
 							/>
 							<div className={classes.dottedLine}></div>
 							<div className={classes.numbering}>{props.index + 1}</div>
@@ -76,14 +83,14 @@ export default function Ingredient(props) {
 									{props.ingredient.value}
 								</Typography>
 								<img
-									className={classes.img}
+									className={classes.ingImg}
 									srcset={props.ingredient.src}
 								/>
 							</CardContent>
 						</Card>
 					}
 
-				</Box>
+				</div>
 			)}
 		</Draggable>
 	);
