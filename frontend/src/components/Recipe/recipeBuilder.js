@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import { Button, Typography, Box, FormControl, Select, MenuItem, TextField, Divider, Card, 
-  CardContent, CardActions, Paper, Grid, makeStyles } from "@material-ui/core";
+import {
+  Button, Typography, Box, FormControl, Select, MenuItem, TextField, Divider, Card,
+  CardContent, CardActions, Paper, Grid, makeStyles
+} from "@material-ui/core";
 
 import Ingredient from "./ingredient"
 
@@ -27,7 +29,7 @@ const useStyles = makeStyles({
 export default function RecipeBuilder(props) {
   const ingredients = [
     { id: "top_bun", value: "Top Bun", src: "https://www.metro.ca/userfiles/image/infographics/images/burgers/5-COWBOY/5-Cowboy-Bun-Top.png" },
-    { id: "bottom_bun", value: "Bottom Bun", src: "https://png.pngitem.com/pimgs/s/344-3449103_bun-bread-bottom-hd-png-download.png" },
+    { id: "bottom_bun", value: "Bottom Bun", src: "https://www.pngkey.com/png/full/431-4310202_burger-bun-bottom-png.png" },
     { id: "patty", value: "Patty", src: "https://image.shutterstock.com/image-photo/single-grilled-hamburger-patty-isolated-260nw-534672568.jpg" },
     { id: "lettuce", value: "Lettuce", src: "https://cdn.britannica.com/77/170677-050-F7333D51/lettuce.jpg" },
     { id: "cheese", value: "Cheese", src: "https://qph.fs.quoracdn.net/main-qimg-fa4e8f9efa8f3ca480f03b93bb3e9b58" },
@@ -57,7 +59,7 @@ export default function RecipeBuilder(props) {
   }
 
   const onDragEnd = (result) => {
-    if (!result.destination) {
+    if (!result.destination) { //throw item from ingredients
       if (result.source.droppableId == "recipe") {
         state.splice(result.source.index, 1);
         onSetState(state);
@@ -79,14 +81,13 @@ export default function RecipeBuilder(props) {
       var newOrder = reorder(state, result.source.index, result.destination.index)
       onSetState(newOrder);
     }
-    console.log(state);
   }
 
   const classes = useStyles();
 
   return (
     state && (
-      <DragDropContext data-testid = "RecipeBuilderTest" onDragEnd={onDragEnd}>
+      <DragDropContext data-testid="RecipeBuilderTest" onDragEnd={onDragEnd}>
 
         {/* ingredients list to choose from*/}
         <Grid item style={{ gridRow: 2 }}>
@@ -131,11 +132,10 @@ export default function RecipeBuilder(props) {
                     padding: 15
                   }}
                   elevation={3}>
-                  <Grid
+                  <div
                     {...provided.droppableProps}
                     ref={provided.innerRef}
                     isDraggingOver={snapshot.isDraggingOver}
-                    style={{ display: 'grid', gridTemplateColumns: 'auto auto', gap: '18px' }}
                     container
                     //direction="column"
                     alignItems="center"
@@ -148,7 +148,7 @@ export default function RecipeBuilder(props) {
                       </Typography>
                     }
                     {provided.placeholder}
-                  </Grid>
+                  </div>
                 </Paper>
               )}
             </Droppable>
