@@ -81,7 +81,7 @@ export default function CreateNewTrainingDialog(props) {
 
 
   //#region SAVE COURSE
-  const [formState, setFormState] = useState({ name: "", description: "" });
+  const [formState, setFormState] = useState({ name: "", description: "", dueDate:new Date()});
   const { authState, setAuthState } = React.useContext(AuthContext);
   let history = useHistory();
 
@@ -98,6 +98,7 @@ export default function CreateNewTrainingDialog(props) {
   const handleSubmit = async (event) => {
     // event.preventDefault();;
     await api.course.create(authState.token, { ...formState, tasks: rowsTasks, assignedEmployees: rowsEmployees });
+    console.log(formState);
     history.push('/dashboard');
     window.location.reload(false);
   }

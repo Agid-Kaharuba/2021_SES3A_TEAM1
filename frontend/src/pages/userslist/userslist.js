@@ -12,7 +12,7 @@ export default function UsersList() {
     const [search, setSearch] = React.useState("");
 
     function handleChange(e) {
-      const { name, value } = e.target;
+      const { value } = e.target;
       setSearch(value)
       console.log(value)
     }
