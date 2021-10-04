@@ -76,7 +76,6 @@ export default function TheTeamPage() {
                 <WhiteTextTypography variant='h3'>
                     <Box style={{ fontWeight: '600', letterSpacing: 6 }} display='inline'> Team Structure</Box>
                 </WhiteTextTypography>
-                <BackButton></BackButton>
             </Grid>
             <Grid container direction="column" alignItems='flex-start'>
                 <Container>
@@ -244,6 +243,9 @@ export default function TheTeamPage() {
 
                     </Box>
                 </Container>
+            </Grid>
+            <Grid item>
+                <BackButton/>
             </Grid>
         </Grid>
 

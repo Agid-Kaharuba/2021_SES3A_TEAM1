@@ -76,7 +76,6 @@ export default function ProjectOutlinePage() {
                 <WhiteTextTypography variant='h3'>
                     <Box style={{ fontWeight: '600', letterSpacing: 6 }} display='inline'> About Us</Box>
                 </WhiteTextTypography>
-                <BackButton></BackButton>
             </Grid>
             <Grid container direction="column" alignItems='flex-start'>
                 <Container>
@@ -96,6 +95,9 @@ export default function ProjectOutlinePage() {
                         </p>
                     </Box>
                 </Container>
+            </Grid>
+            <Grid item>
+                <BackButton/>
             </Grid>
         </Grid>
 

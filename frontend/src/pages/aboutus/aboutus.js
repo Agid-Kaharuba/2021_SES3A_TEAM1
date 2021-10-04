@@ -143,7 +143,6 @@ export default function AboutUsPage() {
           </Grid>
         </Container>
       </Grid>
-
     </Grid>
 
   )
