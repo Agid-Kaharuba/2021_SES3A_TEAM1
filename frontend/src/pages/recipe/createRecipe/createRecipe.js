@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 // IMPORT COMPONENTS
-import { Box, Button, Typography, Divider, TextField, Grid, FormControl, Select, MenuItem, Paper } from "@material-ui/core";
+import { Box, Container, Button, Typography, Divider, TextField, Grid, FormControl, Select, MenuItem, Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { AuthContext } from "../../../context/auth";
@@ -63,7 +63,7 @@ export default function CreateNewRecipePage() {
   }
 
   return (
-    <>
+    <Container maxWidth="lg">
       <Box m={5}>
         <Grid container spacing={2} justify="space-between">
           <Grid item>
@@ -81,14 +81,14 @@ export default function CreateNewRecipePage() {
         <Box mr={6}>
           <Button variant="contained" color="secondary" component={Link} to="/recipe">
             Back
-        </Button>
+          </Button>
         </Box>
         <Box>
           <Button variant="contained" color="primary" onClick={handleSubmit}>
             Save
-        </Button>
+          </Button>
         </Box>
       </Box>
-    </>
+    </Container>
   )
 }
