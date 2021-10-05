@@ -34,14 +34,15 @@ const useStyles = makeStyles({
 		justifySelf: 'center',
 	},
 	card: {
-		width: "14vw",
-		height: "7.2vw",
-		maxHeight: "5em"
+		height: "100%",
+		maxHeight: "5em",
 	},
 	cardContent: {
 		display: "grid",
 		gridTemplateColumns: "1fr 1fr",
-		alignItems: "center"
+		alignItems: "center",
+		height: '100%',
+		padding: '0 10px',
 	},
 	ingImg: {
 		maxWidth: "100%",
@@ -49,7 +50,14 @@ const useStyles = makeStyles({
 		justifySelf: "center"
 	},
 	rImg: {
-		maxWidth: "200px"
+		maxWidth: "175px"
+	},
+	text: {
+		color: "gray",
+		fontSize: "1em"
+	},
+	removeBottomPadding: {
+		paddingBottom: "10px !important"
 	}
 })
 
@@ -68,18 +76,27 @@ export default function Ingredient(props) {
 					{...provided.draggableProps}
 					ref={provided.innerRef}
 					className={classes.box}>
-					{props.edit
-						? <Grid className={classes.grid}>
-							<img
-								className={classes.rImg}
-								srcset={props.ingredient.rSrc}
-							/>
-							<div className={classes.dottedLine}></div>
-							<div className={classes.numbering}>{props.index + 1}</div>
-						</Grid>
-						: <Card variant="outlined" className={classes.card}>
-							<CardContent className={classes.cardContent}>
-								<Typography color="textSecondary" align="center" gutterBottom>
+					{props.view
+						? (props.edit == undefined || props.edit)
+							? <Grid className={classes.grid}>
+								<img
+									className={classes.rImg}
+									srcset={props.ingredient.rSrc}
+								/>
+								<div className={classes.dottedLine}></div>
+								<div className={classes.numbering}>{props.index + 1}</div>
+							</Grid>
+							: <Grid className={classes.grid}>
+								<img
+									className={classes.rImg}
+									srcset={props.ingredient.rSrc}
+								/>
+								<div className={classes.dottedLine}></div>
+								<div className={classes.numbering}>{props.index + 1}</div>
+							</Grid>
+						: <Card variant="outlined" className={classes.card} >
+							<CardContent className={classes.cardContent} classes={{ root: classes.removeBottomPadding }}>
+								<Typography gutterBottom className={classes.text}>
 									{props.ingredient.value}
 								</Typography>
 								<img

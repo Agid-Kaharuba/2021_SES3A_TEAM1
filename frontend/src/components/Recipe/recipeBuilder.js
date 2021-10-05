@@ -31,6 +31,11 @@ const useStyles = makeStyles({
   bold: {
     fontWeight: 600
   },
+  ingGrid: {
+    display: "grid",
+    gridTemplateColumns: 'repeat( auto-fit, minmax(200px, 1fr) )',
+    gap: "10px"
+  }
 })
 
 
@@ -106,18 +111,15 @@ export default function RecipeBuilder(props) {
                   <Typography className={classes.bold} variant='h6'>
                     Ingredients
                   </Typography>
-                  <Grid
+                  <div
                     {...provided.droppableProps}
                     ref={provided.innerRef}
-                    style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr" }}
+                    className={classes.ingGrid}
                     container
-                    //direction="row"
-                    alignItems="center"
-                    justify="center"
                   >
                     {ingredients.map((ingredient, index) => <Ingredient ingredient={ingredient} index={index} />)}
                     {provided.placeholder}
-                  </Grid>
+                  </div>
                 </div>
               )}
             </Droppable>
@@ -150,7 +152,7 @@ export default function RecipeBuilder(props) {
                     justify="center"
                   >
                     {state && state.length > 0
-                      ? state.map((ingredient, index) => <Ingredient ingredient={ingredient} index={index} edit={props.edit} />)
+                      ? state.map((ingredient, index) => <Ingredient ingredient={ingredient} index={index} edit={props.edit} view={true} />)
                       : <Typography variant='h6' justify="center">
                         Drop ingredients here
                       </Typography>
