@@ -3,7 +3,57 @@ guid: 18c4148fc51f9db4c86ed960bb9b4ba8
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: oven_body
+    second: {fileID: 2100000, guid: 6884f7bebb8262040a9e108901a88022, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: oven_brushed
+    second: {fileID: 2100000, guid: f9f8cd872046cb14cb587377978a6720, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: oven_button
+    second: {fileID: 2100000, guid: cd6b0d0c86815284bab76226dea41888, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: oven_button_white
+    second: {fileID: 2100000, guid: 9329fce49345b0c47bed1c73d1804b0a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: oven_glass
+    second: {fileID: 2100000, guid: f84d096b70139fe40bf26c7080ca3c67, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: oven_lock
+    second: {fileID: 2100000, guid: 6283b526413265b4f9d5f407706b209a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: oven_redd_glow
+    second: {fileID: 2100000, guid: e84d2be4c80cf27458e639a8eaa75093, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: oven_screen
+    second: {fileID: 2100000, guid: 10d54d68a8637ef46afd3bead11b9360, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: oven_top
+    second: {fileID: 2100000, guid: e3e435b6e58dd3a488aa1086ed4cecb8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: oven_top_middle
+    second: {fileID: 2100000, guid: a9623574a7d412a419da3baf1cc87776, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

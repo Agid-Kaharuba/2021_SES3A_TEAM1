@@ -8,34 +8,44 @@ public class FridgeController : MonoBehaviour
 {
     private List<GameObject> ItemsToAdd = new List<GameObject>();
     private List<Transform> ItemsPosition = new List<Transform>();
-    private bool changed;
+    private int changed;
     private AudioSource click;
 
     void Start()
     {
         click = gameObject.GetComponent<AudioSource>();
-        changed = false;
+        changed = 0;
     }
 
-    void Changed(GameObject item, Transform position)
+    void Update()
+    {
+        
+    }
+    public void AddItemsToReset(GameObject item, Transform position)
     {
         ItemsToAdd.Add(item);
         ItemsPosition.Add(position);
-        changed = true;
+        changed++;
+    }
+    public void RemoveItemsToReset(GameObject item, Transform position)
+    {
+        ItemsToAdd.Remove(item);
+        ItemsPosition.Remove(position);
+        changed--;
     }
 
     IEnumerator resetFridge()
     {
         click.Play();
 
-        if (changed)
+        if (changed>0)
         {
                 for(int i =0; i < ItemsToAdd.Count; i++)
                 {
                     var FridgeItems = Instantiate(ItemsToAdd[i], ItemsPosition[i]);
                     FridgeItems.transform.parent = GameObject.Find(ItemsToAdd[i].transform.name).transform;
                 }
-                changed = false;
+                changed = 0;
         }
         
 
