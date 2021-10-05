@@ -5,5 +5,5 @@ FROM node:current-bullseye-slim
 COPY ./build /app
 WORKDIR /app
 RUN npm install serve
-ENTRYPOINT node_modules/serve/bin/serve.js -p 3000
+ENTRYPOINT node_modules/serve/bin/serve.js -p 3000 -s
 EXPOSE 3000
