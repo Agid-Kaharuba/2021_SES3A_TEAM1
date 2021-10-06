@@ -4,7 +4,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { Box, Button, Typography, Divider, Card, CardContent, CardActions, Grid, CardMedia, CardActionArea } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { AuthContext } from "../../context/auth";
 import api from "../../helpers/api";
 import CreateNewTrainingDialog from "../supervisor/CreateCourse/createNewTraining";
@@ -67,6 +67,12 @@ export default function CreateNewTrainingPage() {
   const [coursesState, setCoursesState] = useState(undefined);
 
   const [open, setOpen] = React.useState(false);
+
+  let history = useHistory();
+
+  const handleTraining = (course) => {
+    history.push(`/dashboard/${course._id}`);
+  };
 
   const handleDialogOpen = () => {
     setOpen(true);
@@ -131,8 +137,8 @@ export default function CreateNewTrainingPage() {
     return (
       <Grid container className={classes.gridContainer}>
         <Grid item xs={12} sm={6} md={3}>
-          <Card className={classes.root} variant="outlined">
-            <CardActionArea className={classes.actionArea}>
+          <Card className={classes.root} variant="outlined" onClick = {() => handleTraining(course)}>
+            <CardActionArea className={classes.actionArea} >
               <CardMedia
                 className={classes.media}
                 //these images are just placeholders for now
@@ -154,9 +160,6 @@ export default function CreateNewTrainingPage() {
               </CardContent>
 
               <CardActions className={classes.buttons}>
-                <Link className={classes.underline} to={`/dashboard/${course._id}`}>
-                  <Button size="small">View Training</Button>
-                </Link>
                 <Button size="small" onClick={() => handleLaunchXR(course._id)}>Launch XR</Button>
               </CardActions>
             </CardActionArea>
