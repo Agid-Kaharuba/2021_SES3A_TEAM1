@@ -76,7 +76,6 @@ export default function TeamCommunicationPage() {
                 <WhiteTextTypography variant='h3'>
                     <Box style={{ fontWeight: '600', letterSpacing: 6 }} display='inline'> Team Communication</Box>
                 </WhiteTextTypography>
-                <BackButton/>
             </Grid>
             <Grid container direction="column" alignItems='flex-start'>
                 <Container>
@@ -92,8 +91,12 @@ export default function TeamCommunicationPage() {
                     </Box>
                 </Container>
             </Grid>
+            <Grid item>
+                <BackButton/>
+            </Grid>
         </Grid>
 
     )
     //   }
 }
+

@@ -97,9 +97,7 @@ export default function ViewTask(props) {
 
             <Box justifyContent='center' display="flex" m={6}>
               <Box mr={6}>
-                <Button variant="contained" color="secondary" component={Link} to="/task">
-                  Back
-                </Button>
+                <BackButton></BackButton>
               </Box>
               <Box>
                 <Button variant="contained" color="primary" onClick={handleEdit}>

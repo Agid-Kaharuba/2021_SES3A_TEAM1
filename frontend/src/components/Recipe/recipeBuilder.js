@@ -1,9 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import { Button, Typography, Box, FormControl, Select, MenuItem, TextField, Divider, Card, 
-  CardContent, CardActions, Paper, Grid, makeStyles } from "@material-ui/core";
+import {
+  Button, Typography, Box, FormControl, Select, MenuItem, TextField, Divider, Card,
+  CardContent, CardActions, Paper, Grid, makeStyles
+} from "@material-ui/core";
 
 import Ingredient from "./ingredient"
+
+import TopBun from '../../images/recipe/recipe-topBun.png';
+import BottomBun from '../../images/recipe/recipe-bottomBun.png';
+import Patty from '../../images/recipe/recipe-patty.png';
+import Lettuce from '../../images/recipe/recipe-lettuce.png';
+import Cheese from '../../images/recipe/recipe-cheese.png';
+import Sauce from '../../images/recipe/recipe-sauce.png';
+import Tomato from '../../images/recipe/recipe-tomato.png';
 
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
@@ -21,18 +31,23 @@ const useStyles = makeStyles({
   bold: {
     fontWeight: 600
   },
+  ingGrid: {
+    display: "grid",
+    gridTemplateColumns: 'repeat( auto-fit, minmax(200px, 1fr) )',
+    gap: "10px"
+  }
 })
 
 
 export default function RecipeBuilder(props) {
   const ingredients = [
-    { id: "top_bun", value: "Top Bun", src: "https://www.metro.ca/userfiles/image/infographics/images/burgers/5-COWBOY/5-Cowboy-Bun-Top.png" },
-    { id: "bottom_bun", value: "Bottom Bun", src: "https://png.pngitem.com/pimgs/s/344-3449103_bun-bread-bottom-hd-png-download.png" },
-    { id: "patty", value: "Patty", src: "https://image.shutterstock.com/image-photo/single-grilled-hamburger-patty-isolated-260nw-534672568.jpg" },
-    { id: "lettuce", value: "Lettuce", src: "https://cdn.britannica.com/77/170677-050-F7333D51/lettuce.jpg" },
-    { id: "cheese", value: "Cheese", src: "https://qph.fs.quoracdn.net/main-qimg-fa4e8f9efa8f3ca480f03b93bb3e9b58" },
-    { id: "sauce", value: "Tomato Sauce", src: "https://pngimg.com/uploads/sauce/sauce_PNG72.png" },
-    { id: "tomato", value: "Tomato", src: "https://s3.envato.com/files/250360646/DSC_0674.jpg" }
+    { id: "top_bun", value: "Top Bun", src: TopBun, rSrc: TopBun },
+    { id: "bottom_bun", value: "Bottom Bun", src: BottomBun, rSrc: BottomBun },
+    { id: "patty", value: "Patty", src: "https://image.shutterstock.com/image-photo/single-grilled-hamburger-patty-isolated-260nw-534672568.jpg", rSrc: Patty },
+    { id: "lettuce", value: "Lettuce", src: "https://cdn.britannica.com/77/170677-050-F7333D51/lettuce.jpg", rSrc: Lettuce },
+    { id: "cheese", value: "Cheese", src: "https://qph.fs.quoracdn.net/main-qimg-fa4e8f9efa8f3ca480f03b93bb3e9b58", rSrc: Cheese },
+    { id: "sauce", value: "Tomato Sauce", src: "https://pngimg.com/uploads/sauce/sauce_PNG72.png", rSrc: Sauce },
+    { id: "tomato", value: "Tomato", src: "https://s3.envato.com/files/250360646/DSC_0674.jpg", rSrc: Tomato }
   ];
 
   const [state, setState] = useState([]);
@@ -57,7 +72,7 @@ export default function RecipeBuilder(props) {
   }
 
   const onDragEnd = (result) => {
-    if (!result.destination) {
+    if (!result.destination) { //throw item from ingredients
       if (result.source.droppableId == "recipe") {
         state.splice(result.source.index, 1);
         onSetState(state);
@@ -79,14 +94,13 @@ export default function RecipeBuilder(props) {
       var newOrder = reorder(state, result.source.index, result.destination.index)
       onSetState(newOrder);
     }
-    console.log(state);
   }
 
   const classes = useStyles();
 
   return (
     state && (
-      <DragDropContext data-testid = "RecipeBuilderTest" onDragEnd={onDragEnd}>
+      <DragDropContext data-testid="RecipeBuilderTest" onDragEnd={onDragEnd}>
 
         {/* ingredients list to choose from*/}
         <Grid item style={{ gridRow: 2 }}>
@@ -97,18 +111,15 @@ export default function RecipeBuilder(props) {
                   <Typography className={classes.bold} variant='h6'>
                     Ingredients
                   </Typography>
-                  <Grid
+                  <div
                     {...provided.droppableProps}
                     ref={provided.innerRef}
-                    style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr" }}
+                    className={classes.ingGrid}
                     container
-                    //direction="row"
-                    alignItems="center"
-                    justify="center"
                   >
                     {ingredients.map((ingredient, index) => <Ingredient ingredient={ingredient} index={index} />)}
                     {provided.placeholder}
-                  </Grid>
+                  </div>
                 </div>
               )}
             </Droppable>
@@ -131,24 +142,23 @@ export default function RecipeBuilder(props) {
                     padding: 15
                   }}
                   elevation={3}>
-                  <Grid
+                  <div
                     {...provided.droppableProps}
                     ref={provided.innerRef}
                     isDraggingOver={snapshot.isDraggingOver}
-                    style={{ display: 'grid', gridTemplateColumns: 'auto auto', gap: '18px' }}
                     container
                     //direction="column"
                     alignItems="center"
                     justify="center"
                   >
                     {state && state.length > 0
-                      ? state.map((ingredient, index) => <Ingredient ingredient={ingredient} index={index} edit={props.edit} />)
+                      ? state.map((ingredient, index) => <Ingredient ingredient={ingredient} index={index} edit={props.edit} view={true} />)
                       : <Typography variant='h6' justify="center">
                         Drop ingredients here
                       </Typography>
                     }
                     {provided.placeholder}
-                  </Grid>
+                  </div>
                 </Paper>
               )}
             </Droppable>
