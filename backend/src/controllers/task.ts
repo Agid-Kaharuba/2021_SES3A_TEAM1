@@ -59,7 +59,7 @@ export default class TaskController {
   // Create a task
   public async create(req: Request, res: Response) {
     const { body } = req;
-    const user = req.user?._id
+    const user = req.user?._id;
     const newTaskRequest = new Task({
       name: body.name,
       description: body.description,
