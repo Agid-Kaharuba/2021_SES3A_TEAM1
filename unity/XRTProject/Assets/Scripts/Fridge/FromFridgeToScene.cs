@@ -5,37 +5,40 @@ using UnityEngine;
 
 public class FromFridgeToScene : MonoBehaviour {
 
-    //private List<GameObject> startItems = new List<GameObject> ();
-    //private List<GameObject> removedItems = new List<GameObject> ();
-    //private List<Transform> ItemsPositionStart = new List<Transform>();
+    private List<GameObject> startItems = new List<GameObject> ();
+    private List<GameObject> removedItems = new List<GameObject> ();
+    private List<Transform> ItemsPositionStart = new List<Transform>();
     //private List<Transform> ItemsPositionRemoved = new List<Transform>();
-    //private GameObject itemsInFridge;
+    
+    private GameObject itemsInFridge;
     public GameObject button;
 
-    private void Start () {
-        //RegisterInitialItems ();
+    public void Start () {
+        RegisterInitialItems ();
     }
 
-    private void OnTriggerExit ( Collider other ) {
+    public void OnTriggerExit ( Collider other ) {
         if ( other.transform.tag == "Ingredient" ) {
-            //removedItems.Add ( other.gameObject );
-            //startItems.Remove ( other.gameObject );
+            removedItems.Add ( other.gameObject );
+            startItems.Remove ( other.gameObject );
             //ItemsPositionStart.Remove(other.gameObject.transform);
             //ItemsPositionRemoved.Add(other.gameObject.transform);
-            button.GetComponent<FridgeController>().AddItemsToReset(other.gameObject, other.gameObject.transform);
+            button.GetComponent<FridgeController>().AddItemsToReset(other.gameObject);
         }
     }
 
-    private void OnTriggerEnter ( Collider other ) {
+    /**
+    public void OnTriggerEnter ( Collider other ) {
         if ( other.transform.tag == "Ingredient" ) {
-            //removedItems.Remove ( other.gameObject );
-            //startItems.Add ( other.gameObject );
+            removedItems.Remove ( other.gameObject );
+            startItems.Add ( other.gameObject );
             //ItemsPositionStart.Add(other.gameObject.transform);
             //ItemsPositionRemoved.Remove(other.gameObject.transform);
-            button.GetComponent<FridgeController>().RemoveItemsToReset(other.gameObject, other.gameObject.transform);
+            //button.GetComponent<FridgeController>().RemoveItemsToReset(other.gameObject, other.gameObject.transform);
         }
     }
-    /**
+    **/
+    
     private void RegisterInitialItems () {
         itemsInFridge = GameObject.Find ( "ItemsInTheFridge" );
         for ( int i = 0; i < itemsInFridge.transform.childCount; i++ ) {
@@ -45,10 +48,11 @@ public class FromFridgeToScene : MonoBehaviour {
                 Transform position = childB.gameObject.transform;
                 startItems.Add ( childB );
                 ItemsPositionStart.Add(position);
+                button.GetComponent<FridgeController>().AddItems(childB, position);
             }
         }
     }
-    **/
+    
 
     
 

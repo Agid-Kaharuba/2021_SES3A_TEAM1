@@ -6,10 +6,19 @@ using UnityEngine.VFX;
 
 public class FridgeController : MonoBehaviour
 {
+    private List<GameObject> Items = new List<GameObject>();
     private List<GameObject> ItemsToAdd = new List<GameObject>();
     private List<Transform> ItemsPosition = new List<Transform>();
+    private List<Transform> ItemsPositionToReset = new List<Transform>();
     private int changed;
     private AudioSource click;
+    public GameObject pref;
+    private void Awake()
+    {
+        Instantiate(pref, pref.transform.position, pref.transform.rotation ,GameObject.Find("Fridge").transform);
+
+
+    }
 
     void Start()
     {
@@ -21,16 +30,24 @@ public class FridgeController : MonoBehaviour
     {
         
     }
-    public void AddItemsToReset(GameObject item, Transform position)
+    public void AddItems(GameObject item, Transform position)
+    {
+        Items.Add(item);
+        ItemsPosition.Add(position);
+    }
+
+    public void AddItemsToReset(GameObject item)
     {
         ItemsToAdd.Add(item);
-        ItemsPosition.Add(position);
-        changed++;
+        int index = Items.FindIndex(a=>a.name == item.name);
+        Debug.Log(index);
+        
+        //ItemsPositionToReset.Add()
+        //changed++;
     }
-    public void RemoveItemsToReset(GameObject item, Transform position)
+    public void RemoveItemsToReset(GameObject item)
     {
         ItemsToAdd.Remove(item);
-        ItemsPosition.Remove(position);
         changed--;
     }
 
