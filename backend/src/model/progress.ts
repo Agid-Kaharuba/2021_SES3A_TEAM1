@@ -3,8 +3,8 @@ import mongoose, { ObjectId } from 'mongoose';
 export interface Tracking {
   _id?: ObjectId;
   date: Date;
-  event: String;
-  value: String;
+  event: string;
+  value: string;
   data?: Object;
 }
 
@@ -24,10 +24,10 @@ const trackingSchema = new mongoose.Schema({
     require: true,
   },
   event: {
-    type: String
+    type: String,
   },
   value: {
-    type: String
+    type: String,
   },
   data: {
     type: Object,
@@ -70,7 +70,7 @@ const progressSchema = new mongoose.Schema({
   tracking: [{
     type: TrackingModel.schema,
     required: false,
-  }]
+  }],
 });
 
 export default mongoose.model('Progress', progressSchema);

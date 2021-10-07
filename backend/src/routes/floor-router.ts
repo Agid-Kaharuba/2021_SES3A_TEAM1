@@ -2,7 +2,7 @@ import { Express } from 'express';
 import FloorController from '../controllers/floor';
 
 export const FloorRoute = (app: Express, controller: FloorController) => {
-   /**
+  /**
       * @swagger
       * /floor:
       *  get:
@@ -12,9 +12,9 @@ export const FloorRoute = (app: Express, controller: FloorController) => {
       *    200:
       *     description: Success
       */
-   app.get('/floor', controller.getAll);
+  app.get('/floor', controller.getAll);
 
-   /**
+  /**
       * @swagger
       * /floor:
       *  post:
@@ -37,10 +37,10 @@ export const FloorRoute = (app: Express, controller: FloorController) => {
       *    200:
       *     description: Success
       */
-   app.post('/floor', controller.create);
-   app.put('/floor', controller.create);
+  app.post('/floor', controller.create);
+  app.put('/floor', controller.create);
 
-   /**
+  /**
       * @swagger
       * /floor/{floorId}:
       *  get:
@@ -55,9 +55,9 @@ export const FloorRoute = (app: Express, controller: FloorController) => {
       *    200:
       *     description: Success
       */
-   app.get('/floor/:floorId', controller.getById);
+  app.get('/floor/:floorId', controller.getById);
 
-   /**
+  /**
       * @swagger
       * /floor/{floorId}:
       *  put:
@@ -85,9 +85,9 @@ export const FloorRoute = (app: Express, controller: FloorController) => {
       *    200:
       *     description: Success
       */
-   app.put('/floor/:floorId', controller.update);
+  app.put('/floor/:floorId', controller.update);
 
-   /**
+  /**
       * @swagger
       * /floor/{floorId}:
       *  delete:
@@ -102,5 +102,5 @@ export const FloorRoute = (app: Express, controller: FloorController) => {
       *    200:
       *     description: Success
       */
-   app.delete('/floor/:floorId', controller.delete);
+  app.delete('/floor/:floorId', controller.delete);
 };

@@ -12,7 +12,7 @@ const taskSchema = new mongoose.Schema({
   },
   recipe: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Recipe",
+    ref: 'Recipe',
     required: false,
   },
   type: {
@@ -23,10 +23,10 @@ const taskSchema = new mongoose.Schema({
     type: Boolean,
     required: false,
   },
-  userId:{
+  userId: {
     type: String,
     required: false,
-  }
+  },
 });
 
 export default mongoose.model('Task', taskSchema);
