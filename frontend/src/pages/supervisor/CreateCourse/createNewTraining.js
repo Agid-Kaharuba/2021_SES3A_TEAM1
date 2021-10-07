@@ -87,10 +87,11 @@ export default function CreateNewTrainingDialog(props) {
   const classes = useStyles();
   const { onClose: onCloseTraining, open: openTraining } = props;
   const [imagesrc, setImagesrc] = useState(bbt);
+  const [selectedDate, handleDateChange] = React.useState(new Date());
 
 
   //#region SAVE COURSE
-  const [formState, setFormState] = useState({ name: "", description: "", dueDate:new Date()});
+  const [formState, setFormState] = useState({ name: "", description: ""});
   const { authState, setAuthState } = React.useContext(AuthContext);
   let history = useHistory();
 
@@ -106,7 +107,8 @@ export default function CreateNewTrainingDialog(props) {
 
   const handleSubmit = async (event) => {
     // event.preventDefault();;
-    await api.course.create(authState.token, { ...formState, tasks: rowsTasks, assignedEmployees: rowsEmployees });
+
+    await api.course.create(authState.token, { ...formState, tasks: rowsTasks, assignedEmployees: rowsEmployees, dueDate: selectedDate });
     console.log(formState);
     history.push('/dashboard');
     window.location.reload(false);
@@ -352,8 +354,6 @@ export default function CreateNewTrainingDialog(props) {
     return ['Training Details', 'Assign Tasks', 'Assign Employees', 'Assign Due Date'];
   }
 
-  const [selectedDate, handleDateChange] = React.useState(new Date());
-
   function getStepContent(step) {
   
     switch (step) {
@@ -572,6 +572,7 @@ export default function CreateNewTrainingDialog(props) {
               views={["year", "month", "date"]}
               value={selectedDate}
               onChange={handleDateChange}
+              // onChange={selectedDate => setDate(selectedDate)}
             />
             </MuiPickersUtilsProvider>
             {/* </Fragment> */}
