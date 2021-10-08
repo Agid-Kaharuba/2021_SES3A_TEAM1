@@ -1,5 +1,17 @@
-import mongoose from 'mongoose';
-import Task from './task';
+import mongoose, { ObjectId } from 'mongoose';
+
+export interface CourseType {
+  name: string,
+  description: string,
+  image?: string,
+  tasks: ObjectId[],
+  assignEmployee: ObjectId[],
+  archive?: boolean,
+  dueDate?: Date,
+  _id?: ObjectId,
+  completed?: boolean,
+  percentageCompleted?: number,
+}
 
 const courseSchema = new mongoose.Schema({
   name: {
