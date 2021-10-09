@@ -4,7 +4,7 @@ export interface TrackingType {
   _id?: ObjectId;
   date: Date;
   event: string;
-  value: string;
+  value: string | number | boolean;
   data?: any;
 }
 

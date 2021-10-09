@@ -1,11 +1,12 @@
 import mongoose, { ObjectId } from 'mongoose';
+import { TaskType } from './task';
 
 export interface CourseType {
   name: string,
   description: string,
   image?: string,
-  tasks: ObjectId[],
-  assignEmployee: ObjectId[],
+  tasks: ObjectId[] | TaskType[],
+  assignedEmployees: ObjectId[],
   archive?: boolean,
   dueDate?: Date,
   _id?: ObjectId,
