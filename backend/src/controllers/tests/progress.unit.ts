@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import request from 'supertest';
-import { Tracking } from '../../model/progress';
+import { TrackingType } from '../../model/progress';
 
 describe('Progress controller', () => {
   let server: any;
@@ -24,7 +24,7 @@ describe('Progress controller', () => {
   });
 
   it('should submit tracking data to a progress not yet created', async () => {
-    const body: Tracking = {
+    const body: TrackingType = {
       date: new Date(),
       event: 'TEST',
       value: 'TRACK_VALUE',
@@ -37,7 +37,7 @@ describe('Progress controller', () => {
   });
 
   it('should submit tracking data to a progress', async () => {
-    const body: Tracking = {
+    const body: TrackingType = {
       date: new Date(),
       event: 'TEST2',
       value: 'TRACK_VALUE2',
