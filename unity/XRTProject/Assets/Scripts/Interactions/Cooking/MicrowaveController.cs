@@ -4,18 +4,12 @@ using UnityEngine;
 
 public class MicrowaveController : MonoBehaviour {
 
-    public AudioClip open;
-    public AudioClip close;
-    public AudioClip beep;
-    public AudioClip end;
-
     public Light microwaveLight;
 
     private bool isOpen;
     private bool isRunning;
 
-    public AudioSource audioSource;
-    public AudioSource noiseSource;
+
 
     public GameObject door;
 
@@ -42,28 +36,28 @@ public class MicrowaveController : MonoBehaviour {
     }
 
     void OpenMicrowave () {
-        isOpen = true; 
-        audioSource.PlayOneShot ( open, 1 );
-        EndMicrowave ();
+        isOpen = true;
+        FindObjectOfType<AudioManager>().Play("microwaveOpen");
+        EndMicrowave();
         microwaveLight.enabled = true;
     }
 
     void CloseMicrowave () {
         isOpen = false;
-        audioSource.PlayOneShot ( close, 1 );
-        RunMicrowave ();
+        FindObjectOfType<AudioManager>().Play("microwaveClose");
+        RunMicrowave();
         microwaveLight.enabled = false;
     }
 
     void RunMicrowave () {
         isRunning = true;
-        noiseSource.Play ();
+        FindObjectOfType<AudioManager>().Play("microwaveNoise");
     }
 
     void EndMicrowave () {
         isRunning = false;
-        noiseSource.Stop ();
-        audioSource.PlayOneShot ( beep, 1 );
+        FindObjectOfType<AudioManager>().Stop("microwaveNoise");
+        FindObjectOfType<AudioManager>().Play("microwaveBeep");
     }
 
     private void OnTriggerStay ( Collider other ) {

@@ -10,19 +10,10 @@ public class FridgeController : MonoBehaviour
     private List<GameObject> ItemsToAdd = new List<GameObject>();
     private List<Transform> ItemsPosition = new List<Transform>();
     private List<Transform> ItemsPositionToReset = new List<Transform>();
-    private int changed;
-    private AudioSource click;
-    public GameObject pref;
-    private void Awake()
-    {
-        Instantiate(pref, pref.transform.position, pref.transform.rotation ,GameObject.Find("Fridge").transform);
-
-
-    }
+    private int changed;    
 
     void Start()
     {
-        click = gameObject.GetComponent<AudioSource>();
         changed = 0;
     }
 
@@ -40,20 +31,18 @@ public class FridgeController : MonoBehaviour
     {
         ItemsToAdd.Add(item);
         int index = Items.FindIndex(a=>a.name == item.name);
-        Debug.Log(index);
-        
-        //ItemsPositionToReset.Add()
-        //changed++;
+        ItemsPositionToReset.Add(ItemsPosition[index]);
+        changed++;
+        Debug.Log(index+";"+ item + ";" + changed);
     }
     public void RemoveItemsToReset(GameObject item)
     {
         ItemsToAdd.Remove(item);
-        changed--;
     }
 
     IEnumerator resetFridge()
     {
-        click.Play();
+        FindObjectOfType<AudioManager>().Play("Button Press");
 
         if (changed>0)
         {

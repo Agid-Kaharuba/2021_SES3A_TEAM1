@@ -19,10 +19,6 @@ public class FromFridgeToScene : MonoBehaviour {
 
     public void OnTriggerExit ( Collider other ) {
         if ( other.transform.tag == "Ingredient" ) {
-            removedItems.Add ( other.gameObject );
-            startItems.Remove ( other.gameObject );
-            //ItemsPositionStart.Remove(other.gameObject.transform);
-            //ItemsPositionRemoved.Add(other.gameObject.transform);
             button.GetComponent<FridgeController>().AddItemsToReset(other.gameObject);
         }
     }

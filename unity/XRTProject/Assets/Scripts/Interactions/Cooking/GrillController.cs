@@ -9,7 +9,6 @@ public class GrillController : MonoBehaviour
     private Renderer rend;
     private VisualEffect steamEffect;
     private bool poweredOn = false;
-    private AudioSource click;
 
     public UnityEvent GrillPoweredOn;
     public UnityEvent GrillPoweredOff;
@@ -18,12 +17,11 @@ public class GrillController : MonoBehaviour
     {
         rend = GameObject.Find("grill").GetComponent<Renderer>();
         steamEffect = GameObject.Find("Steam").GetComponent<VisualEffect>();
-        click = gameObject.GetComponent<AudioSource>();
     }
 
     private IEnumerator ToggleGrill()
     {
-        click.Play();
+        FindObjectOfType<AudioManager>().Play("Button Press");
 
         yield return new WaitForSeconds(0.5f);
 
