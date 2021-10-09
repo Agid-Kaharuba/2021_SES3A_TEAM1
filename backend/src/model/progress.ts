@@ -21,7 +21,7 @@ export interface ProgressType {
 const trackingSchema = new mongoose.Schema({
   date: {
     type: Date,
-    require: true,
+    required: true,
   },
   event: {
     type: String,

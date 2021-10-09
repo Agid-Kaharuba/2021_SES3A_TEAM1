@@ -1,6 +1,7 @@
 import { TrackingType } from "../model/progress";
 import { CourseType } from "../model/course";
 import _ from "underscore";
+import { TaskType } from "../model/task";
 
 let timeElapsed: number;
 
@@ -103,66 +104,44 @@ const randomEvent = (): TrackingType | undefined => {
   }
   return e;
 };
-export const generateModuleTracking = (module: CourseType) => {
-  timeElapsed = 0;
 
+export const generateModuleTracking = (task: TaskType) => {
   const log: TrackingType[] = [];
+
+  timeElapsed = 0;
+  kitchenState = {
+    GRILL: 0,
+    MICROWAVE: 0,
+    KNIFE: 0
+  };
+  ingredientsState = [];
+  burgerState = [];
+
   log.push({
-    event: "MODULE",
+    event: "TASK",
     value: 1,
     date: currentTime(),
   });
 
-  for (const task of module.tasks) {
-    kitchenState = {
-      GRILL: 0,
-      MICROWAVE: 0,
-      KNIFE: 0
-    };
-    ingredientsState = [];
-    burgerState = [];
-
-    log.push({
-      event: "TASK",
-      value: 1,
-      date: currentTime(),
-    });
-
-    let count = randomNumber();
-    while (count--) {
-      const e = randomEvent();
-      if (e)
-        log.push(e);
-    }
-
-    log.push({
-      event: "SUBMISSION",
-      value: 0,
-      data: burgerState,
-      date: currentTime(),
-    });
-
-    log.push({
-      event: "TASK",
-      value: 0,
-      date: currentTime(),
-    });
+  let count = randomNumber();
+  while (count--) {
+    const e = randomEvent();
+    if (e)
+      log.push(e);
   }
 
   log.push({
-    event: "MODULE",
+    event: "SUBMISSION",
+    value: 0,
+    data: burgerState,
+    date: currentTime(),
+  });
+
+  log.push({
+    event: "TASK",
     value: 0,
     date: currentTime(),
   });
 
   return log;
 };
-
-const r = generateModuleTracking({
-  tasks: [{}],
-  assignedEmployees: [],
-  name: "A Few Burgers",
-  description: "Learn a few new burgers.",
-});
-
-console.log(r);

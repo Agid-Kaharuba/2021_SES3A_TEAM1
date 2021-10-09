@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 // import { MongoError } from 'mongodb';
 import Course, { CourseType } from '../model/course';
-import Progress, { Progress as ProgressType } from '../model/progress';
+import Progress, { ProgressType } from '../model/progress';
 import ResponseService from '../helpers/response';
 
 export default class CourseController {
