@@ -17,14 +17,17 @@ export default class ProgressController {
       score: req.body.score,
     };
     try {
+      // Find course according to the fields below.
       const progress = await ProgressModel.findOne({
         userId: req.body.userId,
         taskId: req.body.taskId,
         courseId: req.body.courseId,
       });
+      // If it is found then update the progress.
       if (progress) {
         const response = await ProgressModel.updateOne({ _id: progress._id }, body);
         ResponseService.successResponse(res, response);
+        // Otherwise create a new progress.
       } else {
         const newProgressRequest = new ProgressModel(body as any);
         newProgressRequest.save((err: any) => {

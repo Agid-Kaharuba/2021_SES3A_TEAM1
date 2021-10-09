@@ -5,16 +5,16 @@ export interface TrackingType {
   date: Date;
   event: string;
   value: string;
-  data?: Object;
+  data?: any;
 }
 
 export interface ProgressType {
-  data: object;
+  data: any;
   userId: string;
   taskId: string;
   courseId: string;
-  completed: string;
-  score: string;
+  completed: boolean;
+  score: number;
   tracking: TrackingType[];
 }
 

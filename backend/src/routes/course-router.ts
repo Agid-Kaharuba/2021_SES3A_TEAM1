@@ -61,7 +61,7 @@ export const CourseRoute = (app: Express, controller: CourseController) => {
      *    200:
      *     description: Success
      */
-  app.get('/course/:courseId', controller.get);
+  app.get('/course/:courseId', checkToken, controller.get);
   /**
      * @swagger
      * /course:
