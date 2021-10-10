@@ -10,7 +10,7 @@ import {
   updateUser,
   uploadImage,
   downloadImage,
-  searchUser, 
+  searchUser,
   deleteUser
 } from "./user";
 import {
@@ -34,7 +34,8 @@ import {
 } from "./recipe";
 import {
   getProgress,
-  downloadTracking
+  downloadTracking,
+  getTrackingPerformance
 } from "./progress";
 
 import dotenv from "dotenv";
@@ -81,6 +82,7 @@ export default {
   },
   progress: {
     get: getProgress,
-    download: downloadTracking
+    download: downloadTracking,
+    performance: getTrackingPerformance
   }
 }

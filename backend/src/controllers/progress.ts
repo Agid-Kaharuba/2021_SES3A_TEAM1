@@ -1,10 +1,11 @@
 import { Request, Response } from 'express';
 import * as XLSX from 'xlsx';
 import ProgressModel, { ProgressType, TrackingType, TrackingModel } from '../model/progress';
-import CourseModel from '../model/course';
+import CourseModel, { CourseType } from '../model/course';
 import TaskModel from '../model/task';
 import UserModel from '../model/user';
 import ResponseService from '../helpers/response';
+import { filter } from 'underscore';
 
 export default class ProgressController {
   public async put(req: Request, res: Response) {
@@ -189,4 +190,69 @@ export default class ProgressController {
       .set('Content-Disposition', 'attachment; filename=' + `${course.name}-${user.staffid}.xlsx`)
       .send(Buffer.from(buffer, 'base64'));
   }
+
+  public async getPerformace(req: Request, res: Response) {
+    const stations = ["GRILL", "KNIFE"];
+
+    try {
+      const course: CourseType = await CourseModel.findOne({ _id: req.query.courseId }).exec();
+      const taskOutcome: any = [];
+
+      for (const taskId of course.tasks) {
+        let stationTimes: { [key: string]: any[] } = convertArrayToObject(stations, () => new Array());
+        let stationAvg: { [key: string]: any } = convertArrayToObject(stations, () => 0);
+
+        const taskTracking = await ProgressModel.find({ taskId: taskId });
+
+        for (const progress of taskTracking) {
+          for (const station of stations) {
+            const result = calcTime(progress.tracking, station);
+            if (!result)
+              break;
+            const mins = new Date(result).getMinutes();
+            stationTimes[station].push({ userId: progress.userId, time: mins });
+          }
+        }
+
+        for (const station of stations) {
+          const sum = stationTimes[station].reduce((a, b) => a + b.time, 0);
+          const avg = (sum / stationTimes[station].length) || 0;
+          stationAvg[station] = avg;
+        }
+        taskOutcome.push({ taskId: taskId, times: stationTimes, averages: stationAvg });
+      }
+
+      ResponseService.successResponse(res, taskOutcome);
+    } catch (err) {
+      console.log(err);
+      ResponseService.mongoErrorResponse(res, err);
+    }
+  }
+}
+
+const convertArrayToObject = (array: string[], initial: any) => {
+  const initialValue = {};
+  return array.reduce((obj: { [key: string]: any }, item: string) => {
+    obj[item] = initial()
+    return obj;
+  }, initialValue);
+};
+
+const calcTime = (events: TrackingType[], eventName: string) => {
+  const filtered = events.filter((event: TrackingType) => event.event === eventName);
+  if (filtered.length === 0) {
+    return null;
+  }
+  let total: any = 0;
+  let prev: Date = filtered[0].date;
+  for (const event of filtered) {
+    if (event.value == 1) {
+      prev = event.date;
+    }
+    else {
+      const diff: any = event.date.valueOf() - prev.valueOf();
+      total = total + diff;
+    }
+  }
+  return total;
 }

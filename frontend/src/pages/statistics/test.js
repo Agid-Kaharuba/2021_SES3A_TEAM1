@@ -40,6 +40,12 @@ export default function Statistics(props) {
     }
   }
 
+  const performance = async () => {
+    console.clear();
+    var res = await api.progress.performance(authState.token, courseId);
+    console.log(res.data);
+  }
+
   return (<>
     <div style={{ display: "flex" }}>
       <List>
@@ -70,7 +76,10 @@ export default function Statistics(props) {
           )
         )}
       </List>
-      <div><Button variant="contained" color="primary" href={selected.export}>Export</Button></div>
+      <div>
+        <Button variant="contained" color="primary" href={selected.export}>Export</Button>
+        <Button variant="contained" color="primary" onClick={performance}>Performance</Button>
+      </div>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>

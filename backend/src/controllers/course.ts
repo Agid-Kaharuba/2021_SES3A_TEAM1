@@ -44,9 +44,6 @@ export default class CourseController {
       //   course.completed = false;
       // }
       course.completed = (course.percentageCompleted === 100);
-      console.log(course);
-      console.log(course.completed);
-      console.log(course.percentageCompleted);
       ResponseService.successResponse(res, course);
     } catch (err) {
       ResponseService.mongoNotFoundResponse(res, err);
