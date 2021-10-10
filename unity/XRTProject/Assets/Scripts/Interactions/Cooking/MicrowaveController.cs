@@ -9,25 +9,22 @@ public class MicrowaveController : MonoBehaviour {
     private bool isOpen;
     private bool isRunning;
 
-
-
     public GameObject door;
-
     public GameObject plate;
 
     public float microwavePlateSpeed = 20f;
 
     void Start() {
-        microwaveLight.enabled = false;
+        microwaveLight.enabled = true;
         isOpen = false;
         isRunning = false;
     }
 
     void Update() {
-        if ( !isOpen && door.transform.eulerAngles.y > 90 )
+        if ( !isOpen && door.transform.localEulerAngles.y > 90 )
             OpenMicrowave ();
 
-        if ( isOpen && door.transform.eulerAngles.y == 90 )
+        if ( isOpen && door.transform.localEulerAngles.y == 90 )
             CloseMicrowave ();
 
         if ( isRunning ) {
@@ -37,16 +34,16 @@ public class MicrowaveController : MonoBehaviour {
 
     void OpenMicrowave () {
         isOpen = true;
-        FindObjectOfType<AudioManager>().Play("microwaveOpen");
+        FindObjectOfType<AudioManager>().Play( "microwaveOpen" );
         EndMicrowave();
-        microwaveLight.enabled = true;
+        microwaveLight.enabled = false;
     }
 
     void CloseMicrowave () {
         isOpen = false;
         FindObjectOfType<AudioManager>().Play("microwaveClose");
         RunMicrowave();
-        microwaveLight.enabled = false;
+        microwaveLight.enabled = true;
     }
 
     void RunMicrowave () {
