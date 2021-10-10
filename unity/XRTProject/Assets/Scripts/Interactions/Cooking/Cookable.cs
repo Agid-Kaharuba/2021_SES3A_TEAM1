@@ -37,7 +37,7 @@ public class Cookable : MonoBehaviour
         BottomSide = new CookableSide(CookSide.Bottom, () => perfectCookDuration, () => maxCookDuration);
     }
 
-    public void TickCooking(float strength, float deltaTime, bool singleSided = true)
+    public void TickCooking(float strength, float deltaTime, bool singleSided)
     {
         if (singleSided && canCookBothSides)
             TickCookingCurrentSide(strength, deltaTime);
@@ -69,7 +69,7 @@ public class Cookable : MonoBehaviour
         // Also cook the other sides by the percentage defined by heat conductivity
         foreach (CookableSide side in AllSides)
         {
-            float addedCookTime = deltaTime * strength * heatConductivity;
+            float addedCookTime = deltaTime * strength;
             side.CookTime = Mathf.Clamp(side.CookTime + addedCookTime, 0, maxCookDuration);
             cookTextureTransitions.ForEach(t => t.SetCookPercentage(side.CookPercentage, side.CookSide));
         }

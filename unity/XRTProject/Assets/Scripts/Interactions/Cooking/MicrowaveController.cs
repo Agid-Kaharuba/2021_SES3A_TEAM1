@@ -12,12 +12,16 @@ public class MicrowaveController : MonoBehaviour {
     public GameObject door;
     public GameObject plate;
 
+    private CookZone cookZone;
+
     public float microwavePlateSpeed = 20f;
 
     void Start() {
         microwaveLight.enabled = true;
         isOpen = false;
         isRunning = false;
+        cookZone = gameObject.GetComponent<CookZone> ();
+        cookZone.SetCanCook ( false );
     }
 
     void Update() {
@@ -49,12 +53,14 @@ public class MicrowaveController : MonoBehaviour {
     void RunMicrowave () {
         isRunning = true;
         FindObjectOfType<AudioManager>().Play("microwaveNoise");
+        cookZone.SetCanCook ( true );
     }
 
     void EndMicrowave () {
         isRunning = false;
         FindObjectOfType<AudioManager>().Stop("microwaveNoise");
         FindObjectOfType<AudioManager>().Play("microwaveBeep");
+        cookZone.SetCanCook ( false );
     }
 
     private void OnTriggerStay ( Collider other ) {
