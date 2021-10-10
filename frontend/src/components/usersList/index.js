@@ -25,7 +25,7 @@ const useStyles = makeStyles({
   }
 })
 
-function User({user, onDeleteClick, usersState, setUsersState} ) {
+function User({user, onDeleteClick, usersState, setUsersState, course} ) {
   const [editState, setEditState] = useState(true);
   const classes = useStyles();
   const { authState } = useContext(AuthContext);
@@ -49,11 +49,10 @@ function User({user, onDeleteClick, usersState, setUsersState} ) {
           <TableCell align="left"> {!editState ? <TextField id="lastname" onChange={handleChange} value={user.lastname}/> : user.lastname}</TableCell>
           <TableCell align="left"> {!editState ? <TextField id="staffid" onChange={handleChange} value={user.staffid}/> : user.staffid}</TableCell>
           {/* Don't know what is going here with the statistics */}
-          {/* <TableCell align="left">
-          {course && (<Link className={classes.underline} to={`/dashboard/${course._id}/statistics/${user._id}`}>
+          {course && (<TableCell align="left"><Link className={classes.underline} to={`/dashboard/${course._id}/stats`}>
               <Button variant="outlined" color="secondary">View Statistics</Button>
-          </Link>)}
-          </TableCell> */}
+          </Link></TableCell>)}
+          
           <TableCell>
             <IconButton
               color="inherit"
@@ -76,7 +75,7 @@ function User({user, onDeleteClick, usersState, setUsersState} ) {
     }
 
 
-export default function Users({usersState, setUsersState, handleEdit, editState, filter =()=>true}){
+export default function Users({course, usersState, setUsersState, handleEdit, editState, filter =()=>true}){
     const classes = useStyles();
     const { authState } = useContext(AuthContext);
     function onDeleteClick(user) {
@@ -132,7 +131,7 @@ export default function Users({usersState, setUsersState, handleEdit, editState,
                     </TableHead>
                     <TableBody>
                         {usersState && usersState.filter(filter).map((user) => {
-                            return (<User user={user} onDeleteClick={onDeleteClick} setUsersState={setUsersState} usersState={usersState}/>)
+                            return (<User course={course} user={user} onDeleteClick={onDeleteClick} setUsersState={setUsersState} usersState={usersState}/>)
                         })}
                     </TableBody>
                 </Table>

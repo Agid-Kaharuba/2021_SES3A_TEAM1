@@ -32,6 +32,9 @@ import {
   updateRecipe,
   getRecipe
 } from "./recipe";
+import {
+  getProgress
+} from "./progress";
 
 import dotenv from "dotenv";
 dotenv.config();
@@ -74,5 +77,8 @@ export default {
   },
   stats: {
     course: getCourseStats
+  },
+  progress: {
+    get: getProgress
   }
 }

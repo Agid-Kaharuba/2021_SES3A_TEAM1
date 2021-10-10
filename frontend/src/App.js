@@ -46,6 +46,7 @@ import ViewRecipe from "./pages/recipe/viewRecipe/viewRecipe.js";
 
 // IMPORT STATISTICS PAGES
 import Statistics from "./pages/statistics/statistics.js";
+import StatsTest from "./pages/statistics/test.js";
 
 // IMPORT CONTEXTS
 import { AuthProvider } from "./context/auth";
@@ -124,6 +125,10 @@ function AppRouter(props) {
       <Route path="/dashboard/:courseId/statistics/:userId"
         exact={true}
         component={Statistics}>
+      </Route>
+      <Route path="/dashboard/:courseId/stats"
+        exact={true}
+        component={StatsTest}>
       </Route>
       <PrivateRoute path="/dashboard/:courseId"
         exact={true}
