@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react"
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@material-ui/core";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from "@material-ui/core";
 import { List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
 import { ArrowRight } from "@material-ui/icons";
 
@@ -10,7 +10,7 @@ export default function Statistics(props) {
   const { authState } = useContext(AuthContext);
   const [courseState, setCourseState] = useState(undefined);
   const [trackingState, setTrackingState] = useState(undefined);
-  const [selected, setSelected] = useState({ userId: null, taskId: null });
+  const [selected, setSelected] = useState({ userId: null, taskId: null, export: null });
   const courseId = props.match.params.courseId;
 
   const fetchData = async () => {
@@ -31,12 +31,12 @@ export default function Statistics(props) {
 
   const updateSelected = async (newSelected) => {
     const updated = { ...selected, ...newSelected };
-    setSelected(updated);
+    const url = api.progress.download(updated.userId, courseId)
+    setSelected({ ...updated, export: url });
 
     if (updated.userId && updated.taskId) {
       var res = await api.progress.get(authState.token, updated.userId, updated.taskId, courseId);
       setTrackingState(res.data[0].tracking);
-      console.log(res.data[0].tracking);
     }
   }
 
@@ -70,8 +70,7 @@ export default function Statistics(props) {
           )
         )}
       </List>
-
-
+      <div><Button variant="contained" color="primary" href={selected.export}>Export</Button></div>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>

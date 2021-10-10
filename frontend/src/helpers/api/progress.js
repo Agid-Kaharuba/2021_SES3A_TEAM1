@@ -9,3 +9,7 @@ export const getProgress = async (token, userId, taskId, courseId) => {
 	);
 	return res;
 }
+
+export const downloadTracking = (userId, courseId) => {
+	return `${API_HOST}/progress/tracking/logs?userId=${userId}&courseId=${courseId}`;
+}

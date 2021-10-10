@@ -33,7 +33,8 @@ import {
   getRecipe
 } from "./recipe";
 import {
-  getProgress
+  getProgress,
+  downloadTracking
 } from "./progress";
 
 import dotenv from "dotenv";
@@ -79,6 +80,7 @@ export default {
     course: getCourseStats
   },
   progress: {
-    get: getProgress
+    get: getProgress,
+    download: downloadTracking
   }
 }
