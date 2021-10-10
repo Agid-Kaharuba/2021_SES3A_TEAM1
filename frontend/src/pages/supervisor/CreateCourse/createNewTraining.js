@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 // IMPORT COMPONENTS
@@ -20,6 +20,10 @@ import Avatar from '@material-ui/core/Avatar';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import { makeStyles } from "@material-ui/core/styles";
 import ListSubheader from '@material-ui/core/ListSubheader';
+import { DatePicker } from "@material-ui/pickers";
+import DateFnsUtils from '@date-io/date-fns'; // choose your lib
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+
 
 // import { Link } from "react-router-dom";
 import { AuthContext } from "../../../context/auth";
@@ -62,6 +66,11 @@ const useStyles = makeStyles(theme => ({
     right: theme.spacing(1),
     top: theme.spacing(1),
     color: theme.palette.grey[500],
+  },
+  date: {
+    marginBottom: theme.spacing(6),
+    marginTop: theme.spacing(4),
+    left: theme.spacing(1)
   }
 
 }));
@@ -78,10 +87,11 @@ export default function CreateNewTrainingDialog(props) {
   const classes = useStyles();
   const { onClose: onCloseTraining, open: openTraining } = props;
   const [imagesrc, setImagesrc] = useState(bbt);
+  const [selectedDate, handleDateChange] = React.useState(new Date());
 
 
   //#region SAVE COURSE
-  const [formState, setFormState] = useState({ name: "", description: "", dueDate:new Date()});
+  const [formState, setFormState] = useState({ name: "", description: ""});
   const { authState, setAuthState } = React.useContext(AuthContext);
   let history = useHistory();
 
@@ -97,7 +107,8 @@ export default function CreateNewTrainingDialog(props) {
 
   const handleSubmit = async (event) => {
     // event.preventDefault();;
-    await api.course.create(authState.token, { ...formState, tasks: rowsTasks, assignedEmployees: rowsEmployees });
+
+    await api.course.create(authState.token, { ...formState, tasks: rowsTasks, assignedEmployees: rowsEmployees, dueDate: selectedDate });
     console.log(formState);
     history.push('/dashboard');
     window.location.reload(false);
@@ -340,10 +351,11 @@ export default function CreateNewTrainingDialog(props) {
   //#region Build Stepper
 
   function getSteps() {
-    return ['Training Details', 'Assign Tasks', 'Assign Employees'];
+    return ['Training Details', 'Assign Tasks', 'Assign Employees', 'Assign Due Date'];
   }
 
   function getStepContent(step) {
+  
     switch (step) {
       case 0: // training description
         return (
@@ -544,6 +556,27 @@ export default function CreateNewTrainingDialog(props) {
                 </Table>
               </TableContainer>
             </Box>
+          </div>
+        );
+      case 3: // assign due date
+        return (
+          <div>
+            <Grid Item>
+            {/* <Fragment> */}
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <DatePicker
+              className={classes.date}
+              openTo="year"
+              format="dd/MM/yyyy"
+              label="Select Date"
+              views={["year", "month", "date"]}
+              value={selectedDate}
+              onChange={handleDateChange}
+              // onChange={selectedDate => setDate(selectedDate)}
+            />
+            </MuiPickersUtilsProvider>
+            {/* </Fragment> */}
+            </Grid>
           </div>
         );
       default:

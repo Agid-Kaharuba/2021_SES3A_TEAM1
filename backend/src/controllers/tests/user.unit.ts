@@ -9,8 +9,8 @@ describe('User/auth controller', () => {
   before(async () => {
     server = require('../../app');
     const user = {
-      username: "supervisor",
-      password: "test123"
+      username: 'supervisor',
+      password: 'test123',
     };
     const { body } = await request(server).post('/auth/login').send(user);
     authToken = body.token;
@@ -24,11 +24,11 @@ describe('User/auth controller', () => {
     const user = {
       username: 'testing12321',
       password: 'qwerty',
-      firstname: "user",
-      lastname: "unit-test",
-      email: "user.unit-test@example.com",
-      staffid: "701",
-      isSupervisor: true
+      firstname: 'user',
+      lastname: 'unit-test',
+      email: 'user.unit-test@example.com',
+      staffid: '701',
+      isSupervisor: true,
     };
     const { body, status } = await request(server).post('/auth/register').send(user);
     userId = body._id;
@@ -45,7 +45,7 @@ describe('User/auth controller', () => {
   });
 
   it('should get all users', async () => {
-    const { body } = await request(server).get('/user/all').set('Authorization', 'Bearer ' + authToken).send();
+    const { body } = await request(server).get('/user/all').set('Authorization', `Bearer ${authToken}`).send();
     expect(body.length).to.equal(2);
   });
 
@@ -58,15 +58,15 @@ describe('User/auth controller', () => {
     expect(body.user._id).to.equal(userId);
   });
 
-  it("should check auth of a user (no success)", async function () {
-    const { body, status } = await request(server).get("/auth").send("jiberish");
+  it('should check auth of a user (no success)', async () => {
+    const { body, status } = await request(server).get('/auth').send('jiberish');
     expect(status).to.equal(401);
-  })
+  });
 
-  it("should check auth of a user (success)", async function () {
-    const { body, status } = await request(server).get("/auth").set('Authorization', 'Bearer ' + authToken).send();
+  it('should check auth of a user (success)', async () => {
+    const { body, status } = await request(server).get('/auth').set('Authorization', `Bearer ${authToken}`).send();
     expect(status).to.equal(200);
-  })
+  });
 
   it('should NOT login a user (wrong username)', async () => {
     const user = {
