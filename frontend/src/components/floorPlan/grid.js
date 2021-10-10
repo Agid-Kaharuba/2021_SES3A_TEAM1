@@ -80,7 +80,7 @@ export default class ToolboxLayout extends React.Component {
               Static - {l.i}
             </span>
           ) : (
-            <span className="text">{l.i}</span>
+            <span className="text">oven</span>
           )}
         </div>
       );
@@ -202,7 +202,7 @@ export default class ToolboxLayout extends React.Component {
 }
 
 function generateLayout() {
-  return _.map(_.range(0, 25), function(item, i) {
+  return _.map(_.range(0, 5), function(item, i) {
     var y = Math.ceil(Math.random() * 4) + 1;
     return {
       x: (_.random(0, 5) * 2) % 12,
