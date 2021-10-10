@@ -7,9 +7,11 @@ public class FromFridgeToScene : MonoBehaviour {
 
     private List<GameObject> startItems = new List<GameObject> ();
     private List<GameObject> removedItems = new List<GameObject> ();
-    private List<Transform> ItemsPositionStart = new List<Transform>();
+    private List<Vector3> ItemsPositionStart = new List<Vector3>();
+    private List<Quaternion> ItemsRotationStart = new List<Quaternion>();
+
     //private List<Transform> ItemsPositionRemoved = new List<Transform>();
-    
+
     private GameObject itemsInFridge;
     public GameObject button;
 
@@ -41,10 +43,12 @@ public class FromFridgeToScene : MonoBehaviour {
             GameObject childA = itemsInFridge.transform.GetChild ( i ).gameObject;
             for ( int j = 0; j < childA.transform.childCount; j++ ) {
                 GameObject childB = childA.transform.GetChild( j ).gameObject;
-                Transform position = childB.gameObject.transform;
+                Vector3 position = childB.gameObject.transform.position;
+                Quaternion rotation = childB.gameObject.transform.rotation;
                 startItems.Add ( childB );
                 ItemsPositionStart.Add(position);
-                button.GetComponent<FridgeController>().AddItems(childB, position);
+                ItemsRotationStart.Add(rotation);
+                button.GetComponent<FridgeController>().AddItems(childB, position, rotation);
             }
         }
     }

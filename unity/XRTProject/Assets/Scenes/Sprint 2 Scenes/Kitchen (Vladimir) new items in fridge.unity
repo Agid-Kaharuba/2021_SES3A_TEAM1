@@ -1117,7 +1117,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &84402665
 Transform:
   m_ObjectHideFlags: 0
@@ -15703,7 +15703,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1171477040
 Transform:
   m_ObjectHideFlags: 0
@@ -22341,13 +22341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71681e6ae985d3f4489a29707c3a08dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  open: {fileID: 8300000, guid: 54cf62566618c4e46af87ac36a8fb4cf, type: 3}
-  close: {fileID: 8300000, guid: 692459d1b8135e940a4c03fcb57444ff, type: 3}
-  beep: {fileID: 8300000, guid: c47c2f5caaf3a7043a7fe0fb79c78373, type: 3}
-  end: {fileID: 8300000, guid: 6cda41792a2812c4f81f04e1f4e1a79e, type: 3}
   microwaveLight: {fileID: 479880838}
-  audioSource: {fileID: 1864894248}
-  noiseSource: {fileID: 1864894247}
   door: {fileID: 588416508}
   plate: {fileID: 1588720386}
   microwavePlateSpeed: 20

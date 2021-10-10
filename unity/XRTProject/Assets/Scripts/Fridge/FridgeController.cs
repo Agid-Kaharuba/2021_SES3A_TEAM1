@@ -7,32 +7,42 @@ using UnityEngine.VFX;
 public class FridgeController : MonoBehaviour
 {
     private List<GameObject> Items = new List<GameObject>();
+    private List<Vector3> InitialItemsPosition = new List<Vector3>();
+    private List<Quaternion> InitialItemsRotation = new List<Quaternion>();
+
     private List<GameObject> ItemsToAdd = new List<GameObject>();
-    private List<Transform> ItemsPosition = new List<Transform>();
-    private List<Transform> ItemsPositionToReset = new List<Transform>();
-    private int changed;    
+    private List<Vector3> ItemsPositionToReset = new List<Vector3>();
+    private List<Quaternion> ItemsRotationToReset = new List<Quaternion>();
+
+    private bool changed;    
 
     void Start()
     {
-        changed = 0;
+        changed = false;
     }
 
     void Update()
     {
-        
+        /**
+        if (Input.GetKeyDown(KeyCode.Space)){
+            StartCoroutine(resetFridge());
+        }
+        **/
     }
-    public void AddItems(GameObject item, Transform position)
+    public void AddItems(GameObject item, Vector3 position, Quaternion rotation)
     {
         Items.Add(item);
-        ItemsPosition.Add(position);
+        InitialItemsPosition.Add(position);
+        InitialItemsRotation.Add(rotation);
     }
 
     public void AddItemsToReset(GameObject item)
     {
-        ItemsToAdd.Add(item);
         int index = Items.FindIndex(a=>a.name == item.name);
-        ItemsPositionToReset.Add(ItemsPosition[index]);
-        changed++;
+        ItemsToAdd.Add(Items[index]);
+        ItemsPositionToReset.Add(InitialItemsPosition[index]);
+        ItemsRotationToReset.Add(InitialItemsRotation[index]);
+        changed = true;
         Debug.Log(index+";"+ item + ";" + changed);
     }
     public void RemoveItemsToReset(GameObject item)
@@ -44,15 +54,23 @@ public class FridgeController : MonoBehaviour
     {
         FindObjectOfType<AudioManager>().Play("Button Press");
 
-        if (changed>0)
+        while (changed == true)
         {
-                for(int i =0; i < ItemsToAdd.Count; i++)
-                {
-                    var FridgeItems = Instantiate(ItemsToAdd[i], ItemsPosition[i]);
-                    FridgeItems.transform.parent = GameObject.Find(ItemsToAdd[i].transform.name).transform;
-                }
-                changed = 0;
+            for (int i = 0; i < ItemsToAdd.Count; i++)
+            {
+                GameObject temp = Instantiate(ItemsToAdd[i], ItemsPositionToReset[i], ItemsRotationToReset[i],
+                    GameObject.Find(ItemsToAdd[i].transform.name).transform.parent);
+                Items.Add(temp);
+                InitialItemsPosition.Add(temp.transform.position);
+                InitialItemsRotation.Add(temp.transform.rotation);
+
+            }
+            changed = false;
+            ItemsToAdd = new List<GameObject>();
+            ItemsPositionToReset = new List<Vector3>();
+            ItemsRotationToReset = new List<Quaternion>();
         }
+        
         
 
         yield return null;
