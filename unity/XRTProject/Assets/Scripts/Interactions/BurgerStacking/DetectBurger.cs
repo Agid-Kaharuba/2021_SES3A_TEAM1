@@ -29,6 +29,7 @@ public class DetectBurger : MonoBehaviour
     {
         if (collider.gameObject.CompareTag("Plates") && plateObject == null)
         {
+            Debug.Log ( "ENTER" );
             Debug.Log("Collision Detected");
             plateObject = collider.gameObject;
             coroutine = StartCoroutine(FinalText(plateObject));
@@ -38,9 +39,10 @@ public class DetectBurger : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         // If the plate is removed before 3 seconds, cancel the final text training completion thing
-        if (plateObject != null)
+        if ( other.gameObject.CompareTag ( "Plates" ) && plateObject != null)
         {
-            StopCoroutine(coroutine);
+            Debug.Log ( "EXIT" );
+            StopCoroutine (coroutine);
             coroutine = null;
             plateObject = null;
         }
