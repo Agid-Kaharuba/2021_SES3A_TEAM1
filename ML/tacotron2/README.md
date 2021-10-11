@@ -79,3 +79,9 @@ Wang and Zongheng Yang.
 [ignored]: https://github.com/NVIDIA/tacotron2/blob/master/hparams.py#L22
 [Apex]: https://github.com/nvidia/apex
 [AMP]: https://github.com/NVIDIA/apex/tree/master/apex/amp
+
+# For use with SES3 Team
+1) Replace filelists files with directory of where your wav files are located
+2) Use `python train.py --output_directory=outdir --log_directory=logdir` is training locally
+3) Use training.ipynb if training on google colab
+    - Would recommend using google drive to store files for colab training
