@@ -83,5 +83,5 @@ Wang and Zongheng Yang.
 # For use with SES3 Team
 1) Replace filelists files with directory of where your wav files are located
 2) Use `python train.py --output_directory=outdir --log_directory=logdir` is training locally
-3) Use training.ipynb if training on google colab
+3) Use tacotron2_training.ipynb if training on google colab
     - Would recommend using google drive to store files for colab training
