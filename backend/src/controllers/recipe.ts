@@ -82,9 +82,10 @@ export default class RecipeController {
       ResponseService.mongoNotFoundResponse(res, err);
     }
   }
+
   public async getCat(req: Request, res: Response) {
     try {
-      const response = await Recipe.find({ archive: { $ne: true } }) .distinct("category");
+      const response = await Recipe.find({ archive: { $ne: true } }).distinct('category');
       ResponseService.successResponse(res, response);
     } catch (err) {
       console.log(err);

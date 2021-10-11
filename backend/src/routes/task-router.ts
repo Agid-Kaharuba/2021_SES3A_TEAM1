@@ -140,9 +140,9 @@ export const TaskRoute = (app: Express, controller: TaskController) => {
      *    200:
      *     description: Success
      */
-   app.get('/task/getById/:userId', controller.getAllById);
+  app.get('/task/getById/:userId', controller.getAllById);
 
-   /**
+  /**
       * @swagger
       * /task/getById/not/{userId}:
       *  get:
@@ -157,5 +157,5 @@ export const TaskRoute = (app: Express, controller: TaskController) => {
       *    200:
       *     description: Success
       */
-   app.get('/task/getById/not/:userId', controller.getAllNotById);
+  app.get('/task/getById/not/:userId', controller.getAllNotById);
 };

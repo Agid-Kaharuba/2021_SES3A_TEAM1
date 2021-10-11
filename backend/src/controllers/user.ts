@@ -32,7 +32,7 @@ export default class UserController {
   public async getAllSupervisor(req: Request, res: Response) {
     try {
       const user = await User.find({
-        isSupervisor: req.query.isSupervisor, archive: { $ne: true }
+        isSupervisor: req.query.isSupervisor, archive: { $ne: true },
       });
       ResponseService.successResponse(res, user);
     } catch (err) {
@@ -71,14 +71,13 @@ export default class UserController {
     }
   }
 
-  //Delete a user
+  // Delete a user
   public async delete(req: Request, res: Response) {
     try {
       const id = req.params.userId;
       const response = await User.updateOne({ _id: id }, { archive: true });
       res.json(response);
-    }
-    catch (err) {
+    } catch (err) {
       ResponseService.mongoNotFoundResponse(res, err);
     }
   }

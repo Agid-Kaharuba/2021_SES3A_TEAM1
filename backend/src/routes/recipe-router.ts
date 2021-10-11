@@ -2,7 +2,7 @@ import { Express } from 'express';
 import RecipeController from '../controllers/recipe';
 
 export const RecipeRoute = (app: Express, controller: RecipeController) => {
-   /**
+  /**
      * @swagger
      * /recipe/category:
      *  get:
@@ -12,7 +12,7 @@ export const RecipeRoute = (app: Express, controller: RecipeController) => {
      *    200:
      *     description: Success
      */
-   app.get("/recipe/category", controller.getCat);
+  app.get('/recipe/category', controller.getCat);
 
   /**
      * @swagger
@@ -156,5 +156,4 @@ export const RecipeRoute = (app: Express, controller: RecipeController) => {
      *     description: Success
      */
   app.delete('/recipe/:recipeId', controller.delete);
-  
 };

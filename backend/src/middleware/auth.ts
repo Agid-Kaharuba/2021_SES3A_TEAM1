@@ -29,17 +29,17 @@ const getUser = async (token: any) => {
 
 const verifyUser = async (req: Request, res: Response, next: any) => {
   const token = getAuthToken(req);
-  //Supervisor
+  // Supervisor
   if (token == SUPERVISOR_TOKEN) {
     // @ts-ignore
-    req.user = await User.findOne({ username: "supervisor" });;
+    req.user = await User.findOne({ username: 'supervisor' });
     return next();
   }
 
-  //Employee
+  // Employee
   if (token == EMPLOYEE_TOKEN) {
     // @ts-ignore
-    req.user = await User.findOne({ username: "employee" });;
+    req.user = await User.findOne({ username: 'employee' });
     return next();
   }
 

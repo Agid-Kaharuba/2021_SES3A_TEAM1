@@ -75,7 +75,7 @@ export default class ImageController {
 
     ProfileImage.findOne({ name }, (err: Error, image: typeof ProfileImage) => {
       if (image) {
-        return res.status(200).send((image as any).img)
+        return res.status(200).send((image as any).img);
       }
       // ResponseService.mongoNotFoundResponse(res, "File not found");
       return res.status(200).send('https://i.pinimg.com/236x/1f/25/5d/1f255d7f9cf3afe7cd9cd97626d08fbf.jpg');
