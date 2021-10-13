@@ -9,7 +9,7 @@ import _ from "lodash";
 import { Responsive, WidthProvider, GridLayout } from "react-grid-layout";
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
-
+import './styles.css';
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
@@ -207,8 +207,8 @@ function generateLayout() {
     return {
       x: (_.random(0, 5) * 2) % 12,
       y: Math.floor(i / 6) * y,
-      w: 2,
-      h: y,
+      w: 2, //width of block
+      h: y, //height of block
       i: i.toString(),
       static: Math.random() < 0.05
     };
