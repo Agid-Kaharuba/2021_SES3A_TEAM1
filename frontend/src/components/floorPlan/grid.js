@@ -162,7 +162,7 @@ export default class ToolboxLayout extends React.Component {
 
   render() {
     return (
-      <div style={{backgroundColor: "grey"}}>
+      <div >
         <div>
           Current Breakpoint: {this.state.currentBreakpoint} (
           {this.props.cols[this.state.currentBreakpoint]} columns)
@@ -201,6 +201,7 @@ export default class ToolboxLayout extends React.Component {
   }
 }
 
+//generate the kitchen items one by one here somehow i think*****
 function generateLayout() {
   return _.map(_.range(0, 5), function(item, i) {
     var y = Math.ceil(Math.random() * 4) + 1;
@@ -215,19 +216,3 @@ function generateLayout() {
   });
 }
     
-// const useStyles = makeStyles({
-//     bold: {
-//         fontWeight: 600
-//       },
-// })
-
-
-// export default function Grid() {
-//     const classes = useStyles();
-
-//     return (
-//         <div>
-//             {/* bryan */}
-//         </div>
-//    )
-// }
