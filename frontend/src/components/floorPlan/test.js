@@ -10,9 +10,9 @@ const ResponsiveReactGridLayout = WidthProvider(Responsive);
 const ReactGridLayout = () => {
   const [layouts, setLayouts] = useState(null);
   const [widgetArray, setWidgetArray] = useState([
-    { i: "widget1", x: 0, y: 0, w: 2, h: 2 },
-    { i: "widget2", x: 2, y: 2, w: 2, h: 2 },
-    { i: "widget3", x: 4, y: 4, w: 2, h: 2 },
+    // { i: "widget1", x: 0, y: 0, w: 2, h: 2 },
+    // { i: "widget2", x: 2, y: 2, w: 2, h: 2 },
+    // { i: "widget3", x: 4, y: 4, w: 2, h: 2 },
   ]);
 
   const handleModify = (layouts, layout) => {
@@ -24,13 +24,14 @@ const ReactGridLayout = () => {
       tempArray[Number(position.i)].width = position.w;
       tempArray[Number(position.i)].height = position.h;
     });
+    console.log(tempArray)
     setWidgetArray(tempArray);
   };
 
-  const handleAdd = () => {
+  const handleAdd = (name) => {
     setWidgetArray([
       ...widgetArray,
-      { i: "widget" + (widgetArray.length + 1), x: 0, y: 0, w: 2, h: 2 },
+      { i: name + " " + (widgetArray.length + 1), x: 0, y: 0, w: 2, h: 2, type: name },
     ]);
   };
 
@@ -43,18 +44,18 @@ const ReactGridLayout = () => {
 
   return (
     <div>
-      <button onClick={() => handleAdd()}>Add Widget</button>
-      <button onClick={() => handleAdd()}>Add Widget</button>
-      <button onClick={() => handleAdd()}>Add Widget</button>
-      <button onClick={() => handleAdd()}>Add Widget</button>
-      <button onClick={() => handleAdd()}>Add Widget</button>
+      <button onClick={() => handleAdd("Table")}>Add Table</button>
+      <button onClick={() => handleAdd("Grill")}>Add Grill</button>
+      <button onClick={() => handleAdd("Fridge")}>Add Fridge</button>
+      <button onClick={() => handleAdd("Sink")}>Add Sink</button>
+      <button onClick={() => handleAdd("Submission Station")}>Add Submission Station</button>
 
       <ResponsiveReactGridLayout
         onLayoutChange={handleModify}
-        verticalCompact={true}
+        verticalCompact={false}
         layout={layouts}
         breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-        preventCollision={false}
+        preventCollision={true}
         cols={{ lg: 8, md: 8, sm: 4, xs: 2, xxs: 2 }}
         autoSize={true}
         margin={{
