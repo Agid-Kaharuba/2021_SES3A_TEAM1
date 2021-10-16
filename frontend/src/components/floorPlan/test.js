@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
-
 //import "./App.css";
+import './styles.css';
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
@@ -31,7 +31,8 @@ const ReactGridLayout = () => {
   const handleAdd = (name) => {
     setWidgetArray([
       ...widgetArray,
-      { i: name + " " + (widgetArray.length + 1), x: 0, y: 0, w: 2, h: 2, type: name },
+      // { i: name + " " + (widgetArray.length + 1), x: 0, y: 0, w: 1, h: 1, type: name },
+      { i: name, x: 0, y: 0, w: 1, h: 1, type: name },
     ]);
   };
 
@@ -70,6 +71,7 @@ const ReactGridLayout = () => {
           return (
             <div
               className="reactGridItem"
+              style={{backgroundColor: "cyan"}}
               key={index}
               data-grid={{
                 x: widget?.x,
@@ -77,9 +79,9 @@ const ReactGridLayout = () => {
                 w: widget?.w,
                 h: widget?.h,
                 i: widget.i,
-                minW: 2,
+                minW: 1,
                 maxW: Infinity,
-                minH: 2,
+                minH: 1,
                 maxH: Infinity,
                 isDraggable: true,
                 isResizable: true,
