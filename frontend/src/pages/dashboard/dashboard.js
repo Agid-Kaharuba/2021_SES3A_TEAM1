@@ -154,7 +154,8 @@ export default function CreateNewTrainingPage() {
                 : ""}
                 </Typography>
                 <Typography variant="body1" color="textSecondary" gutterBottom>
-                  {course.description}
+                  {/* removed the description so the card scales better */}
+                  {/* {course.description} */}
                 </Typography>
               </CardContent>
 
