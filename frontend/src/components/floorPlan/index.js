@@ -13,6 +13,7 @@ import KitchenItem from './kitchenItem';
 import ToolboxLayout from './grid';
 import ToolBox from './grid';
 import ToolBoxItem from './grid';
+import ReactGridLayout from './test';
 
 
 const useStyles = makeStyles({
@@ -33,6 +34,7 @@ export default function FloorPlan() {
             {/* moveable kitchen objects */}
             {/* <KitchenItem /> */}
             <ToolboxLayout/>
+            <ReactGridLayout/>
 
         </div>
    )
