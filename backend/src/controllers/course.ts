@@ -32,7 +32,7 @@ export default class CourseController {
       const course: CourseType = await Course.findOne({ _id: req.params.courseId }).populate({
         path: 'tasks',
         populate: { path: 'recipe' },
-      }).populate('assignedEmployees') as CourseType;
+      }).populate('assignedEmployees').lean() as CourseType;
 
       const progresses: ProgressType[] = await Progress.find({ courseId: req.params.courseId, userId: req?.user?._id });
       const completed = await progresses.filter((progress) => progress.completed === true);
