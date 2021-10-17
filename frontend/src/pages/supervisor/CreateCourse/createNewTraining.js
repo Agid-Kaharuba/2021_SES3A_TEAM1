@@ -134,6 +134,9 @@ export default function CreateNewTrainingDialog(props) {
   const imageChange = (e) => {
     setImagesrc(e);
 
+    setFormState({
+      ...formState, image: e,
+    });
   }
 
   // open/close dialog

@@ -41,6 +41,7 @@ export default class CourseController {
       tasks: body.tasks,
       assignedEmployees: body.assignedEmployees,
       dueDate: body.dueDate,
+      image: body.image
     } as any);
     newCourseRequest.save((err: any) => {
       if (err) {
