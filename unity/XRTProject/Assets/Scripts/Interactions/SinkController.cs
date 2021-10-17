@@ -12,9 +12,11 @@ public class SinkController : MonoBehaviour {
     private ParticleSystem leftWater;
     private ParticleSystem rightWater;
 
+
     void Start() {
         leftWater = gameObject.transform.Find ( "leftWater" ).gameObject.GetComponent<ParticleSystem> ();
         rightWater = gameObject.transform.Find ( "rightWater" ).gameObject.GetComponent<ParticleSystem> ();
+
 
         leftHandle = gameObject.transform.Find ( "Handle_L" ).gameObject.transform;
         rightHandle = gameObject.transform.Find ( "Handle_R" ).gameObject.transform;
@@ -31,16 +33,22 @@ public class SinkController : MonoBehaviour {
     void CheckLeftHandle () {
         if ( leftHandle.localEulerAngles.x < activationAngle && leftHandle.transform.localEulerAngles.x > -activationAngle ) {
             leftWater.Stop ();
-        }  else {
+            //FindObjectOfType<AudioManager>().Stop("WaterRunL");
+        }
+        else {
             leftWater.Play ();
-        }  
+            //FindObjectOfType<AudioManager>().Play("WaterRunL");
+        }
     }
 
     void CheckRightHandle () {
         if ( rightHandle.localEulerAngles.x < activationAngle && rightHandle.transform.localEulerAngles.x > -activationAngle ) {
-            leftWater.Stop ();
-        } else {
-            leftWater.Play ();
+            rightWater.Stop ();
+            //FindObjectOfType<AudioManager>().Stop("WaterRunR");
+        }
+        else {
+            rightWater.Play ();
+            //FindObjectOfType<AudioManager>().Play("WaterRunR");
         }
     }
 }

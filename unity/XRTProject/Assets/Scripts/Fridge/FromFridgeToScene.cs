@@ -16,7 +16,8 @@ public class FromFridgeToScene : MonoBehaviour {
     public GameObject button;
 
     public void Start () {
-        RegisterInitialItems ();
+
+        RegisterInitialItems();
     }
 
     public void OnTriggerExit ( Collider other ) {

@@ -72,10 +72,58 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: cc69f5669482b2b4b813fac8a0ccb9a6, type: 3}
     volume: 1
     pitch: 1
-    loop: 0
+    loop: 1
     source: {fileID: 0}
   - name: microwaveOpen
     clip: {fileID: 8300000, guid: 54cf62566618c4e46af87ac36a8fb4cf, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Grilling
+    clip: {fileID: 8300000, guid: c739e1d850f534a4b8b34e151d38ae06, type: 3}
+    volume: 0.889
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Teleportation
+    clip: {fileID: 8300000, guid: 24777f403d6d59a49bafb7ebc25bae54, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: DropPlates
+    clip: {fileID: 8300000, guid: ccf442baf14bedf45b0ec721bd69098a, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: DropFood
+    clip: {fileID: 8300000, guid: bc249d0e0ba336e4d840021055da82e7, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: WaterRunL
+    clip: {fileID: 8300000, guid: a93ddf115c0183448a777f240eba21d3, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: WaterRunR
+    clip: {fileID: 8300000, guid: a93ddf115c0183448a777f240eba21d3, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: FridgeDoorL
+    clip: {fileID: 8300000, guid: dd187ba15982caf429e4656c683c0cab, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: FridgeDoorR
+    clip: {fileID: 8300000, guid: dd187ba15982caf429e4656c683c0cab, type: 3}
     volume: 1
     pitch: 1
     loop: 0

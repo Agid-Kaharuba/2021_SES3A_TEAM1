@@ -40,9 +40,15 @@ public class Cookable : MonoBehaviour
     public void TickCooking(float strength, float deltaTime, bool singleSided)
     {
         if (singleSided && canCookBothSides)
+        {
             TickCookingCurrentSide(strength, deltaTime);
+            //FindObjectOfType<AudioManager>().Play("Grilling");
+        }
         else
+        {
             TickCookingAllSides(strength, deltaTime);
+            //FindObjectOfType<AudioManager>().Play("Grilling");
+        }
     }
     
     private void TickCookingCurrentSide(float strength, float deltaTime)
