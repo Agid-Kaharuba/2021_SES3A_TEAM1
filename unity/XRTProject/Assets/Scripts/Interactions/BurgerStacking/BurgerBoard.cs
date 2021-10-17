@@ -53,12 +53,12 @@ public class BurgerBoard : MonoBehaviour
     public List<BurgerItem> GetCurrentBurgerItems()
     {
         var burgerItems = new List<BurgerItem>();
-        BurgerItem aboveItem = burgerItem.GluedAboveItem;
+        BurgerItem aboveItem = burgerItem.AboveItem;
 
         while (aboveItem != null)
         {
             burgerItems.Insert(0, aboveItem);
-            aboveItem = aboveItem.GluedAboveItem;
+            aboveItem = aboveItem.AboveItem;
         }
 
         return burgerItems;

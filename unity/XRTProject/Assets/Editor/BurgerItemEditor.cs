@@ -32,6 +32,24 @@ public class BurgerItemEditor : Editor
             {
                 GUILayout.Label($"No Below Item Found");
             }
+            
+            if (burgerItem.AboveStickPoint is {IsGlued: true})
+            {
+                GUILayout.Label($"Above Point Glued is {burgerItem.AboveStickPoint.IsGlued}");
+            }
+            else
+            {
+                GUILayout.Label($"Above Point Not Glued");
+            }
+        
+            if (burgerItem.BelowStickPoint is {IsGlued: true})
+            {
+                GUILayout.Label($"Below Point Glued is {burgerItem.BelowStickPoint.IsGlued}");
+            }
+            else
+            {
+                GUILayout.Label($"Below Point Not Glued");
+            }
 
             if (burgerItem.IsGlued)
             {
@@ -40,15 +58,6 @@ public class BurgerItemEditor : Editor
             else
             {
                 GUILayout.Label($"Not glued to anything");
-            }
-            
-            if (burgerItem.GluedAboveItem != null)
-            {
-                GUILayout.Label($"Glued from {burgerItem.GluedAboveItem.name}");
-            }
-            else
-            {
-                GUILayout.Label($"Not glued from anything");
             }
         }
     }
