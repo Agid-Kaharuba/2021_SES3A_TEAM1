@@ -50,6 +50,7 @@ const useStyles = makeStyles({
   gridContainer: {
     paddingLeft: "20px",
     paddingRight: "20px",
+    paddingBottom: "50px",
   },
   trainingModules: {
     display: "grid",
