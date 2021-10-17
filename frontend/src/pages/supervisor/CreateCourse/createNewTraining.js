@@ -91,6 +91,7 @@ export default function CreateNewTrainingDialog(props) {
 
 
   //#region SAVE COURSE
+  // const [formState, setFormState] = useState({ name: "", description: "", image: imagesrc});
   const [formState, setFormState] = useState({ name: "", description: ""});
   const { authState, setAuthState } = React.useContext(AuthContext);
   let history = useHistory();
@@ -562,7 +563,6 @@ export default function CreateNewTrainingDialog(props) {
         return (
           <div>
             <Grid Item>
-            {/* <Fragment> */}
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <DatePicker
               className={classes.date}
@@ -572,10 +572,8 @@ export default function CreateNewTrainingDialog(props) {
               views={["year", "month", "date"]}
               value={selectedDate}
               onChange={handleDateChange}
-              // onChange={selectedDate => setDate(selectedDate)}
             />
             </MuiPickersUtilsProvider>
-            {/* </Fragment> */}
             </Grid>
           </div>
         );

@@ -141,7 +141,8 @@ export default function CreateNewTrainingPage() {
               <CardMedia
                 className={classes.media}
                 //these images are just placeholders for now
-                image="https://i.pinimg.com/originals/8b/f0/76/8bf07692b7f9704f1b3552943bdcf1cd.jpg"
+                // image="https://i.pinimg.com/originals/8b/f0/76/8bf07692b7f9704f1b3552943bdcf1cd.jpg"
+                 image= {course.image ? course.image : "https://i.pinimg.com/originals/8b/f0/76/8bf07692b7f9704f1b3552943bdcf1cd.jpg"}
                 title="Fast Food Training"
               />
               <CardContent className={classes.text}>
