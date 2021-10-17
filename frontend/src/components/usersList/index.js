@@ -134,36 +134,6 @@ export default function Users({
     setUsersState(usersState.filter((x) => x._id != user._id));
   }
 
-  // function buildUser(user) {
-  //   return (
-  //     <TableRow key={user.name}>
-  //       <TableCell align="left">{user.firstname}</TableCell>
-  //       <TableCell align="left">{user.lastname}</TableCell>
-  //       <TableCell align="left">{user.staffid}</TableCell>
-  //       {/* Don't know what is going here with the statistics */}
-  //       {/* <TableCell align="left">
-  //             {course && (<Link className={classes.underline} to={`/dashboard/${course._id}/statistics/${user._id}`}>
-  //                 <Button variant="outlined" color="secondary">View Statistics</Button>
-  //             </Link>)}
-  //             </TableCell> */}
-  //       {authState.user.isSupervisor && (
-  //         <>
-  //           <TableCell>
-  //             <IconButton color="inherit">
-  //               <EditIcon />
-  //             </IconButton>
-  //           </TableCell>
-  //           <TableCell>
-  //             <IconButton color="inherit" onClick={() => onDeleteClick(user)}>
-  //               <DeleteIcon />
-  //             </IconButton>
-  //           </TableCell>
-  //         </>
-  //       )}
-  //     </TableRow>
-  //   );
-  // }
-
   return (
     <Box data-testid="buildUserTest" m={5}>
       <TableContainer component={Paper}>
