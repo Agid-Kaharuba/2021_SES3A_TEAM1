@@ -320,7 +320,7 @@ export default function CreateNewTrainingDialog(props) {
 
   //Build User Table
   const fetchDataUserTable = async () => {
-    const res = await api.user.get(authState.token);
+    const res = await api.user.search(authState.token, 'isSupervisor=false');
     setUsersState(res.data);
   };
 
