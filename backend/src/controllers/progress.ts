@@ -193,59 +193,71 @@ export default class ProgressController {
   }
 
   public async getPerformace(req: Request, res: Response) {
-    const stations = ["GRILL", "KNIFE"];
-
     try {
       const course: CourseType = await CourseModel.findOne({ _id: req.query.courseId }).exec();
-      const taskOutcomes: any = [];
 
-      for (const taskId of course.tasks) {
-        let stationTimes: { [key: string]: any[] } = convertArrayToObject(stations, () => new Array());
-        let stationAvg: { [key: string]: any } = convertArrayToObject(stations, () => 0);
+      const taskOutcomes = await computeTimedOutcomes(course);
 
-        const taskTracking = await ProgressModel.find({ taskId: taskId, courseId: course._id });
+      const ratings = await computeRatings(course, taskOutcomes)
 
-        for (const progress of taskTracking) {
-          for (const station of stations) {
-            const result = calcTime(progress.tracking, station);
-            if (!result)
-              break;
-            const mins = new Date(result).getMinutes();
-            stationTimes[station].push({ userId: progress.userId, time: mins });
-          }
-        }
-
-        for (const station of stations) {
-          const sum = stationTimes[station].reduce((a, b) => a + b.time, 0);
-          const avg = (sum / stationTimes[station].length) || 0;
-          stationAvg[station] = avg;
-        }
-        taskOutcomes.push({ taskId: taskId, times: stationTimes, averages: stationAvg });
-      }
-
-      const ratings: { [key: string]: number } = course.assignedEmployees.reduce(
-        (obj: { [key: string]: number }, employee: ObjectId) => {
-          obj[employee.toString()] = 0;
-          return obj;
-        },
-        {}
-      );
-
-      for (const taskOutcome of taskOutcomes){
-        for (const station in taskOutcome.times) {
-          const times = taskOutcome.times[station];
-          const sortedTimes = times.sort((a: any, b: any) => b.time - a.time);
-
-          sortedTimes.map((employee: any, index: number) => ratings[employee.userId] += index);
-        }
-      }
-
-      ResponseService.successResponse(res, {taskOutcomes, ratings});
+      ResponseService.successResponse(res, { taskOutcomes, ratings });
     } catch (err) {
       console.log(err);
       ResponseService.mongoErrorResponse(res, err);
     }
   }
+}
+
+const computeTimedOutcomes = async (course: CourseType) => {
+  const stations = ["GRILL", "KNIFE"];
+  const taskOutcomes: any = [];
+
+  for (const taskId of course.tasks) {
+    let stationTimes: { [key: string]: any[] } = convertArrayToObject(stations, () => new Array());
+    let stationAvg: { [key: string]: any } = convertArrayToObject(stations, () => 0);
+
+    const taskTracking = await ProgressModel.find({ taskId: taskId, courseId: course._id });
+
+    for (const progress of taskTracking) {
+      for (const station of stations) {
+        const result = calcTime(progress.tracking, station);
+        if (!result)
+          break;
+        const mins = new Date(result).getMinutes();
+        stationTimes[station].push({ userId: progress.userId, time: mins });
+      }
+    }
+
+    for (const station of stations) {
+      const sum = stationTimes[station].reduce((a, b) => a + b.time, 0);
+      const avg = (sum / stationTimes[station].length) || 0;
+      stationAvg[station] = avg;
+    }
+    taskOutcomes.push({ taskId: taskId, times: stationTimes, averages: stationAvg });
+  }
+
+  return taskOutcomes;
+}
+
+const computeRatings = async (course: CourseType, taskOutcomes: any) => {
+  const ratings: { [key: string]: number } = course.assignedEmployees.reduce(
+    (obj: { [key: string]: number }, employee: ObjectId) => {
+      obj[employee.toString()] = 0;
+      return obj;
+    },
+    {}
+  );
+
+  for (const taskOutcome of taskOutcomes) {
+    for (const station in taskOutcome.times) {
+      const times = taskOutcome.times[station];
+      const sortedTimes = times.sort((a: any, b: any) => b.time - a.time);
+
+      sortedTimes.map((employee: any, index: number) => ratings[employee.userId] += index);
+    }
+  }
+
+  return ratings;
 }
 
 const convertArrayToObject = (array: string[], initial: any) => {
