@@ -10,10 +10,10 @@ import styled from "styled-components";
 import { AuthContext } from "../../context/auth";
 
 import KitchenItem from './kitchenItem';
-import ToolboxLayout from './grid';
-import ToolBox from './grid';
-import ToolBoxItem from './grid';
-import ReactGridLayout from './test';
+import ToolboxLayout from './gridOld';
+import ToolBox from './gridOld';
+import ToolBoxItem from './gridOld';
+import ReactGridLayout from './grid';
 
 
 const useStyles = makeStyles({
@@ -31,9 +31,7 @@ export default function FloorPlan() {
    
     return (
         <div className={classes.back}>
-            {/* moveable kitchen objects */}
-            {/* <KitchenItem /> */}
-            <ToolboxLayout/>
+            {/* <ToolboxLayout/> */}
             <ReactGridLayout/>
 
         </div>
