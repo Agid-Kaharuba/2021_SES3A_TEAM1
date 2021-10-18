@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { getEnabledCategories } from 'trace_events';
 import Recipe from './recipe';
 
 const taskSchema = new mongoose.Schema({
@@ -26,7 +27,11 @@ const taskSchema = new mongoose.Schema({
   userId:{
     type: String,
     required: false,
-  }
+  },
+  Category: {
+    type: String,
+    required: false,
+  },  
 });
 
 export default mongoose.model('Task', taskSchema);
