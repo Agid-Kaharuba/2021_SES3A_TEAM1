@@ -10,6 +10,7 @@ export default function Statistics(props) {
   const { authState } = useContext(AuthContext);
   const [courseState, setCourseState] = useState(undefined);
   const [trackingState, setTrackingState] = useState(undefined);
+  const [performanceState, setPerformanceState] = useState(undefined);
   const [selected, setSelected] = useState({ userId: null, taskId: null, export: null });
   const courseId = props.match.params.courseId;
 
@@ -43,6 +44,7 @@ export default function Statistics(props) {
   const performance = async () => {
     console.clear();
     var res = await api.progress.performance(authState.token, courseId);
+    setPerformanceState(res.data);
     console.log(res.data);
   }
 
@@ -80,6 +82,34 @@ export default function Statistics(props) {
         <Button variant="contained" color="primary" href={selected.export}>Export</Button>
         <Button variant="contained" color="primary" onClick={performance}>Performance</Button>
       </div>
+      <TableContainer component={Paper}>
+        <Table>
+          <TableHead>
+            <TableCell style={{ width: 20 }}>Rank</TableCell>
+            <TableCell >Name</TableCell>
+          </TableHead>
+          <TableBody>
+            {performanceState && (
+              performanceState.ratings.map((performance, index) =>
+                <TableRow style={
+                  performance.recommendation ?
+                    performance.recommendation.hire ?
+                      { background: 'green' }
+                      :
+                      performance.recommendation.fire ? { background: 'red' }
+                        :
+                        {}
+                    :
+                    {}
+                }>
+                  <TableCell>{index + 1}</TableCell>
+                  <TableCell>{performance.user.staffid} {performance.user.firstname} {performance.user.lastname}</TableCell>
+                </TableRow>
+              )
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>

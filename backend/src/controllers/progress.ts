@@ -200,7 +200,9 @@ export default class ProgressController {
 
       const ratings = await computeRatings(course, taskOutcomes)
 
-      ResponseService.successResponse(res, { taskOutcomes, ratings });
+      const recommendedRatings = insertRecommendations(ratings);
+
+      ResponseService.successResponse(res, { taskOutcomes, ratings: recommendedRatings });
     } catch (err) {
       console.log(err);
       ResponseService.mongoErrorResponse(res, err);
@@ -257,7 +259,31 @@ const computeRatings = async (course: CourseType, taskOutcomes: any) => {
     }
   }
 
-  return ratings;
+  const employeesData = await UserModel.find({ _id: { $in: course.assignedEmployees } }).lean();
+
+  const arrayRating = Object.keys(ratings).map((userId) => {
+    const user = employeesData.filter((employee: any) => employee._id.toString() === userId)[0];
+    return {
+      userId,
+      user,
+      rating: ratings[userId]
+    }
+  })
+
+  return arrayRating.sort((a, b) => b.rating - a.rating);
+}
+
+const insertRecommendations = (ratings: any[]) => {
+  const size = ratings.length;
+  return ratings.map((rating, index) => {
+    return {
+      ...rating,
+      recommendation: {
+        hire: index < size * 0.3,
+        fire: index >= size * 0.7,
+      }
+    }
+  })
 }
 
 const convertArrayToObject = (array: string[], initial: any) => {
