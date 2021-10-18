@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
+import { Button, Box } from "@material-ui/core";
+
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 //import "./App.css";
@@ -46,12 +48,26 @@ const ReactGridLayout = () => {
 
   return (
     <div>
-      <button onClick={() => handleAdd("Table")}>Add Table</button>
-      <button onClick={() => handleAdd("Grill")}>Add Grill</button>
-      <button onClick={() => handleAdd("Fridge")}>Add Fridge</button>
-      <button onClick={() => handleAdd("Sink")}>Add Sink</button>
-      <button onClick={() => handleAdd("Microwave")}>Add Microwave</button>
-      <button onClick={() => handleAdd("Submission Station")}>Add Submission Station</button>
+      <Box justifyContent='center' display="flex" m={6}>
+        <Box m={1}>
+          <Button color="primary" variant="contained" onClick={() => handleAdd("Table")}>Add Table</Button>
+        </Box>
+        <Box m={1}>
+          <Button color="primary" variant="contained" onClick={() => handleAdd("Grill")}>Add Grill</Button>
+        </Box>
+        <Box m={1}>
+          <Button color="primary" variant="contained" onClick={() => handleAdd("Fridge")}>Add Fridge</Button>
+        </Box>
+        <Box m={1}>
+          <Button color="primary" variant="contained" onClick={() => handleAdd("Sink")}>Add Sink</Button>
+        </Box>
+        <Box m={1}>
+          <Button color="primary" variant="contained" onClick={() => handleAdd("Microwave")}>Add Microwave</Button>
+        </Box>
+        <Box m={1}>
+          <Button color="primary" variant="contained" onClick={() => handleAdd("Submission Station")}>Add Submission Station</Button>
+        </Box>
+      </Box>
 
       <ResponsiveReactGridLayout
         onLayoutChange={handleModify}
