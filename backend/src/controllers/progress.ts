@@ -6,6 +6,7 @@ import TaskModel from '../model/task';
 import UserModel from '../model/user';
 import ResponseService from '../helpers/response';
 import { filter } from 'underscore';
+import { ObjectId } from 'mongoose';
 
 export default class ProgressController {
   public async put(req: Request, res: Response) {
@@ -196,13 +197,13 @@ export default class ProgressController {
 
     try {
       const course: CourseType = await CourseModel.findOne({ _id: req.query.courseId }).exec();
-      const taskOutcome: any = [];
+      const taskOutcomes: any = [];
 
       for (const taskId of course.tasks) {
         let stationTimes: { [key: string]: any[] } = convertArrayToObject(stations, () => new Array());
         let stationAvg: { [key: string]: any } = convertArrayToObject(stations, () => 0);
 
-        const taskTracking = await ProgressModel.find({ taskId: taskId });
+        const taskTracking = await ProgressModel.find({ taskId: taskId, courseId: course._id });
 
         for (const progress of taskTracking) {
           for (const station of stations) {
@@ -219,10 +220,27 @@ export default class ProgressController {
           const avg = (sum / stationTimes[station].length) || 0;
           stationAvg[station] = avg;
         }
-        taskOutcome.push({ taskId: taskId, times: stationTimes, averages: stationAvg });
+        taskOutcomes.push({ taskId: taskId, times: stationTimes, averages: stationAvg });
       }
 
-      ResponseService.successResponse(res, taskOutcome);
+      const ratings: { [key: string]: number } = course.assignedEmployees.reduce(
+        (obj: { [key: string]: number }, employee: ObjectId) => {
+          obj[employee.toString()] = 0;
+          return obj;
+        },
+        {}
+      );
+
+      for (const taskOutcome of taskOutcomes){
+        for (const station in taskOutcome.times) {
+          const times = taskOutcome.times[station];
+          const sortedTimes = times.sort((a: any, b: any) => b.time - a.time);
+
+          sortedTimes.map((employee: any, index: number) => ratings[employee.userId] += index);
+        }
+      }
+
+      ResponseService.successResponse(res, {taskOutcomes, ratings});
     } catch (err) {
       console.log(err);
       ResponseService.mongoErrorResponse(res, err);
