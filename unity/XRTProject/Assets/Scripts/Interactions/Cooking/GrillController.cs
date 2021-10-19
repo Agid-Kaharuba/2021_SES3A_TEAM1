@@ -30,6 +30,7 @@ public class GrillController : MonoBehaviour
             rend.material.SetColor("_EmissiveColor", Color.red * 1000f);
             steamEffect.enabled = false;
             poweredOn = false;
+            FindObjectOfType<CookZone>().StopSoudnd(); ;
             GrillPoweredOff.Invoke();
         }
         else

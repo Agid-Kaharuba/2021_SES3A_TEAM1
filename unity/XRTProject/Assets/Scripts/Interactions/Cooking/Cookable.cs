@@ -42,12 +42,11 @@ public class Cookable : MonoBehaviour
         if (singleSided && canCookBothSides)
         {
             TickCookingCurrentSide(strength, deltaTime);
-            //FindObjectOfType<AudioManager>().Play("Grilling");
+            
         }
         else
         {
             TickCookingAllSides(strength, deltaTime);
-            //FindObjectOfType<AudioManager>().Play("Grilling");
         }
     }
     

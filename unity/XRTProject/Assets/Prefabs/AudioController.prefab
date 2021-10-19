@@ -82,7 +82,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Grilling
     clip: {fileID: 8300000, guid: c739e1d850f534a4b8b34e151d38ae06, type: 3}
-    volume: 0.889
+    volume: 0.5
     pitch: 1
     loop: 1
     source: {fileID: 0}
@@ -106,13 +106,13 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: WaterRunL
     clip: {fileID: 8300000, guid: a93ddf115c0183448a777f240eba21d3, type: 3}
-    volume: 1
+    volume: 0.5
     pitch: 1
     loop: 1
     source: {fileID: 0}
   - name: WaterRunR
     clip: {fileID: 8300000, guid: a93ddf115c0183448a777f240eba21d3, type: 3}
-    volume: 1
+    volume: 0.5
     pitch: 1
     loop: 1
     source: {fileID: 0}

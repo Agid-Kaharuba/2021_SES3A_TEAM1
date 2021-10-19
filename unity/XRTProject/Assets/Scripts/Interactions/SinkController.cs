@@ -9,6 +9,11 @@ public class SinkController : MonoBehaviour {
     private Transform leftHandle;
     private Transform rightHandle;
 
+    private bool leftHandleSound;
+    private bool rightHandleSound;
+    private bool leftHandleW;
+    private bool rightHandleW;
+
     private ParticleSystem leftWater;
     private ParticleSystem rightWater;
 
@@ -17,9 +22,14 @@ public class SinkController : MonoBehaviour {
         leftWater = gameObject.transform.Find ( "leftWater" ).gameObject.GetComponent<ParticleSystem> ();
         rightWater = gameObject.transform.Find ( "rightWater" ).gameObject.GetComponent<ParticleSystem> ();
 
+        leftHandleSound = false;
+        rightHandleSound = false;
+        leftHandleW= false;
+        rightHandleW= false;
 
         leftHandle = gameObject.transform.Find ( "Handle_L" ).gameObject.transform;
         rightHandle = gameObject.transform.Find ( "Handle_R" ).gameObject.transform;
+
 
         leftWater.Stop ();
         rightWater.Stop ();
@@ -33,22 +43,60 @@ public class SinkController : MonoBehaviour {
     void CheckLeftHandle () {
         if ( leftHandle.localEulerAngles.x < activationAngle && leftHandle.transform.localEulerAngles.x > -activationAngle ) {
             leftWater.Stop ();
-            //FindObjectOfType<AudioManager>().Stop("WaterRunL");
+            StopSoundL();
         }
         else {
             leftWater.Play ();
-            //FindObjectOfType<AudioManager>().Play("WaterRunL");
+            PlaySoundL();
+
         }
     }
 
     void CheckRightHandle () {
         if ( rightHandle.localEulerAngles.x < activationAngle && rightHandle.transform.localEulerAngles.x > -activationAngle ) {
             rightWater.Stop ();
-            //FindObjectOfType<AudioManager>().Stop("WaterRunR");
+            StopSoundR();
         }
         else {
             rightWater.Play ();
-            //FindObjectOfType<AudioManager>().Play("WaterRunR");
+            PlaySoundR();
         }
     }
+    void PlaySoundL()
+    {
+        if(leftHandleSound == false)
+        {
+            leftHandleSound = true;
+            FindObjectOfType<AudioManager>().Play("WaterRunL");
+        }
+        
+    }
+    void PlaySoundR()
+    {
+        
+        if (rightHandleSound == false)
+        {
+            rightHandleSound = true;
+            FindObjectOfType<AudioManager>().Play("WaterRunR");
+        }
+    }
+    void StopSoundL()
+    {
+        if (leftHandleSound == true)
+        {
+            leftHandleSound = false;
+            FindObjectOfType<AudioManager>().Stop("WaterRunL");
+        }
+        
+    }
+    void StopSoundR()
+    {
+        
+        if (rightHandleSound == true)
+        {
+            rightHandleSound = false;
+            FindObjectOfType<AudioManager>().Stop("WaterRunR");
+        }
+    }
+
 }
