@@ -9,6 +9,8 @@ import { AuthContext } from "../../context/auth";
 import api from "../../helpers/api";
 import CreateNewTrainingDialog from "../supervisor/CreateCourse/createNewTraining";
 
+import burgerdefault from "../../images/training-photos/burgerdefault.jpg";
+
 
 const useStyles = makeStyles({
   root: {
@@ -142,7 +144,7 @@ export default function CreateNewTrainingPage() {
                 className={classes.media}
                 //these images are just placeholders for now
                 // image="https://i.pinimg.com/originals/8b/f0/76/8bf07692b7f9704f1b3552943bdcf1cd.jpg"
-                 image= {course.image ? course.image : "https://i.pinimg.com/originals/8b/f0/76/8bf07692b7f9704f1b3552943bdcf1cd.jpg"}
+                 image= {course.image ? course.image : burgerdefault}
                 title="Fast Food Training"
               />
               <CardContent className={classes.text}>

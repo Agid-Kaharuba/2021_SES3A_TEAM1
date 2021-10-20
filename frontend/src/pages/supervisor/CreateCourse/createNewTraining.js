@@ -29,7 +29,7 @@ import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { AuthContext } from "../../../context/auth";
 import api from "../../../helpers/api";
 import PlaceholderImage from "../../../components/uploadImage";
-import bbt from "../../../images/bbt.jpg";
+import burgerdefault from "../../../images/training-photos/burgerdefault.jpg";
 import CreateNewTaskGlobalDialog from "../../task/createtask/createtaskglobal";
 
 const useStyles = makeStyles(theme => ({
@@ -86,7 +86,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function CreateNewTrainingDialog(props) {
   const classes = useStyles();
   const { onClose: onCloseTraining, open: openTraining } = props;
-  const [imagesrc, setImagesrc] = useState(bbt);
+  const [imagesrc, setImagesrc] = useState(burgerdefault);
   const [selectedDate, handleDateChange] = React.useState(new Date());
 
 
