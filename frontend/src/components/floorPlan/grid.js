@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
-import { Button, Box } from "@material-ui/core";
+import { Button, Box, TextField } from "@material-ui/core";
 
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
@@ -113,7 +113,11 @@ const ReactGridLayout = () => {
               >
                 x
               </button>
-              <div>{widget.i}</div>
+              <div>
+                <Box>{widget.i}</Box>
+                <Box>x: {widget.x}</Box>
+                <Box>y: {widget.y}</Box>
+              </div>
             </div>
           );
         })}
