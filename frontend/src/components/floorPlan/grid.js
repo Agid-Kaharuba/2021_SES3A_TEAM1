@@ -34,8 +34,7 @@ const ReactGridLayout = () => {
     setWidgetArray([
       ...widgetArray,
       // { i: name + " " + (widgetArray.length + 1), x: 0, y: 0, w: 1, h: 1, type: name },
-      //previous w: 1, h: 1. Now these new dimensions are to scale with Unity
-      { i: name, x: 0, y: 0, w: 1.4, h: 0.7, type: name },
+      { i: name, x: 0, y: 0, w: 1, h: 1, type: name },
     ]);
   };
 
@@ -75,7 +74,8 @@ const ReactGridLayout = () => {
         layout={layouts}
         breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
         preventCollision={true}
-        cols={{ lg: 8, md: 8, sm: 4, xs: 2, xxs: 2 }}
+        // cols={{ lg: 8, md: 8, sm: 4, xs: 2, xxs: 2 }}
+        cols={{ lg: 5, md: 5, sm: 5, xs: 5, xxs: 5 }}
         autoSize={true}
         margin={{
           lg: [20, 20],
@@ -99,12 +99,12 @@ const ReactGridLayout = () => {
                 i: widget.i,
                 //minW: 1, maxW: Infinity, minH: 1, maxH: Infinity
                 //These new dimensions are to scale with Unity
-                minW: 1.4,
-                maxW: 1.4, 
-                minH: 0.7,
-                maxH: 0.7,
+                // minW: 1, //1.4
+                // maxW: 1, //1.4
+                // minH: 1, //0.7
+                // maxH: 1, //0.7
                 isDraggable: true,
-                isResizable: true,
+                isResizable: false,
               }}
             >
               <button

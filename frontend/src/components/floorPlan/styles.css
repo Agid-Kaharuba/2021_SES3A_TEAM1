@@ -8,9 +8,8 @@ body {
     background: #eee;
     margin-top: 10px;
     /* fits 9 kitchen items down and 5 items across like in Unity */
-    min-height: 1100px; 
-    max-height: 1100px;
-
+    min-height: 1550px; 
+    max-height: 1550px;
   }
   .layoutJSON {
     background: #ddd;
