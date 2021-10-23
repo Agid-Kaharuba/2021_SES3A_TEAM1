@@ -7,10 +7,10 @@ import { Grid } from "@material-ui/core";
 import CloseIcon from '@material-ui/icons/Close';
 import api from '../../helpers/api'
 import { AuthContext } from "../../context/auth";
-import bbt from "../../images/bbt.jpg";
 import burger from "../../images/burger.jpg";
-import burger2 from "../../images/burger2.jpg";
-import burger3 from "../../images/pizza.jpg";
+import burgerdefault from "../../images/training-photos/burgerdefault.jpg"
+import doublepatty from "../../images/training-photos/doublepatty.png"
+import fries from "../../images/training-photos/fries.png"
 
 
 const useStyles = makeStyles(theme => ({
@@ -96,17 +96,17 @@ function ChangeImageDialog(props) {
       <DialogTitle onClose={handleClose}>Choose a Image</DialogTitle>
       <form onSubmit={saveChanges} className={classes.changePswForm}>
         <Grid>
-          <Button onClick={() => { imageChange(bbt); handleClose() }}>
-            <img className={classes.image} src={bbt} alt="profile image" />
+          <Button onClick={() => { imageChange(burgerdefault); handleClose() }}>
+            <img className={classes.image} src={burgerdefault} alt="profile image" />
           </Button>
           <Button onClick={() => { imageChange(burger); handleClose() }}>
             <img className={classes.image} src={burger} alt="profile image" />
           </Button>
-          <Button onClick={() => { imageChange(burger2); handleClose() }}>
-            <img className={classes.image} src={burger2} alt="profile image" />
+          <Button onClick={() => { imageChange(fries); handleClose() }}>
+            <img className={classes.image} src={fries} alt="profile image" />
           </Button>
-          <Button onClick={() => { imageChange(burger3); handleClose() }}>
-            <img className={classes.image} src={burger3} alt="profile image" />
+          <Button onClick={() => { imageChange(doublepatty); handleClose() }}>
+            <img className={classes.image} src={doublepatty} alt="profile image" />
           </Button>
         </Grid>
       </form>

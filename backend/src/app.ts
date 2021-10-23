@@ -1,6 +1,5 @@
 import { Server } from 'http';
 import bodyParser from 'body-parser';
-import config from './helpers/config';
 import cors from 'cors';
 import express from 'express';
 import fs from 'fs';
@@ -8,9 +7,10 @@ import mongoose from 'mongoose';
 import morgan from 'morgan';
 import swaggerJsDoc from 'swagger-jsdoc';
 import swaggerUI from 'swagger-ui-express';
+import config from './helpers/config';
 import ApiInitializer from './initializer';
 import { Routes } from './routes';
-import masterData from './helpers/unity-data'
+import masterData from './helpers/unity-data';
 
 const mongoUri = `${config.DATABASE_URL}/${config.DATABASE_NAME}` as string;
 // @ts-ignore
@@ -51,7 +51,7 @@ const swaggerOptions = {
       bearerAuth: [],
     }],
   },
-  apis: ['src/app.ts', 'src/routes/*']
+  apis: ['src/app.ts', 'src/routes/*'],
 };
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 if (process.env.STAGE !== 'prod') {
@@ -88,7 +88,7 @@ const server: Server = app.listen(config.API_PORT, () => {
   console.log(`Swagger Docs:              http://localhost:${config.API_PORT}/swagger`);
 });
 
-//Unity Test Data
+// Unity Test Data
 masterData();
 
 module.exports = server;

@@ -7,7 +7,7 @@ import ResponseService from '../helpers/response';
 export default class CourseController {
   public async getAll(req: Request, res: Response) {
     try {
-      const { user } = req
+      const { user } = req;
       let courses;
       if (user?.isSupervisor) {
         courses = await Course.find({ archive: { $ne: true } });
@@ -41,6 +41,7 @@ export default class CourseController {
       tasks: body.tasks,
       assignedEmployees: body.assignedEmployees,
       dueDate: body.dueDate,
+      image: body.image
     } as any);
     newCourseRequest.save((err: any) => {
       if (err) {
@@ -91,5 +92,5 @@ export default class CourseController {
     } catch (err) {
       ResponseService.mongoErrorResponse(res, err);
     }
-  }  
+  }
 }

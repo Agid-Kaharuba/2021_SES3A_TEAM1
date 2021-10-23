@@ -4,7 +4,7 @@ import { Box, Button, Typography, Divider, Card, CardContent, CardActions, CardA
 import { AuthContext } from "../../../context/auth";
 import api from "../../../helpers/api";
 import { makeStyles } from "@material-ui/core/styles";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import CreateNewTaskGlobalDialog from "../createtask/createtaskglobal.js";
 
 
@@ -60,6 +60,7 @@ export default function TasksList() {
   const classes = useStyles();
   const { authState } = useContext(AuthContext);
   const [tasksState, setTasksState] = useState(undefined);
+  let history = useHistory();
 
   // open/close dialog
   const [open, setOpen] = React.useState(false);
@@ -68,6 +69,10 @@ export default function TasksList() {
   };
   const handleClose = (value) => {
     setOpen(false);
+  };
+
+  const handleTask = (task) => {
+    history.push(`/task/${task._id}`);
   };
 
   const fetchData = async () => {
@@ -125,7 +130,7 @@ export default function TasksList() {
     return (
       <Grid container className={classes.gridContainer}>
         <Grid item xs={12} sm={6} md={3}>
-          <Card className={classes.root} variant="outlined">
+          <Card className={classes.root} variant="outlined" onClick = {() => handleTask(task)}>
             <CardActionArea className={classes.actionArea}>
               <CardMedia
                 className={classes.media}
@@ -141,12 +146,6 @@ export default function TasksList() {
                   {task.description}
                 </Typography>
               </CardContent>
-
-              <CardActions className={classes.buttons}>
-                <Link className={classes.underline} to={`/task/${task._id}`}>
-                  <Button size="small">View Task</Button>
-                </Link>
-              </CardActions>
             </CardActionArea>
           </Card>
         </Grid>
