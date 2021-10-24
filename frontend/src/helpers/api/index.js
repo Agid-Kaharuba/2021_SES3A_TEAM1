@@ -70,6 +70,7 @@ export default {
     getAll: getAllRecipes,
     create: createRecipe,
     update: updateRecipe,
+    delete: deleteRecipe,
     get: getRecipe
   },
   stats: {
