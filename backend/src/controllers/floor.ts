@@ -35,7 +35,7 @@ export default class FloorController {
     const { body } = req;
     const newFloorRequest = new Floor({
       name: body.name,
-      data: body.data,
+      coordinate: body.data,
     } as any);
     newFloorRequest.save((err: any) => {
       if (err) {
