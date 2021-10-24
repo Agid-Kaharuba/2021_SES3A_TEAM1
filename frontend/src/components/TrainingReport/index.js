@@ -72,7 +72,7 @@ export const TrainingReport = ({ courseId }) => {
 							{performanceState && performanceState.groupsRatings[recommandationText] && (
 								performanceState.groupsRatings[recommandationText].map((performance, index) =>
 									<TableRow style={recommandationStyle}>
-										<TableCell width={'20%'}>{index + 1}</TableCell>
+										<TableCell width={'20%'}>{performance.rank}</TableCell>
 										<TableCell width={'20%'}>{performance.user.staffid}</TableCell>
 										<TableCell>{performance.user.firstname} {performance.user.lastname}</TableCell>
 									</TableRow>
