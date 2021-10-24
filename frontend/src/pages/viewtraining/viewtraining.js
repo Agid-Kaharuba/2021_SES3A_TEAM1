@@ -15,6 +15,7 @@ import { AuthContext } from "../../context/auth";
 import api from "../../helpers/api";
 import PlaceholderImage from "../../components/uploadImage/index.js";
 import bbt from "../../images/bbt.jpg";
+import { id } from "date-fns/locale";
 
 const useStyles = makeStyles({
   bold: {
@@ -52,6 +53,8 @@ export default function ViewCourse(props) {
   const [courseState, setCourseState] = useState(undefined);
   const [editState, setEditState] = useState(true);
   const [imagesrc, setImagesrc] = useState(bbt);
+
+  const CHARACTER_LIMIT = 35;
 
   // Get User Data
   const fetchUserData = async () => {
@@ -167,6 +170,11 @@ export default function ViewCourse(props) {
                   variant="outlined"
                   fullWidth
                   margin="normal"
+                  inputProps={{
+                    maxlength: CHARACTER_LIMIT
+                  }}
+                  value={courseState.name}          
+                  helperText={`${courseState.name.length}/${CHARACTER_LIMIT}`}
                   onChange={handleChange}
                 />
                 <Typography className={classes.bold} variant="h6">
