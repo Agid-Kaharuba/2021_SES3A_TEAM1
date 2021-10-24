@@ -133,7 +133,7 @@ export default function ViewCourse(props) {
 
     const buildTrainingReportSummary = () => {
         return (<Box m={5}>
-            <TrainingReport courseId={courseId} />
+            <TrainingReport courseId={courseId} courseState={courseState} />
         </Box>)
     }
 

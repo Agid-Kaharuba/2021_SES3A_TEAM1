@@ -3,6 +3,7 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 import { makeStyles } from "@material-ui/core/styles";
 import api from "../../helpers/api";
 import { AuthContext } from "../../context/auth";
+import { SelectList } from "../../components/SelectList"
 
 const useStyles = makeStyles({
 	bold: {
@@ -21,10 +22,13 @@ const useStyles = makeStyles({
 	}
 })
 
-export const TrainingReport = ({ courseId }) => {
+export const TrainingReport = ({ courseState: externalCourseState, courseId }) => {
 	const classes = useStyles();
 	const { authState } = useContext(AuthContext);
 	const [performanceState, setPerformanceState] = useState(undefined);
+	const [trackingState, setTrackingState] = useState(undefined);
+	const [selected, setSelected] = useState({ userId: null, taskId: null, export: null });
+	const [courseState, setCourseState] = useState(undefined);
 
 	const fetchData = async () => {
 		try {
@@ -36,11 +40,46 @@ export const TrainingReport = ({ courseId }) => {
 		}
 	};
 
+	const formatCourse = () => {
+		const assignedEmployees = externalCourseState.assignedEmployees.map((i) => {
+			return {
+				...i,
+				label: `${i.staffid} - ${i.firstname} ${i.lastname}`,
+				key: i._id
+			}
+		})
+		const tasks = externalCourseState.tasks.map((i) => {
+			return {
+				...i,
+				label: `${i.name}`,
+				key: i._id
+			}
+		})
+		setCourseState({ ...externalCourseState, assignedEmployees, tasks })
+	}
+
 	useEffect(() => {
 		if (performanceState === undefined) {
 			fetchData();
+			formatCourse();
 		}
 	});
+
+	const updateSelected = async (newSelected, id) => {
+		const updated = selected;
+		updated[id] = newSelected;
+		const url = api.progress.download(updated.userId, courseId)
+		setSelected({ ...updated, export: url });
+
+		if (updated.userId && updated.taskId) {
+			var res = await api.progress.get(authState.token, updated.userId, updated.taskId, courseId);
+			let trackingData = res?.data[0]?.tracking;
+			if (!trackingData) {
+				trackingData = [{ event: "Employee to complete task" }]
+			}
+			setTrackingState(trackingData);
+		}
+	}
 
 	const buildTableHeader = () => {
 
@@ -63,7 +102,7 @@ export const TrainingReport = ({ courseId }) => {
 		const style = { background: 'green' };
 		return (
 			<div className={classes.group}>
-				<Typography className={classes.recommandation}  style={recommandationTextStyle} variant='h6'>
+				<Typography className={classes.recommandation} style={recommandationTextStyle} variant='h6'>
 					{(performanceState && performanceState.groupsRatings[recommandationText]) ? recommandationText : ''}
 				</Typography>
 				<TableContainer component={Paper}>
@@ -93,6 +132,32 @@ export const TrainingReport = ({ courseId }) => {
 		</div >)
 	}
 
+	const buildLogs = () => {
+		return (
+			<TableContainer component={Paper}>
+				<Table>
+					<TableHead>
+						<TableCell width="20%">Time</TableCell>
+						<TableCell width="20%">Event</TableCell>
+						<TableCell width="30%">Value</TableCell>
+						<TableCell>Data</TableCell>
+					</TableHead>
+					<TableBody>
+						{trackingState && (
+							trackingState.map(tracking =>
+								<TableRow>
+									<TableCell>{tracking.date ? (new Date(tracking.date)).toLocaleTimeString() : ''}</TableCell>
+									<TableCell>{tracking.event}</TableCell>
+									<TableCell>{tracking.value}</TableCell>
+									<TableCell>{JSON.stringify(tracking.data)}</TableCell>
+								</TableRow>
+							)
+						)}
+					</TableBody>
+				</Table>
+			</TableContainer>)
+	}
+
 	return (<>
 		<Typography className={classes.bold} variant='h6'>
 			Performance Rankings
@@ -102,6 +167,18 @@ export const TrainingReport = ({ courseId }) => {
 				{buildRankTable()}
 			</div>
 		</Box>
+		<Typography className={classes.bold} variant='h6'>
+			Tracking Logs
+		</Typography>
+		{courseState && (
+			<Box m={5}>
+				<div style={{ display: 'flex' }}>
+					<SelectList listOptions={courseState.assignedEmployees} updateSelected={(key) => updateSelected(key, 'userId')} selected={selected.userId} />
+					<SelectList listOptions={courseState.tasks} updateSelected={(key) => updateSelected(key, 'taskId')} selected={selected.taskId} />
+					{buildLogs()}
+				</div>
+			</Box>
+		)}
 	</>);
 };
 
