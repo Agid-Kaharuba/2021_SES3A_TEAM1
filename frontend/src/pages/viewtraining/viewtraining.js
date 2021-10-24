@@ -8,6 +8,7 @@ import api from "../../helpers/api";
 import PlaceholderImage from "../../components/uploadImage/index.js";
 import bbt from "../../images/bbt.jpg";
 import { TabPanel } from "../../components/TabPanel"
+import { TrainingReport } from "../../components/TrainingReport"
 
 const useStyles = makeStyles({
     bold: {
@@ -132,8 +133,8 @@ export default function ViewCourse(props) {
 
     const buildTrainingReportSummary = () => {
         return (<Box m={5}>
-                <h1>TODO</h1>
-            </Box>)
+            <TrainingReport courseId={courseId} />
+        </Box>)
     }
 
     if (courseState === undefined || usersState === undefined) {
