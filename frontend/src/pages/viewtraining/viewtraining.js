@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Button, Container, Typography, Divider, Box, Grid, TextField } from "@material-ui/core";
+import { Button, Container, Typography, Divider, Box, Grid, TextField, Tab, Tabs } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Users from "../../components/usersList/index.js";
 import Tasks from "../../components/Task/list.js";
@@ -7,6 +7,7 @@ import { AuthContext } from "../../context/auth";
 import api from "../../helpers/api";
 import PlaceholderImage from "../../components/uploadImage/index.js";
 import bbt from "../../images/bbt.jpg";
+import { TabPanel } from "../../components/TabPanel"
 
 const useStyles = makeStyles({
     bold: {
@@ -45,6 +46,7 @@ export default function ViewCourse(props) {
     const [courseState, setCourseState] = useState(undefined);
     const [editState, setEditState] = useState(true);
     const [imagesrc, setImagesrc] = useState(bbt);
+    const [tabState, setTabState] = useState(0);
 
     // Get User Data
     const fetchUserData = async () => {
@@ -106,6 +108,34 @@ export default function ViewCourse(props) {
             fetchCourseData();
         }
     });
+
+    const buildTrainingConfiguration = () => {
+        return (<>
+            <Box m={5}>
+                <Typography className={classes.bold} variant='h6'>
+                    Assigned Users
+                </Typography>
+                <Grid>
+                    <Users usersState={courseState.assignedEmployees} course={courseState} />
+                </Grid>
+            </Box>
+            <Box m={5}>
+                <Typography className={classes.bold} variant='h6'>
+                    Assigned Tasks
+                </Typography>
+                <Grid>
+                    <Tasks tasksState={tasksState} />
+                </Grid>
+            </Box>
+        </>)
+    }
+
+    const buildTrainingReportSummary = () => {
+        return (<Box m={5}>
+                <h1>TODO</h1>
+            </Box>)
+    }
+
     if (courseState === undefined || usersState === undefined) {
         // TODO: add loader
         return (<h1>LOADING</h1>)
@@ -149,22 +179,20 @@ export default function ViewCourse(props) {
                 </Box>
 
                 <Box m={5}>
-                    <Typography className={classes.bold} variant='h6'>
-                        Assigned Users
-                    </Typography>
-                    <Grid>
-                        <Users usersState={courseState.assignedEmployees} course={courseState} />
-                    </Grid>
+                    <Tabs
+                        value={tabState}
+                        onChange={(event, newValue) => setTabState(newValue)} >
+                        <Tab label="Configuration" />
+                        <Tab label="Reporting" />
+                    </Tabs>
+                    <TabPanel value={tabState} index={0}>
+                        {buildTrainingConfiguration()}
+                    </TabPanel>
+                    <TabPanel value={tabState} index={1}>
+                        {buildTrainingReportSummary()}
+                    </TabPanel>
                 </Box>
-                <Box m={5}>
-                    <Typography className={classes.bold} variant='h6'>
-                        Assigned Tasks
-                    </Typography>
-                    <Grid>
-                        <Tasks tasksState={tasksState} />
-                    </Grid>
-                </Box>
-            </Container>
+            </Container >
         )
     }
 }
