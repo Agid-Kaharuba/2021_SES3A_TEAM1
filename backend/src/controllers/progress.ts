@@ -201,8 +201,9 @@ export default class ProgressController {
       const ratings = await computeRatings(course, taskOutcomes)
 
       const recommendedRatings = insertRecommendations(ratings);
+      const groupedRecommendedRatings = groupedRecommendations(recommendedRatings);
 
-      ResponseService.successResponse(res, { taskOutcomes, ratings: recommendedRatings });
+      ResponseService.successResponse(res, { taskOutcomes, ratings: recommendedRatings, groupsRatings: groupedRecommendedRatings });
     } catch (err) {
       console.log(err);
       ResponseService.mongoErrorResponse(res, err);
@@ -284,6 +285,30 @@ const insertRecommendations = (ratings: any[]) => {
       }
     }
   })
+}
+
+const groupedRecommendations = (ratings: any[]): { Hire: any[], Netural: any[], Fire: any[] } => {
+  const groups: { Hire: any[], Netural: any[], Fire: any[] } = {
+    Hire: [],
+    Netural: [],
+    Fire: []
+  }
+
+  let count = 1;
+  for (const rating of ratings) {
+    rating.rank = count;
+    count++;
+    if (rating.recommendation.hire) {
+      groups.Hire.push(rating);
+    } else if (rating.recommendation.fire) {
+      groups.Fire.push(rating);
+    }
+    else {
+      groups.Netural.push(rating);
+    }
+  }
+
+  return groups
 }
 
 const convertArrayToObject = (array: string[], initial: any) => {

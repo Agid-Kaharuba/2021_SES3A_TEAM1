@@ -7,6 +7,17 @@ import { AuthContext } from "../../context/auth";
 const useStyles = makeStyles({
 	bold: {
 		fontWeight: 600
+	},
+	group: {
+		display: 'flex',
+	},
+	recommandation: {
+		width: '10%',
+		textAlign: 'end',
+		paddingRight: '10px',
+	},
+	table: {
+		width: '100%'
 	}
 })
 
@@ -31,35 +42,53 @@ export const TrainingReport = ({ courseId }) => {
 		}
 	});
 
+	const buildTableHeader = () => {
+
+		return (
+			<div className={classes.group}>
+				<Typography className={classes.recommandation} variant='h6'>
+				</Typography>
+				<TableContainer component={Paper}><Table>
+					<TableHead>
+						<TableCell width={'20%'}>Rank</TableCell>
+						<TableCell >Name</TableCell>
+					</TableHead>
+				</Table >
+				</TableContainer>
+			</div>)
+	}
+
+	const buildTableBody = (recommandationText, recommandationStyle) => {
+		const style = { background: 'green' };
+		return (
+			<div className={classes.group}>
+				<Typography className={classes.recommandation} variant='h6'>
+					{(performanceState && performanceState.groupsRatings[recommandationText]) ? recommandationText : ''}
+				</Typography>
+				<TableContainer component={Paper}>
+					<Table>
+						<TableBody>
+							{performanceState && performanceState.groupsRatings[recommandationText] && (
+								performanceState.groupsRatings[recommandationText].map((performance, index) =>
+									<TableRow style={recommandationStyle}>
+										<TableCell>{index + 1}</TableCell>
+										<TableCell>{performance.user.staffid} {performance.user.firstname} {performance.user.lastname}</TableCell>
+									</TableRow>
+								)
+							)}
+						</TableBody>
+					</Table>
+				</TableContainer>
+			</div>)
+	}
+
 	const buildRankTable = () => {
-		return (<TableContainer component={Paper}>
-			<Table>
-				<TableHead>
-					<TableCell style={{ width: 20 }}>Rank</TableCell>
-					<TableCell >Name</TableCell>
-				</TableHead>
-				<TableBody>
-					{performanceState && (
-						performanceState.ratings.map((performance, index) =>
-							<TableRow style={
-								performance.recommendation ?
-									performance.recommendation.hire ?
-										{ background: 'green' }
-										:
-										performance.recommendation.fire ? { background: 'red' }
-											:
-											{}
-									:
-									{}
-							}>
-								<TableCell>{index + 1}</TableCell>
-								<TableCell>{performance.user.staffid} {performance.user.firstname} {performance.user.lastname}</TableCell>
-							</TableRow>
-						)
-					)}
-				</TableBody>
-			</Table>
-		</TableContainer>)
+		return (<div className={classes.table}>
+			{buildTableHeader()}
+			{buildTableBody("Hire", { background: 'green' })}
+			{buildTableBody("Netural", {})}
+			{buildTableBody("Fire", { background: 'red' })}
+		</div >)
 	}
 
 	return (<>
@@ -67,7 +96,7 @@ export const TrainingReport = ({ courseId }) => {
 			Performance Rankings
 		</Typography>
 		<Box m={5}>
-			<div style={{display: 'flex'}}>
+			<div style={{ display: 'flex' }}>
 				{buildRankTable()}
 			</div>
 		</Box>
