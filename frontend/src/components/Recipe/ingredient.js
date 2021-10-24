@@ -55,9 +55,6 @@ const useStyles = makeStyles({
 	text: {
 		color: "gray",
 		fontSize: "1em"
-	},
-	removeBottomPadding: {
-		paddingBottom: "10px !important"
 	}
 })
 
