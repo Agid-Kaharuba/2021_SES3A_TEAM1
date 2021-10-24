@@ -63,7 +63,7 @@ export const TrainingReport = ({ courseState: externalCourseState, courseId }) =
 			fetchData();
 			formatCourse();
 		}
-	});
+	}, [performanceState]);
 
 	const updateSelected = async (newSelected, id) => {
 		const updated = selected;
