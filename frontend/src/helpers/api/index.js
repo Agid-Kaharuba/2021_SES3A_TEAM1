@@ -30,7 +30,8 @@ import {
   getAllRecipes,
   createRecipe,
   updateRecipe,
-  getRecipe
+  getRecipe,
+  deleteRecipe
 } from "./recipe";
 
 import dotenv from "dotenv";

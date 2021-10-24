@@ -76,7 +76,7 @@ export default function RecipeSelector(props) {
   else {
     return (
       (editState ? (<>
-        <Recipes recipesState={recipesState} ActionButton={(props) => (editState && setRecipeButton(props))} />
+        <Recipes recipesState={recipesState} setRecipesState = {setRecipesState} ActionButton={(props) => (editState && setRecipeButton(props))} />
         <Button variant="contained" color="primary" onClick={onSetRecipe}>Create New Recipe</Button>
       </>) : (
         <h1>No recipe set</h1>

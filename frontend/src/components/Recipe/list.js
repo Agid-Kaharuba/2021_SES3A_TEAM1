@@ -1,6 +1,8 @@
-import React from 'react';
-import { Button, Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, 
-  Paper, Grid } from "@material-ui/core";
+import React, { useContext } from 'react';
+import {
+  Button, Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
+  Paper, Grid
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import api from "../../helpers/api";
@@ -23,7 +25,7 @@ const useStyles = makeStyles({
 
 
 export default function Recipes(props) {
-  const { recipesState, ActionButton } = props;
+  const { recipesState, ActionButton, setRecipesState } = props;
   const classes = useStyles();
   const { authState } = useContext(AuthContext);
 
@@ -39,7 +41,12 @@ export default function Recipes(props) {
             </Link>)}
         </TableCell>
         <TableCell align="left">
-          <Button onClick = {()=> api.recipe.delete(authState.token, recipe._id)} variant="outlined" color="secondary">Delete Recipe</Button>
+          <Button onClick={() => {
+            api.recipe.delete(authState.token, recipe._id);
+            // recipesState.filter(r => r._id == recipe._id);
+            // setRecipesState([...recipesState]);
+            setRecipesState(undefined);
+          }} variant="outlined" color="secondary">Delete Recipe</Button>
         </TableCell>
       </TableRow>
     )
@@ -47,7 +54,7 @@ export default function Recipes(props) {
 
   return (
     <>
-      <Box m={5} data-testid = "RecipeListTest" >
+      <Box m={5} data-testid="RecipeListTest" >
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
