@@ -96,6 +96,9 @@ export const CourseRoute = (app: Express, controller: CourseController) => {
      *        dueDate:
      *         type: Date
      *         example: 05/09/2021
+     *        floorPlan:
+     *         type: String
+     *         example: "61755f309442f44b3c3c309c"
      *   responses:
      *    200:
      *     description: Success
@@ -140,6 +143,9 @@ export const CourseRoute = (app: Express, controller: CourseController) => {
      *        dueDate:
      *         type: Date
      *         example: yyyy-mm-dd
+     *        floorPlan:
+     *         type: String
+     *         example: "61755f309442f44b3c3c309c"
      *   responses:
      *    200:
      *     description: Success
