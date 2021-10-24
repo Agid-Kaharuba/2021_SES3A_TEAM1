@@ -51,6 +51,7 @@ export const TrainingReport = ({ courseId }) => {
 				<TableContainer component={Paper}><Table>
 					<TableHead>
 						<TableCell width={'20%'}>Rank</TableCell>
+						<TableCell width={'20%'}>Staff ID</TableCell>
 						<TableCell >Name</TableCell>
 					</TableHead>
 				</Table >
@@ -58,11 +59,11 @@ export const TrainingReport = ({ courseId }) => {
 			</div>)
 	}
 
-	const buildTableBody = (recommandationText, recommandationStyle) => {
+	const buildTableBody = (recommandationText, recommandationTextStyle, recommandationStyle) => {
 		const style = { background: 'green' };
 		return (
 			<div className={classes.group}>
-				<Typography className={classes.recommandation} variant='h6'>
+				<Typography className={classes.recommandation}  style={recommandationTextStyle} variant='h6'>
 					{(performanceState && performanceState.groupsRatings[recommandationText]) ? recommandationText : ''}
 				</Typography>
 				<TableContainer component={Paper}>
@@ -71,8 +72,9 @@ export const TrainingReport = ({ courseId }) => {
 							{performanceState && performanceState.groupsRatings[recommandationText] && (
 								performanceState.groupsRatings[recommandationText].map((performance, index) =>
 									<TableRow style={recommandationStyle}>
-										<TableCell>{index + 1}</TableCell>
-										<TableCell>{performance.user.staffid} {performance.user.firstname} {performance.user.lastname}</TableCell>
+										<TableCell width={'20%'}>{index + 1}</TableCell>
+										<TableCell width={'20%'}>{performance.user.staffid}</TableCell>
+										<TableCell>{performance.user.firstname} {performance.user.lastname}</TableCell>
 									</TableRow>
 								)
 							)}
@@ -85,9 +87,9 @@ export const TrainingReport = ({ courseId }) => {
 	const buildRankTable = () => {
 		return (<div className={classes.table}>
 			{buildTableHeader()}
-			{buildTableBody("Hire", { background: 'green' })}
+			{buildTableBody("Hire", { color: 'green' }, { background: 'green' })}
 			{buildTableBody("Netural", {})}
-			{buildTableBody("Fire", { background: 'red' })}
+			{buildTableBody("Fire", { color: 'red' }, { background: 'red' })}
 		</div >)
 	}
 
