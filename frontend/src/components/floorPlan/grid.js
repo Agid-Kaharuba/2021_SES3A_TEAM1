@@ -1,22 +1,52 @@
 import React, { useState } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
 import { Button, Box, TextField } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
-import "react-grid-layout/css/styles.css";
-import "react-resizable/css/styles.css";
-//import "./App.css";
-import './styles.css';
+// import "react-grid-layout/css/styles.css";
+// import "react-resizable/css/styles.css";
+// //import "./App.css";
+// import './styles.css';
+
+const useStyles = makeStyles({
+  bold: {
+      fontWeight: 600
+    },
+  back:{
+      color: 'black'
+  },
+  reactGridItem: {
+    display: "flex",
+    alignitems: "center",
+    justifycontent: "center",
+    transition: "all 200ms ease",
+    transitionproperty: "left, top",
+    background: "rgba(0, 132, 255, 0.473)",
+    fontfamily: "Arial, Helvetica, sans-serif",
+    textalign: "center"
+  },
+  deleteButton: {
+    position: "absolute",
+    top: "0%",
+    left: "92%",
+    background: "transparent",
+    border: "none",
+    fontsize: "18px",
+    cursor: "pointer",
+  }
+})
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 const ReactGridLayout = () => {
+  const classes = useStyles;
   const [layouts, setLayouts] = useState(null);
   const [widgetArray, setWidgetArray] = useState([
     // { i: "widget1", x: 0, y: 0, w: 2, h: 2 },
     // { i: "widget2", x: 2, y: 2, w: 2, h: 2 },
     // { i: "widget3", x: 4, y: 4, w: 2, h: 2 },
   ]);
-
+// Use State
   const handleModify = (layouts, layout) => {
     const tempArray = widgetArray;
     setLayouts(layout);
