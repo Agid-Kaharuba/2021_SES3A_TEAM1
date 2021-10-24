@@ -1,6 +1,17 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { Button, Container, Typography, Divider, Box, FormControl, Select, MenuItem, Grid, TextField } from "@material-ui/core";
+import {
+  Button,
+  Container,
+  Typography,
+  Divider,
+  Box,
+  FormControl,
+  Select,
+  MenuItem,
+  Grid,
+  TextField,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { AuthContext } from "../../../context/auth";
@@ -11,19 +22,18 @@ import Recipe from "../../../components/Recipe";
 
 const useStyles = makeStyles({
   bold: {
-    fontWeight: 600
+    fontWeight: 600,
   },
   underline: {
-    textDecorationLine: 'underline'
+    textDecorationLine: "underline",
   },
   italic: {
-    fontStyle: 'italic'
+    fontStyle: "italic",
   },
   formControl: {
     minWidth: 200,
   },
-})
-
+});
 
 export default function ViewRecipe(props) {
   const recipeId = props.match.params.recipeId;
@@ -34,25 +44,28 @@ export default function ViewRecipe(props) {
 
   const handleChange = (e) => {
     const { id, value } = e.target;
-    setRecipeState({ ...recipeState, [id]: value })
+    setRecipeState({ ...recipeState, [id]: value });
     console.log(recipeState);
-  }
+  };
 
   const handleEdit = async (e) => {
     //Set editState to enable if user is an employee
     //Update if button is selected
     if (!editState) {
-      console.log("Updating", recipeState)
+      console.log("Updating", recipeState);
       try {
-        const res = await api.recipe.update(authState.token, recipeId, recipeState);
+        const res = await api.recipe.update(
+          authState.token,
+          recipeId,
+          recipeState
+        );
         console.log(res);
-      }
-      catch (err) {
+      } catch (err) {
         console.log(err);
       }
     }
     setEditState(!editState);
-  }
+  };
 
   const fetchData = async () => {
     const res = await api.recipe.get(authState.token, recipeId);
@@ -67,15 +80,14 @@ export default function ViewRecipe(props) {
   });
   if (recipeState === undefined) {
     // TODO: add loader
-    return (<h1>LOADING</h1>)
-  }
-  else {
+    return <h1>LOADING</h1>;
+  } else {
     return (
       <Container maxWidth="lg">
         <Box m={5}>
           <Grid container spacing={2} justify="space-between">
             <Grid item>
-              <Typography className={classes.bold} variant='h4'>
+              <Typography className={classes.bold} variant="h4">
                 View Recipe
               </Typography>
             </Grid>
@@ -83,19 +95,30 @@ export default function ViewRecipe(props) {
           <Divider variant="middle" />
         </Box>
 
-        <Recipe recipeState={recipeState} handleChange={handleChange} editState={!editState} />
+        <Recipe
+          recipeState={recipeState}
+          handleChange={handleChange}
+          editState={!editState}
+        />
 
-        <Box justifyContent='center' display="flex" m={6}>
+        <Box justifyContent="center" display="flex" m={6}>
           <Box mr={6}>
-            <Button variant="contained" color="secondary" component={Link} to="/recipe">
+            <Button
+              variant="contained"
+              color="secondary"
+              component={Link}
+              to="/recipe"
+            >
               Back
             </Button>
           </Box>
-          <Box>
-            <Button variant="contained" color="primary" onClick={handleEdit}>
-              {editState ? "Edit" : "Save"}
-            </Button>
-          </Box>
+          {authState.user.isSupervisor && (
+            <Box>
+              <Button variant="contained" color="primary" onClick={handleEdit}>
+                {editState ? "Edit" : "Save"}
+              </Button>
+            </Box>
+          )}
         </Box>
       </Container>
     );
