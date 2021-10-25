@@ -74,6 +74,11 @@ from flask import Flask, render_template, request, url_for, jsonify, send_file
 app = Flask(__name__)
 import random
 
+
+@app.route('/', methods = ['GET'])
+def api_live():
+    return "tacotron2 is live. Use POST with form data field message to convert to speech."
+    
 @app.route('/', methods = ['POST'])
 def api_endpoint():
     message = request.form['message']
