@@ -287,10 +287,10 @@ const insertRecommendations = (ratings: any[]) => {
   })
 }
 
-const groupedRecommendations = (ratings: any[]): { Hire: any[], Netural: any[], Fire: any[] } => {
-  const groups: { Hire: any[], Netural: any[], Fire: any[] } = {
+const groupedRecommendations = (ratings: any[]): { Hire: any[], Neutral: any[], Fire: any[] } => {
+  const groups: { Hire: any[], Neutral: any[], Fire: any[] } = {
     Hire: [],
-    Netural: [],
+    Neutral: [],
     Fire: []
   }
 
@@ -304,7 +304,7 @@ const groupedRecommendations = (ratings: any[]): { Hire: any[], Netural: any[], 
       groups.Fire.push(rating);
     }
     else {
-      groups.Netural.push(rating);
+      groups.Neutral.push(rating);
     }
   }
 

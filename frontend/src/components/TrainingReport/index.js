@@ -127,7 +127,7 @@ export const TrainingReport = ({ courseState: externalCourseState, courseId }) =
 		return (<div className={classes.table}>
 			{buildTableHeader()}
 			{buildTableBody("Hire", { color: 'green' }, { background: 'green' })}
-			{buildTableBody("Netural", {})}
+			{buildTableBody("Neutral", {})}
 			{buildTableBody("Fire", { color: 'red' }, { background: 'red' })}
 		</div >)
 	}

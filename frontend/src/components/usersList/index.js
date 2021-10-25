@@ -7,9 +7,12 @@ import { Link } from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
 import SearchIcon from '@material-ui/icons/Search';
 import IconButton from "@material-ui/core/IconButton";
+import BarCharIcon from "@material-ui/icons/BarChart";
 import api from '../../helpers/api'
 import { AuthContext } from "../../context/auth";
 import DoneIcon from '@material-ui/icons/Done';
+import { useHistory } from "react-router-dom";
+
 const useStyles = makeStyles({
   bold: {
     fontWeight: 600
@@ -29,6 +32,7 @@ function User({user, onDeleteClick, usersState, setUsersState, course} ) {
   const [editState, setEditState] = useState(true);
   const classes = useStyles();
   const { authState } = useContext(AuthContext);
+  const history = useHistory();
   const handleEdit = async (e, user) => {
     if (!editState) {
         await api.user.update(authState.token, user._id, user);
@@ -49,9 +53,9 @@ function User({user, onDeleteClick, usersState, setUsersState, course} ) {
           <TableCell align="left"> {!editState ? <TextField id="lastname" onChange={handleChange} value={user.lastname}/> : user.lastname}</TableCell>
           <TableCell align="left"> {!editState ? <TextField id="staffid" onChange={handleChange} value={user.staffid}/> : user.staffid}</TableCell>
           {/* Don't know what is going here with the statistics */}
-          {course && (<TableCell align="left"><Link className={classes.underline} to={`/dashboard/${course._id}/stats`}>
+          {/* {course && (<TableCell align="left"><Link className={classes.underline} to={`/dashboard/${course._id}/stats`}>
               <Button variant="outlined" color="secondary">View Statistics</Button>
-          </Link></TableCell>)}
+          </Link></TableCell>)} */}
           
           <TableCell>
             <IconButton
@@ -68,6 +72,14 @@ function User({user, onDeleteClick, usersState, setUsersState, course} ) {
               onClick={() => onDeleteClick(user)}
             >
               <DeleteIcon/>
+            </IconButton>
+          </TableCell>
+          <TableCell>
+            <IconButton
+              color="inherit"
+              onClick={() => history.push(`/user/${user._id}` + (course ? `?courseId=${course?._id}`: ''))}
+            >
+              <BarCharIcon/>
             </IconButton>
           </TableCell>
       </TableRow>
@@ -107,7 +119,7 @@ export default function Users({course, usersState, setUsersState, handleEdit, ed
                   color="inherit"
                   onClick={() => onDeleteClick(user)}
                 >
-                  <DeleteIcon/>
+                  <BarCharIcon/>
                 </IconButton>
               </TableCell>
           </TableRow>
