@@ -20,6 +20,18 @@ export default class CourseController {
     }
   }
 
+  public async getAllWithUser(req: Request, res: Response) {
+    try {
+      const courses = await Course.find({ archive: { $ne: true }, assignedEmployees: req.params.userId }).populate({
+        path: 'tasks',
+        populate: { path: 'recipe' },
+      }).populate('assignedEmployees');
+      ResponseService.successResponse(res, courses);
+    } catch (err) {
+      ResponseService.mongoErrorResponse(res, err);
+    }
+  }
+
   public async get(req: Request, res: Response) {
     try {
       // const course: CourseType = {

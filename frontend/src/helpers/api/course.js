@@ -47,3 +47,12 @@ export const getCourseStats = async (token, courseId, userId) => {
 	);
 	return res;
 }
+
+export const getAllCoursesWith = async (token, userId) => {
+	const res = await axios.get(`${API_HOST}/course/user/${userId}`,
+		{
+			headers: { Authorization: `Bearer ${token}` },
+		}
+	);
+	return res;
+}
