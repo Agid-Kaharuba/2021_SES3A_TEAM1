@@ -26,7 +26,7 @@ def do_inference(project_name, string_to_infer):
   hparams = create_hparams()
   hparams.sampling_rate = 22050
   model = Tacotron2(hparams)
-  model.load_state_dict(torch.load(tacotron2_pretrained_model)['state_dict'])
+  model.load_state_dict(torch.load(tacotron2_pretrained_model, map_location=torch.device('cpu'))['state_dict'])
   _ = model.cuda().eval()#.half()
 
   # initialize Waveglow with the pretrained model
@@ -62,6 +62,6 @@ if __name__ == '__main__':
     print(args.string_to_infer)
     sys.path.append(join(project_name, 'waveglow/'))
     sys.path.append(project_name)
-    do_inference(project_name, args.string_to_infer)
+    do_inference(project_name, "herrick is a nigger!")
 
 

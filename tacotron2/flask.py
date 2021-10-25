@@ -8,7 +8,7 @@ import torch
 import json
 import soundfile as sf
 
-def do_inference(project_name, string_to_infer):
+def do_inference(project_name, file_name, string_to_infer):
   from hparams import create_hparams
   from model import Tacotron2
   from layers import TacotronSTFT
@@ -51,21 +51,41 @@ def do_inference(project_name, string_to_infer):
 
   audio = waveglow.infer(mel_outputs_postnet, sigma=0.666)
   #audio_denoised = denoiser(audio, strength=0.01)[:, 0]
-  sf.write(f'{project_name}/test.wav', audio[0].data.cpu().numpy(), hparams.sampling_rate, 'PCM_24')
+  print(f'{project_name}/{file_name}.wav')
+  sf.write(f'{project_name}/bin/{file_name}.wav', audio[0].data.cpu().numpy(), hparams.sampling_rate, 'PCM_24')
   #sf.write(f'{project_name}/test.wav', audio_denoised[0].data.cpu().numpy(), hparams.sampling_rate, 'PCM_24')
+  return f'{project_name}/bin/{file_name}.wav'
 
 
 
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-s', '--string_to_infer', type=str)
-    args = parser.parse_args()
-    #print(pathlib.Path(__file__).parent.resolve())
+# if __name__ == '__main__':
+#     parser = argparse.ArgumentParser()
+#     parser.add_argument('-s', '--string_to_infer', type=str)
+#     args = parser.parse_args()
+#     #print(pathlib.Path(__file__).parent.resolve())
+
+    # project_name = str(pathlib.Path(__file__).parent.resolve())
+    # print(args.string_to_infer)
+    # sys.path.append(join(project_name, 'waveglow/'))
+    # sys.path.append(project_name)
+    # do_inference(project_name, "Har ree is a stupid nigger.")
+
+from flask import Flask, render_template, request, url_for, jsonify, send_file
+app = Flask(__name__)
+import random
+
+@app.route('/', methods = ['POST'])
+def api_endpoint():
+    message = request.form['message']
 
     project_name = str(pathlib.Path(__file__).parent.resolve())
-    print(args.string_to_infer)
+    print(message)
     sys.path.append(join(project_name, 'waveglow/'))
     sys.path.append(project_name)
-    do_inference(project_name, args.string_to_infer)
+    file_name = random.randint(0, 99999)
+    result = do_inference(project_name, file_name, message)
 
+    return send_file(result, attachment_filename='speech.wav')
 
+if __name__ == '__main__':
+    app.run()
