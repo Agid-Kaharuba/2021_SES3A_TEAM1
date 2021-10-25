@@ -1,7 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext } from "react";
 import {
-  Button, Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
-  Paper, Grid
+  Button,
+  Box,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Grid,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
@@ -10,19 +18,18 @@ import { AuthContext } from "../../context/auth";
 
 const useStyles = makeStyles({
   bold: {
-    fontWeight: 600
+    fontWeight: 600,
   },
   underline: {
-    textDecoration: 'none'
+    textDecoration: "none",
   },
   italic: {
-    fontStyle: 'italic'
+    fontStyle: "italic",
   },
   table: {
     minWidth: 650,
   },
-})
-
+});
 
 export default function Recipes(props) {
   const { recipesState, ActionButton, setRecipesState } = props;
@@ -35,39 +42,50 @@ export default function Recipes(props) {
         <TableCell align="left">{recipe.name}</TableCell>
         <TableCell align="left">{recipe.category}</TableCell>
         <TableCell align="left">
-          {ActionButton ? <ActionButton recipe={recipe} /> :
-            (<Link className={classes.underline} to={`/recipe/${recipe._id}`}>
-              <Button variant="outlined" color="secondary">View Recipe</Button>
-            </Link>)}
+          {ActionButton ? (
+            <ActionButton recipe={recipe} />
+          ) : (
+            <Link className={classes.underline} to={`/recipe/${recipe._id}`}>
+              <Button variant="outlined" color="secondary">
+                View Recipe
+              </Button>
+            </Link>
+          )}
         </TableCell>
         <TableCell align="left">
-          <Button onClick={() => {
-            api.recipe.delete(authState.token, recipe._id);
-            // recipesState.filter(r => r._id == recipe._id);
-            // setRecipesState([...recipesState]);
-            setRecipesState(undefined);
-          }} variant="outlined" color="secondary">Delete Recipe</Button>
+          <Button
+            onClick={() => api.recipe.delete(authState.token, recipe._id)}
+            variant="outlined"
+            color="secondary"
+          >
+            Delete Recipe
+          </Button>
         </TableCell>
       </TableRow>
-    )
+    );
   }
 
   return (
     <>
-      <Box m={5} data-testid="RecipeListTest" >
+      <Box m={5} data-testid="RecipeListTest">
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell className={classes.bold} align="left">Name</TableCell>
-                <TableCell className={classes.bold} align="left">Category</TableCell>
+                <TableCell className={classes.bold} align="left">
+                  Name
+                </TableCell>
+                <TableCell className={classes.bold} align="left">
+                  Category
+                </TableCell>
                 <TableCell align="right"></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {recipesState && recipesState.map((recipe) => {
-                return buildRecipe(recipe);
-              })}
+              {recipesState &&
+                recipesState.map((recipe) => {
+                  return buildRecipe(recipe);
+                })}
             </TableBody>
           </Table>
         </TableContainer>
