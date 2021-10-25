@@ -27,14 +27,16 @@ export default function ReportPage(props) {
   const [userState, setUserState] = useState(undefined);
   const [img, setImg] = useState(undefined);
   const [trackingState, setTrackingState] = useState(undefined);
-	const [selected, setSelected] = useState({ courseId: null, taskId: null, export: null });
-	const [courseState, setCourseState] = useState(undefined);
+  const [selected, setSelected] = useState({ courseId: null, taskId: null, export: null });
+  const [coursesState, setCoursesState] = useState(undefined);
 
   const fetchData = async () => {
     try {
       const res = (await api.user.get(authState.token, userId)).data;
       setUserState(res)
       setImg(await api.user.download(userId))
+      const courses = (await api.course.getAllWith(authState.token, userId)).data
+      setCoursesState(formatCourses(courses));
     }
     catch (err) {
       console.log(err)
@@ -47,21 +49,43 @@ export default function ReportPage(props) {
     }
   }, [userState]);
 
-	const updateSelected = async (newSelected, id) => {
-		const updated = selected;
-		updated[id] = newSelected;
-		const url = api.progress.download(updated.userId, courseId)
-		setSelected({ ...updated, export: url });
+  const updateSelected = async (newSelected, id) => {
+    const updated = selected;
+    updated[id] = newSelected;
 
-		if (updated.userId && updated.taskId) {
-			var res = await api.progress.get(authState.token, updated.userId, updated.taskId, courseId);
-			let trackingData = res?.data[0]?.tracking;
-			if (!trackingData) {
-				trackingData = [{ event: "Employee to complete task" }]
-			}
-			setTrackingState(trackingData);
-		}
-	}
+    if (updated.courseId && updated.taskId) {
+      const url = api.progress.download(userId, updated.courseId)
+      setSelected({ ...updated, export: url });
+      var res = await api.progress.get(authState.token, userId, updated.taskId, updated.courseId);
+      let trackingData = res?.data[0]?.tracking;
+      if (!trackingData) {
+        trackingData = [{ event: "Employee to complete task" }]
+      }
+      setTrackingState(trackingData);
+    }
+    else {
+      setSelected({ ...updated });
+    }
+  }
+
+  const formatCourses = (courses) => {
+    const newCourses = courses.map((i) => {
+      return {
+        ...i,
+        label: `${i.name}`,
+        key: i._id,
+        tasks: i.tasks.map((ii) => {
+          return {
+            ...ii,
+            label: `${ii.name}`,
+            key: ii._id
+          }
+        })
+      }
+    })
+    console.log(newCourses);
+    return newCourses;
+  }
 
   const buildLogs = () => {
     return (
@@ -94,7 +118,7 @@ export default function ReportPage(props) {
 
   return (
     <>
-      <Recommendation recommendation={"Neutral"} />
+      <Recommendation recommendation={"Fire"} />
       <Container maxWidth="lg">
         <Box m={5}>
           <Grid container spacing={2} justify="space-between">
@@ -134,19 +158,21 @@ export default function ReportPage(props) {
           </Grid>
           <Divider variant="middle" />
           <div style={{ display: "flex" }}>
-            <div style={{ paddingRight: "32px" }}>
-              <SelectList listOptions={courseState.assignedEmployees} updateSelected={(key) => updateSelected(key, 'userId')} selected={selected.userId} />
-              <SelectList listOptions={courseState.tasks} updateSelected={(key) => updateSelected(key, 'taskId')} selected={selected.taskId} />
-              {buildLogs()}
+            <div style={{ paddingRight: "32px", display: "flex" }}>
+              <SelectList listOptions={coursesState} updateSelected={(key) => updateSelected(key, 'courseId')} selected={selected.courseId} />
+              <SelectList listOptions={coursesState ? (coursesState.find(i => i._id == selected.courseId)?.tasks ?? []) : []} updateSelected={(key) => updateSelected(key, 'taskId')} selected={selected.taskId} />
             </div>
-            <div>
+            <div style={{ width: '50%' }}>
               <Typography className={classes.bold} variant='h4'>
                 Course Report
               </Typography>
               <Divider />
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sed aliquam orci, in malesuada enim. Sed eget diam a ante imperdiet bibendum. In hac habitasse platea dictumst. Integer efficitur iaculis sem sed ultricies. Aliquam erat volutpat. Vestibulum venenatis viverra sapien, in pretium diam luctus non. Integer lacinia nunc at feugiat efficitur. Nulla facilisi. Aliquam pretium sem convallis tellus cursus, sed suscipit orci dapibus. In finibus aliquam blandit.
-              </p>
+              {coursesState && selected.courseId && (<>
+                <p>{coursesState.find(i => i._id === selected.courseId).name}</p>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sed aliquam orci, in malesuada enim. Sed eget diam a ante imperdiet bibendum. In hac habitasse platea dictumst. Integer efficitur iaculis sem sed ultricies. Aliquam erat volutpat. Vestibulum venenatis viverra sapien, in pretium diam luctus non. Integer lacinia nunc at feugiat efficitur. Nulla facilisi. Aliquam pretium sem convallis tellus cursus, sed suscipit orci dapibus. In finibus aliquam blandit.
+                </p>
+              </>)}
               <Typography className={classes.bold} variant='h4'>
                 Task Report
               </Typography>
@@ -156,6 +182,7 @@ export default function ReportPage(props) {
               </p>
             </div>
           </div>
+          {buildLogs()}
         </Box>
       </Container>
     </>
