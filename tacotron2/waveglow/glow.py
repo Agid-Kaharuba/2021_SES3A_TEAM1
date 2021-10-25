@@ -117,6 +117,7 @@ class WN(torch.nn.Module):
         self.n_channels = n_channels
         self.in_layers = torch.nn.ModuleList()
         self.res_skip_layers = torch.nn.ModuleList()
+        self.cond_layers = torch.nn.ModuleList()
 
         start = torch.nn.Conv1d(n_in_channels, n_channels, 1)
         start = torch.nn.utils.weight_norm(start, name='weight')
@@ -129,9 +130,6 @@ class WN(torch.nn.Module):
         end.bias.data.zero_()
         self.end = end
 
-        cond_layer = torch.nn.Conv1d(n_mel_channels, 2*n_channels*n_layers, 1)
-        self.cond_layer = torch.nn.utils.weight_norm(cond_layer, name='weight')
-
         for i in range(n_layers):
             dilation = 2 ** i
             padding = int((kernel_size*dilation - dilation)/2)
@@ -140,6 +138,9 @@ class WN(torch.nn.Module):
             in_layer = torch.nn.utils.weight_norm(in_layer, name='weight')
             self.in_layers.append(in_layer)
 
+            cond_layer = torch.nn.Conv1d(n_mel_channels, 2*n_channels, 1)
+            cond_layer = torch.nn.utils.weight_norm(cond_layer, name='weight')
+            self.cond_layers.append(cond_layer)
 
             # last one is not necessary
             if i < n_layers - 1:
@@ -153,25 +154,24 @@ class WN(torch.nn.Module):
     def forward(self, forward_input):
         audio, spect = forward_input
         audio = self.start(audio)
-        output = torch.zeros_like(audio)
-        n_channels_tensor = torch.IntTensor([self.n_channels])
-
-        spect = self.cond_layer(spect)
 
         for i in range(self.n_layers):
-            spect_offset = i*2*self.n_channels
             acts = fused_add_tanh_sigmoid_multiply(
                 self.in_layers[i](audio),
-                spect[:,spect_offset:spect_offset+2*self.n_channels,:],
-                n_channels_tensor)
+                self.cond_layers[i](spect),
+                torch.IntTensor([self.n_channels]))
 
             res_skip_acts = self.res_skip_layers[i](acts)
             if i < self.n_layers - 1:
-                audio = audio + res_skip_acts[:,:self.n_channels,:]
-                output = output + res_skip_acts[:,self.n_channels:,:]
+                audio = res_skip_acts[:,:self.n_channels,:] + audio
+                skip_acts = res_skip_acts[:,self.n_channels:,:]
             else:
-                output = output + res_skip_acts
+                skip_acts = res_skip_acts
 
+            if i == 0:
+                output = skip_acts
+            else:
+                output = skip_acts + output
         return self.end(output)
 
 
@@ -274,7 +274,6 @@ class WaveGlow(torch.nn.Module):
             audio_1 = audio[:,n_half:,:]
 
             output = self.WN[k]((audio_0, spect))
-
             s = output[:, n_half:, :]
             b = output[:, :n_half, :]
             audio_1 = (audio_1 - b)/torch.exp(s)
@@ -298,7 +297,7 @@ class WaveGlow(torch.nn.Module):
         for WN in waveglow.WN:
             WN.start = torch.nn.utils.remove_weight_norm(WN.start)
             WN.in_layers = remove(WN.in_layers)
-            WN.cond_layer = torch.nn.utils.remove_weight_norm(WN.cond_layer)
+            WN.cond_layers = remove(WN.cond_layers)
             WN.res_skip_layers = remove(WN.res_skip_layers)
         return waveglow
 
