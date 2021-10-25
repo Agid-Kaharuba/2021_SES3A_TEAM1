@@ -15,7 +15,7 @@ export const InferenceRoute = (app: Express, controller: InferenceController) =>
      *      schema:
      *       type: object
      *       properties:
-     *        name:
+     *        text:
      *         type: string
      *         example: This is going to say something!
      *   responses:
