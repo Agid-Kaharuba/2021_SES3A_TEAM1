@@ -14,11 +14,14 @@ def do_inference(project_name, string_to_infer):
   from layers import TacotronSTFT
   from audio_processing import griffin_lim
   from text import text_to_sequence
-  from waveglow.denoiser import Denoiser
-  from waveglow.glow import WaveGlow
+  #from waveglow.denoiser import Denoiser
+  from waveglow.denoiser_copy import Denoiser
+  #from waveglow.glow import WaveGlow
+  from waveglow.glow_copy import WaveGlow
 
   tacotron2_pretrained_model = f"{project_name}/tacotron2_statedict.pt"
   waveglow_pretrained_model = f"{project_name}/waveglow_old.pt"
+  device = torch.device('cpu')
 
   torch.set_grad_enabled(False)
 
@@ -26,8 +29,8 @@ def do_inference(project_name, string_to_infer):
   hparams = create_hparams()
   hparams.sampling_rate = 22050
   model = Tacotron2(hparams)
-  model.load_state_dict(torch.load(tacotron2_pretrained_model)['state_dict'])
-  _ = model.cuda().eval()#.half()
+  model.load_state_dict(torch.load(tacotron2_pretrained_model, map_location=device)['state_dict'])
+  _ = model.eval()#.half()
 
   # initialize Waveglow with the pretrained model
   # waveglow = torch.load(waveglow_pretrained_model)['model']
@@ -35,20 +38,21 @@ def do_inference(project_name, string_to_infer):
   print('%s/waveglow/config.json' % project_name)
   waveglow_config = json.load(open('%s/waveglow/config.json' % project_name))['waveglow_config']
   waveglow = WaveGlow(**waveglow_config)
-  waveglow.load_state_dict(torch.load(waveglow_pretrained_model)['model'].state_dict())
-  _ = waveglow.cuda().eval()#.half()
+  waveglow.load_state_dict(torch.load(waveglow_pretrained_model, map_location=device)['model'].state_dict())
+  _ = waveglow.eval()#.half()
   for k in waveglow.convinv:
       k.float()
-  denoiser = Denoiser(waveglow)
+  #denoiser = Denoiser(waveglow)
 
   sequence = np.array(text_to_sequence(string_to_infer, ['english_cleaners']))[None, :]
   sequence = torch.autograd.Variable(torch.from_numpy(sequence)).long()
-  sequence = sequence.cuda()
+  sequence = sequence
   mel_outputs, mel_outputs_postnet, _, alignments = model.inference(sequence)
 
   audio = waveglow.infer(mel_outputs_postnet, sigma=0.666)
-  audio_denoised = denoiser(audio, strength=0.01)[:, 0]
-  sf.write(f'{project_name}/test.wav', audio_denoised[0].data.cpu().numpy(), hparams.sampling_rate, 'PCM_24')
+  #audio_denoised = denoiser(audio, strength=0.01)[:, 0]
+  sf.write(f'{project_name}/test.wav', audio[0].data.cpu().numpy(), hparams.sampling_rate, 'PCM_24')
+  #sf.write(f'{project_name}/test.wav', audio_denoised[0].data.cpu().numpy(), hparams.sampling_rate, 'PCM_24')
 
 
 
