@@ -93,4 +93,4 @@ def api_endpoint():
     return send_file(result, attachment_filename='speech.wav')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', port=4000)
