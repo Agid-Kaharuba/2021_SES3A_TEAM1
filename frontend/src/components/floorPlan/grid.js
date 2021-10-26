@@ -100,7 +100,6 @@ const ReactGridLayout = () => {
 
       <ResponsiveReactGridLayout
         onLayoutChange={handleModify}
-        isBounded={true}
         verticalCompact={false}
         layout={layouts}
         breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
