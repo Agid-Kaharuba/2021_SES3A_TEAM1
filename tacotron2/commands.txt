@@ -1,0 +1,34 @@
+did it send?
+g4dn.xlarge
+c6g.medium
+c5.large
+
+
+Instance types
+ - Will not use the gpu one because cannot find an instance type to use and all are pricey anyway.
+ - cheapest accelerate compute is inf1.xlarge
+ - g4dn.xlarge is another cheap one.
+ - will run using t3.medium
+ - but use g4dn.xlarge/inf1.xlarge or faster for presentation.
+
+
+
+sudo curl -X post http://ec2-3-26-21-55.ap-southeast-2.compute.amazonaws.com:4000 -d "message=Hello from curl" -o out.wav -k
+
+
+https://drive.google.com/uc?id=1mL1aZyYt0yclszga56DAwxBG6MAwKic1
+https://drive.google.com/uc?id=1Rp2aeAkfmFSD4EgoG4fE2qNI95ax4TWU
+
+ssh -i "../.vscode/SES3B.pem" ubuntu@ec2-13-55-146-149.ap-southeast-2.compute.amazonaws.com
+ssh -i ".vscode/SES3B.pem" ubuntu@ec2-13-55-146-149.ap-southeast-2.compute.amazonaws.com
+
+https://tecadmin.net/setup-autorun-python-script-using-systemd/
+
+tmux new -s mywindow
+tmux a -t mywindow
+
+home/ubuntu/2021_SES3A_TEAM1/tacotron2/app.py
+
+ssh -i ".vscode/SES3B.pem" ubuntu@ec2-3-25-170-196.ap-southeast-2.compute.amazonaws.com
+
+sudo curl -X post http://ec2-3-25-144-84.ap-southeast-2.compute.amazonaws.com:4000 -d "message=From Earth, the sun looks like a big, yellow ball. But it is not really like a ball. It is made of gases and metals. It is also very hot. Nothing can live on the sun. But it is a good thing the sun is so hot. The sun’s heat makes Earth warm enough for people to live." -o out.wav -k

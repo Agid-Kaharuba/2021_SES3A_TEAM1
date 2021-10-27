@@ -1,0 +1,15 @@
+POST http://ec2-3-25-144-84.ap-southeast-2.compute.amazonaws.com:4000
+Content-Type: application/x-www-form-urlencoded
+
+message=Hello from rest api
+
+###
+
+POST http://ec2-3-25-144-84.ap-southeast-2.compute.amazonaws.com:4000
+Content-Type: application/x-www-form-urlencoded
+
+message=Hello from rest api
+
+###
+
+GET http://ec2-3-25-144-84.ap-southeast-2.compute.amazonaws.com:4000
