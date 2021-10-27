@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link, useHistory } from "react-router-dom";
-import { Button, Typography, Box, Divider, TextField, Table, TableBody, TableCell, TableContainer, 
-  TableHead, TableRow, Paper, Grid } from "@material-ui/core";
+import {
+  Button, Typography, Box, Divider, TextField, Table, TableBody, TableCell, TableContainer,
+  TableHead, TableRow, Paper, Grid
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import RecipeBuilder from "./recipeBuilder";
@@ -49,13 +51,13 @@ export default function Recipe(props) {
               Category
             </Typography>
             {/* <TextField value={recipeState.category} id="category" name="category" disabled={!editState} variant="outlined" fullWidth margin='normal' onChange={handleChange} /> */}
-            <select 
-              name="category" 
-              id="category" 
-              onChange={handleChange} 
-              value={recipeState.category} 
-              disabled={!editState} 
-              style={{ width: '100%', height: '4vw', fontSize: '1.2vw' }}
+            <select
+              name="category"
+              id="category"
+              onChange={handleChange}
+              value={recipeState.category}
+              disabled={!editState}
+              style={{ width: '100%', height: '2.5em', fontSize: '1.2rem' }}
             >
               <option> </option>
               <option value="Burger">Burger</option>
