@@ -88,9 +88,11 @@ def api_endpoint():
     sys.path.append(join(project_name, 'waveglow/'))
     sys.path.append(project_name)
     file_name = random.randint(0, 99999)
-    result = do_inference(project_name, file_name, message)
-
-    return send_file(result, attachment_filename='speech.wav')
+    try: 
+        result = do_inference(project_name, file_name, message)
+        return send_file(result, attachment_filename='speech.wav')
+    except:
+        return send_file(f'{project_name}/bin/error.wav', attachment_filename='speech.wav')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=4000)
