@@ -62,6 +62,6 @@ if __name__ == '__main__':
     print(args.string_to_infer)
     sys.path.append(join(project_name, 'waveglow/'))
     sys.path.append(project_name)
-    do_inference(project_name, "herrick is a nigger!")
+    do_inference(project_name, "herrick is a ####!")
 
 
