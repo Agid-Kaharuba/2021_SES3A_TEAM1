@@ -47,6 +47,9 @@ import ViewRecipe from "./pages/recipe/viewRecipe/viewRecipe.js";
 // IMPORT STATISTICS PAGES
 import Statistics from "./pages/statistics/statistics.js";
 
+// IMPORT FLOOR PLAN PAGES
+import FloorPlanPage from "./pages/floorPlan/floorPlan.js";
+
 // IMPORT CONTEXTS
 import { AuthProvider } from "./context/auth";
 // import Signout from "./helpers/auth/signout.js";
@@ -161,6 +164,11 @@ function AppRouter(props) {
         exact={true}
         component={ViewRecipe}>
       </Route>
+
+      // Floor Plan Routes
+      <PrivateRoute path="/floorplan"
+        exact={true}
+        component={FloorPlanPage} />
 
     </Switch>
   );

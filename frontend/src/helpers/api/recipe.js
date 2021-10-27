@@ -38,3 +38,12 @@ export const getRecipe = async (token, recipeId) => {
 	);
 	return res;
 }
+
+export const deleteRecipe = async (token, recipeId) => {
+	const res = await axios.delete(`${API_HOST}/recipe/${recipeId}`,
+		{
+			headers: { Authorization: `Bearer ${token}` },
+		}
+	);
+	return res;
+}
