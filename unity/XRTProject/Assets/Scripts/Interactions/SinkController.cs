@@ -41,7 +41,6 @@ public class SinkController : MonoBehaviour {
     }
 
     void CheckLeftHandle () {
-        Debug.Log ( leftHandle.localEulerAngles.x );
         if ( !IsBetween(leftHandle.localEulerAngles.x, activationAngle, 360-activationAngle) ) {
             leftWater.Stop ();
             StopSoundL();

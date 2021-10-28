@@ -37,5 +37,10 @@ namespace Interactions
         {
             materials.ForEach(m => m.SetFloat(DirtinessKey, dirtiness));
         }
+
+        private void OnParticleCollision ( GameObject other ) {
+            if ( other.transform.tag == "Water" )
+                dirtiness -= 0.5f * Time.deltaTime;
+        }
     }
 }
