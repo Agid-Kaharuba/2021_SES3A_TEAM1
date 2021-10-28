@@ -29,7 +29,7 @@ import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { AuthContext } from "../../../context/auth";
 import api from "../../../helpers/api";
 import PlaceholderImage from "../../../components/uploadImage";
-import bbt from "../../../images/bbt.jpg";
+import burgerdefault from "../../../images/training-photos/burgerdefault.jpg";
 import CreateNewTaskGlobalDialog from "../../task/createtask/createtaskglobal";
 
 const useStyles = makeStyles(theme => ({
@@ -86,11 +86,12 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function CreateNewTrainingDialog(props) {
   const classes = useStyles();
   const { onClose: onCloseTraining, open: openTraining } = props;
-  const [imagesrc, setImagesrc] = useState(bbt);
+  const [imagesrc, setImagesrc] = useState(burgerdefault);
   const [selectedDate, handleDateChange] = React.useState(new Date());
 
 
   //#region SAVE COURSE
+  // const [formState, setFormState] = useState({ name: "", description: "", image: imagesrc});
   const [formState, setFormState] = useState({ name: "", description: ""});
   const { authState, setAuthState } = React.useContext(AuthContext);
   let history = useHistory();
@@ -133,6 +134,9 @@ export default function CreateNewTrainingDialog(props) {
   const imageChange = (e) => {
     setImagesrc(e);
 
+    setFormState({
+      ...formState, image: e,
+    });
   }
 
   // open/close dialog
@@ -319,7 +323,7 @@ export default function CreateNewTrainingDialog(props) {
 
   //Build User Table
   const fetchDataUserTable = async () => {
-    const res = await api.user.get(authState.token);
+    const res = await api.user.search(authState.token, 'isSupervisor=false');
     setUsersState(res.data);
   };
 
@@ -562,7 +566,6 @@ export default function CreateNewTrainingDialog(props) {
         return (
           <div>
             <Grid Item>
-            {/* <Fragment> */}
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <DatePicker
               className={classes.date}
@@ -572,10 +575,8 @@ export default function CreateNewTrainingDialog(props) {
               views={["year", "month", "date"]}
               value={selectedDate}
               onChange={handleDateChange}
-              // onChange={selectedDate => setDate(selectedDate)}
             />
             </MuiPickersUtilsProvider>
-            {/* </Fragment> */}
             </Grid>
           </div>
         );
