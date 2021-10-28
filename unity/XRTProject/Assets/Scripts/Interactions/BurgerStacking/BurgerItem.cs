@@ -80,7 +80,7 @@ public class BurgerItem : MonoBehaviour
     [SerializeField] private bool isBoard;
     [SerializeField] public UnityEvent OnAboveStackChanged;
     
-    private const float SnapDistance = 0.1f;
+    private const float SnapDistance = 0.12f;
     private const float falloffAngle = 70;
     private Interactable interactable;
     private Rigidbody rb;
@@ -102,9 +102,10 @@ public class BurgerItem : MonoBehaviour
     public bool IsGlued => isGlued;
     public BurgerItem GluedBelowItem => gluedItem;
     public BurgerItem GluedAboveItem => gluedFrom;
+    public bool IsGluedUpsideDown => gluedStickPoint.IsAbove;
     public StickPoint AboveStickPoint { get; private set; }
     public StickPoint BelowStickPoint { get; private set; }
-    
+
 
     private void Awake()
     {
@@ -138,12 +139,7 @@ public class BurgerItem : MonoBehaviour
             handToAttachNextFrame = null;
         }
 
-        float tiltAngle = Vector3.Angle(Vector3.up, transform.up);
-
-        if (tiltAngle >= falloffAngle)
-        {
-            UnGlueBurger();
-        }
+        UpdateTiltingFall();
     }
 
     private void OnCollisionEnter(Collision other)
@@ -223,6 +219,21 @@ public class BurgerItem : MonoBehaviour
         return currentItem;
     }
 
+    private void UpdateTiltingFall()
+    {
+        if (!isGlued) return;
+        
+        float tiltAngle = IsGluedUpsideDown 
+            ? Vector3.Angle(Vector3.up, -transform.up)
+            : Vector3.Angle(Vector3.up, transform.up);
+
+        if (tiltAngle >= falloffAngle)
+        {
+            Debug.Log($"Burger Item {name} is tilted and falling off the glue");
+            UnGlueBurger();
+        }
+    }
+
     private void TryGlue(GameObject otherObject)
     {
         if (!isHandHolding && !isGlued)
@@ -232,18 +243,27 @@ public class BurgerItem : MonoBehaviour
             if (otherBurgerItem)
             {
                 // Only glue from the top to bottom
-                bool isItemBelow = otherBurgerItem.transform.position.y < transform.position.y;
+                bool isItemBelow = otherBurgerItem.stackDetector.transform.position.y < stackDetector.transform.position.y;
                 bool isAlreadyGlued = gluedFrom == otherBurgerItem || gluedItem == otherBurgerItem;
+                float upAngleDifference = Vector3.Angle(stackDetector.transform.up, otherBurgerItem.stackDetector.transform.up); 
                 
                 if (isItemBelow && (canStackBelow || otherBurgerItem.isBoard) && !isAlreadyGlued)
                 {
                     BurgerItem topMostItem = otherBurgerItem.GetTopMostItem();
                     var pointPair = GetClosestStickPointsTo(otherBurgerItem, true, SnapDistance);
+                    
 
                     if (pointPair.HasValue && otherBurgerItem == topMostItem)
                     {
-                        Debug.Log($"{name} Glue with {otherBurgerItem}");
-                        GlueBurger(pointPair.Value.currentStickPoint, pointPair.Value.otherStickPoint);
+                        var points = pointPair.Value;
+                        bool isSameOrientation = points.currentStickPoint.IsAbove == points.otherStickPoint.IsAbove &&
+                                                 upAngleDifference < 90;
+
+                        if (!isSameOrientation)
+                        {
+                            Debug.Log($"{name} Glue with {otherBurgerItem}");
+                            GlueBurger(pointPair.Value.currentStickPoint, pointPair.Value.otherStickPoint);
+                        }
                     }
                 }
             }
