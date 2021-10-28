@@ -41,7 +41,8 @@ public class SinkController : MonoBehaviour {
     }
 
     void CheckLeftHandle () {
-        if ( leftHandle.localEulerAngles.x < activationAngle && leftHandle.transform.localEulerAngles.x > -activationAngle ) {
+        Debug.Log ( leftHandle.localEulerAngles.x );
+        if ( !IsBetween(leftHandle.localEulerAngles.x, activationAngle, 360-activationAngle) ) {
             leftWater.Stop ();
             StopSoundL();
         }
@@ -53,7 +54,7 @@ public class SinkController : MonoBehaviour {
     }
 
     void CheckRightHandle () {
-        if ( rightHandle.localEulerAngles.x < activationAngle && rightHandle.transform.localEulerAngles.x > -activationAngle ) {
+        if ( !IsBetween ( rightHandle.localEulerAngles.x, activationAngle, 360 - activationAngle ) ) {
             rightWater.Stop ();
             StopSoundR();
         }
@@ -97,6 +98,12 @@ public class SinkController : MonoBehaviour {
             rightHandleSound = false;
             FindObjectOfType<AudioManager>().Stop("WaterRunR");
         }
+    }
+
+    public bool IsBetween ( double testValue, double bound1, double bound2 ) {
+        if ( bound1 > bound2 )
+            return testValue >= bound2 && testValue <= bound1;
+        return testValue >= bound1 && testValue <= bound2;
     }
 
 }
