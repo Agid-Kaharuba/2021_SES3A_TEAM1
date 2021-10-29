@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
-import { Button, Box, TextField } from "@material-ui/core";
+import { Button, Box, TextField, Typography } from "@material-ui/core";
 
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 //import "./App.css";
 import './styles.css';
+
+import api from "../../helpers/api";
+import { AuthContext } from "../../context/auth";
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
@@ -16,6 +19,7 @@ const ReactGridLayout = () => {
     // { i: "widget2", x: 2, y: 2, w: 2, h: 2 },
     // { i: "widget3", x: 4, y: 4, w: 2, h: 2 },
   ]);
+  const { authState } = useContext(AuthContext);
 
   const handleModify = (layouts, layout) => {
     const tempArray = widgetArray;
@@ -44,6 +48,13 @@ const ReactGridLayout = () => {
     tempArray.splice(index, 1);
     setWidgetArray(tempArray);
   };
+
+  //try to print to consolve/web and then send to backend/unity
+  const getCoordinates = () => {
+    const token = authState.token;
+    const data = {name: "floor1", coordinates: widgetArray};
+    api.floor.create(token, data);
+  }
 
   return (
     <div>
@@ -86,6 +97,7 @@ const ReactGridLayout = () => {
           xxs: [20, 20],
         }}
       >
+        
         {widgetArray?.map((widget, index) => {
           return (
             <div
@@ -123,8 +135,9 @@ const ReactGridLayout = () => {
           );
         })}
       </ResponsiveReactGridLayout>
+      <Button color="primary" variant="contained" onClick={() => getCoordinates()}>save</Button>
     </div>
   );
-};
+} //;
 
 export default ReactGridLayout;

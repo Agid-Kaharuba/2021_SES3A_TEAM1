@@ -1,4 +1,11 @@
 import { verify, registerUser, loginUser } from "./auth";
+import { 
+  createFloor,
+  getAllFloors,
+  getFloor,
+  updateFloor,
+  deleteFloor 
+} from "./floor";
 import {
   getAllUser,
   getCurrentUser,
@@ -69,5 +76,8 @@ export default {
   },
   stats: {
     course: getCourseStats,
+  },
+  floor: {
+    create: createFloor,
   },
 };

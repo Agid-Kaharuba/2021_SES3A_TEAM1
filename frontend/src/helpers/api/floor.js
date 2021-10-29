@@ -39,7 +39,7 @@ export const updateFloor = async (token, floorId, data) => {
 	return res;
 }
 
-export const deleteFloor = async (token, userId) => {
+export const deleteFloor = async (token, userId, floorId) => {
 	const res = await axios.delete(`${API_HOST}/floor/${floorId}`,
 		{
 			headers: { Authorization: `Bearer ${token}` },
