@@ -6,6 +6,7 @@ public class Dropping : MonoBehaviour
 {
     bool platesDroppSound = false;
     bool foodDroppSound = false;
+    public AudioClip lol;
 
     // Start is called before the first frame update
     private void OnTriggerEnter(Collider other)
@@ -24,6 +25,7 @@ public class Dropping : MonoBehaviour
     void PlayPlatesFall()
     {
         FindObjectOfType<AudioManager>().Play("DropPlates");
+
     }
     void PlayFoodFall()
     {

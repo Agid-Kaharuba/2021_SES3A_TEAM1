@@ -2,11 +2,11 @@ using UnityEngine.Audio;
 using System;
 using Random = UnityEngine.Random;
 using UnityEngine;
-
+using System.Collections.Generic;
 
 public class AudioManager : MonoBehaviour
 {
-    public Sound[] sounds;
+    public List<Sound> sounds;
 
     public static AudioManager instance;
     void Awake()
@@ -32,22 +32,71 @@ public class AudioManager : MonoBehaviour
 
     public void Play(string name)
     {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
-        s.source.Play();
+        for (int i = 0; i < sounds.Count; i++)
+        {
+            if (sounds[i].name == name)
+            {
+                Sound s = sounds[i];
+                s.source.Play();
+            }
+        }
     }
     public void Stop(string name)
     {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
-        s.source.Stop();
+        for (int i = 0; i < sounds.Count; i++)
+        {
+            if (sounds[i].name == name)
+            {
+                Sound s = sounds[i];
+                s.source.Stop();
+            }
+        }
     }
     public void ChangePitch(string name, float speed)
     {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
-        s.source.pitch = speed / 10;
+        for (int i = 0; i < sounds.Count; i++)
+        {
+            if (sounds[i].name == name)
+            {
+                Sound s = sounds[i];
+                s.source.pitch = speed / 10;
+            }
+        }
+
     }
     public void ChangeVolume(string name, float volume)
     {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
-        s.source.volume = volume;
+        for (int i = 0; i < sounds.Count; i++)
+        {
+            if (sounds[i].name == name)
+            {
+                Sound s = sounds[i];
+                s.source.volume = volume;
+            }
+        }
     }
+    //If you pass sounds script
+    public void AddSound(Sound newSound)
+    {
+        sounds.Add(newSound);
+        newSound.source = gameObject.AddComponent<AudioSource>();
+        newSound.source.clip = newSound.clip;
+
+        newSound.source.volume = newSound.volume;
+        newSound.source.pitch = newSound.pitch;
+        newSound.source.loop = newSound.loop;
+    }
+    //If you ONLY pass audio file
+    public void AddClip(AudioClip newClip,string ClipName)
+    {
+        Sound LOL = new Sound();
+        LOL.name = ClipName;
+        LOL.source = gameObject.AddComponent<AudioSource>();
+        LOL.source.clip = newClip;
+        LOL.source.volume = 1;
+        LOL.source.pitch = 1;
+        LOL.source.loop = false;
+        sounds.Add(LOL);
+    }
+
 }
