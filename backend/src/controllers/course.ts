@@ -25,7 +25,7 @@ export default class CourseController {
       const course = await Course.findOne({ _id: req.params.courseId }).populate({
         path: 'tasks',
         populate: { path: 'recipe' },
-      }).populate('assignedEmployees');
+      }).populate('assignedEmployees').populate('floorPlan');
 
       ResponseService.successResponse(res, course);
     } catch (err) {
@@ -41,6 +41,8 @@ export default class CourseController {
       tasks: body.tasks,
       assignedEmployees: body.assignedEmployees,
       dueDate: body.dueDate,
+      image: body.image,
+      floorPlan: body.floorPlan,
     } as any);
     newCourseRequest.save((err: any) => {
       if (err) {

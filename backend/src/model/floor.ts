@@ -1,13 +1,12 @@
 import mongoose from 'mongoose';
-import Recipe from './floor';
 
 const floorSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
   },
-  data: {
-    type: Object,
+  coordinate: {
+    type: [Object],
     required: true,
   },
   archive: {

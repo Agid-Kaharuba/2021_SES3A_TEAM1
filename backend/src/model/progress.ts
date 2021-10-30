@@ -1,6 +1,6 @@
 import mongoose, { ObjectId } from 'mongoose';
 
-export interface Tracking {
+export interface TrackingType {
   _id?: ObjectId;
   date: Date;
   event: string;
@@ -8,14 +8,14 @@ export interface Tracking {
   data?: Object;
 }
 
-export interface Progress {
+export interface ProgressType {
   data: object;
   userId: string;
   taskId: string;
   courseId: string;
   completed: string;
   score: string;
-  tracking: Tracking[];
+  tracking: TrackingType[];
 }
 
 const trackingSchema = new mongoose.Schema({

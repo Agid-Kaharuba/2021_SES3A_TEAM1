@@ -30,9 +30,9 @@ export const FloorRoute = (app: Express, controller: FloorController) => {
       *        name:
       *         type: string
       *         example: First Floor
-      *        data:
+      *        coordinate:
       *         type: object
-      *         example: data
+      *         example: [{i: "grill", x: 0, y: 1}]
       *   responses:
       *    200:
       *     description: Success
@@ -78,7 +78,7 @@ export const FloorRoute = (app: Express, controller: FloorController) => {
       *        name:
       *         type: string
       *         example: First Floor
-      *        data:
+      *        coordinate:
       *         type: object
       *         example: data
       *   responses:
