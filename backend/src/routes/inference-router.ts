@@ -45,4 +45,5 @@ export const InferenceRoute = (app: Express, controller: InferenceController) =>
      *     description: Success
      */
   app.post('/inference', controller.proxy);
+  app.put('/inference', controller.proxy);
 }
