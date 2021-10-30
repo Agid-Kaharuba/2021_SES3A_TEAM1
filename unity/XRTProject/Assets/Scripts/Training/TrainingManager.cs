@@ -187,6 +187,25 @@ public class TrainingManager : MonoBehaviour
     {
         CurrentTask = task;
         OnCurrentTaskChanged?.Invoke();
+        if (task != null)
+        {
+            StartCoroutine(apiService.TextToSpeech(task.Description, (obj) =>
+            {
+                if (obj is BackendErrorResponse error)
+                {
+                    Debug.LogError($"Error generating speech {error.Status}: {error.Message}");
+                }
+                else if (obj is byte[] bytes)
+                {
+                    AudioClip audioClip = WavUtility.ToAudioClip(bytes);
+                    AudioManager.instance.AddClip(audioClip, "taskDescription");
+                    AudioManager.instance.Play("taskDescription");
+                }
+
+                UpdateTrainingModule();
+            }));
+
+        }
     }
 
     public void SwitchTask(int index)

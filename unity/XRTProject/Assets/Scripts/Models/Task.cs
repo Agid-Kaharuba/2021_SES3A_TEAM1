@@ -9,7 +9,10 @@ public class Task
 
     [JsonProperty("name")]
     public string Name { get; set; }
-    
+
+    [JsonProperty("description")]
+    public string Description { get; set; }
+
     [JsonProperty("type")]
     [JsonConverter(typeof(StringEnumConverter))]
     public TaskType TaskType { get; set; }
