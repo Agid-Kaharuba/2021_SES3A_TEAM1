@@ -90,9 +90,9 @@ def api_endpoint():
     file_name = random.randint(0, 99999)
     try: 
         result = do_inference(project_name, file_name, message)
-        return send_file(result, attachment_filename='speech.wav')
+        return send_file(result, attachment_filename='speech.wav', mimetype='audio/wav')
     except:
-        return send_file(f'{project_name}/bin/error.wav', attachment_filename='speech.wav')
+        return send_file(f'{project_name}/bin/error.wav', attachment_filename='speech.wav', mimetype='audio/wav')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=4000)
