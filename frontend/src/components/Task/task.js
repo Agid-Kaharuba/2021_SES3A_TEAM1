@@ -51,7 +51,7 @@ export default function Task(props) {
           Task Name
         </Typography>
         <TextField
-          id="outlined-multiline-static"
+          id="name"
           fullWidth='true'
           variant="outlined"
           name="name"
@@ -66,7 +66,7 @@ export default function Task(props) {
           Task Description
         </Typography>
         <TextField
-          id="outlined-multiline-static"
+          id="description"
           multiline
           rows={4}
           fullWidth='true'
