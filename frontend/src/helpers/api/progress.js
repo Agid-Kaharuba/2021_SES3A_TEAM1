@@ -22,3 +22,12 @@ export const getTrackingPerformance = async (token, courseId) => {
 	);
 	return res;
 }
+
+export const getTrackingPerformanceUser = async (token, userId) => {
+	const res = await axios.get(`${API_HOST}/progress/tracking/performance/${userId}`,
+		{
+			headers: { Authorization: `Bearer ${token}` },
+		}
+	);
+	return res;
+}

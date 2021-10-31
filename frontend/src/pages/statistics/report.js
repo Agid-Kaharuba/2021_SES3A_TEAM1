@@ -7,6 +7,7 @@ import { Recommendation } from "../../components/Recommendation"
 import { AuthContext } from "../../context/auth";
 import api from "../../helpers/api";
 import { SelectList } from "../../components/SelectList"
+import { ControlPointSharp } from "@material-ui/icons";
 
 const useStyles = makeStyles({
   bold: {
@@ -37,6 +38,9 @@ export default function ReportPage(props) {
       setImg(await api.user.download(userId))
       const courses = (await api.course.getAllWith(authState.token, userId)).data
       setCoursesState(formatCourses(courses));
+
+      const performanceData = (await api.progress.user(authState.token, userId)).data;
+      console.log(performanceData);
     }
     catch (err) {
       console.log(err)

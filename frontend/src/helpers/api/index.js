@@ -36,7 +36,8 @@ import {
 import {
   getProgress,
   downloadTracking,
-  getTrackingPerformance
+  getTrackingPerformance,
+  getTrackingPerformanceUser
 } from "./progress";
 
 import dotenv from "dotenv";
@@ -85,6 +86,7 @@ export default {
   progress: {
     get: getProgress,
     download: downloadTracking,
-    performance: getTrackingPerformance
+    performance: getTrackingPerformance,
+    user: getTrackingPerformanceUser
   }
 }

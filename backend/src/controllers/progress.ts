@@ -2,11 +2,13 @@ import { Request, Response } from 'express';
 import * as XLSX from 'xlsx';
 import ProgressModel, { ProgressType, TrackingType, TrackingModel } from '../model/progress';
 import CourseModel, { CourseType } from '../model/course';
-import TaskModel from '../model/task';
+import TaskModel, { TaskType } from '../model/task';
 import UserModel from '../model/user';
 import ResponseService from '../helpers/response';
 import { filter } from 'underscore';
 import { ObjectId } from 'mongoose';
+
+const STATIONS = ["GRILL", "KNIFE", "MICROWAVE"];
 
 export default class ProgressController {
   public async put(req: Request, res: Response) {
@@ -209,20 +211,57 @@ export default class ProgressController {
       ResponseService.mongoErrorResponse(res, err);
     }
   }
+
+  public async getUserPerformace(req: Request, res: Response) {
+    try {
+      const courses: CourseType[] = await CourseModel.find({ archive: { $ne: true }, assignedEmployees: req.params.userId }).exec();
+
+      const results = courses.map(async (course) => {
+        const taskOutcomes = await computeTimedOutcomes(course);
+
+        const ratings = await computeRatings(course, taskOutcomes)
+
+        const recommendedRatings = insertRecommendations(ratings);
+        const groupedRecommendedRatings = groupedRecommendations(recommendedRatings);
+
+        return { taskOutcomes, ratings: recommendedRatings, groupsRatings: groupedRecommendedRatings };
+      });
+
+      const performances = await Promise.all(results);
+      const overallRecommendation = computeOverallRecommendation(performances, req.params.userId);
+      console.log(overallRecommendation);
+
+
+      performances.map((course: any) => {
+        console.log(
+          course.taskOutcomes.map((taskOutcome: any) => {
+            return computeTaskReport(taskOutcome, req.params.userId);
+          })
+        )
+      });
+
+
+
+      ResponseService.successResponse(res, { performances, recommendation: overallRecommendation });
+      // ResponseService.successResponse(res, { taskOutcomes, ratings: recommendedRatings, groupsRatings: groupedRecommendedRatings });
+    } catch (err) {
+      console.log(err);
+      ResponseService.mongoErrorResponse(res, err);
+    }
+  }
 }
 
 const computeTimedOutcomes = async (course: CourseType) => {
-  const stations = ["GRILL", "KNIFE"];
   const taskOutcomes: any = [];
 
   for (const taskId of course.tasks) {
-    let stationTimes: { [key: string]: any[] } = convertArrayToObject(stations, () => new Array());
-    let stationAvg: { [key: string]: any } = convertArrayToObject(stations, () => 0);
+    let stationTimes: { [key: string]: any[] } = convertArrayToObject(STATIONS, () => new Array());
+    let stationAvg: { [key: string]: any } = convertArrayToObject(STATIONS, () => 0);
 
     const taskTracking = await ProgressModel.find({ taskId: taskId, courseId: course._id });
 
     for (const progress of taskTracking) {
-      for (const station of stations) {
+      for (const station of STATIONS) {
         const result = calcTime(progress.tracking, station);
         if (!result)
           break;
@@ -231,7 +270,7 @@ const computeTimedOutcomes = async (course: CourseType) => {
       }
     }
 
-    for (const station of stations) {
+    for (const station of STATIONS) {
       const sum = stationTimes[station].reduce((a, b) => a + b.time, 0);
       const avg = (sum / stationTimes[station].length) || 0;
       stationAvg[station] = avg;
@@ -326,6 +365,7 @@ const calcTime = (events: TrackingType[], eventName: string) => {
   }
   let total: any = 0;
   let prev: Date = filtered[0].date;
+
   for (const event of filtered) {
     if (event.value == 1) {
       prev = event.date;
@@ -336,4 +376,40 @@ const calcTime = (events: TrackingType[], eventName: string) => {
     }
   }
   return total;
+}
+
+const computeOverallRecommendation = (performances: any, userId: string) => {
+  let overallRecommendation = 0;
+
+  performances.map((performance: any) => {
+    const recommendation = performance.ratings.find((rating: any) => rating.userId === userId).recommendation;
+    if (recommendation.hire) {
+      overallRecommendation += 1;
+    }
+    else if (recommendation.fire) {
+      overallRecommendation -= 1;
+    }
+  })
+  if (overallRecommendation > 0) {
+    return "Hire";
+  }
+  if (overallRecommendation < 0) {
+    return "Fire";
+  }
+
+  return "Neutral";
+}
+
+const computeTaskReport = (task: any, userId: string) => {
+  let stationPerformance: { [key: string]: any } = convertArrayToObject(STATIONS, () => 0);
+
+  for (const station of STATIONS) {
+    const average = task.averages[station];
+    const userTime = task.times[station].find((x: any) => x.userId == userId);
+    if (userTime) {
+      stationPerformance[station] = userTime.time - average;
+    }
+  }
+
+  return stationPerformance;
 }
