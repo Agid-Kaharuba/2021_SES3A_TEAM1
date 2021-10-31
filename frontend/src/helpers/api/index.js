@@ -4,7 +4,9 @@ import {
   getAllFloors,
   getFloor,
   updateFloor,
-  deleteFloor 
+  deleteFloor,
+  getTheFloor,
+  updateTheFloor,
 } from "./floor";
 import {
   getAllUser,
@@ -79,5 +81,7 @@ export default {
   },
   floor: {
     create: createFloor,
+    getThe: getTheFloor,
+    updateThe: updateTheFloor,
   },
 };

@@ -10,6 +10,15 @@ export const getAllFloors = async (token) => {
 	return res;
 }
 
+export const getTheFloor = async (token) => {
+	const res = await axios.get(`${API_HOST}/floor`,
+		{
+			headers: { Authorization: `Bearer ${token}` },
+		}
+	);
+	return res;
+}
+
 export const createFloor = async (token, data) => {
 	const res = await axios.post(`${API_HOST}/floor`,
 		data,
@@ -22,6 +31,16 @@ export const createFloor = async (token, data) => {
 
 export const getFloor = async (token, floorId) => {
 	const res = await axios.get(`${API_HOST}/floor/${floorId}`,
+		{
+			headers: { Authorization: `Bearer ${token}` },
+		}
+	);
+	return res;
+}
+
+export const updateTheFloor = async (token, data) => {
+	const res = await axios.put(`${API_HOST}/floor`,
+		data,
 		{
 			headers: { Authorization: `Bearer ${token}` },
 		}

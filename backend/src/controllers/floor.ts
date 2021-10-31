@@ -29,7 +29,7 @@ export default class FloorController {
       }
       else {
         const newFloorRequest = new Floor({
-          coordinate: body.coordinates,
+          coordinate: body.coordinate,
         } as any);
         newFloorRequest.save((err: any) => {
           if (err) {
