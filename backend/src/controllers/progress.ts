@@ -231,19 +231,16 @@ export default class ProgressController {
       const overallRecommendation = computeOverallRecommendation(performances, req.params.userId);
       console.log(overallRecommendation);
 
+      const out: any[] = await Promise.all(performances.map(async (course: any) => {
+        return await Promise.all(course.taskOutcomes.map(async (taskOutcome: any) => {
+          return await computeTaskReport(taskOutcome, req.params.userId);
+        }))
+      }));
 
-      performances.map((course: any) => {
-        console.log(
-          course.taskOutcomes.map((taskOutcome: any) => {
-            return computeTaskReport(taskOutcome, req.params.userId);
-          })
-        )
-      });
+      const arr2d = [].concat(...out);
+      const arr1d = [].concat(...arr2d);
 
-
-
-      ResponseService.successResponse(res, { performances, recommendation: overallRecommendation });
-      // ResponseService.successResponse(res, { taskOutcomes, ratings: recommendedRatings, groupsRatings: groupedRecommendedRatings });
+      ResponseService.successResponse(res, { performances, recommendation: overallRecommendation, summary: arr1d });
     } catch (err) {
       console.log(err);
       ResponseService.mongoErrorResponse(res, err);
@@ -400,16 +397,38 @@ const computeOverallRecommendation = (performances: any, userId: string) => {
   return "Neutral";
 }
 
-const computeTaskReport = (task: any, userId: string) => {
-  let stationPerformance: { [key: string]: any } = convertArrayToObject(STATIONS, () => 0);
+const computeTaskReport = async (task: any, userId: string) => {
+  const notes = [];
 
   for (const station of STATIONS) {
     const average = task.averages[station];
     const userTime = task.times[station].find((x: any) => x.userId == userId);
-    if (userTime) {
-      stationPerformance[station] = userTime.time - average;
+    if (!userTime) continue;
+    if (userTime.time % 4 == 0) {
+      const actualTask = await TaskModel.findOne({
+        _id: task.taskId,
+      });
+      notes.push(`Juggles multiple stations in "${actualTask.name}".`);
+    }
+    if (userTime.time > average && userTime.time % 2 == 0) {
+      const actualTask = await TaskModel.findOne({
+        _id: task.taskId,
+      });
+      notes.push(`Best in class in "${actualTask.name}" for ${station.toLowerCase()}.`);
+    }
+    else if (userTime.time > average) {
+      const actualTask = await TaskModel.findOne({
+        _id: task.taskId,
+      });
+      notes.push(`Above average in "${actualTask.name}" for ${station.toLowerCase()}.`);
+    }
+    else if (userTime.time > average) {
+      const actualTask = await TaskModel.findOne({
+        _id: task.taskId,
+      });
+      notes.push(`Below average in "${actualTask.name}" for ${station.toLowerCase()}.`);
     }
   }
 
-  return stationPerformance;
+  return notes;
 }

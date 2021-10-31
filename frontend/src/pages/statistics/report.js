@@ -28,6 +28,7 @@ export default function ReportPage(props) {
   const [userState, setUserState] = useState(undefined);
   const [img, setImg] = useState(undefined);
   const [trackingState, setTrackingState] = useState(undefined);
+  const [performanceData, setPerformanceData] = useState(undefined);
   const [selected, setSelected] = useState({ courseId: null, taskId: null, export: null });
   const [coursesState, setCoursesState] = useState(undefined);
 
@@ -39,8 +40,9 @@ export default function ReportPage(props) {
       const courses = (await api.course.getAllWith(authState.token, userId)).data
       setCoursesState(formatCourses(courses));
 
-      const performanceData = (await api.progress.user(authState.token, userId)).data;
-      console.log(performanceData);
+      const pData = (await api.progress.user(authState.token, userId)).data;
+      console.log(pData);
+      setPerformanceData(pData);
     }
     catch (err) {
       console.log(err)
@@ -122,7 +124,7 @@ export default function ReportPage(props) {
 
   return (
     <>
-      <Recommendation recommendation={"Fire"} />
+      <Recommendation recommendation={performanceData?.recommendation ?? ""} />
       <Container maxWidth="lg">
         <Box m={5}>
           <Grid container spacing={2} justify="space-between">
@@ -147,8 +149,16 @@ export default function ReportPage(props) {
               </Typography>
               <Divider />
               <p>
-                Report Summary Test
+                Here is what we noticed in {userState.firstname}
               </p>
+              <ul>
+                {performanceData?.summary ? performanceData.summary.map((note) =>
+                  <li>{note}</li>
+                )
+                  : (
+                    <li>{userState.firstname} has not conducted enough training to determine her skills.</li>
+              )}
+              </ul>
             </div>
           </div>
         </Box>
@@ -156,7 +166,7 @@ export default function ReportPage(props) {
           <Grid container spacing={2} justify="space-between">
             <Grid item>
               <Typography className={classes.bold} variant='h4'>
-                Performance Breakdown
+                Performance Breakdown Tracking Logs
               </Typography>
             </Grid>
           </Grid>
@@ -165,25 +175,6 @@ export default function ReportPage(props) {
             <div style={{ paddingRight: "32px", display: "flex" }}>
               <SelectList listOptions={coursesState} updateSelected={(key) => updateSelected(key, 'courseId')} selected={selected.courseId} />
               <SelectList listOptions={coursesState ? (coursesState.find(i => i._id == selected.courseId)?.tasks ?? []) : []} updateSelected={(key) => updateSelected(key, 'taskId')} selected={selected.taskId} />
-            </div>
-            <div style={{ width: '50%' }}>
-              <Typography className={classes.bold} variant='h4'>
-                Course Report
-              </Typography>
-              <Divider />
-              {coursesState && selected.courseId && (<>
-                <p>{coursesState.find(i => i._id === selected.courseId).name}</p>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sed aliquam orci, in malesuada enim. Sed eget diam a ante imperdiet bibendum. In hac habitasse platea dictumst. Integer efficitur iaculis sem sed ultricies. Aliquam erat volutpat. Vestibulum venenatis viverra sapien, in pretium diam luctus non. Integer lacinia nunc at feugiat efficitur. Nulla facilisi. Aliquam pretium sem convallis tellus cursus, sed suscipit orci dapibus. In finibus aliquam blandit.
-                </p>
-              </>)}
-              <Typography className={classes.bold} variant='h4'>
-                Task Report
-              </Typography>
-              <Divider />
-              <p>
-                Task Report Test
-              </p>
             </div>
           </div>
           {buildLogs()}
