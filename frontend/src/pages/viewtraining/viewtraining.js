@@ -49,30 +49,6 @@ export default function ViewCourse(props) {
   const [imagesrc, setImagesrc] = useState(bbt);
   const [tabState, setTabState] = useState(0);
 
-  // Get User Data
-  const fetchUserData = async () => {
-    const res = await api.user.all(authState.token);
-    setUsersState(res.data);
-  };
-
-  useEffect(() => {
-    if (usersState === undefined) {
-      fetchUserData();
-    }
-  });
-
-  //Get Tasks Data
-  const fetchTasksData = async () => {
-    const res = await api.task.getAll(authState.token);
-    setTasksState(res.data);
-  };
-
-  useEffect(() => {
-    if (tasksState === undefined) {
-      fetchTasksData();
-    }
-  });
-
   // Edit Course Data
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -125,7 +101,7 @@ export default function ViewCourse(props) {
           Assigned Tasks
         </Typography>
         <Grid>
-          <Tasks tasksState={tasksState} />
+          <Tasks tasksState={courseState.tasks} />
         </Grid>
       </Box>
     </>)
@@ -137,7 +113,7 @@ export default function ViewCourse(props) {
     </Box>)
   }
 
-  if (courseState === undefined || usersState === undefined) {
+  if (courseState === undefined) {
     // TODO: add loader
     return (<h1>LOADING</h1>)
   }
