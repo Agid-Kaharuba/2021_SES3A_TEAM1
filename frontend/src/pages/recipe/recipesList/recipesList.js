@@ -129,6 +129,7 @@ export default function RecipesList() {
            <CardActions className= {classes.buttons}>
              <Link className={classes.underline} to={`/recipe/${recipe._id}`}>
                <Button size="small">View Recipe</Button>
+               <Button size="small"> Delete Recipe</Button>
              </Link>
            </CardActions>
            </CardActionArea>
