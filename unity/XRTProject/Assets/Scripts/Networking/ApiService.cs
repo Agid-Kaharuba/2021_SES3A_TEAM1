@@ -146,4 +146,11 @@ public class ApiService
             .HandleError(callback);
         yield return apiRequest.Execute();
     }
+
+    public IEnumerator GetFloorPlan ( Action<object> callback = null ) {
+        ApiRequest apiRequest = SendAuthenticatedRequest ( "floor", HTTPRequestType.Get )
+            .HandleJsonResponse<FloorModel> ( callback )
+            .HandleError ( callback );
+        yield return apiRequest.Execute ();
+    }
 }
