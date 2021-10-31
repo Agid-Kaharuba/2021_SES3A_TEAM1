@@ -6,68 +6,20 @@ export const FloorRoute = (app: Express, controller: FloorController) => {
       * @swagger
       * /floor:
       *  get:
-      *   description: Get all floors
+      *   description: Get the floorplan
       *   tags: [Floor]
       *   responses:
       *    200:
       *     description: Success
       */
-  app.get('/floor', controller.getAll);
+  app.get('/floor', controller.getTheFloorPlan);
 
   /**
       * @swagger
       * /floor:
-      *  post:
-      *   description: Create a floor
-      *   tags: [Floor]
-      *   requestBody:
-      *    required: true,
-      *    content:
-      *     application/json:
-      *      schema:
-      *       type: object
-      *       properties:
-      *        name:
-      *         type: string
-      *         example: First Floor
-      *        coordinate:
-      *         type: object
-      *         example: [{i: "grill", x: 0, y: 1}]
-      *   responses:
-      *    200:
-      *     description: Success
-      */
-  app.post('/floor', controller.create);
-  app.put('/floor', controller.create);
-
-  /**
-      * @swagger
-      * /floor/{floorId}:
-      *  get:
-      *   description: Get a floor by id
-      *   tags: [Floor]
-      *   parameters:
-      *    - in: path
-      *      name: floorId
-      *      required: true
-      *      type: string
-      *   responses:
-      *    200:
-      *     description: Success
-      */
-  app.get('/floor/:floorId', controller.getById);
-
-  /**
-      * @swagger
-      * /floor/{floorId}:
       *  put:
-      *   description: Update a floor by id
+      *   description: Update the floor plan
       *   tags: [Floor]
-      *   parameters:
-      *    - in: path
-      *      name: floorId
-      *      required: true
-      *      type: string
       *   requestBody:
       *    required: true,
       *    content:
@@ -75,9 +27,6 @@ export const FloorRoute = (app: Express, controller: FloorController) => {
       *      schema:
       *       type: object
       *       properties:
-      *        name:
-      *         type: string
-      *         example: First Floor
       *        coordinate:
       *         type: object
       *         example: data
@@ -85,22 +34,5 @@ export const FloorRoute = (app: Express, controller: FloorController) => {
       *    200:
       *     description: Success
       */
-  app.put('/floor/:floorId', controller.update);
-
-  /**
-      * @swagger
-      * /floor/{floorId}:
-      *  delete:
-      *   description: Delete a floor
-      *   tags: [Floor]
-      *   parameters:
-      *    - in: path
-      *      name: floorId
-      *      required: true
-      *      type: string
-      *   responses:
-      *    200:
-      *     description: Success
-      */
-  app.delete('/floor/:floorId', controller.delete);
+  app.put('/floor', controller.updateTheFloodplan);
 };
