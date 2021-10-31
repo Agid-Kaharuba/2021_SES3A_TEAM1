@@ -143,7 +143,7 @@ export default function ReportPage(props) {
               </Typography>
               <Divider />
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sed aliquam orci, in malesuada enim. Sed eget diam a ante imperdiet bibendum. In hac habitasse platea dictumst. Integer efficitur iaculis sem sed ultricies. Aliquam erat volutpat. Vestibulum venenatis viverra sapien, in pretium diam luctus non. Integer lacinia nunc at feugiat efficitur. Nulla facilisi. Aliquam pretium sem convallis tellus cursus, sed suscipit orci dapibus. In finibus aliquam blandit.
+                Report Summary Test
               </p>
             </div>
           </div>
@@ -178,7 +178,7 @@ export default function ReportPage(props) {
               </Typography>
               <Divider />
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sed aliquam orci, in malesuada enim. Sed eget diam a ante imperdiet bibendum. In hac habitasse platea dictumst. Integer efficitur iaculis sem sed ultricies. Aliquam erat volutpat. Vestibulum venenatis viverra sapien, in pretium diam luctus non. Integer lacinia nunc at feugiat efficitur. Nulla facilisi. Aliquam pretium sem convallis tellus cursus, sed suscipit orci dapibus. In finibus aliquam blandit.
+                Task Report Test
               </p>
             </div>
           </div>
