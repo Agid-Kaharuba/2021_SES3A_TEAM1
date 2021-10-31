@@ -1,8 +1,13 @@
-import {
-  verify,
-  registerUser,
-  loginUser
-} from "./auth";
+import { verify, registerUser, loginUser } from "./auth";
+import { 
+  createFloor,
+  getAllFloors,
+  getFloor,
+  updateFloor,
+  deleteFloor,
+  getTheFloor,
+  updateTheFloor,
+} from "./floor";
 import {
   getAllUser,
   getCurrentUser,
@@ -11,7 +16,7 @@ import {
   uploadImage,
   downloadImage,
   searchUser,
-  deleteUser
+  deleteUser,
 } from "./user";
 import {
   getAllCourses,
@@ -21,17 +26,13 @@ import {
   getCourseStats,
   getAllCoursesWith
 } from "./course";
-import {
-  getAllTasks,
-  createTask,
-  getTask,
-  updateTask
-} from "./task";
+import { getAllTasks, createTask, getTask, updateTask } from "./task";
 import {
   getAllRecipes,
   createRecipe,
   updateRecipe,
-  getRecipe
+  getRecipe,
+  deleteRecipe,
 } from "./recipe";
 import {
   getProgress,
@@ -43,13 +44,15 @@ import {
 import dotenv from "dotenv";
 dotenv.config();
 
-export const API_HOST = process.env.REACT_APP_API_HOST ?? 'http://ec2-13-55-156-75.ap-southeast-2.compute.amazonaws.com:4000';
+export const API_HOST =
+  process.env.REACT_APP_API_HOST ??
+  "http://ec2-13-55-156-75.ap-southeast-2.compute.amazonaws.com:4000";
 
 export default {
   auth: {
     verify: verify,
     login: loginUser,
-    register: registerUser
+    register: registerUser,
   },
   user: {
     current: getCurrentUser,
@@ -59,7 +62,7 @@ export default {
     upload: uploadImage,
     download: downloadImage,
     search: searchUser,
-    delete: deleteUser
+    delete: deleteUser,
   },
   course: {
     getAll: getAllCourses,
@@ -72,13 +75,14 @@ export default {
     getAll: getAllTasks,
     create: createTask,
     get: getTask,
-    update: updateTask
+    update: updateTask,
   },
   recipe: {
     getAll: getAllRecipes,
     create: createRecipe,
     update: updateRecipe,
-    get: getRecipe
+    delete: deleteRecipe,
+    get: getRecipe,
   },
   stats: {
     course: getCourseStats
@@ -88,5 +92,10 @@ export default {
     download: downloadTracking,
     performance: getTrackingPerformance,
     user: getTrackingPerformanceUser
-  }
-}
+  },
+  floor: {
+    create: createFloor,
+    getThe: getTheFloor,
+    updateThe: updateTheFloor,
+  },
+};

@@ -46,6 +46,12 @@ const courseSchema = new mongoose.Schema({
     type: Date,
     required: false,
   },
+  floorPlan: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Floor',
+    required: false,
+  },
+
 });
 
 export default mongoose.model('Course', courseSchema);
