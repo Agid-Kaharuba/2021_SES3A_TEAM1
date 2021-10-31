@@ -136,4 +136,14 @@ public class ApiService
             .HandleError(callback);
         yield return apiRequest.Execute();
     }
+
+    public IEnumerator TextToSpeech(String text, Action<object> callback = null)
+    {
+        var body = new { text = text };
+        ApiRequest apiRequest = SendAuthenticatedRequest("inference", HTTPRequestType.Put)
+            .SendJson(body)
+            .HandleResponse(callback)
+            .HandleError(callback);
+        yield return apiRequest.Execute();
+    }
 }

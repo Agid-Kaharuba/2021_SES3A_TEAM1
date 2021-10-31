@@ -14,7 +14,7 @@ public class ApiRequest
     private string payload = string.Empty;
     private Action<UnityWebRequest> responseAction = null;
     private Action<BackendErrorResponse> errorAction = null;
-    private Action<string> responsePayload = null;
+    private Action<object> responsePayload = null;
     
     public bool ShouldIgnoreErrors { get; private set; }
     public bool HasJsonPayload { get; private set; }
@@ -61,7 +61,7 @@ public class ApiRequest
 
     public ApiRequest HandleJsonResponse<T>(Action<T> responsePayload)
     {
-        this.responsePayload = (p) => responsePayload.Invoke(JsonConvert.DeserializeObject<T>(p));
+        this.responsePayload = (p) => responsePayload.Invoke(JsonConvert.DeserializeObject<T>(p as string));
         return this;
     }
 
@@ -134,7 +134,15 @@ public class ApiRequest
             }
             else
             {
-                responsePayload.Invoke(Request.downloadHandler.text);
+                string contentType = Request.GetResponseHeader("Content-Type") ?? Request.GetResponseHeader("content-type");
+                if (contentType.Contains("application/json"))
+                {
+                    responsePayload.Invoke(Request.downloadHandler.text);
+                }
+                else
+                {
+                    responsePayload.Invoke(Request.downloadHandler.data);
+                }
             }
         }
     }
