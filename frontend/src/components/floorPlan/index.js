@@ -33,7 +33,6 @@ export default function FloorPlan() {
         <div className={classes.back}>
             {/* <ToolboxLayout/> */}
             <ReactGridLayout/>
-
         </div>
    )
 }
