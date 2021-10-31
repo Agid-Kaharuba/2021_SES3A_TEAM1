@@ -56,3 +56,12 @@ export const getAllCoursesWith = async (token, userId) => {
 	);
 	return res;
 }
+
+export const deleteCourse = async (token, userId) => {
+	const res = await axios.delete(`${API_HOST}/course/user/${userId}`,
+		{
+			headers: { Authorization: `Bearer ${token}` },
+		}
+	);
+	return res;
+}

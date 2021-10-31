@@ -86,6 +86,10 @@ export default function CreateNewTrainingPage() {
     setCoursesState(res.data);
   };
 
+  function onDeleteClick(course) {
+    api.user.delete(authState.token, course._id)
+  }
+
   useEffect(() => {
     if (coursesState === undefined) {
       fetchData();
@@ -160,6 +164,7 @@ export default function CreateNewTrainingPage() {
 
               <CardActions className={classes.buttons}>
                 <Button size="small" onClick={() => handleLaunchXR(course._id)}>Launch XR</Button>
+                <Button size="small"onClick={() => onDeleteClick(course._id)}> Delete Course</Button>
               </CardActions>
             </CardActionArea>
           </Card>

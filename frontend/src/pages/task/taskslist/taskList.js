@@ -115,6 +115,7 @@ export default function TasksList() {
                       Create New Task
                     </Typography>
                   </CardContent>
+                  
                 </CardActionArea>
               </Card>
               <CreateNewTaskGlobalDialog open={open} onClose={handleClose} createdTask={taskCreated}></CreateNewTaskGlobalDialog>
@@ -146,6 +147,9 @@ export default function TasksList() {
                   {task.description}
                 </Typography>
               </CardContent>
+              <CardActions className={classes.buttons}>
+                  <Button size="small"> Delete Task</Button>
+                  </CardActions>
             </CardActionArea>
           </Card>
         </Grid>
