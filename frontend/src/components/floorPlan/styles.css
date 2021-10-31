@@ -1,9 +1,3 @@
-body {
-    padding: 20px;
-  }
-  #content {
-    width: 100%;
-  }
   .react-grid-layout {
     background: #eee;
     margin-top: 10px;
@@ -100,10 +94,6 @@ body {
     border: 1px solid black;
     margin: 10px 0;
     padding: 10px;
-  }
-
-  .App {
-    text-align: center;
   }
   
   /* .react-grid-layout {

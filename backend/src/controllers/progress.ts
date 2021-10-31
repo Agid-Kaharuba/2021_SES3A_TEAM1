@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import * as XLSX from 'xlsx';
-import ProgressModel, { Progress, Tracking, TrackingModel } from '../model/progress';
+import ProgressModel, { ProgressType, TrackingType, TrackingModel } from '../model/progress';
 import CourseModel from '../model/course';
 import TaskModel from '../model/task';
 import UserModel from '../model/user';
@@ -101,7 +101,7 @@ export default class ProgressController {
 
   public async putTracking(req: Request, res: Response) {
     try {
-      const tracking: Tracking = req.body;
+      const tracking: TrackingType = req.body;
       tracking._id = undefined;
 
       let progress = await ProgressModel.findOne({

@@ -17,6 +17,8 @@ import { IngredientRoute } from './ingredient-router';
 import IngredientController from '../controllers/ingredient';
 import { FloorRoute } from './floor-router';
 import FloorController from '../controllers/floor';
+import { InferenceRoute } from './inference-router';
+import InferenceController from '../controllers/inference';
 
 export const Routes = (init: ApiInitializer) => {
   CourseRoute(init.getApp(), new CourseController());
@@ -28,4 +30,5 @@ export const Routes = (init: ApiInitializer) => {
   ProgressRoute(init.getApp(), new ProgressController());
   IngredientRoute(init.getApp(), new IngredientController());
   FloorRoute(init.getApp(), new FloorController());
+  InferenceRoute(init.getApp(), new InferenceController());
 };
