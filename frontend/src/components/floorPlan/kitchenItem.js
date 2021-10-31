@@ -1,4 +1,5 @@
 // KITCHEN ITEMS FOR THE FLOOR PLAN
+//not needed for now
 
 import React from 'react';
 import { useHistory } from "react-router-dom";

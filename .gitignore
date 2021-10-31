@@ -129,3 +129,6 @@ key.json
 /backend/.env_orig
 /backend/service-account-key_old.json
 /backend/service-account-key_new.json
+
+tacotron2_statedict.pt
+waveglow_old.pt

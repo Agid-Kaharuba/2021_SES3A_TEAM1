@@ -6,6 +6,7 @@ export default {
   STAGE: process.env.STAGE as string,
   API_PORT: process.env.API_PORT as string,
   DATABASE_URL: process.env.DATABASE_URL as string,
+  TEXT_TO_SPEECH_API: process.env.TEXT_TO_SPEECH_API as string,
   DATABASE_NAME: process.env.DATABASE_NAME as string,
   TEST_DATABASE_NAME: process.env.TEST_DATABASE_NAME as string,
   TOKEN_SECRET: process.env.TOKEN_SECRET as string,
