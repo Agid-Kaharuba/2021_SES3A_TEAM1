@@ -1,10 +1,6 @@
 import mongoose from 'mongoose';
 
 const floorSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
   coordinate: {
     type: [Object],
     required: true,

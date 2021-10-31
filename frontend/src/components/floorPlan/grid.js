@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
 import { Button, Box, TextField, Typography } from "@material-ui/core";
 
@@ -13,24 +13,39 @@ const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 const ReactGridLayout = () => {
   const [layouts, setLayouts] = useState(null);
-  const [widgetArray, setWidgetArray] = useState([
-    // { i: "widget1", x: 0, y: 0, w: 2, h: 2 },
-    // { i: "widget2", x: 2, y: 2, w: 2, h: 2 },
-    // { i: "widget3", x: 4, y: 4, w: 2, h: 2 },
-  ]);
+  const [widgetArray, setWidgetArray] = useState(undefined);
   const { authState } = useContext(AuthContext);
 
+  const fetchData = async () => {
+    const res = await api.floor.getThe(authState.token);
+    console.log(res.data);
+    if (res.data) {
+      setWidgetArray(res.data.coordinate);
+    }
+    else {
+      setWidgetArray([]);
+    }
+  };
+
+  useEffect(() => {
+    if (widgetArray === undefined) {
+      fetchData();
+    }
+  }, [widgetArray]);
+
   const handleModify = (layouts, layout) => {
-    const tempArray = widgetArray;
-    setLayouts(layout);
-    layouts?.map((position) => {
-      tempArray[Number(position.i)].x = position.x;
-      tempArray[Number(position.i)].y = position.y;
-      tempArray[Number(position.i)].width = position.w;
-      tempArray[Number(position.i)].height = position.h;
-    });
-    console.log(tempArray)
-    setWidgetArray(tempArray);
+    if (widgetArray) {
+      const tempArray = widgetArray.slice();
+      setLayouts(layout);
+      layouts?.map((position) => {
+        tempArray[Number(position.i)].x = position.x;
+        tempArray[Number(position.i)].y = position.y;
+        tempArray[Number(position.i)].width = position.w;
+        tempArray[Number(position.i)].height = position.h;
+      });
+      console.log(tempArray)
+      setWidgetArray(tempArray);
+    }
   };
 
   const handleAdd = (name) => {
@@ -52,8 +67,8 @@ const ReactGridLayout = () => {
   //get coordinates of kitchen widgets and send to backend
   const getCoordinates = () => {
     const token = authState.token;
-    const data = {name: "floor1", coordinates: widgetArray};
-    api.floor.create(token, data);
+    const data = { name: "floor1", coordinate: widgetArray };
+    api.floor.updateThe(token, data);
   }
 
   return (
@@ -101,7 +116,7 @@ const ReactGridLayout = () => {
           return (
             <div
               className="reactGridItem"
-              style={{backgroundColor: "cyan"}}
+              style={{ backgroundColor: "cyan" }}
               key={index}
               data-grid={{
                 x: widget?.x,
