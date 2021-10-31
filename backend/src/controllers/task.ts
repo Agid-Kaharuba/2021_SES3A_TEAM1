@@ -80,8 +80,9 @@ export default class TaskController {
   public async update(req: Request, res: Response) {
     try {
       const id = req.params.taskId;
-      req.body.recipe = undefined;
+      // req.body.recipe = undefined;
       const { body } = req;
+      console.log(body);
       const response = await Task.updateOne({ _id: id }, body, { omitUndefined: true });
       ResponseService.successResponse(res, response);
     } catch (err) {

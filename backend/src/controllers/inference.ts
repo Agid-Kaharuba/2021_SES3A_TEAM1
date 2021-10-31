@@ -40,7 +40,7 @@ export default class InferenceController {
       const { body } = req;
       const text = body.text;
 
-      const axiosResponse  = await axios.post(
+      const axiosResponse = await axios.post(
         config.TEXT_TO_SPEECH_API,
         new URLSearchParams({
           message: text
@@ -53,6 +53,10 @@ export default class InferenceController {
         }
       )
 
+      console.log(axiosResponse.headers);
+      Object.entries(axiosResponse.headers).map(
+        ([name, value]) => res.setHeader(name, value)
+      );
       axiosResponse.data.pipe(res)
     }
     catch (err: any) {
