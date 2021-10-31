@@ -10,6 +10,40 @@ export async function findFloor(Id: string) {
 }
 
 export default class FloorController {
+  public async getTheFloorPlan(req: Request, res: Response) {
+    try {
+      const floor = await Floor.findOne({ archive: { $ne: true } });
+      ResponseService.successResponse(res, floor);
+    } catch (err) {
+      ResponseService.mongoErrorResponse(res, err);
+    }
+  }
+
+  public async updateTheFloodplan(req: Request, res: Response) {
+    try {
+      const { body } = req;
+      const attemptFind = await Floor.findOne({});
+      if (attemptFind){
+        const response = await Floor.updateOne({}, body);
+        ResponseService.successResponse(res, response);
+      }
+      else {
+        const newFloorRequest = new Floor({
+          coordinate: body.coordinates,
+        } as any);
+        newFloorRequest.save((err: any) => {
+          if (err) {
+            ResponseService.mongoErrorResponse(res, err);
+          } else {
+            ResponseService.successResponse(res, newFloorRequest);
+          }
+        });
+      }
+    } catch (err) {
+      ResponseService.mongoNotFoundResponse(res, err);
+    }
+  }
+
   // Get all floorplans
   public async getAll(req: Request, res: Response) {
     try {
