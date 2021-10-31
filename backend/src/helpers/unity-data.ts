@@ -38,12 +38,12 @@ async function masterData() {
 
     if (!employee) {
       employee = new User({
-        username: 'employee',
-        password: 'employee',
-        firstname: 'Big',
-        lastname: 'Chungus',
-        email: 'bigchungus@gmail.com',
-        staffid: '69696969',
+        username: 'matthew',
+        password: 'matthew',
+        firstname: 'Matthew',
+        lastname: 'Barrett',
+        email: 'Matthew@gmail.com',
+        staffid: '12374642',
         isSupervisor: false,
       } as any);
       await employee.save();

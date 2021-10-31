@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Container, Typography, Divider, Box, Grid } from "@material-ui/core";
+import { Container, Typography, Divider, Box, Grid, Button } from "@material-ui/core";
 import { TableCell, TableHead, TableBody, Table, TableContainer, TableRow, Paper } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles";
 import { Recommendation } from "../../components/Recommendation"
@@ -157,7 +157,7 @@ export default function ReportPage(props) {
                 )
                   : (
                     <li>{userState.firstname} has not conducted enough training to determine her skills.</li>
-              )}
+                  )}
               </ul>
             </div>
           </div>
@@ -176,6 +176,7 @@ export default function ReportPage(props) {
               <SelectList listOptions={coursesState} updateSelected={(key) => updateSelected(key, 'courseId')} selected={selected.courseId} />
               <SelectList listOptions={coursesState ? (coursesState.find(i => i._id == selected.courseId)?.tasks ?? []) : []} updateSelected={(key) => updateSelected(key, 'taskId')} selected={selected.taskId} />
             </div>
+            <Button variant="contained" color="primary" href={selected.export}>Export</Button>
           </div>
           {buildLogs()}
         </Box>
