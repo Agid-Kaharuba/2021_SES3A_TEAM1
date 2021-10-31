@@ -24,6 +24,7 @@ import {
   getCourse,
   updateCourse,
   getCourseStats,
+  getAllCoursesWith
 } from "./course";
 import { getAllTasks, createTask, getTask, updateTask } from "./task";
 import {
@@ -33,6 +34,12 @@ import {
   getRecipe,
   deleteRecipe,
 } from "./recipe";
+import {
+  getProgress,
+  downloadTracking,
+  getTrackingPerformance,
+  getTrackingPerformanceUser
+} from "./progress";
 
 import dotenv from "dotenv";
 dotenv.config();
@@ -62,6 +69,7 @@ export default {
     create: createCourse,
     get: getCourse,
     update: updateCourse,
+    getAllWith: getAllCoursesWith
   },
   task: {
     getAll: getAllTasks,
@@ -77,7 +85,13 @@ export default {
     get: getRecipe,
   },
   stats: {
-    course: getCourseStats,
+    course: getCourseStats
+  },
+  progress: {
+    get: getProgress,
+    download: downloadTracking,
+    performance: getTrackingPerformance,
+    user: getTrackingPerformanceUser
   },
   floor: {
     create: createFloor,

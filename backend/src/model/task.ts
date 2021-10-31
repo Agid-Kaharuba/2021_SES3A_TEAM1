@@ -2,6 +2,10 @@ import mongoose from 'mongoose';
 import { getEnabledCategories } from 'trace_events';
 import Recipe from './recipe';
 
+export interface TaskType {
+  
+}
+
 const taskSchema = new mongoose.Schema({
   name: {
     type: String,

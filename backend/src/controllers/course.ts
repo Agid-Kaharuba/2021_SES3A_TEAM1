@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 // import { MongoError } from 'mongodb';
-import Course from '../model/course';
-import Progress from '../model/progress';
+import Course, { CourseType } from '../model/course';
+import Progress, { ProgressType } from '../model/progress';
 import ResponseService from '../helpers/response';
 
 export default class CourseController {
@@ -20,13 +20,42 @@ export default class CourseController {
     }
   }
 
+  public async getAllWithUser(req: Request, res: Response) {
+    try {
+      const courses = await Course.find({ archive: { $ne: true }, assignedEmployees: req.params.userId }).populate({
+        path: 'tasks',
+        populate: { path: 'recipe' },
+      }).populate('assignedEmployees');
+      ResponseService.successResponse(res, courses);
+    } catch (err) {
+      ResponseService.mongoErrorResponse(res, err);
+    }
+  }
+
   public async get(req: Request, res: Response) {
     try {
-      const course = await Course.findOne({ _id: req.params.courseId }).populate({
+      // const course: CourseType = {
+      //   name: 'Hello',
+      //   description: 'Yes',
+      //   tasks: [],
+      //   assignEmployee: [],
+      //   completed: false,
+      // };
+      const course: CourseType = await Course.findOne({ _id: req.params.courseId }).populate({
         path: 'tasks',
         populate: { path: 'recipe' },
       }).populate('assignedEmployees').populate('floorPlan');
 
+      const progresses: ProgressType[] = await Progress.find({ courseId: req.params.courseId, userId: req?.user?._id });
+      const completed = await progresses.filter((progress) => progress.completed === true);
+      course.percentageCompleted = (completed.length / course.tasks.length) * 100;
+      // if (course.percentageCompleted === 100) {
+      //   course.completed = true;
+      // }
+      // else {
+      //   course.completed = false;
+      // }
+      course.completed = (course.percentageCompleted === 100);
       ResponseService.successResponse(res, course);
     } catch (err) {
       ResponseService.mongoNotFoundResponse(res, err);

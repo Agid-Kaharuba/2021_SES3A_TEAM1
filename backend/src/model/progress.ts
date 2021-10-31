@@ -4,24 +4,24 @@ export interface TrackingType {
   _id?: ObjectId;
   date: Date;
   event: string;
-  value: string;
-  data?: Object;
+  value: string | number | boolean;
+  data?: any;
 }
 
 export interface ProgressType {
-  data: object;
+  data: any;
   userId: string;
   taskId: string;
   courseId: string;
-  completed: string;
-  score: string;
+  completed: boolean;
+  score: number;
   tracking: TrackingType[];
 }
 
 const trackingSchema = new mongoose.Schema({
   date: {
     type: Date,
-    require: true,
+    required: true,
   },
   event: {
     type: String,

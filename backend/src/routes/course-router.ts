@@ -48,6 +48,22 @@ export const CourseRoute = (app: Express, controller: CourseController) => {
   app.get('/course', checkToken, controller.getAll);
   /**
      * @swagger
+     * /course/user/{userId}:
+     *  get:
+     *   description: Get all course for a user
+     *   tags: [Course]
+     *   parameters:
+     *    - in: path
+     *      name: courseId
+     *      required: true
+     *      type: string
+     *   responses:
+     *    200:
+     *     description: Success
+     */
+  app.get('/course/user/:userId', checkToken, controller.getAllWithUser);
+  /**
+     * @swagger
      * /course/{courseId}:
      *  get:
      *   description: Get a course by id
@@ -61,7 +77,7 @@ export const CourseRoute = (app: Express, controller: CourseController) => {
      *    200:
      *     description: Success
      */
-  app.get('/course/:courseId', controller.get);
+  app.get('/course/:courseId', checkToken, controller.get);
   /**
      * @swagger
      * /course:

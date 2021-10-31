@@ -46,6 +46,8 @@ import ViewRecipe from "./pages/recipe/viewRecipe/viewRecipe.js";
 
 // IMPORT STATISTICS PAGES
 import Statistics from "./pages/statistics/statistics.js";
+import ReportPage from "./pages/statistics/report.js";
+import StatsTest from "./pages/statistics/test.js";
 
 // IMPORT FLOOR PLAN PAGES
 import FloorPlanPage from "./pages/floorPlan/floorPlan.js";
@@ -112,6 +114,10 @@ function AppRouter(props) {
       <PrivateRoute path="/profile"
         exact={true}
         component={EmployeeProfile} />
+      <PrivateRoute path="/user/:userId"
+        exact={true}
+        component={ReportPage}>
+      </PrivateRoute>
       <PrivateRoute path="/user"
         exact={true}
         component={UserList}>
@@ -127,6 +133,10 @@ function AppRouter(props) {
       <Route path="/dashboard/:courseId/statistics/:userId"
         exact={true}
         component={Statistics}>
+      </Route>
+      <Route path="/dashboard/:courseId/stats"
+        exact={true}
+        component={StatsTest}>
       </Route>
       <PrivateRoute path="/dashboard/:courseId"
         exact={true}

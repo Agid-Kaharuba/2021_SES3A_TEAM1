@@ -19,6 +19,7 @@ import Task from './model/task';
 import Course from './model/course';
 import ProfileImage from './model/image';
 import Progress from './model/progress';
+import { generateModuleTracking } from './helpers/mock-tracking';
 
 async function save(models: Document[][]) {
   await Promise.all(models.map(async (model) => Promise.all(model.map(async (obj) => obj.save()))));
@@ -54,7 +55,7 @@ async function seed() {
 
     const len = TrackingData.length;
     Progresses.map((progress: any) => {
-      progress.tracking = _.sample(TrackingData, len * 0.8);
+      progress.tracking = generateModuleTracking(progress.taskId); // _.sample(TrackingData, len * 0.8);
     });
 
     await save([Employees, Supervisors, Recipes, Tasks, Courses, Progresses, Images]);

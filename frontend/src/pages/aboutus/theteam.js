@@ -23,6 +23,7 @@ import VanishaGif from '../../images/vanishavr.gif';
 import BryanGif from '../../images/bryanvr.gif';
 import Matthew from '../../images/profile-photos/matt.jpg';
 import Vladimir from '../../images/profile-photos/vlad.jpg';
+import Aaron from '../../images/profile-photos/aaron.jpg';
 import BackButton from "../../components/backbutton";
 
 // import { Link } from "react-router-dom";
@@ -237,6 +238,17 @@ export default function TheTeamPage() {
                                     <Avatar src={Agid} className={profiles.large} />
                                     <WhiteTextTypography style={{ fontWeight: '600', fontSize: '1.2rem' }}>Agid Kaharuba</WhiteTextTypography>
                                     <WhiteTextTypography>Unity Developer</WhiteTextTypography>
+                                </Grid>
+                            </Grid>
+                            <Grid item>
+                                <Grid
+                                    container
+                                    direction='column'
+                                    alignItems='center'
+                                    justify='center'>
+                                    <Avatar src={Aaron} className={profiles.large} />
+                                    <WhiteTextTypography style={{ fontWeight: '600', fontSize: '1.2rem' }}>The Aaron</WhiteTextTypography>
+                                    <WhiteTextTypography>Tech Stack Carry</WhiteTextTypography>
                                 </Grid>
                             </Grid>
                         </Grid>
