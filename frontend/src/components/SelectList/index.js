@@ -12,23 +12,23 @@ export const SelectList = (props) => {
   }
 
   return (
-    <Table style={styles}>
-      <thead>
-        <tr>
-          <th>User</th>
-          <th>Task</th>
-        </tr>
-      </thead>
-        <List>
+    <List>
+      <Table style={styles}>
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Task</th>
+          </tr>
+        </thead>
           {listOptions && (
             listOptions.map(option =>
               <ListItem style={styles} button key={option.key} selected={selected === option.key} onClick={() => update(option.key)}>
                 <ListItemText primary={option.label} />
               </ListItem>
-            )
-          )}
-        </List>
-    </Table>
+              )
+            )}
+        </Table>
+      </List>
   );
 };
 
