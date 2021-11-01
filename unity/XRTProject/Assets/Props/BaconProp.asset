@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0926e7a7e51345d29cb7100d5f3ece6c, type: 3}
-  m_Name: Onion
+  m_Name: BaconProp
   m_EditorClassIdentifier: 
-  propId: chopped_onion
-  associatedPrefab: {fileID: 2657270694366542775, guid: d2d553577c38c0f43b930c212d201140, type: 3}
+  propId: bacon
+  associatedPrefab: {fileID: 6355970633735604913, guid: 533d1dbdb6adda14ebfc7bf474b7b34a, type: 3}
