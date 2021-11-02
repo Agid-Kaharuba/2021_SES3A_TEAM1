@@ -9,7 +9,7 @@
     "@testing-library/jest-dom": "^5.1.0",
     "@testing-library/react": "^10.0.0",
     "@testing-library/user-event": "^7.2.1",
-    "axios": "^0.22.0",
+    "axios": "^0.23.0",
     "canvas": "^2.6.1",
     "chart.js": "^3.2.0",
     "clsx": "^1.1.0",
