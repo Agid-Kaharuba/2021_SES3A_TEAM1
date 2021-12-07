@@ -13,3 +13,16 @@ message=Hello from rest api
 ###
 
 GET http://ec2-3-25-144-84.ap-southeast-2.compute.amazonaws.com:4000
+
+###
+
+GET http://ec2-3-26-169-195.ap-southeast-2.compute.amazonaws.com:4000
+
+###
+
+POST http://ec2-3-26-169-195.ap-southeast-2.compute.amazonaws.com:4000/inference
+Content-Type: application/json
+
+{
+  "text": "hello world."
+}

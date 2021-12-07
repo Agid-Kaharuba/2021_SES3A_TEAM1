@@ -32,3 +32,27 @@ home/ubuntu/2021_SES3A_TEAM1/tacotron2/app.py
 ssh -i ".vscode/SES3B.pem" ubuntu@ec2-3-25-170-196.ap-southeast-2.compute.amazonaws.com
 
 sudo curl -X post http://ec2-3-25-144-84.ap-southeast-2.compute.amazonaws.com:4000 -d "message=From Earth, the sun looks like a big, yellow ball. But it is not really like a ball. It is made of gases and metals. It is also very hot. Nothing can live on the sun. But it is a good thing the sun is so hot. The sun’s heat makes Earth warm enough for people to live." -o out.wav -k
+
+
+
+
+sudo curl -X post http://ec2-3-26-29-222.ap-southeast-2.compute.amazonaws.com:4000 -d "message=Hello." -o out.wav -k
+
+
+
+sudo curl -X post http://ec2-3-26-169-195.ap-southeast-2.compute.amazonaws.com:4000/inference -H "Content-Type: application/json" -d '{"text": "hello world.",}' -o out.wav -k
+
+curl http://ec2-3-26-169-195.ap-southeast-2.compute.amazonaws.com:4000
+
+
+
+
+curl --request POST --header "Content-Type: application/json" -d '{"text": "hello world."}' -o out.wav -k http://ec2-3-26-169-195.ap-southeast-2.compute.amazonaws.com:4000/inference
+
+curl -X 'POST' \
+  'http://ec2-3-26-169-195.ap-southeast-2.compute.amazonaws.com:4000/inference' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "text": "This is going to say something!"
+}' -o out.wav -k
